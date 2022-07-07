@@ -1,0 +1,77 @@
+.clickable{
+  cursor: pointer;
+}
+
+.box-space{
+  padding: 30px;
+}
+
+.side-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-width: 200px;
+  width: 20vw;
+  height: 100vh;
+}
+
+.main-content {
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+  position: fixed;
+  top: 0;
+  right: 0;
+  max-width: calc(100vw - 200px);
+  width: 80vw;
+  height: 100vh;
+}
+
+.footer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  bottom: 0;
+}
+
+.rdt_Table{
+  background-color: var(--card-background-color)!important;
+  color: var(--color); 
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+  font-weight: var(--font-weight);
+}
+.rdt_TableRow{
+  background-color: var(--card-background-color)!important;
+  color: var(--color); 
+  border-bottom-color: rgba(120, 120, 120, 0.1)!important;
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+  font-weight: var(--font-weight);
+}
+.rdt_TableCol{}
+.rdt_TableCol_Sortable{
+  color: var(--color);
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+  font-weight: var(--font-weight);
+  
+}
+.rdt_TableCell{
+  color: var(--color);
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+  font-weight: var(--font-weight);
+}
+.rdt_TableHeader{}
+.rdt_TableFooter{}
+.rdt_TableHead{}
+.rdt_TableHeadRow{
+  background-color: var(--card-background-color)!important;
+  color: var(--color);
+  border-bottom-color: rgba(120, 120, 120, 0.1)!important;
+}
+.rdt_TableBody{}
+.rdt_ExpanderRow{
+  background-color: var(--card-background-color)!important;
+}
