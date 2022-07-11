@@ -75,3 +75,12 @@
 .rdt_ExpanderRow{
   background-color: var(--card-background-color)!important;
 }
+
+[data-testid=expander-button-undefined] {
+  margin: 0!important;
+  padding: 0!important;
+}
+
+[data-testid=expander-button-undefined] > svg {
+  fill: var(--contrast)!important;
+}

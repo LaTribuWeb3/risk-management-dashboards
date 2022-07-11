@@ -41,10 +41,8 @@ class Oracles extends Component {
       <div>
         <Box loading={loading}>
           {!loading && <DataTable
-              expandableRows
               columns={columns}
               data={data}
-              expandableRowsComponent={ExpandedComponent}
           />}
         </Box>
       </div>

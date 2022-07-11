@@ -3,6 +3,7 @@ import {observer} from "mobx-react"
 import Box from "../components/Box"
 import BoxGrid from "../components/BoxGrid"
 import mainStore from '../stores/main.store'
+import WhaleFriendly from '../components/WhaleFriendly'
 
 const boxRow = {
   display: 'flex',
@@ -27,13 +28,13 @@ class Overview extends Component {
           <Box loading={loading}>
             {firstHalf.map(([k, v])=> <div key={k} style={boxRow}>
               <div>{humanTxt(k)}</div>
-              <div>{v}</div>
+              <div>$<WhaleFriendly num={v} /></div>
             </div>)}
           </Box>
           <Box loading={loading}>
             {secondHalf.map(([k, v])=> <div key={k} style={boxRow}>
               <div>{humanTxt(k)}</div>
-              <div>{v}</div>
+              <div>$<WhaleFriendly num={v} /></div>
             </div>)}
           </Box>
         </BoxGrid>
