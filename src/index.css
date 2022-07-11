@@ -40,6 +40,7 @@
   font-family: var(--font-family);
   font-size: var(--font-size);
   font-weight: var(--font-weight);
+  margin-left: 2px!important;
 }
 .rdt_TableRow{
   background-color: var(--card-background-color)!important;
@@ -83,4 +84,10 @@
 
 [data-testid=expander-button-undefined] > svg {
   fill: var(--contrast)!important;
+}
+
+:root {
+  --red-text: var(--del-color);
+  --yellow-text: #cfb23c;
+  --green-text: var(--ins-color);
 }

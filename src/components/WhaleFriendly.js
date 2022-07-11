@@ -9,7 +9,6 @@ export const whaleFriendlyFormater = num => {
   } else {
     num = parseFloat(num)
   }
-  debugger
   let wfn
     if(num === 0) {
       wfn = '0'

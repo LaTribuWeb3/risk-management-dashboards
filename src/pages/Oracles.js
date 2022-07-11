@@ -3,28 +3,43 @@ import {observer} from "mobx-react"
 import Box from "../components/Box"
 import DataTable from 'react-data-table-component'
 import mainStore from '../stores/main.store'
+import {whaleFriendlyFormater} from '../components/WhaleFriendly'
+import {removeTokenPrefix} from '../utils'
+import Ramzor from '../components/Ramzor'
+
+const percentFrom = (base, num) => {
+  const percent = ((num / base) * 100) - 100
+  return <Ramzor 
+    yellow={percent > 2 || percent < -2} 
+    red={percent >5 || percent < -5}>
+      {percent.toFixed(2)}%
+    </Ramzor>
+}
 
 const columns = [
   {
-      name: 'key',
+      name: 'asset',
       selector: row => row.key,
+      format: row => removeTokenPrefix(row.key),
+      sortable: true,
+  },
+  {
+      name: 'oracle',
+      selector: row => row.oracle,
       sortable: true,
   },  
   {
       name: 'cex_price',
       selector: row => row.cex_price,
+      format: row => percentFrom(row.oracle, row.cex_price),
       sortable: true,
   },  
   {
       name: 'dex_price',
       selector: row => row.dex_price,
+      format: row => percentFrom(row.oracle, row.dex_price),
       sortable: true,
   },  
-  {
-      name: 'oracle',
-      selector: row => row.oracle,
-      sortable: true,
-  },
 ];
 
 const ExpandedComponent = ({ data }) => <pre>{JSON.stringify(data, null, 2)}</pre>;
