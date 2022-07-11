@@ -4,11 +4,7 @@ import Footer from './Footer'
 import Header from './Header'
 
 const activeStyle = {
-  //fontWeight: 'bolder',
-  // letterSpacing: '1px',
-  fontSize: '1.2rem',
   transition: 'all 0.3s ease-in-out',
-  color: 'var(--contrast)'
 }
 
 const pages = [
@@ -49,7 +45,8 @@ const Sidenav = (props) => {
             {pages.map(page=> <li key={page}>
               <a
                 href={'#'+page}
-                style={hash === page ? activeStyle : undefined}
+                style={activeStyle}
+                className={hash === page ? 'primary' : 'secondary'}
                 onClick={()=> setHash(page)}
               >
                 {page}

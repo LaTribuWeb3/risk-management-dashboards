@@ -52,9 +52,9 @@ class Slippage extends Component {
 
     return (
       <div>
-        <Box loading={loading}>
+        <div loading={loading}>
           {!loading && <ExpandedComponent data={data}/>}
-        </Box>
+        </div>
       </div>
     )
   }

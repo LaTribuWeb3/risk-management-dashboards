@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import {observer} from "mobx-react"
 import Box from "../components/Box"
-import Slippage from "../components/Slippage"
+import SlippageChart from "../components/SlippageChart"
 import DataTable from 'react-data-table-component'
 import mainStore from '../stores/main.store'
 import {whaleFriendlyFormater} from '../components/WhaleFriendly'
@@ -67,7 +67,8 @@ class Liquidity extends Component {
               expandableRows
               columns={columns}
               data={data}
-              expandableRowsComponent={Slippage}
+              expandableRowsComponent={SlippageChart}
+              expandableRowExpanded={()=> true}
           />}
         </Box>
       </div>
