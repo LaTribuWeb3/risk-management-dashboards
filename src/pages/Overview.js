@@ -10,11 +10,15 @@ const humanTxt = txt => txt.split('_').join(' ')
 
 class Overview extends Component {
   render (){
-    const data = mainStore['overview_data'] 
+    const rawData = Object.assign({}, mainStore['overview_data'] || {})
+    const {json_time} = rawData
+    if(json_time){
+      delete rawData.json_time
+    }
     const loading = mainStore['overview_loading']
-    const half = !loading ? parseInt(Object.entries(data).length / 2) : 0
-    const firstHalf = !loading ? Object.entries(data).slice(0, half) : []
-    const secondHalf = !loading ? Object.entries(data).slice(half) : []
+    const half = !loading ? parseInt(Object.entries(rawData).length / 2) : 0
+    const firstHalf = !loading ? Object.entries(rawData).slice(0, half) : []
+    const secondHalf = !loading ? Object.entries(rawData).slice(half) : []
     return (
       <div>
         <BoxGrid>
