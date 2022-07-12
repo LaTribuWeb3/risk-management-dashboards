@@ -4,7 +4,14 @@ import Box from "../components/Box"
 import BoxGrid from "../components/BoxGrid"
 import mainStore from '../stores/main.store'
 import WhaleFriendly from '../components/WhaleFriendly'
-import BoxRow from '../components/BoxRow'
+
+const boxRow = {
+  display: 'flex',
+  justifyContent: 'space-between',
+  marginBottom: '10px',
+  paddingBottom: '10px',
+  borderBottom: '1px solid rgba(120, 120, 120, 0.1)'
+}
 
 const humanTxt = txt => txt.split('_').join(' ')
 
@@ -19,16 +26,16 @@ class Overview extends Component {
       <div>
         <BoxGrid>
           <Box loading={loading}>
-            {firstHalf.map(([k, v])=> <BoxRow key={k}>
+            {firstHalf.map(([k, v])=> <div key={k} style={boxRow}>
               <div>{humanTxt(k)}</div>
               <div>$<WhaleFriendly num={v} /></div>
-            </BoxRow>)}
+            </div>)}
           </Box>
           <Box loading={loading}>
-            {secondHalf.map(([k, v])=> <BoxRow key={k}>
+            {secondHalf.map(([k, v])=> <div key={k} style={boxRow}>
               <div>{humanTxt(k)}</div>
               <div>$<WhaleFriendly num={v} /></div>
-            </BoxRow>)}
+            </div>)}
           </Box>
         </BoxGrid>
       </div>

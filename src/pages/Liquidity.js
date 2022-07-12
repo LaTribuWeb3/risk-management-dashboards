@@ -13,6 +13,12 @@ const columns = [
       selector: row => row.key,
       format: row => removeTokenPrefix(row.key),
       sortable: true,
+  },    
+  {
+      name: 'count',
+      selector: row => row.count,
+      format: row => row.count,
+      sortable: true,
   },  
   {
       name: 'avg',
@@ -33,15 +39,15 @@ const columns = [
       sortable: true,
   },
   {
+    name: 'top_5',
+    selector: row => row.top_5,
+    format: row => precentFormatter(row.top_5),
+    sortable: true,
+  },
+  {
       name: 'top_10',
       selector: row => row.top_10,
       format: row => precentFormatter(row.top_10),
-      sortable: true,
-  },
-  {
-      name: 'top_5',
-      selector: row => row.top_5,
-      format: row => precentFormatter(row.top_5),
       sortable: true,
   },
   {
@@ -55,7 +61,13 @@ const columns = [
 class Liquidity extends Component {
   render (){
     const loading = mainStore['dex_liquidity_loading']
-    const data = !loading ? Object.entries(mainStore['dex_liquidity_data']).map(([k, v])=> {
+    
+    const rawData = Object.assign({}, mainStore['dex_liquidity_data'] || {})
+    const {json_time} = rawData
+    if(json_time){
+      delete rawData.json_time
+    }
+    const data = !loading ? Object.entries(rawData).map(([k, v])=> {
       v.key = k
       return v
     }) : []

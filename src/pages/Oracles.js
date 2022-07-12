@@ -47,7 +47,12 @@ const ExpandedComponent = ({ data }) => <pre>{JSON.stringify(data, null, 2)}</pr
 class Oracles extends Component {
   render (){
     const loading = mainStore['oracles_loading']
-    const data = !loading ? Object.entries(mainStore['oracles_data']).map(([k, v])=> {
+    const rawData = Object.assign({}, mainStore['oracles_data'] || {})
+    const {json_time} = rawData
+    if(json_time){
+      delete rawData.json_time
+    }
+    const data = !loading ? Object.entries(rawData).map(([k, v])=> {
       v.key = k
       return v
     }) : []
