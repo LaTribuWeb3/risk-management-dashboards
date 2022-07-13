@@ -96,3 +96,14 @@
 text {
   font-size: var(--data-font-size);
 }
+
+.plus-minus {
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  padding: 0 5px;
+  text-align: center;
+}
+.plus-minus:hover {
+  background:rgba(120, 120, 120, 0.1);
+}

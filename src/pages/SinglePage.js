@@ -6,6 +6,8 @@ import Overview from './Overview'
 import Liquidity from './Liquidity'
 import Accounts from "./Accounts";
 import Oracles from "./Oracles";
+import RiskParameters from "./RiskParameters";
+import Simulation from "./Simulation";
 
 class SinglePage extends Component {
   render (){
@@ -21,6 +23,13 @@ class SinglePage extends Component {
         <Backstop/> */}
         <h1 id="liquidity">Liquidity</h1>
         <Liquidity/>
+        <h1 id="risk-parameters">Risk Parameters</h1>
+        <RiskParameters />
+        <hgroup>
+          <h1 id="simulation">Simulation</h1>
+          <h3>Worse day simulation on current condition</h3>
+        </hgroup>
+        <Simulation />
       </div>
     )
   }

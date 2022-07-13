@@ -41,7 +41,6 @@ class SlippageChart extends Component {
     if(json_time){
       delete rawData.json_time
     }
-    debugger
     const data = !loading ? (rawData['au'+market] || {}) : {}
     const dataSet = Object.entries(data).map(([k, v])=> ({name: removeTokenPrefix(k), value: v}))
     if(!dataSet.length){

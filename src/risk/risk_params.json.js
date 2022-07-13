@@ -1,4 +1,4 @@
-{
+export default {
   "auETH-auUSDC": {
     "hm-price_recovery_time-0.0-volume_for_slippage_10_percents-82.10510444641113-recovery_halflife_retail-0.0-stability_pool_initial_balance_ratio-0.0-share_institutional-0.0": [
       {

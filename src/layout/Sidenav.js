@@ -5,6 +5,7 @@ import Header from './Header'
 
 const activeStyle = {
   transition: 'all 0.3s ease-in-out',
+  textTransform: 'capitalize',
 }
 
 const pages = [
@@ -14,7 +15,9 @@ const pages = [
   'liquidity',
   'backstop',
   'assumptions',
-  'qualitative-anlysis'
+  'qualitative-anlysis',
+  'risk-parameters',
+  'simulation'
 ]
 
 

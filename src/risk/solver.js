@@ -1,4 +1,4 @@
-class Solver {
+export default class Solver {
   constructor(rawDataObj) {
       this.liquidationPenalty = 0.1
       this.collaterals = []
@@ -36,7 +36,7 @@ class Solver {
 
                   if(! lfs.includes(data["lf"])) continue // lf is not relevant
                   const dc = data["dc"]
-                  if(! dcs.includes[dc]) {
+                  if(! dcs.includes(dc)) {
                       dcs.push(dc)
                       perDcResult[dc] = []
                   }
@@ -222,43 +222,44 @@ class Solver {
       return this.findValidCfg(cfg.mintCaps, cfg.borrowCaps, cfg.cfs).efficientFrontier
   }
 }
-/*
-const rawData = require("./json.js")
-const s = new Solver(rawData)
-const caps = {
-  "auUSDC" : 0,
-  "auUSDT" : 0,
-  "auWNEAR" : 45,
-  "auSTNEAR" : 49,
-  "auWBTC" : 45,
-  "auETH" : 45
-}
+// const rawData = require("./risk_params.json")
+// const s = new Solver(rawData)
+// console.log(s.caps)
 
-const cfs = {
-  "auUSDC" : 0,
-  "auUSDT" : 0,
-  "auWNEAR" : 0,
-  "auSTNEAR" : 0,
-  "auWBTC" : 0,
-  "auETH" : 0    
-}
+// const caps = {
+//   "auUSDC" : 0,
+//   "auUSDT" : 0,
+//   "auWNEAR" : 45,
+//   "auSTNEAR" : 49,
+//   "auWBTC" : 45,
+//   "auETH" : 45
+// }
 
-const cfg = s.findValidCfg(caps, caps, cfs)
-//console.log({caps})
-console.log({cfg})
-console.log("try to optimize")
-const imp = s.optimizeCfg(cfg)
-console.log(imp)
-console.log("try to imporove cf")
-//const newEthCf = 0.89 //0.862
-//console.log(s.recommendationForIncrease(imp, "cfs", "auETH", newEthCf))
-console.log(s.recommendations(imp))
-return
-console.log("optimize borrow caps")
-const opt = s.optimizeBorrowCaps(cfg[0], cfg[1], cfg[2])
-console.log({opt})
+// const cfs = {
+//   "auUSDC" : 0,
+//   "auUSDT" : 0,
+//   "auWNEAR" : 0,
+//   "auSTNEAR" : 0,
+//   "auWBTC" : 0,
+//   "auETH" : 0    
+// }
+
+// const cfg = s.findValidCfg(caps, caps, cfs)
+// //console.log({caps})
+// console.log({cfg})
+// console.log("try to optimize")
+// const imp = s.optimizeCfg(cfg)
+// console.log(imp)
+// console.log("try to imporove cf")
+// //const newEthCf = 0.89 //0.862
+// //console.log(s.recommendationForIncrease(imp, "cfs", "auETH", newEthCf))
+// console.log(s.recommendations(imp))
+// return
+// console.log("optimize borrow caps")
+// const opt = s.optimizeBorrowCaps(cfg[0], cfg[1], cfg[2])
+// console.log({opt})
 
 
-console.log("--------------------------")
-console.log(cfg[0])
-console.log(opt)*/
+// console.log("--------------------------")
+// console.log(cfg[0])
+// console.log(opt)
