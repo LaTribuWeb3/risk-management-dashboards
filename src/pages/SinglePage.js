@@ -26,8 +26,8 @@ class SinglePage extends Component {
         <h1 id="risk-parameters">Risk Parameters</h1>
         <RiskParameters />
         <hgroup>
-          <h1 id="simulation">Simulation</h1>
-          <h3>Worse day simulation on current condition</h3>
+          <h1 id="simulation">Current State</h1>
+          <h3>Worse day simulation on current state</h3>
         </hgroup>
         <Simulation />
       </div>

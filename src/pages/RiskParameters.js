@@ -32,7 +32,7 @@ const columns = [
   },   
   {
       name: 'Collateral Factor',
-      selector: row => row.collateral_factor,
+      selector: row => row.collateral_factor.toFixed(2),
   },  
 ];
 

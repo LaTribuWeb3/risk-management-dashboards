@@ -143,6 +143,8 @@ export default class Solver {
               }
           }
 
+          return cfg
+
           for(const cap of this.caps[asset]) {
               if(cap > cfg.mintCaps[asset]) {
                   const tempMintCaps = Object.assign({}, cfg.mintCaps)

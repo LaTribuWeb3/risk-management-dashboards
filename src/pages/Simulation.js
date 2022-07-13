@@ -3,29 +3,30 @@ import {observer} from "mobx-react"
 import Box from "../components/Box"
 import DataTable from 'react-data-table-component'
 import mainStore from '../stores/main.store'
+import {whaleFriendlyFormater} from '../components/WhaleFriendly'
 
 const columns = [
   {
       name: 'asset',
       selector: row => row.key,
-      format: row => removeTokenPrefix(row.key),
+      format: row => (row.key),
       sortable: true,
   },
   {
-      name: 'max_collateral',
-      selector: row => row['max_collateral factor'],
-      sortable: true,
+    name: 'total liquidations',
+    selector: row => whaleFriendlyFormater(row.total_liquidation),
+    format: row => whaleFriendlyFormater(row.total_liquidation),
+    sortable: true,
   },  
   {
-      name: 'max_drop',
-      selector: row => row.max_drop,
-      format: row => row.max_drop,
-      sortable: true,
-  },  
+    name: 'max drop',
+    selector: row => row.max_drop,
+    format: row => row.max_drop,
+    sortable: true,
+  },      
   {
-      name: 'total_liquidation',
-      selector: row => row.total_liquidation,
-      format: row => row.total_liquidation,
+      name: 'max collateral factor',
+      selector: row => row['max_collateral'],
       sortable: true,
   },  
 ];
