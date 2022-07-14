@@ -13,7 +13,7 @@ const buttonsStyle = {
   display: 'flex', 
   flexDirection: 'column', 
   alignItems: 'center', 
-  margin: '10px 20px', 
+  margin: '5px 20px', 
   borderRadius: 'var(--border-radius)', 
   boxShadow: 'var(--card-box-shadow)',
 }

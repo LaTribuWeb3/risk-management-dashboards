@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import {observer} from "mobx-react"
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceLine } from 'recharts';
 import {COLORS} from '../constants'
+import mainStore from '../stores/main.store'
+import {removeTokenPrefix} from '../utils'
+import {WhaleFriendlyAxisTick} from '../components/WhaleFriendly'
 
 class LiquidationsGraph extends Component {
 
@@ -20,6 +23,12 @@ class LiquidationsGraph extends Component {
     })
     const dataKeys = Object.keys(graphKeys)
     const dataSet = Object.values(graphData).sort((a, b) => a.x - b.x)
+
+    const loading = mainStore['oracles_loading']
+    const rawData = Object.assign({}, mainStore['oracles_data'] || {})
+    debugger
+    const asset = this.props.data.key
+    const currentPrice = (rawData[asset] || {}).oracle
     return (
       <div>
         <AreaChart
@@ -34,8 +43,10 @@ class LiquidationsGraph extends Component {
           }}
         >
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="x" />
-          <YAxis />
+          {currentPrice && <ReferenceLine alwaysShow={true} x={currentPrice} label={`${removeTokenPrefix(asset)} price`} stroke="var(--primary" />}
+          {/* <ReferenceLine y={650000} label="Max" stroke="red" /> */}
+          <XAxis type="number" dataKey="x" />
+          <YAxis tick={<WhaleFriendlyAxisTick />}/>
           <Tooltip />
           {dataKeys.map((k, i)=> <Area key={i} type="monotone" dataKey={k} stackId="1" stroke={COLORS[i]} fill={COLORS[i]} />)}
         </AreaChart>

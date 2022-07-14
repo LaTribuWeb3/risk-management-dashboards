@@ -48,7 +48,7 @@
   font-size: var(--font-size);
   font-weight: var(--font-weight);
   margin-left: 2px!important;
-  width: 99.5%;
+  width: calc(100% - 2px)!important;/* bugFix */
 }
 .rdt_TableRow{
   background-color: var(--card-background-color)!important;
@@ -96,6 +96,11 @@
 
 text {
   font-size: var(--data-font-size);
+  color: var(--color);
+}
+.data-text {
+  font-size: var(--data-font-size);
+  color: var(--color);
 }
 
 .plus-minus {

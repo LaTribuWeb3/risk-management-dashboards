@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component, Fragment, PureComponent } from "react";
 import {observer} from "mobx-react"
 const tenth = 100
 
@@ -39,6 +39,20 @@ class WhaleFriendly extends Component {
         {wfn}
       </Fragment>
     )
+  }
+}
+
+export class WhaleFriendlyAxisTick extends PureComponent {
+  render() {
+    const { x, y, stroke, payload } = this.props;
+
+    return (
+      <g transform={`translate(${x},${y})`}>
+        <text x={0} y={0} dy={16} textAnchor="end" fill="#666">
+          {whaleFriendlyFormater(payload.value)}
+        </text>
+      </g>
+    );
   }
 }
 
