@@ -48,6 +48,7 @@
   font-size: var(--font-size);
   font-weight: var(--font-weight);
   margin-left: 2px!important;
+  width: 99.5%;
 }
 .rdt_TableRow{
   background-color: var(--card-background-color)!important;

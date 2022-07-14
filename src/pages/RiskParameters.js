@@ -6,6 +6,7 @@ import mainStore from '../stores/main.store'
 import {whaleFriendlyFormater} from '../components/WhaleFriendly'
 import {removeTokenPrefix} from '../utils'
 import CapInput from '../components/CapInput'
+import Recomendation from '../components/Recomendation'
 import riskStore from '../stores/risk.store'
 
 const NumConfig = observer(({row, field}) => {
@@ -32,13 +33,15 @@ const columns = [
   },   
   {
       name: 'Collateral Factor',
-      selector: row => row.collateral_factor.toFixed(2),
+      selector: row => row.collateral_factor,
+      format: row => <Recomendation row={row} tooltip={'textsssss'}>{row.collateral_factor.toFixed(2)}</Recomendation>,
   },  
 ];
 
 
 class RiskParameters extends Component {
   render (){
+
     return (
       <div>
         <Box>

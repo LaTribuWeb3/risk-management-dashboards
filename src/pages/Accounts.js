@@ -15,6 +15,16 @@ const columns = [
       sortable: true,
   },  
   {
+      name: 'total_collateral',
+      selector: row => whaleFriendlyFormater(row.total_collateral),
+      sortable: true,
+  },
+  {
+      name: 'total_debt',
+      selector: row => whaleFriendlyFormater(row.total_debt),
+      sortable: true,
+  },
+  {
       name: 'median_collateral',
       selector: row => whaleFriendlyFormater(row.median_collateral),
       sortable: true,
@@ -47,16 +57,6 @@ const columns = [
   {
       name: 'top_1_debt',
       selector: row => whaleFriendlyFormater(row.top_1_debt),
-      sortable: true,
-  },
-  {
-      name: 'total_collateral',
-      selector: row => whaleFriendlyFormater(row.total_collateral),
-      sortable: true,
-  },
-  {
-      name: 'total_debt',
-      selector: row => whaleFriendlyFormater(row.total_debt),
       sortable: true,
   },
 ];

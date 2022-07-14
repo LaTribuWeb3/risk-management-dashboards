@@ -46,6 +46,7 @@ const riskData = [
 class RiskStore {
   data = []
   incrementationOptions = {}
+  recomendations = []
   constructor (){
     this.init()
     makeAutoObservable(this)
@@ -71,6 +72,7 @@ class RiskStore {
         const sorted = riskData.sort((a,b)=> a.asset.localeCompare(b.asset))
         this.data = sorted
       })
+      this.incrament(riskData[0], 'mint_cap') // TODO: remove this is for the demo only
     }
   }
 
@@ -106,6 +108,7 @@ class RiskStore {
       collateralFactorCaps[row.asset] = 0
     })
     const newRiskParameters = this.solver.optimizeCfg(this.solver.findValidCfg(mintCaps, borrowCaps, collateralFactorCaps))
+    this.recomendations = this.solver.recommendations(newRiskParameters)
     // then rebuild data object from new configurations
     const newTableData = {}
     Object.entries(newRiskParameters.mintCaps).forEach(([k, v])=> {
@@ -153,6 +156,7 @@ class RiskStore {
           collateralFactorCaps[row.asset] = 0
         })
         const newRiskParameters = this.solver.optimizeCfg(this.solver.findValidCfg(mintCaps, borrowCaps, collateralFactorCaps))
+        this.recomendations = this.solver.recommendations(newRiskParameters)
         // then rebuild data object from new configurations
         const newTableData = {}
         Object.entries(newRiskParameters.mintCaps).forEach(([k, v])=> {
