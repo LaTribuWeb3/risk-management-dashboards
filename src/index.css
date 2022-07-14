@@ -113,3 +113,17 @@ text {
 .plus-minus:hover {
   background:rgba(120, 120, 120, 0.1);
 }
+
+.box-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(120, 120, 120, 0.1);
+}
+
+.box-row:last-child{
+  border-bottom: none;
+  margin-bottom: 0;
+  margin-bottom: 0;
+}
