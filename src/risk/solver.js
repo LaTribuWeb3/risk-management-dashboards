@@ -97,12 +97,12 @@ export default class Solver {
                       resultMintCaps[long] = this.min(resultMintCaps[long], dc)
                       match = true
 
-                      if(cfs[long] === cf) efficientFrontier.push({"long" : long, "short" : short, "mintCap" : prevDc})
+                      if(cfs[long] === cf) efficientFrontier.push({"asset" : long, "short" : short, "change" : "mintCap", "recommendation" : "decrease " + long + " mint cap to " + prevDc.toString(), "newCap" : prevDc})
                   }
                   if(dc >= borrowCaps[short]) {
                       match = true
 
-                      if(cfs[long] === cf) efficientFrontier.push({"long" : long, "short" : short, "borrowCap" : prevDc})                        
+                      if(cfs[long] === cf) efficientFrontier.push({"asset" : long, "short" : short, "change" : "borrowCap", "recommendation" : "decrease " + short + " borrow cap to " + prevDc.toString(), "newCap" : prevDc})                        
                   }
 
                   if(match) {
