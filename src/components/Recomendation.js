@@ -2,11 +2,14 @@ import React, {useState} from "react";
 import {observer} from "mobx-react"
 import ReactTooltip from 'react-tooltip';
 import riskStore from '../stores/risk.store'
+import Ramzor from '../components/Ramzor'
 
 class Recomendation extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {tooltip: true};
+    this.state = {
+      tooltip: true,
+    };
   }
 
   render () {
@@ -17,8 +20,11 @@ class Recomendation extends React.Component {
       }
     })
     const recomendation = recomendations.join('\n Or ')
+    const cf = this.props.row.collateral_factor.toFixed(2)
+    const diff = this.props.row.diff
     return (<React.Fragment>
       <abbr
+          className={`${diff ? 'highlight' : ''}`}
           onMouseEnter={() => {
             console.log('enter')
             this.setState({tooltip: true});
@@ -31,10 +37,10 @@ class Recomendation extends React.Component {
             setTimeout(() => this.setState({tooltip: true}), 1000)
           }}
         data-tip={recomendation}>
-        {this.props.children}
-      </abbr>  
-      <span>{this.state.tooltip}</span>
-      {this.state.tooltip && <ReactTooltip effect="solid"/>}
+        {cf}
+      </abbr>
+      {diff && <Ramzor red={diff < 0}> ({diff.toFixed(2)}%)</Ramzor>}
+      {this.state.tooltip && <ReactTooltip textColor='var(--tooltip-color)' backgroundColor='var(--tooltip-background-color)' effect="solid"/>}
     </React.Fragment>)
   }
 }

@@ -127,3 +127,11 @@ text {
   margin-bottom: 0;
   margin-bottom: 0;
 }
+
+.highlight {
+  transition: all 0.3 ease-out;
+  padding: 0.125rem 0.25rem;
+  background-color: var(--mark-background-color);
+  color: var(--mark-color);
+  vertical-align: baseline;
+}

@@ -34,7 +34,7 @@ const columns = [
   {
       name: 'Collateral Factor',
       selector: row => row.collateral_factor,
-      format: row => <Recomendation row={row} tooltip={'textsssss'}>{row.collateral_factor.toFixed(2)}</Recomendation>,
+      format: row => <Recomendation row={row}/>,
   },  
 ];
 

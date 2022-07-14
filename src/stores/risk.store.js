@@ -72,13 +72,9 @@ class RiskStore {
         const sorted = riskData.sort((a,b)=> a.asset.localeCompare(b.asset))
         this.data = sorted
       })
-      this.incrament(riskData[0], 'mint_cap') // TODO: remove this is for the demo only
+      this.solve()
+      this.initialData = this.data.map(r => r)
     }
-  }
-
-  changeData = (row, field, event) => {
-    console.log({row, field, event: event.target.value})
-    row[field] = event.target.value
   }
 
   incrament = (row, field) => {
@@ -98,7 +94,12 @@ class RiskStore {
     }
     // cahnge the value
     row[field] = options[currentIndex+1]
-    // then generate mintCaps, borrowCaps & collateralFactorCaps objects
+    this.solve()
+    console.log('incrament')
+  }
+
+  solve = () => {
+    // generate mintCaps, borrowCaps & collateralFactorCaps objects
     const mintCaps = {}
     const borrowCaps = {}
     const collateralFactorCaps = {}
@@ -123,58 +124,43 @@ class RiskStore {
       newTableData[k] = newTableData[k] || {asset: k}
       newTableData[k].collateral_factor = v
     })
+    debugger
+    // look for diffs and add theme
+    if(this.initialData){
+      debugger
+      this.initialData.forEach(row=> {
+        const cf = row.collateral_factor
+        const newCf = newTableData[row.asset].collateral_factor
+        if(cf === newCf) {
+          newTableData[row.asset].diff = false
+          return
+        }
+        newTableData[row.asset].diff = (100 - ((cf / newCf) * 100)) 
+      })
+    }
     // then rerender
     runInAction(()=> {
-      this.data = Object.values(newTableData).sort((a,b)=> a.asset.localeCompare(b.asset))
+      this.data = (Object.values(newTableData)).sort((a,b)=> a.asset.localeCompare(b.asset))
     })
-    console.log('incrament')
   }
 
   decrament = (row, field) => {
-        // find the options
-        const options = this.incrementationOptions[row.asset] || []
-        // find the index of exisiting value
-        const currentIndex = options.indexOf(row[field])
-        // validate we can incrament or decrament
-        if(currentIndex == -1 ){
-          console.log('cant decrament 1')
-          return
-        }
-        if(currentIndex === 0){
-          console.log('cant decrament 2')
-          return
-        }
-        // cahnge the value
-        row[field] = options[currentIndex-1]
-        // then generate mintCaps, borrowCaps & collateralFactorCaps objects
-        const mintCaps = {}
-        const borrowCaps = {}
-        const collateralFactorCaps = {}
-        this.data.forEach(row => {
-          mintCaps[row.asset] = row.mint_cap
-          borrowCaps[row.asset] = row.borrow_cap
-          collateralFactorCaps[row.asset] = 0
-        })
-        const newRiskParameters = this.solver.optimizeCfg(this.solver.findValidCfg(mintCaps, borrowCaps, collateralFactorCaps))
-        this.recomendations = this.solver.recommendations(newRiskParameters)
-        // then rebuild data object from new configurations
-        const newTableData = {}
-        Object.entries(newRiskParameters.mintCaps).forEach(([k, v])=> {
-          newTableData[k] = newTableData[k] || {asset: k}
-          newTableData[k].mint_cap = v
-        })
-        Object.entries(newRiskParameters.borrowCaps).forEach(([k, v])=> {
-          newTableData[k] = newTableData[k] || {asset: k}
-          newTableData[k].borrow_cap = v
-        })
-        Object.entries(newRiskParameters.cfs).forEach(([k, v])=> {
-          newTableData[k] = newTableData[k] || {asset: k}
-          newTableData[k].collateral_factor = v
-        })
-        // then rerender
-        runInAction(()=> {
-          this.data = (Object.values(newTableData)).sort((a,b)=> a.asset.localeCompare(b.asset))
-        })
+    // find the options
+    const options = this.incrementationOptions[row.asset] || []
+    // find the index of exisiting value
+    const currentIndex = options.indexOf(row[field])
+    // validate we can incrament or decrament
+    if(currentIndex == -1 ){
+      console.log('cant decrament 1')
+      return
+    }
+    if(currentIndex === 0){
+      console.log('cant decrament 2')
+      return
+    }
+    // cahnge the value
+    row[field] = options[currentIndex-1]
+    this.solve()
     console.log('decrament')
   }
 }
