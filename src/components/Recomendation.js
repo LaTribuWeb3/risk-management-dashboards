@@ -24,7 +24,7 @@ class Recomendation extends React.Component {
     const diff = this.props.row.diff
     return (<React.Fragment>
       <abbr
-          className={`${diff ? 'highlight' : ''}`}
+          className={`transition ${diff ? 'highlight' : ''}`}
           onMouseEnter={() => {
             console.log('enter')
             this.setState({tooltip: true});

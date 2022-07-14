@@ -73,7 +73,6 @@ class RiskStore {
         this.data = sorted
       })
       this.solve()
-      this.initialData = this.data.map(r => r)
     }
   }
 
@@ -96,6 +95,21 @@ class RiskStore {
     row[field] = options[currentIndex+1]
     this.solve()
     console.log('incrament')
+  }
+
+  clearDiffs = () => {
+    if(this.timeOutId){
+      //clear timeOut
+      clearTimeout(this.timeOutId)
+    }
+    this.timeOutId = setTimeout(() => {
+      runInAction(()=> {
+        this.data = this.data.map(r => {
+          r.diff = false
+          return r
+        })
+      })
+    }, 5000)
   }
 
   solve = () => {
@@ -124,24 +138,21 @@ class RiskStore {
       newTableData[k] = newTableData[k] || {asset: k}
       newTableData[k].collateral_factor = v
     })
-    debugger
     // look for diffs and add theme
-    if(this.initialData){
-      debugger
-      this.initialData.forEach(row=> {
-        const cf = row.collateral_factor
-        const newCf = newTableData[row.asset].collateral_factor
-        if(cf === newCf) {
-          newTableData[row.asset].diff = false
-          return
-        }
-        newTableData[row.asset].diff = (100 - ((cf / newCf) * 100)) 
-      })
-    }
+    this.data.forEach(row=> {
+      const cf = row.collateral_factor
+      const newCf = newTableData[row.asset].collateral_factor
+      if(!cf || cf === newCf) {
+        newTableData[row.asset].diff = false
+        return
+      }
+      newTableData[row.asset].diff = newCf - cf
+    })
     // then rerender
     runInAction(()=> {
       this.data = (Object.values(newTableData)).sort((a,b)=> a.asset.localeCompare(b.asset))
     })
+    this.clearDiffs()
   }
 
   decrament = (row, field) => {
