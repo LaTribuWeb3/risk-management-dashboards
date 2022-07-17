@@ -39,7 +39,7 @@ class Recomendation extends React.Component {
         data-tip={recomendation}>
         {cf}
       </abbr>
-      {diff && <Ramzor red={diff < 0}> ({diff.toFixed(2)}%)</Ramzor>}
+      {diff && <Ramzor red={diff < 0}> ({diff.toFixed(2)})</Ramzor>}
       {this.state.tooltip && <ReactTooltip textColor='var(--tooltip-color)' backgroundColor='var(--tooltip-background-color)' effect="solid"/>}
     </React.Fragment>)
   }
