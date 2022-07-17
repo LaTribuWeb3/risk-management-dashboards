@@ -138,3 +138,18 @@ text {
   color: var(--mark-color);
   vertical-align: baseline;
 }
+
+.nav-link{
+  transition: all 0.3s ease-out;
+  text-transform: capitalize;
+  color: var(--secondary);
+}
+
+.active-scroll-spy {
+  color: var(--primary);
+  font-weight: bold;
+}
+
+section {
+  min-height: 100vh;
+}

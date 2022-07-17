@@ -18,21 +18,29 @@ function renderPage (props, PageComponent) {
   )
 }
 
-function App() {
-  return (
-    <Router>
-      <div className="App">
-        <Sidenav/>
-        <div className="main-content box-space">
-            <main>
-              <Routes>
-                <Route exact path="/"  element={<SinglePage/>}/>
-              </Routes>
-            </main>
+class App extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.scrollContainer = React.createRef();
+  }
+
+  render () {
+    return (
+      <Router>
+        <div className="App">
+          <Sidenav/>
+          <div ref={this.scrollContainer} className="main-content box-space">
+              <main>
+                <Routes>
+                  <Route exact path="/"  element={<SinglePage scrollContainer={this.scrollContainer}/>}/>
+                </Routes>
+              </main>
+          </div>
         </div>
-      </div>
-    </Router>
-  );
+      </Router>
+    );
+  }
 }
 
 export default observer(App);
