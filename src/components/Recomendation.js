@@ -20,7 +20,8 @@ class Recomendation extends React.Component {
       }
     })
     const recomendation = recomendations.join('\n Or ')
-    const cf = this.props.row.collateral_factor.toFixed(2)
+    debugger
+    const cf = (this.props.row.collateral_factor || 0).toFixed(2)
     const diff = this.props.row.diff
     return (<React.Fragment>
       <abbr

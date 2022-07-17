@@ -52,25 +52,27 @@ class RiskStore {
     makeAutoObservable(this)
   }
 
-  init = ()=> {
+  init = async ()=> {
     // get API data
     //while( mainStore['risk_params_loading']) { console.log( mainStore['risk_params_loading'])}
     //while(loading)
     //console.log({loading})
 
-    console.log("ori", mainStore['risk_params_loading'])
     if(true) {
-      const rawData = Object.assign({}, mainStore['risk_params_data'] || {"xxx" : 4})
-      const apiData = orisApiData
+      const data = await mainStore['risk_params_request']
+      this.rawData = Object.assign({}, data || {})
+      const {json_time} = this.rawData
+      if(json_time){
+        delete this.rawData.json_time
+      }
       // inctanciate a solver
-      this.solver = new Solver(apiData)
-      console.log({rawData})
+      this.solver = new Solver(this.rawData)
       console.log("caps", this.solver.caps)
       runInAction(()=> {
         this.incrementationOptions = this.solver.caps
         console.log(this.incrementationOptions)
-        const sorted = riskData.sort((a,b)=> a.asset.localeCompare(b.asset))
-        this.data = sorted
+        // const sorted = riskData.sort((a,b)=> a.asset.localeCompare(b.asset))
+        // this.data = sorted
       })
       this.solve()
     }
@@ -117,12 +119,22 @@ class RiskStore {
     const mintCaps = {}
     const borrowCaps = {}
     const collateralFactorCaps = {}
-    this.data.forEach(row => {
-      mintCaps[row.asset] = row.mint_cap
-      borrowCaps[row.asset] = row.borrow_cap
-      collateralFactorCaps[row.asset] = 0
-    })
+    if(this.data.length){
+      this.data.forEach(row => {
+        mintCaps[row.asset] = row.mint_cap
+        borrowCaps[row.asset] = row.borrow_cap
+        collateralFactorCaps[row.asset] = 0
+      })
+    } else {
+      Object.entries(this.solver.caps).forEach(([k, v])=> {
+        const max = v[v.length - 1]
+        mintCaps[k] = max
+        borrowCaps[k] = max
+        collateralFactorCaps[k] = 0
+      })
+    }
     const newRiskParameters = this.solver.optimizeCfg(this.solver.findValidCfg(mintCaps, borrowCaps, collateralFactorCaps))
+    
     this.recomendations = this.solver.recommendations(newRiskParameters)
     // then rebuild data object from new configurations
     const newTableData = {}

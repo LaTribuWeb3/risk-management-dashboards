@@ -41,10 +41,10 @@ const columns = [
 
 class RiskParameters extends Component {
   render (){
-
+    const loading = mainStore['risk_params_loading']
     return (
       <div>
-        <Box>
+        <Box loading={loading}>
           <DataTable
               columns={columns}
               data={riskStore.data}

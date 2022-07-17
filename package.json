@@ -26,7 +26,7 @@
     "web3-utils": "^1.7.3"
   },
   "scripts": {
-    "start": "react-app-rewired start",
+    "start": "REACT_APP_CONFIG=dev && react-app-rewired start",
     "start-coming-soon": "REACT_APP_COMING_SOON=true react-app-rewired start",
     "build-server": "BUILD_PATH='../public' react-app-rewired build",
     "build": "react-app-rewired build",

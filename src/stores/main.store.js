@@ -3,7 +3,7 @@ import axios from "axios"
 import web3Utils from "web3-utils"
 
 const {fromWei, toBN} = web3Utils
-const platformId = 0
+const platformId = window.APP_CONFIG.PLATFORM_ID
 const apiEndpoints = ['overview', 'accounts', 'dex_liquidity', 'oracles', 'usd_volume_for_slippage', 'current_simulation_risk',
                       'risk_params']
 
@@ -37,10 +37,11 @@ class MainStore {
   fetchData = (endpoint) => {
     this[endpoint + '_loading'] = true
     this[endpoint + '_data'] = null
-    axios.get(`${this.apiUrl}/${endpoint}/${platformId}`)
+    this[endpoint + '_request'] = axios.get(`${this.apiUrl}/${endpoint}/${platformId}`)
     .then(({data})=> {
       this[endpoint + '_loading'] = false
       this[endpoint + '_data'] = data
+      return data
     })
     .catch(console.error)
   }

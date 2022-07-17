@@ -6,6 +6,7 @@ import {COLORS, BLOCK_EXPLORER} from '../constants'
 import {removeTokenPrefix} from '../utils'
 import {whaleFriendlyFormater, WhaleFriendlyAxisTick} from '../components/WhaleFriendly'
 import BoxRow from "./BoxRow";
+import { TOKEN_PREFIX } from "../constants";
 
 const truncate = {
   maxWidth: '200px',
@@ -27,7 +28,7 @@ class SlippageChart extends Component {
     if(json_time){
       delete rawData.json_time
     }
-    const data = !loading ? (rawData['au'+market] || {}) : {}
+    const data = !loading ? (rawData[TOKEN_PREFIX + market] || {}) : {}
     const dataSet = Object.entries(data).map(([k, v])=> ({name: removeTokenPrefix(k), value: v}))
     if(!dataSet.length){
       return null
