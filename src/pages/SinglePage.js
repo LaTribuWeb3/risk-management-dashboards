@@ -13,7 +13,7 @@ class SinglePage extends Component {
 
   render (){
     return (
-      <ScrollSpy scrollThrottle={100} parentScrollContainerRef={this.props.scrollContainer}>
+      <ScrollSpy offsetBottom={200} scrollThrottle={100} parentScrollContainerRef={this.props.scrollContainer}>
         <section id="overview">
           <h1 >Overview</h1>
           <Overview/>
