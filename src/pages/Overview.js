@@ -5,6 +5,7 @@ import BoxGrid from "../components/BoxGrid"
 import mainStore from '../stores/main.store'
 import WhaleFriendly from '../components/WhaleFriendly'
 import BoxRow from '../components/BoxRow'
+import OverviewPieCharts from '../components/OverviewPieCharts'
 
 const humanTxt = txt => txt.split('_').join(' ')
 
@@ -21,6 +22,7 @@ class Overview extends Component {
     const secondHalf = !loading ? Object.entries(rawData).slice(half) : []
     return (
       <div>
+        <OverviewPieCharts/>
         <BoxGrid>
           <Box loading={loading}>
             {firstHalf.map(([k, v])=> <BoxRow key={k}>

@@ -102,6 +102,9 @@ text {
   font-size: var(--data-font-size);
   color: var(--color);
 }
+.recharts-legend-item-text {
+  font-size: var(--data-font-size);
+}
 
 .plus-minus {
   cursor: pointer;
@@ -120,6 +123,7 @@ text {
   margin-bottom: 10px;
   padding-bottom: 10px;
   border-bottom: 1px solid rgba(120, 120, 120, 0.1);
+  color: var(--color);
 }
 
 .box-row:last-child{
@@ -152,4 +156,22 @@ text {
 
 section {
   min-height: 100vh;
+}
+
+.tooltip-container{
+  border-radius: var(--border-radius);
+  box-shadow: var(--card-box-shadow);
+  padding: 20px;
+  background-color: var(--background-color);
+  min-width: 200px;
+  z-index: 100000;
+  font-size: var(--data-font-size);
+}
+
+line.recharts-reference-line-line{
+  stroke-dasharray: 5 10;
+}
+
+.recharts-sector{
+  stroke: none;
 }
