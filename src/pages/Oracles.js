@@ -59,7 +59,7 @@ class Oracles extends Component {
 
     return (
       <div>
-        <Box loading={loading}>
+        <Box loading={loading} time={json_time}>
           {!loading && <DataTable
               columns={columns}
               data={data}

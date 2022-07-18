@@ -1,4 +1,6 @@
-import React from "react";
+import React from 'react'
+import {observer} from 'mobx-react'
+import LastUpdate from './LastUpdate'
 
 const Box = props => {
   const box = {
@@ -12,8 +14,9 @@ const Box = props => {
   return (
     <article style={box} aria-busy={props.loading}>
       {props.children}
+      {props.time && <LastUpdate time={props.time}/>}
     </article>
   )
 }
 
-export default Box;
+export default observer(Box)
