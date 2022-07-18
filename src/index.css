@@ -123,6 +123,7 @@ text {
   margin-bottom: 10px;
   padding-bottom: 10px;
   border-bottom: 1px solid rgba(120, 120, 120, 0.1);
+  color: var(--color);
 }
 
 .box-row:last-child{
