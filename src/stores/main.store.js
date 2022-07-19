@@ -9,7 +9,7 @@ const apiEndpoints = ['overview', 'accounts', 'dex_liquidity', 'oracles', 'usd_v
 
 class MainStore {
 
-  apiUrl = 'https://analytics.riskdao.org'
+  apiUrl = process.env.REACT_APP_API_URL || 'https://analytics.riskdao.org'
   blackMode =  null
   loading = {}
   apiData = {}
