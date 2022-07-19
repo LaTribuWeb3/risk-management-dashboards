@@ -27,10 +27,8 @@
   },
   "scripts": {
     "start": "REACT_APP_CONFIG=dev && react-app-rewired start",
-    "start-coming-soon": "REACT_APP_COMING_SOON=true react-app-rewired start",
-    "build-server": "BUILD_PATH='../public' react-app-rewired build",
     "build": "react-app-rewired build",
-    "build-coming-soon": "REACT_APP_COMING_SOON=true react-app-rewired build",
+    "build-staging": "REACT_APP_API_URL=https://api-staging.riskdao.org react-app-rewired build",
     "test": "react-app-rewired test",
     "eject": "react-app-rewired eject"
   },
