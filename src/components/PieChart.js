@@ -13,7 +13,6 @@ const data = [
 ];
 
 const renderActiveShape = (props) => {
-  debugger
   const RADIAN = Math.PI / 180;
   const { cx, cy, midAngle, innerRadius, outerRadius, startAngle, endAngle, fill, payload, percent, value, index } = props;
   const sin = Math.sin(-RADIAN * midAngle);
@@ -27,7 +26,6 @@ const renderActiveShape = (props) => {
   const textAnchor = cos >= 0 ? 'start' : 'end';
 
   const color = COLORS[index]
-  debugger
   return (
     <g>
       <text x={cx} y={cy} dy={8} textAnchor="middle" fill={fill}>

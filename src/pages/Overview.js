@@ -24,17 +24,21 @@ class Overview extends Component {
       <div>
         <OverviewPieCharts/>
         <BoxGrid>
-          <Box loading={loading}>
-            {firstHalf.map(([k, v])=> <BoxRow key={k}>
-              <div>{humanTxt(k)}</div>
-              <div>$<WhaleFriendly num={v} /></div>
-            </BoxRow>)}
+          <Box loading={loading} time={json_time}>
+            <div>
+              {firstHalf.map(([k, v])=> <BoxRow key={k}>
+                <div>{humanTxt(k)}</div>
+                <div>$<WhaleFriendly num={v} /></div>
+              </BoxRow>)}
+            </div>
           </Box>
-          <Box loading={loading}>
-            {secondHalf.map(([k, v])=> <BoxRow key={k}>
-              <div>{humanTxt(k)}</div>
-              <div>$<WhaleFriendly num={v} /></div>
-            </BoxRow>)}
+          <Box loading={loading} time={json_time}>
+            <div>
+              {secondHalf.map(([k, v])=> <BoxRow key={k}>
+                <div>{humanTxt(k)}</div>
+                <div>$<WhaleFriendly num={v} /></div>
+              </BoxRow>)}
+            </div>
           </Box>
         </BoxGrid>
       </div>

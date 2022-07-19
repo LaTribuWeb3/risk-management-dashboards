@@ -74,7 +74,7 @@ class Liquidity extends Component {
 
     return (
       <div>
-        <Box loading={loading}>
+        <Box loading={loading} time={json_time}>
           {!loading && <DataTable
               expandableRows
               columns={columns}

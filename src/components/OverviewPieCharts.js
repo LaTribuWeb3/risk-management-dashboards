@@ -22,11 +22,11 @@ class OverviewPieCharts extends Component {
     }) : []
     return (
       <BoxGrid>
-        <Box loading={loading} height={450}>
+        <Box loading={loading} height={450} time={json_time}>
           <h6 style={{margin: 0}}>Collateral</h6>
           {!loading && <PieChart data={data} dataKey={'total_collateral'}/>}
         </Box>
-        <Box loading={loading} height={450}>
+        <Box loading={loading} height={450} time={json_time}>
         <h6 style={{margin: 0}}>Debt</h6>
           {!loading && <PieChart data={data} dataKey={'total_debt'}/>}
         </Box>
