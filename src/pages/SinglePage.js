@@ -6,6 +6,7 @@ import Accounts from "./Accounts";
 import Oracles from "./Oracles";
 import RiskParameters from "./RiskParameters";
 import Simulation from "./Simulation";
+import Alerts from './Alerts';
 import ScrollSpy from "react-ui-scrollspy";
 
 
@@ -14,7 +15,11 @@ class SinglePage extends Component {
   render (){
     return (
       <ScrollSpy offsetBottom={200} scrollThrottle={100} parentScrollContainerRef={this.props.scrollContainer}>
-        <section id="overview">
+        <section id="alerts">
+          <h1 >Alerts</h1>
+          <Alerts/>
+        </section>       
+         <section id="overview">
           <h1 >Overview</h1>
           <Overview/>
         </section>
