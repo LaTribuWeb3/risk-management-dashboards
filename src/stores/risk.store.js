@@ -3,6 +3,16 @@ import axios from "axios"
 import Solver from "../risk/solver"
 import mainStore from '../stores/main.store'
 
+const tweakCurrentCap = cap => {
+  if (cap === '0'){
+    return Infinity
+  }
+  if (cap === '1'){
+    return '0'
+  }
+  return cap
+}
+
 class RiskStore {
   data = [] 
   currentData = []
@@ -38,8 +48,8 @@ class RiskStore {
           const clean = {}
           for (let asset in d.borrow_caps) {
             clean[asset] = { asset }
-            clean[asset].borrow_cap = d.borrow_caps[asset]
-            clean[asset].mint_cap = d.collateral_caps[asset]
+            clean[asset].borrow_cap = tweakCurrentCap(d.borrow_caps[asset])
+            clean[asset].mint_cap = tweakCurrentCap(d.collateral_caps[asset])
             clean[asset].current_collateral_factor = d.collateral_factors[asset]
           }
           return Object.values(clean)
@@ -156,8 +166,8 @@ class RiskStore {
 
   findCap = (asset, value) => {
     const caps = this.solver.caps[asset]
-    if(value === '0'){
-      return caps[caps.length-1]
+    if(value === Infinity){
+      return caps[caps.length - 1]
     }
     for(let cap of caps){
       if(cap * 1000000 >= value){
@@ -168,6 +178,7 @@ class RiskStore {
 
   solveFor = (dataSet) => {
     // generate mintCaps, borrowCaps & collateralFactorCaps objects
+    debugger
     const mintCaps = {}
     const borrowCaps = {}
     const collateralFactorCaps = {}
@@ -198,9 +209,10 @@ class RiskStore {
 
     // then rerender
     runInAction(()=> {
-      debugger
       dataSet = dataSet.map(r=> {
         r.collateral_factor = newTableData[r.asset].collateral_factor
+        r.debug_mc = newTableData[r.asset].mint_cap
+        r.debug_bc = newTableData[r.asset].borrow_cap
         return r
       })//(Object.values(newTableData)).sort((a,b)=> a.asset.localeCompare(b.asset))
     })

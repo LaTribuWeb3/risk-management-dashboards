@@ -9,7 +9,7 @@ import riskStore from '../stores/risk.store'
 import {Cf} from './CfDiff'
 
 const currentCapFormater = num => {
-  if (num === '0') {
+  if (num === Infinity) {
     return '∞';
   }
   return whaleFriendlyFormater(num)
@@ -25,12 +25,20 @@ const currentColumns = [
       name: 'Mint Cap',
       selector: row => row.mint_cap,
       format: row => currentCapFormater(row.mint_cap)
-  },  
+  },    
+  // {
+  //     name: 'M C',
+  //     selector: row => row.debug_mc,
+  // },  
   {
       name: 'Borrow Cap',
       selector: row => row.borrow_cap,
       format: row => currentCapFormater(row.borrow_cap)
   },
+  // {
+  //   name: 'B C',
+  //   selector: row => row.debug_bc,
+  // },  
   {
       name: 'Collateral Factor',
       selector: row => row.collateral_factor,

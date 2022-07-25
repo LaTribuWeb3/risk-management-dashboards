@@ -19,11 +19,19 @@ const currentColumns = [
       selector: row => row.mint_cap,
       format: row => whaleFriendlyFormater(row.mint_cap)
   },  
+  // {
+  //   name: 'M C',
+  //   selector: row => row.debug_mc,
+  // },  
   {
       name: 'Borrow Cap',
       selector: row => row.borrow_cap,
       format: row => whaleFriendlyFormater(row.borrow_cap)
   },
+  // {
+  //   name: 'B C',
+  //   selector: row => row.debug_bc,
+  // },
   {
       name: 'Collateral Factor',
       selector: row => row.collateral_factor,
