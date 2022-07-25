@@ -6,16 +6,12 @@ import mainStore from '../stores/main.store'
 import {whaleFriendlyFormater} from '../components/WhaleFriendly'
 import {removeTokenPrefix} from '../utils'
 import CapInput from '../components/CapInput'
-import Recomendation from '../components/Recomendation'
+import CfDiff from '../components/CfDiff'
 import riskStore from '../stores/risk.store'
+import RiskParametersCurrent from '../components/RiskParametersCurrent'
+import RiskParametersUtilization from '../components/RiskParametersUtilization'
 
-const NumConfig = observer(({row, field}) => {
-  return <div>
-    <input className="lean-input" onChange={(event)=>riskStore.changeData(row, field, event)} type="number" value={row[field]} id="tentacles" name="tentacles"min="0" max="100"/>
-  </div>
-})
-
-const columns = [
+const redcomendationColumns = [
   {
       name: '',
       selector: row => row.asset,
@@ -25,31 +21,63 @@ const columns = [
       name: 'Mint Cap',
       selector: row => row.mint_cap,
       format: row => <CapInput row={row} field={'mint_cap'}/>,
-  },  
+  },
   {
       name: 'Borrow Cap',
       selector: row => row.borrow_cap,
       format: row => <CapInput row={row} field={'borrow_cap'}/>,
-  },   
+  }, 
   {
-      name: 'Collateral Factor',
+      name: 'Collateral Factor (current)',
       selector: row => row.collateral_factor,
-      format: row => <Recomendation row={row}/>,
-  },  
+      format: row => <CfDiff row={row}/>,
+  },   
+  // {
+  //     name: 'recommendation',
+  //     selector: row => row.collateral_factor,
+  //     format: row => <Recommendation row={row}/>,
+  //     grow: 2
+  // }, 
 ];
 
+const expendedBoxStyle = {margin: '30px', width: '100%', minHeight: '100px', padding: '30px'}
+
+const Recommendation = (props) => {
+  let recommendations = []
+  riskStore.recommendations.forEach(r=> {
+    if(r.asset === props.data.asset){
+      recommendations.push(r.recommendation)
+    }
+  })
+  recommendations = [... new Set(recommendations)]
+  return <div style={{display: 'flex', justifyContent: 'space-between', width: '100%'}}>
+    <article style={expendedBoxStyle}>
+      <h6>to improve collateral factor</h6>
+      {recommendations.map(r=> <div key={r}>
+        <a onClick={()=>riskStore.preformRecommendation(r)}>
+          {r}
+        </a>
+      </div>)}
+    </article>
+  </div>
+}
 
 class RiskParameters extends Component {
   render (){
-    const loading = mainStore['risk_params_loading']
+    const {loading} = riskStore
     const {json_time} = mainStore['risk_params_data'] || {}
     return (
       <div>
+        <RiskParametersCurrent/>
+        <RiskParametersUtilization/>
         <Box loading={loading} time={json_time}>
-          <DataTable
-              columns={columns}
+          <h6>Risk Parameters Recommendations</h6>
+          {!loading && <DataTable
+              expandableRows
+              columns={redcomendationColumns}
               data={riskStore.data}
-          />
+              expandableRowsComponent={Recommendation}
+          />}
         </Box>
       </div>
     )

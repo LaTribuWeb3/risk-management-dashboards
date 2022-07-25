@@ -2,64 +2,48 @@ import { makeAutoObservable, runInAction } from "mobx"
 import axios from "axios"
 import Solver from "../risk/solver"
 import mainStore from '../stores/main.store'
-import orisApiData from "../risk/risk_params.json"
-
-const riskData = [
-  {
-    asset: "auUSDC",
-    mint_cap: 50.0,
-    borrow_cap: 50.0,
-    collateral_factor: 0,
-  },
-  {
-    asset: "auUSDT",
-    mint_cap: 50.0,
-    borrow_cap: 50.0,
-    collateral_factor: 0,
-  },
-  {
-    asset: "auWNEAR",
-    mint_cap: 50.0,
-    borrow_cap: 50.0,
-    collateral_factor: 0,
-  },
-  {
-    asset: "auSTNEAR",
-    mint_cap: 50.0,
-    borrow_cap: 0.0,
-    collateral_factor: 0,
-  },
-  {
-    asset: "auWBTC",
-    mint_cap: 50.0,
-    borrow_cap: 50.0,
-    collateral_factor: 0,
-  },
-  {
-    asset: "auETH",
-    mint_cap: 50.0,
-    borrow_cap: 50.0,
-    collateral_factor: 0,
-  },
-]
 
 class RiskStore {
-  data = []
+  data = [] 
+  currentData = []
+  utilization = []
+  loading = true
   incrementationOptions = {}
-  recomendations = []
+  recommendations = []
   constructor (){
     this.init()
     makeAutoObservable(this)
   }
 
   init = async ()=> {
-    // get API data
-    //while( mainStore['risk_params_loading']) { console.log( mainStore['risk_params_loading'])}
-    //while(loading)
-    //console.log({loading})
-
     if(true) {
       const data = await mainStore['risk_params_request']
+      this.utilization = await mainStore['accounts_request']
+        .then(u=> {
+          return Object.entries(u)
+          .map(([k, v])=> {
+            if(k == 'json_time'){
+              return null
+            }
+            return { 
+              asset: k,
+              mint_cap: v.total_collateral,
+              borrow_cap: v.total_debt
+            }
+          })
+          .filter(o=> o)
+        })
+      this.currentData = await mainStore['lending_platform_current_request']
+        .then(d => {
+          const clean = {}
+          for (let asset in d.borrow_caps) {
+            clean[asset] = { asset }
+            clean[asset].borrow_cap = d.borrow_caps[asset]
+            clean[asset].mint_cap = d.collateral_caps[asset]
+            clean[asset].current_collateral_factor = d.collateral_factors[asset]
+          }
+          return Object.values(clean)
+        })
       this.rawData = Object.assign({}, data || {})
       const {json_time} = this.rawData
       if(json_time){
@@ -67,14 +51,17 @@ class RiskStore {
       }
       // inctanciate a solver
       this.solver = new Solver(this.rawData)
+      this.solveFor(this.utilization)
+      this.solveFor(this.currentData)
       console.log("caps", this.solver.caps)
       runInAction(()=> {
         this.incrementationOptions = this.solver.caps
         console.log(this.incrementationOptions)
         // const sorted = riskData.sort((a,b)=> a.asset.localeCompare(b.asset))
         // this.data = sorted
+        this.solve()
+        this.loading = false
       })
-      this.solve()
     }
   }
 
@@ -135,7 +122,7 @@ class RiskStore {
     }
     const newRiskParameters = this.solver.optimizeCfg(this.solver.findValidCfg(mintCaps, borrowCaps, collateralFactorCaps))
     
-    this.recomendations = this.solver.recommendations(newRiskParameters)
+    this.recommendations = this.solver.recommendations(newRiskParameters)
     // then rebuild data object from new configurations
     const newTableData = {}
     Object.entries(newRiskParameters.mintCaps).forEach(([k, v])=> {
@@ -167,6 +154,58 @@ class RiskStore {
     this.clearDiffs()
   }
 
+  findCap = (asset, value) => {
+    const caps = this.solver.caps[asset]
+    if(value === '0'){
+      return caps[caps.length-1]
+    }
+    for(let cap of caps){
+      if(cap * 1000000 >= value){
+        return cap
+      }
+    }
+  }
+
+  solveFor = (dataSet) => {
+    // generate mintCaps, borrowCaps & collateralFactorCaps objects
+    const mintCaps = {}
+    const borrowCaps = {}
+    const collateralFactorCaps = {}
+    if(dataSet.length){
+      dataSet.forEach(row => {
+        mintCaps[row.asset] = this.findCap(row.asset, row.mint_cap)
+        borrowCaps[row.asset] = this.findCap(row.asset, row.borrow_cap)
+        collateralFactorCaps[row.asset] = 0
+      })
+    }
+    const newRiskParameters = this.solver.optimizeCfg(this.solver.findValidCfg(mintCaps, borrowCaps, collateralFactorCaps))
+    
+    //this.recommendations = this.solver.recommendations(newRiskParameters)
+    // then rebuild data object from new configurations
+    const newTableData = {}
+    Object.entries(newRiskParameters.mintCaps).forEach(([k, v])=> {
+      newTableData[k] = newTableData[k] || {asset: k}
+      newTableData[k].mint_cap = v
+    })
+    Object.entries(newRiskParameters.borrowCaps).forEach(([k, v])=> {
+      newTableData[k] = newTableData[k] || {asset: k}
+      newTableData[k].borrow_cap = v
+    })
+    Object.entries(newRiskParameters.cfs).forEach(([k, v])=> {
+      newTableData[k] = newTableData[k] || {asset: k}
+      newTableData[k].collateral_factor = v
+    })
+
+    // then rerender
+    runInAction(()=> {
+      debugger
+      dataSet = dataSet.map(r=> {
+        r.collateral_factor = newTableData[r.asset].collateral_factor
+        return r
+      })//(Object.values(newTableData)).sort((a,b)=> a.asset.localeCompare(b.asset))
+    })
+  }
+
   decrament = (row, field) => {
     // find the options
     const options = this.incrementationOptions[row.asset] || []
@@ -185,6 +224,23 @@ class RiskStore {
     row[field] = options[currentIndex-1]
     this.solve()
     console.log('decrament')
+  }
+
+  getCurrentCollateralFactor = (asset) => {
+    const [{current_collateral_factor }] = this.currentData.filter(r => r.asset === asset)
+    return current_collateral_factor
+  }
+
+  preformRecommendation = (recommendation) => {
+    // decrease ADA.e mint cap to 40
+    const [operation, asset, type, , , amount] = recommendation.split(' ')
+    for (let row of this.data) {
+      if(row.asset === asset){
+        row[`${type}_cap`] = amount
+        this.solve()
+        break;
+      }
+    }
   }
 }
 

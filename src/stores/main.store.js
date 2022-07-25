@@ -5,7 +5,7 @@ import web3Utils from "web3-utils"
 const {fromWei, toBN} = web3Utils
 const platformId = window.APP_CONFIG.PLATFORM_ID
 const apiEndpoints = ['overview', 'accounts', 'dex_liquidity', 'oracles', 'usd_volume_for_slippage', 'current_simulation_risk',
-                      'risk_params']
+                      'risk_params', 'lending_platform_current']
 
 class MainStore {
 
