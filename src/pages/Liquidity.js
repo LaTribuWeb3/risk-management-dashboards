@@ -13,6 +13,7 @@ const columns = [
       selector: row => row.key,
       format: row => removeTokenPrefix(row.key),
       sortable: true,
+      grow: 2,
   },    
   {
       name: 'count',

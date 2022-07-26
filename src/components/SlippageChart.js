@@ -20,7 +20,10 @@ const expendedBoxStyle = {margin: '30px', width: '50%', minHeight: '300px'}
 class SlippageChart extends Component {
 
   render (){
-    const market = this.props.data.key.split('-')[0]
+    let market = this.props.data.key.split('-')[0]
+    if (market === 'WETH'){
+      market = 'ETH'
+    }
     const {users} = this.props.data || []
     const loading = mainStore['usd_volume_for_slippage_loading']
     const rawData = Object.assign({}, mainStore['usd_volume_for_slippage_data'] || {})
