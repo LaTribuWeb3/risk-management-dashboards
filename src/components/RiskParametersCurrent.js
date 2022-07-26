@@ -24,7 +24,8 @@ const currentColumns = [
   {
       name: 'Mint Cap',
       selector: row => row.mint_cap,
-      format: row => currentCapFormater(row.mint_cap)
+      format: row => currentCapFormater(row.mint_cap),
+      grow: 2,
   },    
   // {
   //     name: 'M C',
@@ -33,7 +34,8 @@ const currentColumns = [
   {
       name: 'Borrow Cap',
       selector: row => row.borrow_cap,
-      format: row => currentCapFormater(row.borrow_cap)
+      format: row => currentCapFormater(row.borrow_cap),
+      grow: 2,
   },
   // {
   //   name: 'B C',

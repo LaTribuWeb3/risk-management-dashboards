@@ -17,7 +17,8 @@ const currentColumns = [
   {
       name: 'Mint Cap',
       selector: row => row.mint_cap,
-      format: row => whaleFriendlyFormater(row.mint_cap)
+      format: row => whaleFriendlyFormater(row.mint_cap),
+      grow: 2,
   },  
   // {
   //   name: 'M C',
@@ -26,16 +27,18 @@ const currentColumns = [
   {
       name: 'Borrow Cap',
       selector: row => row.borrow_cap,
-      format: row => whaleFriendlyFormater(row.borrow_cap)
+      format: row => whaleFriendlyFormater(row.borrow_cap),
+      grow: 2,
   },
   // {
   //   name: 'B C',
   //   selector: row => row.debug_bc,
   // },
   {
-      name: 'Collateral Factor',
+      name: 'Collateral Factor (current)',
       selector: row => row.collateral_factor,
       format: row => <Cf row={row}/>,
+      grow: 2,
   },
 ];
 

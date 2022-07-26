@@ -11,7 +11,7 @@ import riskStore from '../stores/risk.store'
 import RiskParametersCurrent from '../components/RiskParametersCurrent'
 import RiskParametersUtilization from '../components/RiskParametersUtilization'
 
-const redcomendationColumns = [
+const columns = [
   {
       name: '',
       selector: row => row.asset,
@@ -21,23 +21,20 @@ const redcomendationColumns = [
       name: 'Mint Cap',
       selector: row => row.mint_cap,
       format: row => <CapInput row={row} field={'mint_cap'}/>,
+      grow: 2
   },
   {
       name: 'Borrow Cap',
       selector: row => row.borrow_cap,
       format: row => <CapInput row={row} field={'borrow_cap'}/>,
+      grow: 2
   }, 
   {
       name: 'Collateral Factor (current)',
       selector: row => row.collateral_factor,
       format: row => <CfDiff row={row}/>,
-  },   
-  // {
-  //     name: 'recommendation',
-  //     selector: row => row.collateral_factor,
-  //     format: row => <Recommendation row={row}/>,
-  //     grow: 2
-  // }, 
+      grow: 2
+  }
 ];
 
 const expendedBoxStyle = {margin: '30px', width: '100%', minHeight: '100px', padding: '30px'}
@@ -74,7 +71,7 @@ class RiskParameters extends Component {
           <h6>Risk Parameters Recommendations</h6>
           {!loading && <DataTable
               expandableRows
-              columns={redcomendationColumns}
+              columns={columns}
               data={riskStore.data}
               expandableRowsComponent={Recommendation}
           />}
