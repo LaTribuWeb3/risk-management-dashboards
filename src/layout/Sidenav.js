@@ -4,13 +4,14 @@ import Footer from './Footer'
 import Header from './Header'
 
 const pages = [
+  'alerts',
   'overview',
   'accounts',
   'oracles',
   'liquidity',
-  'backstop',
-  'assumptions',
-  'qualitative-anlysis',
+  // 'backstop',
+  // 'assumptions',
+  //'qualitative-anlysis',
   'risk-parameters',
   'simulation'
 ]
