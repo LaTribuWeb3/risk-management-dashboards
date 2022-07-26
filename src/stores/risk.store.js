@@ -1,5 +1,4 @@
 import { makeAutoObservable, runInAction } from "mobx"
-import axios from "axios"
 import Solver from "../risk/solver"
 import mainStore from '../stores/main.store'
 
