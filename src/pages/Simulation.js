@@ -4,12 +4,13 @@ import Box from "../components/Box"
 import DataTable from 'react-data-table-component'
 import mainStore from '../stores/main.store'
 import {whaleFriendlyFormater} from '../components/WhaleFriendly'
+import {removeTokenPrefix} from '../utils'
 
 const columns = [
   {
       name: 'asset',
       selector: row => row.key,
-      format: row => (row.key),
+      format: row => removeTokenPrefix(row.key),
       sortable: true,
   },
   {
@@ -31,7 +32,7 @@ const columns = [
   },  
 ];
 
-class Oracles extends Component {
+class Simulation extends Component {
   render (){
     const loading = mainStore['current_simulation_risk_loading']
     const rawData = Object.assign({}, mainStore['current_simulation_risk_data'] || {})
@@ -41,9 +42,19 @@ class Oracles extends Component {
     }
     const data = !loading ? Object.entries(rawData).map(([k, v])=> {
       v.key = k
+      v.total_liquidation = Object.values(v)
+        .filter(o => typeof o === 'object')
+        .reduce((a, b)=> {
+          return a + Number(b.total_liquidation)
+        }, 0)      
+        v.max_drop = Object.values(v)
+        .filter(o => typeof o === 'object')
+        .reduce((a, b)=> {
+          return a + Number(b.max_drop)
+        }, 0)
       return v
     }) : []
-
+    debugger
     return (
       <div>
         <Box loading={loading}  time={json_time}>
@@ -57,4 +68,4 @@ class Oracles extends Component {
   }
 }
 
-export default observer(Oracles)
+export default observer(Simulation)

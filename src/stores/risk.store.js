@@ -178,7 +178,6 @@ class RiskStore {
 
   solveFor = (dataSet) => {
     // generate mintCaps, borrowCaps & collateralFactorCaps objects
-    debugger
     const mintCaps = {}
     const borrowCaps = {}
     const collateralFactorCaps = {}
