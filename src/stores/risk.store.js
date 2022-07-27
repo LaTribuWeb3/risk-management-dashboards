@@ -47,7 +47,6 @@ class RiskStore {
           const clean = {}
           for (let asset in d.borrow_caps) {
             clean[asset] = { asset }
-            debugger
             clean[asset].borrow_cap = tweakCurrentCap(d.borrow_caps[asset])
             clean[asset].mint_cap = tweakCurrentCap(d.collateral_caps[asset])
             clean[asset].current_collateral_factor = d.collateral_factors[asset]
@@ -77,7 +76,10 @@ class RiskStore {
 
   getRecommendations = async () => {
     await this.initPromise
-    return [this.utilization, this.currentData]
+    const simulation = Object.entries(mainStore.clean( await mainStore['current_simulation_risk_request']))
+      .map(([k, v])=> Object.assign({asset: k}, v.summary))
+    debugger
+    return [this.utilization, this.currentData, simulation]
   }
 
   incrament = (row, field) => {

@@ -157,6 +157,13 @@ class AlertStore {
         alerts.push(`${removeTokenPrefix(row.asset)} current collateral factor (${currentCF}) is higher than recommended (${recommendedCF.toFixed(2)}) based on current borrow & mint caps`)
       }
     })
+    simulation.forEach(row => {
+      const currentCF = Number(riskStore.getCurrentCollateralFactor(row.asset))
+      const recommendedCF = Number(row.max_collateral)
+      if(currentCF > recommendedCF){
+        alerts.push(`${removeTokenPrefix(row.asset)} current collateral factor (${currentCF}) is higher than recommended (${recommendedCF.toFixed(2)}) based on our simulation`)
+      }
+    })
     return {
       title: 'collateral factor alert',
       data: alerts, 
