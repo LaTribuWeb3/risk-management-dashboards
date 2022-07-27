@@ -3,7 +3,7 @@ import axios from "axios"
 
 const platformId = window.APP_CONFIG.PLATFORM_ID
 const apiEndpoints = ['overview', 'accounts', 'dex_liquidity', 'oracles', 'usd_volume_for_slippage', 'current_simulation_risk',
-                      'risk_params', 'lending_platform_current']
+                      'risk_params', 'lending_platform_current', 'risky_accounts']
 
 class MainStore {
 
@@ -30,6 +30,14 @@ class MainStore {
 
   init = () => {
     apiEndpoints.forEach(this.fetchData)
+  }
+
+  clean = data => {
+    const clean = Object.assign({}, data)
+    if(clean.json_time) {
+      delete clean.json_time
+    }
+    return clean
   }
 
   fetchData = (endpoint) => {

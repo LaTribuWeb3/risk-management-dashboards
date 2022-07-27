@@ -20,7 +20,7 @@ class RiskStore {
   incrementationOptions = {}
   recommendations = []
   constructor (){
-    this.init()
+    this.initPromise = this.init()
     makeAutoObservable(this)
   }
 
@@ -72,6 +72,11 @@ class RiskStore {
         this.loading = false
       })
     }
+  }
+
+  getUtilizationRecommendation = async () => {
+    await this.initPromise
+    return this.utilization
   }
 
   incrament = (row, field) => {
