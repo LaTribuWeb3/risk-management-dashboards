@@ -54,7 +54,6 @@ class Simulation extends Component {
         }, 0)
       return v
     }) : []
-    debugger
     return (
       <div>
         <Box loading={loading}  time={json_time}>
