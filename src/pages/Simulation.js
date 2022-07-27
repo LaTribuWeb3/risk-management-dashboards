@@ -15,7 +15,7 @@ const columns = [
   },
   {
     name: 'total liquidations',
-    selector: row => whaleFriendlyFormater(row.total_liquidation),
+    selector: row => row.total_liquidation,
     format: row => whaleFriendlyFormater(row.total_liquidation),
     sortable: true,
   },  
@@ -41,18 +41,7 @@ class Simulation extends Component {
       delete rawData.json_time
     }
     const data = !loading ? Object.entries(rawData).map(([k, v])=> {
-      v.key = k
-      v.total_liquidation = Object.values(v)
-        .filter(o => typeof o === 'object')
-        .reduce((a, b)=> {
-          return a + Number(b.total_liquidation)
-        }, 0)      
-        v.max_drop = Object.values(v)
-        .filter(o => typeof o === 'object')
-        .reduce((a, b)=> {
-          return a + Number(b.max_drop)
-        }, 0)
-      return v
+      return Object.assign({ key: k}, v.summary)
     }) : []
     return (
       <div>

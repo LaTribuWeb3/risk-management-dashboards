@@ -36,12 +36,9 @@ class AlertStore {
   getOpenLiquidations = async () => {
     const alerts = []
     const { data: openLiquidations} = mainStore.clean( await mainStore['open_liquidations_request'])
-    debugger
     openLiquidations.forEach(ol=> {
-      debugger
       alerts.push(`account ${ol.account} is being liquidated`)
     })
-    debugger
     return {
       title: 'open liquidations alert',
       data: alerts
