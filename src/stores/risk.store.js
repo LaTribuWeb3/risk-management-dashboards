@@ -74,9 +74,9 @@ class RiskStore {
     }
   }
 
-  getUtilizationRecommendation = async () => {
+  getRecommendations = async () => {
     await this.initPromise
-    return this.utilization
+    return [this.utilization, this.currentData]
   }
 
   incrament = (row, field) => {

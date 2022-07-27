@@ -13,7 +13,7 @@ const percentFromDiff = (base, num) => {
 
 class AlertStore {
   alerts = []
-  loading
+  loading = true
   constructor() {
     makeAutoObservable(this)
     this.init()
@@ -25,10 +25,27 @@ class AlertStore {
       this.getWhaleAlert(),
       this.getUtilizationAlert(),
       this.getCollateralFactor(),
+      this.getOpenLiquidations(),
     ])
     runInAction(() => {
       this.alerts = alerts
+      this.loading = false
     })
+  }
+
+  getOpenLiquidations = async () => {
+    const alerts = []
+    const { data: openLiquidations} = mainStore.clean( await mainStore['open_liquidations_request'])
+    debugger
+    openLiquidations.forEach(ol=> {
+      debugger
+      alerts.push(`account ${ol.account} is being liquidated`)
+    })
+    debugger
+    return {
+      title: 'open liquidations alert',
+      data: alerts
+    }
   }
 
   getOracleAlert = async () => {
@@ -127,15 +144,20 @@ class AlertStore {
 
   getCollateralFactor = async () => {
     const alerts = []
-    const recommendations = await riskStore.getUtilizationRecommendation()
+    const [currentUtilization, currentCap, simulation] = await riskStore.getRecommendations()
     //getCurrentCollateralFactor
-    debugger
-    recommendations.forEach(row => {
+    currentUtilization.forEach(row => {
       const currentCF = Number(riskStore.getCurrentCollateralFactor(row.asset))
       const recommendedCF = row.collateral_factor
-      debugger
       if(currentCF > recommendedCF){
-        alerts.push(`${removeTokenPrefix(row.asset)} current collateral factor (${currentCF}) is higher than recommended (${recommendedCF.toFixed(2)})`)
+        alerts.push(`${removeTokenPrefix(row.asset)} current collateral factor (${currentCF}) is higher than recommended (${recommendedCF.toFixed(2)}) based on actual usage `)
+      }
+    })
+    currentCap.forEach(row => {
+      const currentCF = Number(riskStore.getCurrentCollateralFactor(row.asset))
+      const recommendedCF = row.collateral_factor
+      if(currentCF > recommendedCF){
+        alerts.push(`${removeTokenPrefix(row.asset)} current collateral factor (${currentCF}) is higher than recommended (${recommendedCF.toFixed(2)}) based on current borrow & mint caps`)
       }
     })
     return {
