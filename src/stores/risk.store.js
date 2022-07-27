@@ -3,10 +3,10 @@ import Solver from "../risk/solver"
 import mainStore from '../stores/main.store'
 
 const tweakCurrentCap = cap => {
-  if (cap === '0'){
+  if (cap === '0' || cap === 0) {
     return Infinity
   }
-  if (cap === '1'){
+  if (cap === '1'  || cap === 1){
     return '0'
   }
   return cap
@@ -47,6 +47,7 @@ class RiskStore {
           const clean = {}
           for (let asset in d.borrow_caps) {
             clean[asset] = { asset }
+            debugger
             clean[asset].borrow_cap = tweakCurrentCap(d.borrow_caps[asset])
             clean[asset].mint_cap = tweakCurrentCap(d.collateral_caps[asset])
             clean[asset].current_collateral_factor = d.collateral_factors[asset]
