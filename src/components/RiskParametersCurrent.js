@@ -17,34 +17,34 @@ const currentCapFormater = num => {
 
 const currentColumns = [
   {
-      name: '',
+      name: 'Asset',
       selector: row => row.asset,
       format: row => removeTokenPrefix(row.asset),
+      width: '110px'
   },
   {
-      name: 'Mint Cap',
+      name: 'Supply Cap ($m)',
       selector: row => row.mint_cap,
       format: row => currentCapFormater(row.mint_cap),
-      grow: 2,
+      width: '190px'
   },    
-  // {
-  //     name: 'M C',
-  //     selector: row => row.debug_mc,
-  // },  
+
   {
-      name: 'Borrow Cap',
+      name: 'Borrow Cap ($m)',
       selector: row => row.borrow_cap,
       format: row => currentCapFormater(row.borrow_cap),
-      grow: 2,
+      width: '190px'
   },
-  // {
-  //   name: 'B C',
-  //   selector: row => row.debug_bc,
-  // },  
   {
-      name: 'Collateral Factor',
+      name: 'Current Collateral Factor',
+      selector: row => riskStore.getCurrentCollateralFactor(row.asset),
+      width: '260px'
+  },  
+  {
+      name: 'Recommended Collateral Factor',
       selector: row => row.collateral_factor,
-      format: row => <Cf row={row}/>,
+      format: row => row.collateral_factor.toFixed(2),
+      width: '390px'
   },
 ];
 
@@ -55,7 +55,10 @@ class RiskParametersCurrent extends Component {
     return (
       <div>
         <Box loading={loading} time={currentJsonTime}>
-          <h6>Current Risk Parameters</h6>
+          <hgroup>
+            <h6>According to Existing Caps</h6>
+            <p>Recommended collateral factors according to existing supply and borrow caps set by the platform.</p>
+          </hgroup>
           {!loading && <DataTable
               columns={currentColumns}
               data={currentData}

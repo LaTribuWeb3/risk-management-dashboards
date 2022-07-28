@@ -10,6 +10,7 @@ import CfDiff from '../components/CfDiff'
 import riskStore from '../stores/risk.store'
 import RiskParametersCurrent from '../components/RiskParametersCurrent'
 import RiskParametersUtilization from '../components/RiskParametersUtilization'
+import RiskParametersSimulation from '../components/RiskParametersSimulation'
 
 const columns = [
   {
@@ -67,7 +68,8 @@ class RiskParameters extends Component {
       <div>
         <RiskParametersCurrent/>
         <RiskParametersUtilization/>
-        <Box loading={loading} time={json_time}>
+        <RiskParametersSimulation />
+        {/* <Box loading={loading} time={json_time}>
           <h6>Risk Parameters Recommendations</h6>
           {!loading && <DataTable
               expandableRows
@@ -75,7 +77,7 @@ class RiskParameters extends Component {
               data={riskStore.data}
               expandableRowsComponent={Recommendation}
           />}
-        </Box>
+        </Box> */}
       </div>
     )
   }

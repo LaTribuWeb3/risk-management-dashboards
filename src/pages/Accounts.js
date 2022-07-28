@@ -94,8 +94,10 @@ class Accounts extends Component {
       return b.total_collateral - a.total_collateral
     }) : []
 
-    data[0].defaultExpanded = true  
-
+    if(data.length){
+      data[0].defaultExpanded = true  
+    }
+    
     return (
       <div>
         <Box loading={loading} time={json_time}>

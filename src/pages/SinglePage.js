@@ -50,13 +50,13 @@ class SinglePage extends Component {
           <Liquidity/>
         </section>
         <section id="risk-parameters">
-          <h1>Risk Parameters</h1>
+          <h1>Collateral Factor Recommendations</h1>
           <RiskParameters />
         </section>
         <section id="simulation">
           <hgroup>
-            <h1 >Current State</h1>
-            <h3>Worse day simulation on current state</h3>
+            <h1> Risk Parameters Simulator</h1>
+            <h3>The simulator lets you set different Supply and Borrow caps to get Collateral Factor recommendations according to different caps. The tool also provides optimization setting recommendations. </h3>
           </hgroup>
           <Simulation />
         </section>

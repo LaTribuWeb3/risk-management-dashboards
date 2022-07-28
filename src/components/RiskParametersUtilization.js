@@ -10,34 +10,31 @@ import {Cf} from './CfDiff'
 
 const currentColumns = [
   {
-      name: '',
+      name: 'Asset',
       selector: row => row.asset,
       format: row => removeTokenPrefix(row.asset),
   },
   {
-      name: 'Mint Cap',
+      name: 'Current Supply',
       selector: row => row.mint_cap,
       format: row => whaleFriendlyFormater(row.mint_cap),
       grow: 2,
-  },  
-  // {
-  //   name: 'M C',
-  //   selector: row => row.debug_mc,
-  // },  
+  },   
   {
-      name: 'Borrow Cap',
+      name: 'Current Borrow',
       selector: row => row.borrow_cap,
       format: row => whaleFriendlyFormater(row.borrow_cap),
       grow: 2,
   },
-  // {
-  //   name: 'B C',
-  //   selector: row => row.debug_bc,
-  // },
   {
-      name: 'Collateral Factor (current)',
+      name: 'Current Collateral Factor',
+      selector: row => riskStore.getCurrentCollateralFactor(row.asset),
+      width: '260px'
+  },    
+  {
+      name: 'Recommended Collateral Factor',
       selector: row => row.collateral_factor,
-      format: row => <Cf row={row}/>,
+      format: row => row.collateral_factor.toFixed(2),
       grow: 2,
   },
 ];
@@ -49,7 +46,10 @@ class RiskParametersUtilization extends Component {
     return (
       <div>
         <Box loading={loading} time={currentJsonTime}>
-          <h6>Current Risk Parameters Utilization</h6>
+          <hgroup>
+            <h6>According to Current Usage</h6>
+            <p>Recommended collateral factors according to current supply and borrow usage</p>
+          </hgroup>
           {!loading && <DataTable
               columns={currentColumns}
               data={utilization}

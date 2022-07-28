@@ -21,14 +21,12 @@ class CfDiff extends React.Component {
   }
 
   render () {
-    const currentCollateralFactor = riskStore.getCurrentCollateralFactor(this.props.row.asset)
     const cf = (this.props.row.collateral_factor || 0).toFixed(2)
     const diff = this.props.row.diff
     return (<React.Fragment>
       <abbr className={`transition ${diff ? 'highlight' : ''}`}>
         {cf} 
       </abbr>
-      <span> ({currentCollateralFactor}) </span>
       {diff && <Ramzor red={diff < 0}> ({diff.toFixed(2)})</Ramzor>}
     </React.Fragment>)
   }
