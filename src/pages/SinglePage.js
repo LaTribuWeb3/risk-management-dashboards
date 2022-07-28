@@ -15,8 +15,8 @@ class SinglePage extends Component {
   render (){
     return (
       <ScrollSpy offsetBottom={200} scrollThrottle={100} parentScrollContainerRef={this.props.scrollContainer}>
-        <section id="alerts">
-          <h1 >Alerts</h1>
+        <section id="system-status">
+          <h1>System Status</h1>
           <Alerts/>
         </section>       
          <section id="overview">

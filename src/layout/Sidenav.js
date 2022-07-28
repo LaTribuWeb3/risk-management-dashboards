@@ -4,7 +4,7 @@ import Footer from './Footer'
 import Header from './Header'
 
 const pages = [
-  'alerts',
+  'system-status',
   'overview',
   'accounts',
   'oracles',
