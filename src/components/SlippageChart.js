@@ -54,7 +54,6 @@ class SlippageChart extends Component {
     const dataMax = Math.min(secondBiggest.value * 2, biggest.value)
     return (
       <div style={{display: 'flex', justifyContent: 'space-between', width: '100%'}}>
-        <div>{dataMax}</div>  
         <article style={expendedBoxStyle}>
         <ResponsiveContainer>
           <BarChart data={dataSet}>
