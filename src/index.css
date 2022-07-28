@@ -3,6 +3,8 @@
   --yellow-text: #cfb23c;
   --green-text: var(--ins-color);
   --data-font-size: calc(var(--font-size) - 2.5px);
+  --header-height: 100px;
+  --sidebar-width: 20vw;
 }
 
 .clickable{
@@ -15,14 +17,14 @@
 
 .side-bar {
   position: fixed;
-  top: 0;
+  top: var(--header-height);
   left: 0;
   min-width: 200px;
-  width: 20vw;
-  height: 100vh;
+  width: var(--sidebar-width);
 }
 
 .main-content {
+  margin-top: 100px;
   overflow-y: scroll;
   scroll-behavior: smooth;
   position: fixed;
@@ -31,7 +33,14 @@
   max-width: calc(100vw - 200px);
   width: 80vw;
   height: 100vh;
+  /* hide scrollbar */
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
 }
+.main-content::-webkit-scrollbar { 
+  display: none;  /* Safari and Chrome */
+}
+
 
 .footer {
   width: 100%;

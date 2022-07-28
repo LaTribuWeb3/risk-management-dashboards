@@ -20,7 +20,7 @@ const pages = [
 const Sidenav = (props) => {
   return (
     <div className="side-bar box-space">
-      <Header/>
+      {/* <Header/> */}
       <aside>
         <nav>
           <ul>

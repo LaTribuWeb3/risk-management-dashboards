@@ -2,10 +2,7 @@ import '@picocss/pico'
 import {observer} from "mobx-react"
 import Footer from './layout/Footer'
 import Sidenav from './layout/Sidenav'
-import Overview from "./pages/Overview"
-import Accounts from "./pages/Accounts"
-import Liquidity from "./pages/Liquidity"
-import Backstop from "./pages/Backstop"
+import Header from './layout/Header'
 import SinglePage from "./pages/SinglePage"
 import './themeSwitcher'
 import './App.css'
@@ -29,8 +26,9 @@ class App extends React.Component {
     return (
       <Router>
         <div className="App">
-          <Sidenav/>
+          <Header />
           <div ref={this.scrollContainer} className="main-content box-space">
+            <Sidenav/>
               <main>
                 <Routes>
                   <Route exact path="/"  element={<SinglePage scrollContainer={this.scrollContainer}/>}/>
