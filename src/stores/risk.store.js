@@ -78,7 +78,6 @@ class RiskStore {
     await this.initPromise
     const simulation = Object.entries(mainStore.clean( await mainStore['current_simulation_risk_request']))
       .map(([k, v])=> Object.assign({asset: k}, v.summary))
-    debugger
     return [this.utilization, this.currentData, simulation]
   }
 
