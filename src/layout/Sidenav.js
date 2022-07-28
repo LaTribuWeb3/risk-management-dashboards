@@ -7,7 +7,7 @@ const pages = [
   'system-status',
   'overview',
   'asset-distribution',
-  'oracles',
+  'oracle-deviation',
   'liquidity',
   // 'backstop',
   // 'assumptions',

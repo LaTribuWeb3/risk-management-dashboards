@@ -38,8 +38,11 @@ class SinglePage extends Component {
 
           <Accounts/>
         </section>
-        <section  id="oracles">
-          <h1>Oracles</h1>
+        <section  id="oracle-deviation">
+          <hgroup>
+            <h1>Oracle Deviation</h1>
+            <p>The table tracks the deviation from the oracle price feed used by the platform compared to the assets’ prices taken from Centralized Exchanges (CEX) and Decentralized Exchanges (DEX). This helps monitor any critical deviations that might indicate an oracle manipulation, de-pegging, downtime, etc.</p>
+          </hgroup>
           <Oracles/>
         </section>
         <section id="liquidity">
