@@ -6,7 +6,7 @@ import Header from './Header'
 const pages = [
   'system-status',
   'overview',
-  'accounts',
+  'asset-distribution',
   'oracles',
   'liquidity',
   // 'backstop',

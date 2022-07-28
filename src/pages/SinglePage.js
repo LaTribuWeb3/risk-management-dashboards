@@ -20,12 +20,23 @@ class SinglePage extends Component {
           <Alerts/>
         </section>       
          <section id="overview">
-          <h1 >Overview</h1>
+          <hgroup>
+            <h1 >Overview</h1>
+            <p>State of the platform overview</p>
+          </hgroup>
           <Overview/>
         </section>
-        <section id="accounts">
-          <h1>Accounts</h1>
-          <Accounts/>      
+        <section id="asset-distribution">
+          <hgroup>
+            <h1>Asset Distribution</h1>
+            <p>
+              The table tracks the main statistics per asset in the platform. 
+              Clicking on each row will open a graph describing the expected liquidations according to price changes of the base asset. Liquidations can be executed also if an asset price increases when the asset is the debt asset. 
+              Users can sort the table using the arrows on each column.
+            </p>
+          </hgroup>
+
+          <Accounts/>
         </section>
         <section  id="oracles">
           <h1>Oracles</h1>

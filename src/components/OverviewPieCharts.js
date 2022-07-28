@@ -27,7 +27,7 @@ class OverviewPieCharts extends Component {
           {!loading && <PieChart data={data} dataKey={'total_collateral'}/>}
         </Box>
         <Box loading={loading} height={450} time={json_time}>
-        <h6 style={{margin: 0}}>Debt</h6>
+          <h6 style={{margin: 0}}>Debt</h6>
           {!loading && <PieChart data={data} dataKey={'total_debt'}/>}
         </Box>
       </BoxGrid>

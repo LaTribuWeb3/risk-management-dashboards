@@ -7,7 +7,18 @@ import WhaleFriendly from '../components/WhaleFriendly'
 import BoxRow from '../components/BoxRow'
 import OverviewPieCharts from '../components/OverviewPieCharts'
 
-const humanTxt = txt => txt.split('_').join(' ')
+const txtMap = {
+  "total_debt": "Total Debt",
+  "top_1_debt": "Debt of Top 1 User",
+  "top_10_debt": "Debt of Top 10 Users",
+  "median_debt": "Median Debt per User",
+  "total_collateral": "Total Collateral",
+  "top_1_collateral": "Collateral of Top 1 User",
+  "top_10_collateral": "Collateral of Top 10 Users",
+  "median_collateral": "Median Collateral per User",
+}
+
+const humanTxt = txt => txtMap[txt]
 
 class Overview extends Component {
   render (){
@@ -18,8 +29,24 @@ class Overview extends Component {
     }
     const loading = mainStore['overview_loading']
     const half = !loading ? parseInt(Object.entries(rawData).length / 2) : 0
-    const firstHalf = !loading ? Object.entries(rawData).slice(0, half) : []
-    const secondHalf = !loading ? Object.entries(rawData).slice(half) : []
+    const firstHalf = !loading ? Object.entries(rawData)
+      .filter(([k, v])=>{
+        return k.indexOf('collateral') > -1
+      })
+      .sort(([a],[b])=>{
+        if(a > b) return -1
+        if(a < b) return 1
+        return 0
+      }) : []
+    const secondHalf = !loading ? Object.entries(rawData)
+      .filter(([k, v])=>{
+        return k.indexOf('debt') > -1
+      })
+      .sort(([a],[b])=>{
+        if(a > b) return -1
+        if(a < b) return 1
+        return 0
+      }) : []
     return (
       <div>
         <OverviewPieCharts/>

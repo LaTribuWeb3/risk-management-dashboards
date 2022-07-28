@@ -9,60 +9,74 @@ import {removeTokenPrefix} from '../utils'
 
 const columns = [
   {
-      name: 'asset',
+      name: 'Asset',
       selector: row => row.key,
       format: row => removeTokenPrefix(row.key),
       sortable: true,
+      width: '140px',
   },  
   {
-      name: 'total_collateral',
-      selector: row => whaleFriendlyFormater(row.total_collateral),
+      name: 'Total Collateral',
+      selector: row =>  Number(row.total_collateral),
+      format: row => whaleFriendlyFormater(row.total_collateral),
       sortable: true,
+      width: '200px'
   },
   {
-      name: 'total_debt',
-      selector: row => whaleFriendlyFormater(row.total_debt),
+      name: 'Total Debt',
+      selector: row => Number(row.total_debt),
+      format: row => whaleFriendlyFormater(row.total_debt),
       sortable: true,
+      width: '150px'
   },
   {
-      name: 'median_collateral',
-      selector: row => whaleFriendlyFormater(row.median_collateral),
+      name: 'Median Collateral',
+      selector: row =>  Number(row.median_collateral),
+      format: row => whaleFriendlyFormater(row.median_collateral),
       sortable: true,
+      width: '210px'
   },  
   {
-      name: 'median_debt',
-      selector: row => whaleFriendlyFormater(row.median_debt),
+      name: 'Median Debt',
+      selector: row =>  Number(row.median_debt),
+      format: row => whaleFriendlyFormater(row.median_debt),
       sortable: true,
+      width: '180px'
   },  
   {
-      name: 'top_10_collateral',
-      selector: row => whaleFriendlyFormater(row.top_10_collateral),
+      name: 'Top 10 Accounts Collateral',
+      selector: row =>  Number(row.top_10_collateral),
+      format: row => whaleFriendlyFormater(row.top_10_collateral),
       sortable: true,
+      width: '290px'
   },
   {
-      name: 'top_10_debt',
-      selector: row => whaleFriendlyFormater(row.top_10_debt),
+      name: 'Top 10 Accounts Debt',
+      selector: row =>  Number(row.top_10_debt),
+      format: row => whaleFriendlyFormater(row.top_10_debt),
       sortable: true,
+      width: '270px'
   },
   {
-      name: 'top_10_collateral',
-      selector: row => whaleFriendlyFormater(row.top_10_collateral),
+      name: 'Top 1 Account Collateral',
+      selector: row =>  Number(row.top_1_collateral),
+      format: row => whaleFriendlyFormater(row.top_1_collateral),
       sortable: true,
+      width: '270px'
   },
   {
-      name: 'top_1_collateral',
-      selector: row => whaleFriendlyFormater(row.top_1_collateral),
+      name: 'Top 1 Account Debt',
+      selector: row =>  Number(row.top_1_debt),
+      format: row => whaleFriendlyFormater(row.top_1_debt),
       sortable: true,
+      width: '230px'
   },
-  {
-      name: 'top_1_debt',
-      selector: row => whaleFriendlyFormater(row.top_1_debt),
-      sortable: true,
-  },
-];
+]
 
 const ExpandedComponent = ({ data }) => <pre>{JSON.stringify(data, null, 2)}</pre>;
 
+const rowPreExpanded = row => row.defaultExpanded
+  
 class Accounts extends Component {
   render (){
     const loading = mainStore['accounts_loading']
@@ -71,10 +85,16 @@ class Accounts extends Component {
     if(json_time){
       delete rawData.json_time
     }
-    const data = !loading ? Object.entries(rawData).map(([k, v])=> {
+    const data = !loading ? Object.entries(rawData)
+    .map(([k, v])=> {
       v.key = k
       return v
+    })
+    .sort((a, b)=> {
+      return b.total_collateral - a.total_collateral
     }) : []
+
+    data[0].defaultExpanded = true  
 
     return (
       <div>
@@ -84,6 +104,7 @@ class Accounts extends Component {
               columns={columns}
               data={data}
               expandableRowsComponent={LiquidationsGraph}
+              expandableRowExpanded={rowPreExpanded}
           />}
         </Box>
       </div>
