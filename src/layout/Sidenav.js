@@ -30,7 +30,7 @@ const Sidenav = (props) => {
                 data-to-scrollspy-id={page}
                 className='nav-link'
               >
-                {page}
+                {page.split('-').join(' ')}
               </a>
             </li>)}
           </ul>
