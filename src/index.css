@@ -3,7 +3,7 @@
   --yellow-text: #cfb23c;
   --green-text: var(--ins-color);
   --data-font-size: calc(var(--font-size) - 2.5px);
-  --header-height: 100px;
+  --header-height: 180px;
   --sidebar-width: 20vw;
 }
 
@@ -24,7 +24,6 @@
 }
 
 .main-content {
-  margin-top: 100px;
   overflow-y: scroll;
   scroll-behavior: smooth;
   position: fixed;
@@ -74,7 +73,6 @@
   font-size: var(--font-size);
   font-weight: var(--font-weight);
 }
-
 .rdt_TableCell{
   color: var(--color);
   font-family: var(--font-family);
