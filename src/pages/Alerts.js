@@ -29,6 +29,7 @@ const Alert = props => {
           <DataTable
             data={alert.data}
             columns={alert.columns}
+            defaultSortFieldId={1}
           />
         </Box>}
       {noIssues && <kbd style={{backgroundColor: 'var(--ins-color)'}}>No Issues</kbd>}
