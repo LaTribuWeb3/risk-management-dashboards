@@ -25,10 +25,12 @@ const Alert = props => {
         <div style={style}>{alert.title} </div>
         {alert.singleMetric && <span> {alert.singleMetric}</span>}
       </summary>
-      {!!alert.data.length && <DataTable
+      {!!alert.data.length && <Box>
+          <DataTable
             data={alert.data}
             columns={alert.columns}
-        />}
+          />
+        </Box>}
       {noIssues && <kbd style={{backgroundColor: 'var(--ins-color)'}}>No Issues</kbd>}
     </details>
   )

@@ -310,7 +310,7 @@ class AlertStore {
           asset: row.asset,
           currentCF,
           recommendedCF: recommendedCF.toFixed(2),
-          "basedOn": "current borrow & mint caps"
+          "basedOn": "caps"
         })
       }
     })
