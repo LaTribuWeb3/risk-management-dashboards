@@ -40,6 +40,14 @@ const columns = [
 ];
 
 const expendedBoxStyle = {margin: '30px', width: '100%', minHeight: '100px', padding: '30px'}
+const humanizeRecommendation = r => {
+  const rItems = r.split(' ')
+  rItems[1] = removeTokenPrefix(rItems[1])
+  if(rItems[2] === 'mint'){
+    rItems[2] = 'supply'
+  }
+  return rItems.join(' ')
+}
 
 const Recommendation = (props) => {
   let recommendations = []
@@ -54,7 +62,7 @@ const Recommendation = (props) => {
       <h6>to improve collateral factor</h6>
       {recommendations.map(r=> <div key={r}>
         <a onClick={()=>riskStore.preformRecommendation(r)}>
-          {r}
+          {humanizeRecommendation(r)}
         </a>
       </div>)}
     </article>
@@ -68,7 +76,7 @@ class Simulation extends Component {
     return (
       <div>
         <Box loading={loading} time={json_time}>
-          <h6>Risk Parameters Recommendations</h6>
+          {/* <h6>Risk Parameters Recommendations</h6> */}
           {!loading && <DataTable
               expandableRows
               columns={columns}

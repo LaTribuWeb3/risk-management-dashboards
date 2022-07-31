@@ -91,7 +91,7 @@ class AlertStore {
       },
       {
         name: 'Debt Size',
-        selector: row => row.debt,
+        selector: row => whaleFriendlyFormater(row.debt),
         sortable: true,
       },
     ]
@@ -233,6 +233,7 @@ class AlertStore {
     Object.entries(currentCaps).forEach(([k, v]) => {
       if(k === 'borrow_caps'){
         Object.entries(v).forEach(([asset, cap]) => {
+          cap = Number(cap)
           if(cap === '0'){
             cap = Infinity
           }
@@ -240,21 +241,22 @@ class AlertStore {
             cap = 0
           }
           else {
-            cap = Number(cap)
+            cap = cap
           }
           markets[asset].borrow_cap = cap
         })
       }
       if(k === 'collateral_caps'){
         Object.entries(v).forEach(([asset, cap]) => {
-          if(cap === '0'){
+          cap = Number(cap)
+          if(cap === 0){
             cap = Infinity
           }
-          else if(cap === '1'){
+          else if(cap === 1){
             cap = 0
           }
           else {
-            cap = Number(cap)
+            cap = cap
           }
           markets[asset].mint_cap = cap
         })
@@ -263,6 +265,10 @@ class AlertStore {
     
     Object.values(markets)
       .forEach(market => {
+        debugger
+        if(market.mint_cap === Infinity || market.borrow_cap === Infinity){
+          return
+        }
         const mintUtilization = (market.mint_usage / market.mint_cap) * 100
         if(mintUtilization > 70){
           alerts.push({
