@@ -19,7 +19,7 @@ const currentColumns = [
   {
       name: 'Asset',
       selector: row => row.asset,
-      format: row => removeTokenPrefix(row.asset),
+      format: row => <b>{removeTokenPrefix(row.asset)}</b>,
   },
   {
       name: 'Supply Cap',

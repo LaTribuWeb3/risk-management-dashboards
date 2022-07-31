@@ -113,6 +113,7 @@ class AlertStore {
       {
         name: 'Asset',
         selector: row => row.asset,
+        format: row => <b>{removeTokenPrefix(row.asset)}</b>,
         sortable: true,
       },
       {
@@ -144,24 +145,31 @@ class AlertStore {
   }
 
   getWhaleAlert = async () => {
-    const whales = mainStore.clean(await mainStore['risky_accounts_request'])
+    const whales = mainStore.clean(await mainStore['whale_accounts_request'])
     const alerts = []
     const columns = [
       {
         name: 'Asset',
-        selector: row => row.asset
+        selector: row => removeTokenPrefix(row.asset),
+        format: row => <b>{removeTokenPrefix(row.asset)}</b>,
+        sortable: true,
       },
       {
         name: 'Collateral / Debt',
-        selector: row => row.type
+        selector: row => row.type,
+        sortable: true,
       },
       {
         name: 'Size',
-        selector: row => row.size
+        selector: row => row.size,
+        format: row => whaleFriendlyFormater(row.size),
+        sortable: true,
       },
       {
         name: 'Address',
-        selector: row => row.account
+        selector: row => row.account,
+        format: row => <BlockExplorerLink address={row.account}/>,
+        sortable: true,
       }
 
     ]
@@ -197,6 +205,7 @@ class AlertStore {
     const columns = [
       {
         name: 'Asset',
+        format: row => <b>{removeTokenPrefix(row.asset)}</b>,
         selector: row => row.asset
       },
       {
@@ -279,6 +288,7 @@ class AlertStore {
       {
         name: 'Asset',
         selector: row => removeTokenPrefix(row.asset),
+        format: row => <b>{removeTokenPrefix(row.asset)}</b>,
         sortable: true,
       },
       {

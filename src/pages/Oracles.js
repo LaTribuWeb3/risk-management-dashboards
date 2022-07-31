@@ -20,7 +20,7 @@ const columns = [
   {
       name: 'Asset',
       selector: row => row.key,
-      format: row => removeTokenPrefix(row.key),
+      format: row => <b>{removeTokenPrefix(row.key)}</b>,
       sortable: true,
   },
   {

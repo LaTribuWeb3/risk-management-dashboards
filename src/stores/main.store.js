@@ -3,7 +3,7 @@ import axios from "axios"
 
 const platformId = window.APP_CONFIG.PLATFORM_ID
 const apiEndpoints = ['overview', 'accounts', 'dex_liquidity', 'oracles', 'usd_volume_for_slippage', 'current_simulation_risk',
-                      'risk_params', 'lending_platform_current', 'risky_accounts', 'open_liquidations']
+                      'risk_params', 'lending_platform_current', 'whale_accounts', 'open_liquidations']
 
 class MainStore {
 

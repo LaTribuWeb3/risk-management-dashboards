@@ -12,7 +12,7 @@ const currentColumns = [
   {
       name: 'Asset',
       selector: row => row.asset,
-      format: row => removeTokenPrefix(row.asset),
+      format: row => <b>{removeTokenPrefix(row.asset)}</b>,
   },
   {
       name: 'Current Supply',
@@ -48,7 +48,7 @@ class RiskParametersUtilization extends Component {
         <Box loading={loading} time={currentJsonTime}>
           <hgroup>
             <h6>According to Current Usage</h6>
-            <p className="description">Recommended collateral factors according to current supply and borrow usage</p>
+            <p >Recommended collateral factors according to current supply and borrow usage</p>
           </hgroup>
           {!loading && <DataTable
               columns={currentColumns}

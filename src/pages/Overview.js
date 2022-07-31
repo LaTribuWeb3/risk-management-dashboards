@@ -55,7 +55,7 @@ class Overview extends Component {
             <div>
               {firstHalf.map(([k, v])=> <BoxRow key={k}>
                 <div>{humanTxt(k)}</div>
-                <div>$<WhaleFriendly num={v} /></div>
+                <div><WhaleFriendly num={v} /></div>
               </BoxRow>)}
             </div>
           </Box>
@@ -63,7 +63,7 @@ class Overview extends Component {
             <div>
               {secondHalf.map(([k, v])=> <BoxRow key={k}>
                 <div>{humanTxt(k)}</div>
-                <div>$<WhaleFriendly num={v} /></div>
+                <div><WhaleFriendly num={v} /></div>
               </BoxRow>)}
             </div>
           </Box>
