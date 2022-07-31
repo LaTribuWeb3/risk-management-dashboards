@@ -175,6 +175,8 @@ section {
   min-width: 200px;
   z-index: 100000;
   font-size: var(--data-font-size);
+  max-height: 30vh;
+  overflow: hidden;
 }
 
 line.recharts-reference-line-line{

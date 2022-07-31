@@ -22,17 +22,17 @@ const CustomTooltip = ({ active, payload, label }) => {
     }, 0).toFixed(2)
     return (
       <div className="tooltip-container">
-        <BoxRow>
+        <BoxRow slim={true}>
           <div>Price</div>
           <div>{whaleFriendlyFormater(price)}</div>
         </BoxRow>
         {(Object.entries(content).map(([k ,v], i) => {
         k = k === 'x' ? 'Price' : k
-         return <BoxRow key={i}>
+         return <BoxRow slim={true} key={i}>
           <div style={{color: colorMap[k]}}>{removeTokenPrefix(k)}</div>
           <div>{whaleFriendlyFormater(v)}</div>
         </BoxRow>}))}
-        <BoxRow>
+        <BoxRow slim={true}>
           <div>Total</div>
           <div>{whaleFriendlyFormater(total)}</div>
         </BoxRow>
