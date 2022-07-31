@@ -67,9 +67,6 @@ class Simulation extends Component {
     const {json_time} = mainStore['risk_params_data'] || {}
     return (
       <div>
-        {/* <RiskParametersCurrent/>
-        <RiskParametersUtilization/>
-        <RiskParametersSimulation /> */}
         <Box loading={loading} time={json_time}>
           <h6>Risk Parameters Recommendations</h6>
           {!loading && <DataTable

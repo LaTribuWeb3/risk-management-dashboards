@@ -196,3 +196,7 @@ section {
 h1 {
   padding-top: 20px;
 }
+
+details.hide-details summary::after{
+  display: none;
+} 

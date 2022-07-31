@@ -26,11 +26,55 @@ class AlertStore {
       this.getUtilizationAlert(),
       this.getCollateralFactor(),
       this.getOpenLiquidations(),
+      this.getLiquidationsRisk(),
+      this.getValueRisk(),
     ])
     runInAction(() => {
       this.alerts = alerts
       this.loading = false
     })
+  }
+
+  getValueRisk = async () => {
+    const alerts = []
+    const data = mainStore.clean( await mainStore['current_simulation_risk_request'])
+    let valueAtRisk = 0
+    Object.values(data).forEach(o=> {
+      
+      Object.entries(o).forEach(([k, v])=> {
+        if (k === 'summary'){
+          return
+        }
+        valueAtRisk += Number(v.pnl)
+      })
+    })
+    debugger
+    return {
+      title: 'value at risk',
+      data: alerts,
+      singleMetric: whaleFriendlyFormater(valueAtRisk),
+      negative: valueAtRisk > 0
+    }
+  }
+
+  getLiquidationsRisk = async () => {
+    const alerts = []
+    const data = mainStore.clean( await mainStore['current_simulation_risk_request'])
+    let liquidationsAtRisk = 0
+    Object.values(data).forEach(o=> {
+      Object.entries(o).forEach(([k, v])=> {
+        if (k === 'summary'){
+          return
+        }
+        liquidationsAtRisk += Number(v.total_liquidation)
+      })
+    })
+    return {
+      title: 'liquidations at risk',
+      data: alerts,
+      singleMetric: whaleFriendlyFormater(liquidationsAtRisk),
+      negative: liquidationsAtRisk > 0
+    }
   }
 
   getOpenLiquidations = async () => {
