@@ -32,7 +32,6 @@ class SinglePage extends Component {
             <p className="description">
               The table tracks the main statistics per asset in the platform. 
               Clicking on each row will open a graph describing the expected liquidations according to price changes of the base asset. Liquidations can be executed also if an asset price increases when the asset is the debt asset. 
-              Users can sort the table using the arrows on each column.
             </p>
           </hgroup>
 
