@@ -73,8 +73,6 @@ const columns = [
   },
 ]
 
-const ExpandedComponent = ({ data }) => <pre>{JSON.stringify(data, null, 2)}</pre>;
-
 const rowPreExpanded = row => row.defaultExpanded
   
 class Accounts extends Component {
@@ -104,6 +102,8 @@ class Accounts extends Component {
           {!loading && <DataTable
               expandableRows
               columns={columns}
+              defaultSortFieldId={2}
+              defaultSortAsc={false}
               data={data}
               expandableRowsComponent={LiquidationsGraph}
               expandableRowExpanded={rowPreExpanded}

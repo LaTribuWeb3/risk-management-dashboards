@@ -57,7 +57,7 @@ class RiskParametersCurrent extends Component {
         <Box loading={loading} time={currentJsonTime}>
           <hgroup>
             <h6>According to Existing Caps</h6>
-            <p>Recommended collateral factors according to existing supply and borrow caps set by the platform.</p>
+            <p className="description">Recommended collateral factors according to existing supply and borrow caps set by the platform.</p>
           </hgroup>
           {!loading && <DataTable
               columns={currentColumns}

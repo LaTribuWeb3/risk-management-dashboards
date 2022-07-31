@@ -182,3 +182,7 @@ line.recharts-reference-line-line{
 .recharts-sector{
   stroke: none;
 }
+
+.description {
+  width: 80%;
+}

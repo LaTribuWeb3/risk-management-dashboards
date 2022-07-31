@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import {observer} from "mobx-react"
 import Box from "../components/Box"
 import BoxGrid from "../components/BoxGrid"
-import mainStore from '../stores/main.store'
 import alertStore from '../stores/alert.store'
 
 const Alert = props => <div style={{ 
