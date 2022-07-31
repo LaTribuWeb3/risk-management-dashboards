@@ -27,7 +27,7 @@ class App extends React.Component {
       <Router>
         <div className="App">
           <Header />
-          <div ref={this.scrollContainer} className="main-content box-space">
+          <div ref={this.scrollContainer} className="main-content">
             <Sidenav/>
               <main>
                 <Routes>

@@ -24,6 +24,8 @@
 }
 
 .main-content {
+  padding: 30px;
+  padding-top: 0;
   overflow-y: scroll;
   scroll-behavior: smooth;
   position: fixed;
@@ -185,4 +187,12 @@ line.recharts-reference-line-line{
 
 .description {
   width: 80%;
+}
+
+section {
+  margin-bottom: 50px!important;
+}
+
+h1 {
+  padding-top: 20px;
 }
