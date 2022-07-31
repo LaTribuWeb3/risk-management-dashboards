@@ -49,7 +49,7 @@ class SinglePage extends Component {
           <h1>Liquidity</h1>
           <Liquidity/>
         </section>
-        <section id="risk-parameters">
+        <section id="collateral-factors">
           <h1>Collateral Factor Recommendations</h1>
           <RiskParameters />
         </section>

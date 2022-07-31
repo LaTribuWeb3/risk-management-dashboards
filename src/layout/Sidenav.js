@@ -12,9 +12,13 @@ const pages = [
   // 'backstop',
   // 'assumptions',
   //'qualitative-anlysis',
-  'risk-parameters',
+  'collateral-factors',
   'simulation'
 ]
+
+const humanPagesMap = {
+  liquidity: "DEX Liquidity"
+}
 
 
 const Sidenav = (props) => {
@@ -30,7 +34,7 @@ const Sidenav = (props) => {
                 data-to-scrollspy-id={page}
                 className='nav-link'
               >
-                {page.split('-').join(' ')}
+                {humanPagesMap[page] || page.split('-').join(' ')}
               </a>
             </li>)}
           </ul>
