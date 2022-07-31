@@ -15,13 +15,13 @@ const columns = [
       format: row => removeTokenPrefix(row.asset),
   },
   {
-      name: 'Supply Cap ($m)',
+      name: 'Supply Cap',
       selector: row => row.mint_cap,
       format: row => <CapInput row={row} field={'mint_cap'}/>,
       grow: 2
   },
   {
-      name: 'Borrow Cap ($m)',
+      name: 'Borrow Cap',
       selector: row => row.borrow_cap,
       format: row => <CapInput row={row} field={'borrow_cap'}/>,
       grow: 2

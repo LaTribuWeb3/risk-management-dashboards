@@ -15,13 +15,13 @@ export const whaleFriendlyFormater = num => {
     } else if(!num){
       wfn = 'N/A'
     }else if(num  <= tenth) {
-      wfn = Number(num.toFixed(2))
+      wfn = '$' + Number(num.toFixed(2))
     }else if(num / 1000 <= tenth) {
-      wfn = Number((num / 1000).toFixed(2)) + 'K'
+      wfn = '$' + Number((num / 1000).toFixed(2)) + 'K'
     } else if(num / 1000000 <= tenth) {
-      wfn = Number((num / 1000000).toFixed(2)) + 'M'
+      wfn = '$' + Number((num / 1000000).toFixed(2)) + 'M'
     } else {
-      wfn = Number((num / 1000000000).toFixed(2)) + 'B'
+      wfn = '$' + Number((num / 1000000000).toFixed(2)) + 'B'
     }
     return wfn
 }

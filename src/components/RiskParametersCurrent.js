@@ -23,14 +23,14 @@ const currentColumns = [
       width: '110px'
   },
   {
-      name: 'Supply Cap ($m)',
+      name: 'Supply Cap',
       selector: row => row.mint_cap,
       format: row => currentCapFormater(row.mint_cap),
       width: '190px'
   },    
 
   {
-      name: 'Borrow Cap ($m)',
+      name: 'Borrow Cap',
       selector: row => row.borrow_cap,
       format: row => currentCapFormater(row.borrow_cap),
       width: '190px'
