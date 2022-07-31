@@ -200,3 +200,8 @@ h1 {
 details.hide-details summary::after{
   display: none;
 } 
+
+.rdt_TableCol > [data-column-id] > div{
+  white-space: normal;
+  word-break: keep-all;
+}

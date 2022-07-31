@@ -62,7 +62,7 @@ class LiquidationsGraph extends Component {
     const asset = this.props.data.key
     const currentPrice = (rawData[asset] || {}).oracle
     return (
-      <div style={{ width: '100%', height: '400px' }}>
+      <div style={{ width: '100%', height: '30vh' }}>
       <ResponsiveContainer>
         <AreaChart
           data={dataSet}

@@ -13,63 +13,63 @@ const columns = [
       selector: row => row.key,
       format: row => removeTokenPrefix(row.key),
       sortable: true,
-      width: '140px',
+      minWidth: '110px'
   },  
   {
       name: 'Total Collateral',
       selector: row =>  Number(row.total_collateral),
       format: row => whaleFriendlyFormater(row.total_collateral),
       sortable: true,
-      width: '200px'
+      minWidth: '140px'
   },
   {
       name: 'Total Debt',
       selector: row => Number(row.total_debt),
       format: row => whaleFriendlyFormater(row.total_debt),
       sortable: true,
-      width: '150px'
+      minWidth: '110px'
   },
   {
       name: 'Median Collateral',
       selector: row =>  Number(row.median_collateral),
       format: row => whaleFriendlyFormater(row.median_collateral),
       sortable: true,
-      width: '210px'
+      minWidth: '140px'
   },  
   {
       name: 'Median Debt',
       selector: row =>  Number(row.median_debt),
       format: row => whaleFriendlyFormater(row.median_debt),
       sortable: true,
-      width: '180px'
+      minWidth: '120px'
   },  
   {
       name: 'Top 10 Accounts Collateral',
       selector: row =>  Number(row.top_10_collateral),
       format: row => whaleFriendlyFormater(row.top_10_collateral),
       sortable: true,
-      width: '290px'
+      minWidth: '140px'
   },
   {
       name: 'Top 10 Accounts Debt',
       selector: row =>  Number(row.top_10_debt),
       format: row => whaleFriendlyFormater(row.top_10_debt),
       sortable: true,
-      width: '270px'
+      minWidth: '140px'
   },
   {
       name: 'Top 1 Account Collateral',
       selector: row =>  Number(row.top_1_collateral),
       format: row => whaleFriendlyFormater(row.top_1_collateral),
       sortable: true,
-      width: '270px'
+      minWidth: '140px'
   },
   {
       name: 'Top 1 Account Debt',
       selector: row =>  Number(row.top_1_debt),
       format: row => whaleFriendlyFormater(row.top_1_debt),
       sortable: true,
-      width: '230px'
+      minWidth: '140px'
   },
 ]
 

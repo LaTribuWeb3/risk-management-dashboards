@@ -20,31 +20,26 @@ const currentColumns = [
       name: 'Asset',
       selector: row => row.asset,
       format: row => removeTokenPrefix(row.asset),
-      width: '110px'
   },
   {
       name: 'Supply Cap',
       selector: row => row.mint_cap,
       format: row => currentCapFormater(row.mint_cap),
-      width: '190px'
   },    
 
   {
       name: 'Borrow Cap',
       selector: row => row.borrow_cap,
       format: row => currentCapFormater(row.borrow_cap),
-      width: '190px'
   },
   {
       name: 'Current Collateral Factor',
       selector: row => riskStore.getCurrentCollateralFactor(row.asset),
-      width: '260px'
   },  
   {
       name: 'Recommended Collateral Factor',
       selector: row => row.collateral_factor,
       format: row => row.collateral_factor.toFixed(2),
-      width: '390px'
   },
 ];
 
