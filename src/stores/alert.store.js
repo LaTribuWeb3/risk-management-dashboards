@@ -21,11 +21,11 @@ class AlertStore {
   
   init = async () => {
     const alerts = await Promise.all([
+      this.getCollateralFactor(),
+      this.getOpenLiquidations(),
       this.getOracleAlert(),
       this.getWhaleAlert(),
       this.getUtilizationAlert(),
-      this.getCollateralFactor(),
-      this.getOpenLiquidations(),
       this.getLiquidationsRisk(),
       this.getValueRisk(),
     ])
@@ -48,7 +48,6 @@ class AlertStore {
         valueAtRisk += Number(v.pnl)
       })
     })
-    debugger
     return {
       title: 'value at risk',
       data: alerts,
@@ -79,54 +78,127 @@ class AlertStore {
 
   getOpenLiquidations = async () => {
     const alerts = []
-    const { data: openLiquidations} = mainStore.clean( await mainStore['open_liquidations_request'])
+    const columns = [
+      {
+        name: 'User',
+        selector: row => row.user
+      },
+      {
+        name: 'Debt Size',
+        selector: row => row.debt
+      },
+    ]
+    const { data: openLiquidations } = mainStore.clean( await mainStore['open_liquidations_request'])
     openLiquidations.forEach(ol=> {
-      alerts.push(`account ${ol.account} is being liquidated`)
+      alerts.push({
+        user: ol.account,
+        debt: ol.user_debt_wo_looping
+      })
     })
     return {
-      title: 'open liquidations alert',
-      data: alerts
+      title: 'open liquidations',
+      data: alerts,
+      columns
     }
   }
 
   getOracleAlert = async () => {
     const oracles = mainStore.clean(await mainStore['oracles_request'])
+    const columns = [
+      {
+        name: 'Asset',
+        selector: row => row.asset,
+      },
+      {
+        name: 'Deviation',
+        selector: row => row.diff,
+      }
+    ]
     const alerts = Object.entries(oracles)
       .map(([key, row]) => {
         const diff = Math.max(percentFromDiff(row.oracle, row.cex_price), percentFromDiff(row.oracle, row.dex_price))
         if(diff >= priceOracleDiffThreshold){
-          return `${removeTokenPrefix(key)} price oracle has a ${diff.toFixed(0)}% diffrence from exchange price`
+
+          return {
+            asset: removeTokenPrefix(key),
+            diff,
+          }
         }
       })
       .filter(r => !!r)
 
       return {
-          title: 'oracle alert',
-          data: alerts, 
+          title: 'oracles',
+          data: alerts,
+          columns
       }
   }
 
   getWhaleAlert = async () => {
     const whales = mainStore.clean(await mainStore['risky_accounts_request'])
     const alerts = []
+    const columns = [
+      {
+        name: 'Asset',
+        selector: row => row.asset
+      },
+      {
+        name: 'Collateral / Debt',
+        selector: row => row.type
+      },
+      {
+        name: 'Size',
+        selector: row => row.size
+      },
+      {
+        name: 'Address',
+        selector: row => row.account
+      }
+
+    ]
     Object.entries(whales)
       .map(([key, row]) => {
         row.big_collateral.forEach(({id: account, size})=> {
-          alerts.push(`account ${account} has $${whaleFriendlyFormater(size)} of ${removeTokenPrefix(key)} as collateral`)
+          alerts.push({
+            asset: key,
+            type: 'Collateral',
+            size,
+            account,
+          })
         })        
         row.big_debt.forEach(({id: account, size})=> {
-          alerts.push(`account ${account} has $${whaleFriendlyFormater(size)} of ${removeTokenPrefix(key)} in debt`)
+          alerts.push({
+            asset: key,
+            type: 'Debt',
+            size,
+            account,
+          })        
         })
       })
     return {
-      title: 'whale alert',
-      data: alerts
+      title: 'whales',
+      data: alerts,
+      columns
     }
   }
 
   getUtilizationAlert = async () => {
     const markets = {}
     const alerts = []
+    const columns = [
+      {
+        name: 'Asset',
+        selector: row => row.asset
+      },
+      {
+        name: 'Supply/ Borrow',
+        selector: row => row.type
+      },
+      {
+        name: 'Cap',
+        selector: row => row.cap
+      }
+    ]
     const currentUsage = mainStore.clean(await mainStore['accounts_request'])
     
     Object.entries(currentUsage).forEach(([k, v]) => {
@@ -170,47 +242,94 @@ class AlertStore {
       .forEach(market => {
         const mintUtilization = (market.mint_usage / market.mint_cap) * 100
         if(mintUtilization > 70){
-          alerts.push(`${market.market} mint utilization is ${mintUtilization}% of mint cap`)
+          alerts.push({
+            asset: market.market,
+            type: 'Supply',
+            cap: mintUtilization
+          })
         }
         const borrowUtilization = (market.borrow_usage / market.borrow_cap) * 100
         if(borrowUtilization > 70){
-          alerts.push(`${market.market} borrow utilization is ${borrowUtilization}% of borrow cap`)
+          alerts.push({
+            asset: market.market,
+            type: 'borrow',
+            cap: borrowUtilization
+          })
         }
       })
     return {
-      title: 'utilization alert',
-      data: alerts
+      title: 'utilization',
+      data: alerts,
+      columns
     }
   }
 
   getCollateralFactor = async () => {
     const alerts = []
+    const columns = [
+      {
+        name: 'Asset',
+        selector: row => row.asset,
+        sortable: true,
+      },
+      {
+        name: 'Current CF',
+        selector: row => row.currentCF,
+        sortable: true,
+      },
+      {
+        name: 'Recommended CF',
+        selector: row => row.recommendedCF,
+        sortable: true,
+      },
+      {
+        name: 'Based On',
+        selector: row => row.basedOn,
+        sortable: true,
+      }
+    ]
     const [currentUtilization, currentCap, simulation] = await riskStore.getRecommendations()
     //getCurrentCollateralFactor
     currentUtilization.forEach(row => {
       const currentCF = Number(riskStore.getCurrentCollateralFactor(row.asset))
       const recommendedCF = row.collateral_factor
       if(currentCF > recommendedCF){
-        alerts.push(`${removeTokenPrefix(row.asset)} current collateral factor (${currentCF}) is higher than recommended (${recommendedCF.toFixed(2)}) based on actual usage `)
+        alerts.push({
+          asset: row.asset,
+          currentCF,
+          recommendedCF: recommendedCF.toFixed(2),
+          "basedOn": "usage"
+        })
       }
     })
     currentCap.forEach(row => {
       const currentCF = Number(riskStore.getCurrentCollateralFactor(row.asset))
       const recommendedCF = row.collateral_factor
       if(currentCF > recommendedCF){
-        alerts.push(`${removeTokenPrefix(row.asset)} current collateral factor (${currentCF}) is higher than recommended (${recommendedCF.toFixed(2)}) based on current borrow & mint caps`)
+        alerts.push({
+          asset: row.asset,
+          currentCF,
+          recommendedCF: recommendedCF.toFixed(2),
+          "basedOn": "current borrow & mint caps"
+        })
       }
     })
     simulation.forEach(row => {
       const currentCF = Number(riskStore.getCurrentCollateralFactor(row.asset))
       const recommendedCF = Number(row.max_collateral)
       if(currentCF > recommendedCF){
-        alerts.push(`${removeTokenPrefix(row.asset)} current collateral factor (${currentCF}) is higher than recommended (${recommendedCF.toFixed(2)}) based on our simulation`)
+        alerts.push({
+          asset: row.asset,
+          currentCF,
+          recommendedCF: recommendedCF.toFixed(2),
+          "basedOn": "Worst Day Scenario"
+        })
       }
     })
     return {
-      title: 'collateral factor alert',
-      data: alerts, 
+      title: 'collateral factors',
+      data: alerts,
+      columns: columns
     }
   }
 }

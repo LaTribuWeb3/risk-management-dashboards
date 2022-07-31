@@ -3,6 +3,7 @@ import {observer} from "mobx-react"
 import Box from "../components/Box"
 import BoxGrid from "../components/BoxGrid"
 import alertStore from '../stores/alert.store'
+import DataTable from 'react-data-table-component'
 
 const Alert = props => {
   const { alert } = props
@@ -24,7 +25,10 @@ const Alert = props => {
         <div style={style}>{alert.title} </div>
         {alert.singleMetric && <span> {alert.singleMetric}</span>}
       </summary>
-      {!!alert.data.length && alert.data.map((text, i)=> <p key={i}>{text}</p>)}
+      {!!alert.data.length && <DataTable
+            data={alert.data}
+            columns={alert.columns}
+        />}
       {noIssues && <kbd style={{backgroundColor: 'var(--ins-color)'}}>No Issues</kbd>}
     </details>
   )
