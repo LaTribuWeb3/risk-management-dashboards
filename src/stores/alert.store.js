@@ -3,6 +3,8 @@ import mainStore from "./main.store"
 import riskStore from "./risk.store"
 import { removeTokenPrefix } from "../utils"
 import { whaleFriendlyFormater } from '../components/WhaleFriendly'
+import BlockExplorerLink from "../components/BlockExplorerLink"
+import Ramzor from "../components/Ramzor"
 
 const priceOracleDiffThreshold = 5
 
@@ -81,11 +83,14 @@ class AlertStore {
     const columns = [
       {
         name: 'User',
-        selector: row => row.user
+        selector: row => row.user,
+        format: row => <BlockExplorerLink address={row.user}/>,
+        sortable: true,
       },
       {
         name: 'Debt Size',
-        selector: row => row.debt
+        selector: row => row.debt,
+        sortable: true,
       },
     ]
     const { data: openLiquidations } = mainStore.clean( await mainStore['open_liquidations_request'])
@@ -108,10 +113,14 @@ class AlertStore {
       {
         name: 'Asset',
         selector: row => row.asset,
+        sortable: true,
       },
       {
         name: 'Deviation',
         selector: row => row.diff,
+        format: row => <Ramzor 
+        red={row.diff >5 || row.diff < -5}> {row.diff.toFixed(2)}%</Ramzor>,
+        sortable: true,
       }
     ]
     const alerts = Object.entries(oracles)
@@ -269,7 +278,7 @@ class AlertStore {
     const columns = [
       {
         name: 'Asset',
-        selector: row => row.asset,
+        selector: row => removeTokenPrefix(row.asset),
         sortable: true,
       },
       {
