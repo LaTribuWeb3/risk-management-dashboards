@@ -3,7 +3,7 @@
   --yellow-text: #cfb23c;
   --green-text: var(--ins-color);
   --data-font-size: calc(var(--font-size) - 2.5px);
-  --header-height: 180px;
+  --header-height: 20vh;
   --sidebar-width: 20vw;
 }
 

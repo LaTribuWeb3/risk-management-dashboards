@@ -23,7 +23,7 @@ const Alert = props => {
     <details className={noDetails ? "hide-details" : ""}>
       <summary>
         <div style={style}>{alert.title} </div>
-        {alert.singleMetric && <span> {alert.singleMetric}</span>}
+        {alert.singleMetric && <span data-tooltip={alert.tooltip}> {alert.singleMetric}</span>}
       </summary>
       {!!alert.data.length && <Box>
           <DataTable

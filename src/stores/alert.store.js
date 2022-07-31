@@ -28,8 +28,8 @@ class AlertStore {
       this.getOracleAlert(),
       this.getWhaleAlert(),
       this.getUtilizationAlert(),
-      this.getLiquidationsRisk(),
       this.getValueRisk(),
+      this.getLiquidationsRisk(),
     ])
     runInAction(() => {
       this.alerts = alerts
@@ -54,7 +54,8 @@ class AlertStore {
       title: 'value at risk',
       data: alerts,
       singleMetric: whaleFriendlyFormater(valueAtRisk),
-      negative: valueAtRisk > 0
+      negative: valueAtRisk > 0,
+      tooltip: 'Total PnL according to Worst-Day-Scenario simulation'
     }
   }
 
@@ -74,7 +75,8 @@ class AlertStore {
       title: 'liquidations at risk',
       data: alerts,
       singleMetric: whaleFriendlyFormater(liquidationsAtRisk),
-      negative: liquidationsAtRisk > 0
+      negative: liquidationsAtRisk > 0,
+      tooltip: "Total liquidations according to Worst-Day-Scenario simulation"
     }
   }
 
@@ -119,8 +121,7 @@ class AlertStore {
       {
         name: 'Deviation',
         selector: row => row.diff,
-        format: row => <Ramzor 
-        red={row.diff >5 || row.diff < -5}> {row.diff.toFixed(2)}%</Ramzor>,
+        format: row => <Ramzor red={row.diff >5 || row.diff < -5}> {row.diff.toFixed(2)}%</Ramzor>,
         sortable: true,
       }
     ]
@@ -206,15 +207,19 @@ class AlertStore {
       {
         name: 'Asset',
         format: row => <b>{removeTokenPrefix(row.asset)}</b>,
-        selector: row => row.asset
+        selector: row => row.asset,
+        sortable: true,
       },
       {
         name: 'Supply/ Borrow',
-        selector: row => row.type
+        selector: row => row.type,
+        sortable: true,
       },
       {
-        name: 'Cap',
-        selector: row => row.cap
+        name: 'Cap Utilization',
+        selector: row => row.cap,
+        format: row => <Ramzor red={row.cap > 85} yellow={row.cap > 70}> {row.cap.toFixed(2)}%</Ramzor>,
+        sortable: true,
       }
     ]
     const currentUsage = mainStore.clean(await mainStore['accounts_request'])

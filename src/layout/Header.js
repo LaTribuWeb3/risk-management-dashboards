@@ -13,9 +13,9 @@ class Header extends Component {
     return (
       <div className="box-space" style={{position: 'fixed', top: 0, width: 'var(--sidebar-width)', height: 'var(--header-height)', paddingLeft: '30px'}}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', height: '100%', flexDirection: 'column'}}>
-          <img style={{ width: '15vw'}} src={`/images/${color}-wordmark.png`}/>
+          <img style={{ height: 'calc((var(--header-height) / 2) - 35px)'}} src={`/images/${color}-wordmark.png`}/>
           {/* <img style={{ width: '0.7vw', margin: '0 2vw'}} src={`/logos/${color}-x.svg`}/> */}
-          <img style={{ width: '14vw'}} src={`/logos/aurigami.svg`}/>
+          <img style={{height: 'calc((var(--header-height) / 2) - 45px)'}} src={`/logos/aurigami.svg`}/>
         </div>
       </div>
     )
