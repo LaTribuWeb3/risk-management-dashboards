@@ -67,7 +67,7 @@ class LiquidationsGraph extends Component {
         <AreaChart
           data={dataSet}
         >
-          <CartesianGrid strokeDasharray="3 3" />
+          {/* <CartesianGrid strokeDasharray="3 3" /> */}
           {currentPrice && <ReferenceLine 
             alwaysShow={true} 
             x={currentPrice} 
