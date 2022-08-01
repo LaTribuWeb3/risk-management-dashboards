@@ -15,7 +15,7 @@ const truncate = {
   textOverflow: 'ellipsis'
 }
 
-const expendedBoxStyle = {margin: '30px', width: '50%', minHeight: '300px'}
+const expendedBoxStyle = {margin: '30px', width: '50%', minHeight: '300px', padding: '40px'}
 
 const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
@@ -34,7 +34,7 @@ const CustomTooltip = ({ active, payload, label }) => {
 class SlippageChart extends Component {
 
   render (){
-    let market = this.props.data.key.split('-')[0]
+    let market = this.props.data
     if (market === 'WETH'){
       market = 'ETH'
     }
@@ -55,25 +55,29 @@ class SlippageChart extends Component {
     return (
       <div style={{display: 'flex', justifyContent: 'space-between', width: '100%'}}>
         <article style={expendedBoxStyle}>
-        <ResponsiveContainer>
-          <BarChart data={dataSet}>
-            <XAxis dataKey="name" />
-            <YAxis type="number" domain={['dataMin', dataMax]} tick={<WhaleFriendlyAxisTick />} allowDataOverflow={true}/>
-            <Tooltip content={CustomTooltip}/>
-            <Bar dataKey="value" fill={COLORS[0]} />
-          </BarChart>
+          <ResponsiveContainer>
+            <BarChart data={dataSet}>
+              <XAxis dataKey="name" />
+              <YAxis type="number" domain={['dataMin', dataMax]} tick={<WhaleFriendlyAxisTick />} allowDataOverflow={true}/>
+              <Tooltip content={CustomTooltip}/>
+              <Bar dataKey="value" fill={COLORS[0]} />
+            </BarChart>
           </ResponsiveContainer>
         </article>
-        <article style={expendedBoxStyle}>
-          <h6>top 5 accounts</h6>
+        {this.props.i === 0 && <div className="box-space" style={{width: '50%'}}>
+          <hgroup>
+            <h1></h1>
+            <p>Max liquidation size that can be executed with a single transaction according to current available DEX liquidity.</p>
+          </hgroup>
+        </div>}
+          {/* <h6>top 5 accounts</h6>
           <div style={{display: 'flex', justifyContent: 'space-between', flexDirection: 'column'}}>
             {users.map(({user, size}, i)=> <BoxRow key={i}>
               <a target="_blank" href={`${BLOCK_EXPLORER}/address/${user}`} style={truncate}>{user}</a>
               <span className="data-text" >${whaleFriendlyFormater(size)}</span>
             </BoxRow>
             )}
-          </div>
-        </article>
+          </div> */}
       </div>
     )
   }

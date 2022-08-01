@@ -265,7 +265,6 @@ class AlertStore {
     
     Object.values(markets)
       .forEach(market => {
-        debugger
         if(market.mint_cap === Infinity || market.borrow_cap === Infinity){
           return
         }

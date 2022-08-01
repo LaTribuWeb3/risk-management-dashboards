@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import {observer} from "mobx-react"
 import Overview from './Overview'
-import Liquidity from './Liquidity'
+import Liquidity from './Liquidity2'
 import Accounts from "./Accounts";
 import Oracles from "./Oracles";
 import RiskParameters from "./RiskParameters";
@@ -45,7 +45,13 @@ class SinglePage extends Component {
           <Oracles/>
         </section>
         <section id="liquidity">
-          <h1>Liquidity</h1>
+          <hgroup>
+            <h1>DEX Liquidity</h1>
+            <p className="description">Monitoring available on-chain DEX liquidity per asset. 
+              The statistics monitor the top accounts portion of total liquidity as well as the average and median size of LP positions.  
+              *Aggregated DEX data is provided by Kyber Swap.
+            </p>
+          </hgroup>
           <Liquidity/>
         </section>
         <section id="collateral-factors">
