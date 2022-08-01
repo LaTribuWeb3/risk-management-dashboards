@@ -4,6 +4,7 @@ import Box from "../components/Box"
 import BoxGrid from "../components/BoxGrid"
 import alertStore from '../stores/alert.store'
 import DataTable from 'react-data-table-component'
+import AtRisk from '../components/AtRisk'
 
 const Alert = props => {
   const { alert } = props
@@ -50,6 +51,7 @@ class Alerts extends Component {
     */
     return (
       <div>
+        <AtRisk/>
         <BoxGrid>
           <Box loading={alertStore.loading}>
             <div>

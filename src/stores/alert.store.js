@@ -16,20 +16,22 @@ const percentFromDiff = (base, num) => {
 class AlertStore {
   alerts = []
   loading = true
+  valueAtRisk = null
+  liquidationsAtRisk = null
   constructor() {
     makeAutoObservable(this)
     this.init()
   }
   
   init = async () => {
+    this.getValueRisk()
+    this.getLiquidationsRisk()
     const alerts = await Promise.all([
       this.getCollateralFactor(),
       this.getOpenLiquidations(),
       this.getOracleAlert(),
       this.getWhaleAlert(),
       this.getUtilizationAlert(),
-      this.getValueRisk(),
-      this.getLiquidationsRisk(),
     ])
     runInAction(() => {
       this.alerts = alerts
@@ -42,7 +44,6 @@ class AlertStore {
     const data = mainStore.clean( await mainStore['current_simulation_risk_request'])
     let valueAtRisk = 0
     Object.values(data).forEach(o=> {
-      
       Object.entries(o).forEach(([k, v])=> {
         if (k === 'summary'){
           return
@@ -50,13 +51,10 @@ class AlertStore {
         valueAtRisk += Number(v.pnl)
       })
     })
-    return {
-      title: 'value at risk',
-      data: alerts,
-      singleMetric: whaleFriendlyFormater(valueAtRisk),
-      negative: valueAtRisk > 0,
-      tooltip: 'Total PnL according to Worst-Day-Scenario simulation'
-    }
+
+    runInAction(()=> {
+      this.valueAtRisk = whaleFriendlyFormater(valueAtRisk)
+    })
   }
 
   getLiquidationsRisk = async () => {
@@ -71,13 +69,11 @@ class AlertStore {
         liquidationsAtRisk += Number(v.total_liquidation)
       })
     })
-    return {
-      title: 'liquidations at risk',
-      data: alerts,
-      singleMetric: whaleFriendlyFormater(liquidationsAtRisk),
-      negative: liquidationsAtRisk > 0,
-      tooltip: "Total liquidations according to Worst-Day-Scenario simulation"
-    }
+
+    runInAction(()=> {
+      this.liquidationsAtRisk = whaleFriendlyFormater(liquidationsAtRisk)
+    })
+
   }
 
   getOpenLiquidations = async () => {
