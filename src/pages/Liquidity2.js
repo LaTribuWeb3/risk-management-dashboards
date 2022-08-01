@@ -6,56 +6,71 @@ import DataTable from 'react-data-table-component'
 import mainStore from '../stores/main.store'
 import {whaleFriendlyFormater} from '../components/WhaleFriendly'
 import {removeTokenPrefix, precentFormatter} from '../utils'
+import BlockExplorerLink from '../components/BlockExplorerLink'
+
+const usersMinWidth = '180px'
+
+const Users = row => {
+  debugger
+  return <div style={{display: 'flex', width: '100%'}}>
+    <details style={{padding: '0', border: 'none', marginBottom: '0', width: usersMinWidth}}>
+      <summary>{precentFormatter(row.top_5)}</summary>
+      <div style={{display: 'flex', flexDirection: 'column', width: usersMinWidth, }}>
+        {row.users.map(user => {
+          return <div style={{display: 'flex', maxWidth: '100%'}}>
+              <div style={{maxWidth: '40%'}}>
+                <BlockExplorerLink key={user.user} address={user.user}/>
+              </div>
+              <div >{whaleFriendlyFormater(user.size)}</div>
+            </div>
+        })}
+      </div>
+    </details>
+  </div>
+}
 
 const columns = [
   {
       name: 'LP Pair',
       selector: row => row.key,
       format: row => <b>{removeTokenPrefix(row.key)}</b>,
-      sortable: true,
-      grow: 2
+      minWidth: '140px'
   },    
   {
       name: 'LPs count',
       selector: row => row.count,
       format: row => row.count,
-      sortable: true,
   },  
   {
       name: 'Avg LP size',
       selector: row => row.avg,
       format: row => whaleFriendlyFormater(row.avg),
-      sortable: true,
   },  
   {
       name: 'Med LP size',
       selector: row => row.med,
       format: row => whaleFriendlyFormater(row.med),
-      sortable: true,
   },  
   {
       name: 'Top 1 LP',
       selector: row => row.top_1,
       format: row => precentFormatter(row.top_1),
-      sortable: true,
   },
   {
-    name: 'Top 5 LP',
-    selector: row => row.top_5,
-    format: row => precentFormatter(row.top_5),
-    sortable: true,
+      name: 'Top 5 LP',
+      selector: row => row.top_5,
+      format: row => Users(row),
+      minWidth: usersMinWidth
   },
   {
       name: 'Top 10 LP',
       selector: row => row.top_10,
       format: row => precentFormatter(row.top_10),
-      sortable: true,
   },
   {
       name: 'Total liquidity ',
       selector: row => row.total,
       format: row => whaleFriendlyFormater(row.total),
-      sortable: true,
   }
 ];
 
