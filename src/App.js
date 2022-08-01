@@ -29,11 +29,12 @@ class App extends React.Component {
           <Header />
           <div ref={this.scrollContainer} className="main-content">
             <Sidenav/>
-              <main>
-                <Routes>
-                  <Route exact path="/"  element={<SinglePage scrollContainer={this.scrollContainer}/>}/>
-                </Routes>
-              </main>
+            <main>
+              <Routes>
+                <Route exact path="/"  element={<SinglePage scrollContainer={this.scrollContainer}/>}/>
+              </Routes>
+            </main>
+            <Footer/>
           </div>
         </div>
       </Router>

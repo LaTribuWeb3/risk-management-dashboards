@@ -12,15 +12,14 @@ const usersMinWidth = '180px'
 
 const Users = row => {
   const users = row.users.sort((a,b)=> Number(b.size) - Number(a.size))
-  debugger
   return <div style={{display: 'flex', width: '100%'}}>
     <details style={{padding: '0', border: 'none', marginBottom: '0', width: usersMinWidth}}>
       <summary>{precentFormatter(row.top_5)}</summary>
       <div style={{display: 'flex', flexDirection: 'column', width: usersMinWidth, }}>
         {users.map(user => {
-          return <div style={{display: 'flex', maxWidth: '100%'}}>
+          return <div key={user.user} style={{display: 'flex', maxWidth: '100%'}}>
               <div style={{maxWidth: '40%'}}>
-                <BlockExplorerLink key={user.user} address={user.user}/>
+                <BlockExplorerLink  address={user.user}/>
               </div>
               <div >{whaleFriendlyFormater(user.size)}</div>
             </div>

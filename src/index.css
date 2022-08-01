@@ -18,9 +18,11 @@
 .side-bar {
   position: fixed;
   top: var(--header-height);
+  bottom: 0;
   left: 0;
   min-width: 200px;
   width: var(--sidebar-width);
+  height: calc(100vh - var(--header-height) );
 }
 
 .main-content {
@@ -47,8 +49,7 @@
   width: 100%;
   display: flex;
   justify-content: center;
-  position: absolute;
-  bottom: 0;
+  margin-left: calc(var(--sidebar-width) / -2);
 }
 
 .rdt_Table{
