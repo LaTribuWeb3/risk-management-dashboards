@@ -33,7 +33,7 @@ const CustomTooltip = ({ active, payload, label }) => {
 
 class SlippageChart extends Component {
 
-  render (){
+  render () {
     let market = this.props.data.toUpperCase()
     if (market === 'WETH'){
       market = 'ETH'
@@ -63,12 +63,12 @@ class SlippageChart extends Component {
             </BarChart>
           </ResponsiveContainer>
         </article>
-        {this.props.i === 0 && <div className="box-space" style={{width: '50%'}}>
+        <div className="box-space" style={{width: '50%'}}>
           <hgroup>
             <h1></h1>
             <p>Max liquidation size that can be executed with a single transaction according to current available DEX liquidity.</p>
           </hgroup>
-        </div>}
+        </div>
           {/* <h6>top 5 accounts</h6>
           <div style={{display: 'flex', justifyContent: 'space-between', flexDirection: 'column'}}>
             {users.map(({user, size}, i)=> <BoxRow key={i}>

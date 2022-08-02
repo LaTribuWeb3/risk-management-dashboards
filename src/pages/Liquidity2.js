@@ -5,8 +5,9 @@ import SlippageChart from "../components/SlippageChart"
 import DataTable from 'react-data-table-component'
 import mainStore from '../stores/main.store'
 import {whaleFriendlyFormater} from '../components/WhaleFriendly'
-import {removeTokenPrefix, precentFormatter} from '../utils'
+import {precentFormatter} from '../utils'
 import BlockExplorerLink from '../components/BlockExplorerLink'
+import Token from '../components/Token'
 
 const usersMinWidth = '180px'
 
@@ -33,7 +34,7 @@ const columns = [
   {
       name: 'LP Pair',
       selector: row => row.key,
-      format: row => <b>{removeTokenPrefix(row.key)}</b>,
+      format: row => <Token value={row.key}/>,
       minWidth: '140px'
   },    
   {
@@ -80,6 +81,8 @@ class Liquidity extends Component {
     const assets = {}
     const rawData = Object.assign({}, mainStore['dex_liquidity_data'] || {})
     const {json_time} = rawData
+
+    debugger
     if(json_time){
       delete rawData.json_time
     }
@@ -89,11 +92,13 @@ class Liquidity extends Component {
       v.key = k
       assets[asset].lps.push(v)
     })
+    assets['WNEAR'] = { name: 'WNEAR', lps: []}
+
     return (
       <div>
         <Box loading={loading} time={json_time}>
           {Object.values(assets).map((asset, i)=><details key={i} open>
-            <summary><b>{asset.name}</b></summary>
+            <summary><Token value={asset.name} /></summary>
             <div style={{display: 'flex'}}>
               <SlippageChart data={asset.name} i={i}/>
             </div>

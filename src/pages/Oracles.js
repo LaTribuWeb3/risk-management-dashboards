@@ -3,9 +3,8 @@ import {observer} from "mobx-react"
 import Box from "../components/Box"
 import DataTable from 'react-data-table-component'
 import mainStore from '../stores/main.store'
-import {whaleFriendlyFormater} from '../components/WhaleFriendly'
-import {removeTokenPrefix} from '../utils'
 import Ramzor from '../components/Ramzor'
+import Token from '../components/Token'
 
 const percentFrom = (base, num) => {
   const percent = ((num / base) * 100) - 100
@@ -20,7 +19,7 @@ const columns = [
   {
       name: 'Asset',
       selector: row => row.key,
-      format: row => <b>{removeTokenPrefix(row.key)}</b>,
+      format: row => <Token value={row.key}/>,
       sortable: true,
   },
   {

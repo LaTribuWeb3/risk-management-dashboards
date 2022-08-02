@@ -5,13 +5,14 @@ import SlippageChart from "../components/SlippageChart"
 import DataTable from 'react-data-table-component'
 import mainStore from '../stores/main.store'
 import {whaleFriendlyFormater} from '../components/WhaleFriendly'
-import {removeTokenPrefix, precentFormatter} from '../utils'
+import { precentFormatter} from '../utils'
+import
 
 const columns = [
   {
       name: 'Asset',
       selector: row => row.key,
-      format: row => <b>{removeTokenPrefix(row.key)}</b>,
+      format: row => <Token value={row.key}/>,
       sortable: true,
       grow: 2,
   },    

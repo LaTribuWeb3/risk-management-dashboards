@@ -6,7 +6,7 @@ import mainStore from '../stores/main.store'
 import {whaleFriendlyFormater} from './WhaleFriendly'
 import {removeTokenPrefix} from '../utils'
 import riskStore from '../stores/risk.store'
-import {Cf} from './CfDiff'
+import Token from './Token'
 
 const currentCapFormater = num => {
   if (num === Infinity) {
@@ -19,7 +19,7 @@ const currentColumns = [
   {
       name: 'Asset',
       selector: row => row.asset,
-      format: row => <b>{removeTokenPrefix(row.asset)}</b>,
+      format: row => <Token value={row.asset}/>,
   },
   {
       name: 'Supply Cap',

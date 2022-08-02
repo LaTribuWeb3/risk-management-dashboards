@@ -60,6 +60,15 @@
   margin-left: 2px!important;
   width: calc(100% - 2px)!important;/* bugFix */
 }
+
+.rdt_Table > div {
+  background-color: var(--card-background-color)!important;
+  color: var(--color); 
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+  font-weight: var(--font-weight);
+}
+
 .rdt_TableRow{
   background-color: var(--card-background-color)!important;
   color: var(--color); 

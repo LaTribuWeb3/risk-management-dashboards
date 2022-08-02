@@ -7,12 +7,13 @@ import {removeTokenPrefix} from '../utils'
 import CapInput from '../components/CapInput'
 import CfDiff from '../components/CfDiff'
 import riskStore from '../stores/risk.store'
+import Token from "../components/Token"
 
 const columns = [
   {
       name: 'Asset',
       selector: row => row.asset,
-      format: row => <b>{removeTokenPrefix(row.asset)}</b>,
+      format: row => <Token value={row.asset}/>,
   },
   {
       name: 'Supply Cap',

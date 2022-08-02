@@ -5,8 +5,8 @@ import DataTable from 'react-data-table-component'
 import mainStore from '../stores/main.store'
 import LiquidationsGraph from '../components/LiquidationsGraph'
 import {whaleFriendlyFormater} from '../components/WhaleFriendly'
-import {removeTokenPrefix} from '../utils'
 import { makeAutoObservable, runInAction } from "mobx"
+import Token from "../components/Token"
 
 
 class LocalStore {
@@ -41,7 +41,7 @@ class Accounts extends Component {
       {
           name: 'Asset',
           selector: row => row.key,
-          format: row => <b>{removeTokenPrefix(row.key)}</b>,
+          format: row => <Token value={row.key}/>,
           sortable: true,
           minWidth: '110px'
       },  

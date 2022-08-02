@@ -5,6 +5,7 @@ import { removeTokenPrefix } from "../utils"
 import { whaleFriendlyFormater } from '../components/WhaleFriendly'
 import BlockExplorerLink from "../components/BlockExplorerLink"
 import Ramzor from "../components/Ramzor"
+import Token from "../components/Token"
 
 const priceOracleDiffThreshold = 5
 
@@ -110,7 +111,7 @@ class AlertStore {
       {
         name: 'Asset',
         selector: row => row.asset,
-        format: row => <b>{removeTokenPrefix(row.asset)}</b>,
+        format: row => <Token value={row.asset}/>,
         sortable: true,
       },
       {
@@ -147,7 +148,7 @@ class AlertStore {
       {
         name: 'Asset',
         selector: row => removeTokenPrefix(row.asset),
-        format: row => <b>{removeTokenPrefix(row.asset)}</b>,
+        format: row => <Token value={row.asset}/>,
         sortable: true,
       },
       {
@@ -201,7 +202,7 @@ class AlertStore {
     const columns = [
       {
         name: 'Asset',
-        format: row => <b>{removeTokenPrefix(row.asset)}</b>,
+        format: row => <Token value={row.asset}/>,
         selector: row => row.asset,
         sortable: true,
       },
@@ -293,7 +294,7 @@ class AlertStore {
       {
         name: 'Asset',
         selector: row => removeTokenPrefix(row.asset),
-        format: row => <b>{removeTokenPrefix(row.asset)}</b>,
+        format: row => <Token value={row.asset}/>,
         sortable: true,
       },
       {

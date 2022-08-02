@@ -4,13 +4,13 @@ import Box from "./Box"
 import DataTable from 'react-data-table-component'
 import mainStore from '../stores/main.store'
 import {whaleFriendlyFormater} from './WhaleFriendly'
-import {removeTokenPrefix} from '../utils'
+import Token from './Token'
 
 const columns = [
   {
       name: 'Asset',
       selector: row => row.key,
-      format: row => <b>{removeTokenPrefix(row.key)}</b>,
+      format: row => <Token value={row.key}/>,
       sortable: true,
   },
   {
