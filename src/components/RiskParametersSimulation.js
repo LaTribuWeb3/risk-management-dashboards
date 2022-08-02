@@ -28,6 +28,7 @@ const columns = [
   {
       name: 'Max Collateral Factor',
       selector: row => row['max_collateral'],
+      format: row => row['max_collateral'].toFixed(2),
       sortable: true,
   },  
 ];

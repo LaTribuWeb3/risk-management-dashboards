@@ -51,7 +51,6 @@ class AlertStore {
         valueAtRisk += Number(v.pnl)
       })
     })
-
     runInAction(()=> {
       this.valueAtRisk = whaleFriendlyFormater(valueAtRisk)
     })

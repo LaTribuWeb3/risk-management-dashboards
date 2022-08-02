@@ -27,7 +27,6 @@ class Overview extends Component {
     if(json_time){
       delete rawData.json_time
     }
-    debugger
     
     const loading = mainStore['overview_loading']
     const data = Object.entries(rawData).filter(([k, v])=> k.indexOf('nl_') === -1)
