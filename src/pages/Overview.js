@@ -27,9 +27,11 @@ class Overview extends Component {
     if(json_time){
       delete rawData.json_time
     }
+    debugger
+    
     const loading = mainStore['overview_loading']
-    const half = !loading ? parseInt(Object.entries(rawData).length / 2) : 0
-    const firstHalf = !loading ? Object.entries(rawData)
+    const data = Object.entries(rawData).filter(([k, v])=> k.indexOf('nl_') === -1)
+    const firstHalf = !loading ? data
       .filter(([k, v])=>{
         return k.indexOf('collateral') > -1
       })
@@ -38,7 +40,7 @@ class Overview extends Component {
         if(a < b) return 1
         return 0
       }) : []
-    const secondHalf = !loading ? Object.entries(rawData)
+    const secondHalf = !loading ? data
       .filter(([k, v])=>{
         return k.indexOf('debt') > -1
       })
