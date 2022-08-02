@@ -10,7 +10,7 @@ import Token from "../components/Token"
 
 
 class LocalStore {
-  looping = false
+  looping = true
 
   constructor (){
     makeAutoObservable(this)
@@ -22,7 +22,7 @@ class LocalStore {
   }
 
   get loopingPrefix(){
-    return !this.looping ? 'nl_' : ''
+    return !this.looping ? '' : 'nl_'
   }
 
   prefixLooping = str => {
@@ -128,8 +128,8 @@ class Accounts extends Component {
         <Box loading={loading} time={json_time}>
         <fieldset>
           <label htmlFor="switch">
-            <input onChange={localStore.toggleLooping} value={localStore.looping} type="checkbox" id="switch" name="switch" role="switch"/>
-            <span className="nudge" data-tooltip="same asset used as debt and collateral">looping</span>
+            <input onChange={localStore.toggleLooping} value={localStore.looping} type="checkbox" defaultChecked = "true" id="switch" name="switch" role="switch"/>
+            <span className="nudge" data-tooltip="same asset used as debt and collateral">Ignore correlated debt and collateral</span>
           </label>
         </fieldset>
           {!loading && <DataTable
