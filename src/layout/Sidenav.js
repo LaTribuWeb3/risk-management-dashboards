@@ -6,14 +6,14 @@ import Header from './Header'
 const pages = [
   'system-status',
   'overview',
+  'collateral-factors',
+  'sandbox',
   'asset-distribution',
   'oracle-deviation',
   'liquidity',
   // 'backstop',
   // 'assumptions',
   //'qualitative-anlysis',
-  'collateral-factors',
-  'simulation'
 ]
 
 const humanPagesMap = {

@@ -11,7 +11,7 @@ export const whaleFriendlyFormater = num => {
   }
   let wfn
     if(num === 0) {
-      wfn = '0'
+      wfn = '$0'
     } else if(!num){
       wfn = 'N/A'
     }else if(num  <= tenth) {

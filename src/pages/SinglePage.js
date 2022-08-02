@@ -26,6 +26,17 @@ class SinglePage extends Component {
           </hgroup>
           <Overview/>
         </section>
+        <section id="collateral-factors">
+          <h1>Collateral Factor Recommendations</h1>
+          <RiskParameters />
+        </section>
+        <section id="sandbox">
+          <hgroup >
+            <h1> Risk Parameters Sandbox</h1>
+            <p className="description">The sandbox lets you set different Supply and Borrow caps to get Collateral Factor recommendations according to different caps. The tool also provides optimization setting recommendations. </p>
+          </hgroup>
+          <Simulation />
+        </section>
         <section id="asset-distribution">
           <hgroup>
             <h1>Asset Distribution</h1>
@@ -49,21 +60,10 @@ class SinglePage extends Component {
             <h1>DEX Liquidity</h1>
             <p className="description">Monitoring available on-chain DEX liquidity per asset. 
               The statistics monitor the top accounts portion of total liquidity as well as the average and median size of LP positions.  
-              *Aggregated DEX data is provided by Kyber Swap.
+              <br/>*Aggregated DEX data is provided by Kyber Swap.
             </p>
           </hgroup>
           <Liquidity/>
-        </section>
-        <section id="collateral-factors">
-          <h1>Collateral Factor Recommendations</h1>
-          <RiskParameters />
-        </section>
-        <section id="simulation">
-          <hgroup >
-            <h1> Risk Parameters Simulator</h1>
-            <p className="description">The simulator lets you set different Supply and Borrow caps to get Collateral Factor recommendations according to different caps. The tool also provides optimization setting recommendations. </p>
-          </hgroup>
-          <Simulation />
         </section>
       </ScrollSpy>
     )
