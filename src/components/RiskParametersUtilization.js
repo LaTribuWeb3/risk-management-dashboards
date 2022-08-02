@@ -18,13 +18,23 @@ const currentColumns = [
       selector: row => row.mint_cap,
       format: row => whaleFriendlyFormater(row.mint_cap),
       grow: 2,
-  },   
+  },     
+  // {
+  //     name: 'debug_mc',
+  //     selector: row => row.debug_mc,
+  //     grow: 2,
+  // },   
   {
       name: 'Current Borrow',
       selector: row => row.borrow_cap,
       format: row => whaleFriendlyFormater(row.borrow_cap),
       grow: 2,
-  },
+  },   
+  // {
+  //     name: 'debug_bc',
+  //     selector: row => row.debug_bc,
+  //     grow: 2,
+  // },
   {
       name: 'Current Collateral Factor',
       selector: row => riskStore.getCurrentCollateralFactor(row.asset),
