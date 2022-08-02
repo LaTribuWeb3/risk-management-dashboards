@@ -44,7 +44,6 @@
   display: none;  /* Safari and Chrome */
 }
 
-
 .footer {
   width: 100%;
   display: flex;
@@ -207,4 +206,8 @@ details.hide-details summary::after{
 .rdt_TableCol > [data-column-id] > div{
   white-space: normal;
   word-break: keep-all;
+}
+
+[data-tooltip].nudge:hover::before {
+  margin-left: 70px;
 }
