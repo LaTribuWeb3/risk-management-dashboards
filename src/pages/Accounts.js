@@ -21,7 +21,7 @@ class LocalStore {
   }
 
   get loopingPrefix(){
-    return !this.looping ? 'nl_' : ''
+    return !this.looping ? '' : 'nl_'
   }
 
   prefixLooping = str => {
