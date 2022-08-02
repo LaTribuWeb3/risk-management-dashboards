@@ -125,13 +125,13 @@ class Accounts extends Component {
     
     return (
       <div>
+        <Box loading={loading} time={json_time}>
         <fieldset>
-          <label for="switch">
+          <label htmlFor="switch">
             <input onChange={localStore.toggleLooping} value={localStore.looping} type="checkbox" id="switch" name="switch" role="switch"/>
             <span className="nudge" data-tooltip="same asset used as debt and collateral">looping</span>
           </label>
         </fieldset>
-        <Box loading={loading} time={json_time}>
           {!loading && <DataTable
               expandableRows
               columns={columns}

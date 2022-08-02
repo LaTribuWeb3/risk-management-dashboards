@@ -17,6 +17,7 @@ class RiskStore {
   currentData = []
   utilization = []
   loading = true
+  looping = false
   incrementationOptions = {}
   recommendations = []
   constructor (){
@@ -28,20 +29,20 @@ class RiskStore {
     if(true) {
       const data = await mainStore['risk_params_request']
       this.utilization = await mainStore['accounts_request']
-        .then(u=> {
-          return Object.entries(u)
-          .map(([k, v])=> {
-            if(k == 'json_time'){
-              return null
-            }
-            return { 
-              asset: k,
-              mint_cap: v.total_collateral,
-              borrow_cap: v.total_debt
-            }
-          })
-          .filter(o=> o)
+      .then(u=> {
+        return Object.entries(u)
+        .map(([k, v])=> {
+          if(k == 'json_time'){
+            return null
+          }
+          return { 
+            asset: k,
+            mint_cap: this.looping ? v.total_collateral : v.nl_total_collateral,
+            borrow_cap: this.looping ? v.total_debt : v.nl_total_debt,            
+          }
         })
+        .filter(o=> o)
+      })
       this.currentData = await mainStore['lending_platform_current_request']
         .then(d => {
           const clean = {}
@@ -72,6 +73,27 @@ class RiskStore {
         this.loading = false
       })
     }
+  }
+
+  toggleLooping = async () => {
+    this.looping = !this.looping
+    this.utilization = await mainStore['accounts_request']
+      .then(u=> {
+        return Object.entries(u)
+        .map(([k, v])=> {
+          if(k == 'json_time'){
+            return null
+          }
+          return { 
+            asset: k,
+            mint_cap: this.looping ? v.total_collateral : v.nl_total_collateral,
+            borrow_cap: this.looping ? v.total_debt : v.nl_total_debt,            
+          }
+        })
+        .filter(o=> o)
+      })
+    
+    this.solveFor(this.utilization)
   }
 
   getRecommendations = async () => {
