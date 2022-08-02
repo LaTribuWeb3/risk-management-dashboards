@@ -60,12 +60,12 @@ class RiskParametersUtilization extends Component {
             <h6>According to Current Usage</h6>
             <p >Recommended collateral factors according to current supply and borrow usage</p>
           </hgroup>
-          <fieldset>
+          {/* <fieldset>
             <label htmlFor="switch">
               <input onChange={riskStore.toggleLooping} value={riskStore.looping} type="checkbox" id="switch" name="switch" role="switch"/>
               <span className="nudge" data-tooltip="same asset used as debt and collateral">looping</span>
             </label>
-          </fieldset>
+          </fieldset> */}
           {!loading && <DataTable
               columns={currentColumns}
               data={utilization}

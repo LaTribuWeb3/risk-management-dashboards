@@ -103,12 +103,12 @@ class Liquidity extends Component {
               <SlippageChart data={asset.name} i={i}/>
             </div>
             <div style={{marginLeft: '30px'}}>
-              <Box>
-                  <DataTable
+            {!!asset.lps.length && <Box>
+                   <DataTable
                     columns={columns}
                     data={asset.lps}
                   />
-              </Box>
+              </Box>}
             </div>
           </details>)}
         </Box>
