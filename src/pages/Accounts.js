@@ -18,7 +18,6 @@ class LocalStore {
 
   toggleLooping = () => {
     this.looping = !this.looping
-    console.log("toggleLooping", this.looping)
   }
 
   get loopingPrefix(){
@@ -128,8 +127,8 @@ class Accounts extends Component {
         <Box loading={loading} time={json_time}>
         <fieldset>
           <label htmlFor="switch">
-            <input onChange={localStore.toggleLooping} value={localStore.looping} type="checkbox" defaultChecked = "true" id="switch" name="switch" role="switch"/>
-            <span className="nudge" data-tooltip="same asset used as debt and collateral">Ignore correlated debt and collateral</span>
+            <input onChange={localStore.toggleLooping} defaultChecked={localStore.looping} type="checkbox" id="switch" name="switch" role="switch"/>
+            <span>Ignore correlated debt and collateral</span>
           </label>
         </fieldset>
           {!loading && <DataTable
