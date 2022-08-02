@@ -8,9 +8,9 @@ class RiskParameters extends Component {
   render (){
     return (
       <div>
-        <RiskParametersCurrent/>
-        <RiskParametersUtilization/>
-        <RiskParametersSimulation />
+        <RiskParametersSimulation />  
+        <RiskParametersUtilization/>                  
+        <RiskParametersCurrent/>      
       </div>
     )
   }
