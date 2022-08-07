@@ -31,6 +31,7 @@
     "build-staging": "REACT_APP_API_URL=https://api-staging.riskdao.org react-app-rewired build",
     "build-aurigami": "REACT_APP_CONFIG=aurigami react-app-rewired build",
     "build-nervos": "REACT_APP_CONFIG=nervos react-app-rewired build",
+    "build-vesta": "REACT_APP_CONFIG=vesta react-app-rewired build",
     "test": "react-app-rewired test",
     "eject": "react-app-rewired eject"
   },
