@@ -128,7 +128,7 @@ class Accounts extends Component {
         <fieldset>
           <label htmlFor="switch">
             <input onChange={localStore.toggleLooping} defaultChecked={localStore.looping} type="checkbox" id="switch" name="switch" role="switch"/>
-            <span>Ignore correlated debt and collateral</span>
+            <span>Ignore correlated debt and collateral, and assets not in market</span>
           </label>
         </fieldset>
           {!loading && <DataTable
