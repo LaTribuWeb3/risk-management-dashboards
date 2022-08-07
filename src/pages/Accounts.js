@@ -121,7 +121,7 @@ class Accounts extends Component {
     if(data.length){
       data[0].defaultExpanded = true  
     }
-    
+    debugger
     return (
       <div>
         <Box loading={loading} time={json_time}>

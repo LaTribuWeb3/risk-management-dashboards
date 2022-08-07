@@ -6,34 +6,46 @@ import alertStore from '../stores/alert.store'
 import DataTable from 'react-data-table-component'
 import AtRisk from '../components/AtRisk'
 
-const Alert = props => {
-  const { alert } = props
-  const hasAlerts = alert.data.length || alert.negative
+const AlertText = props => {
+  const { type, hasAlerts } = props
   const style = { 
-    backgroundImage: `var(${hasAlerts ? '--icon-invalid' : '--icon-valid'})`,
     display: 'inline-block',
     minWidth: '26px',
     minHeight: '26px',
     paddingLeft: '30px',
     textTransform: 'capitalize',
   }
+  if(type === 'healthy'){
+    style.backgroundImage = `var(--icon-valid)`
+  }
+  if (type === 'review'){
+    style.backgroundImage = `url('icons/exclamation-triangle.svg')`
+  }
+  if(type === 'action required'){
+    style.backgroundImage = `var(--icon-invalid)`
+  }
+  return (<div style={style}>{props.children}</div>)
+}
 
-  const noIssues = !alert.data.length && !alert.singleMetric 
-  const noDetails = alert.singleMetric
+const Alert = props => {
+  const { alert } = props
+  const hasAlerts = alert.data.length || alert.negative
+
   return (
-    <details className={noDetails ? "hide-details" : ""}>
+    <details>
       <summary>
-        <div style={style}>{alert.title} </div>
-        {alert.singleMetric && <span style={{marginLeft: '15px'}} data-tooltip={alert.tooltip}>{alert.singleMetric}</span>}
+        <AlertText type={alert.type}>{alert.title}</AlertText>
       </summary>
-      {!!alert.data.length && <Box>
+      {alert.type === 'healthy' && <kbd style={{backgroundColor: 'var(--ins-color)'}}>No Issues</kbd>}
+      {alert.type === 'danger' && <a href={alert.link} ><kbd style={{backgroundColor: 'var(--red-text)'}}>Action Required</kbd></a>}
+      {alert.type === 'review' && <a href={alert.link} ><kbd style={{backgroundColor: 'var(--yellow-text)'}}>Review</kbd></a>}
+      {alert.showTable && !!alert.data.length && <Box>
           <DataTable
             data={alert.data}
             columns={alert.columns}
             defaultSortFieldId={1}
           />
         </Box>}
-      {noIssues && <kbd style={{backgroundColor: 'var(--ins-color)'}}>No Issues</kbd>}
     </details>
   )
 }
