@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#000000" />
     <meta
       name="description"
-      content="Risk DAO | bad-bebt dashboard"
+      content="Risk DAO | %REACT_APP_CONFIG% dashboard"
     />
     <link id="faviconTag" rel="icon" href="%PUBLIC_URL%/risk-dao-black.svg" />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/risk-dao-black.svg" />
@@ -25,6 +25,8 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <title>Risk DAO | risk management dashboard</title>
+    <script src="%PUBLIC_URL%/configs/dev.js"></script>
+    <script src="%PUBLIC_URL%/configs/%REACT_APP_CONFIG%.js"></script>
     <script>
       const changeFavicon = () => {
         const faviconTag = document.getElementById("faviconTag");

@@ -1,58 +1,40 @@
-import React, { useState, useEffect } from "react"
+import React from "react"
 import {observer} from "mobx-react"
 import Footer from './Footer'
 import Header from './Header'
 
-const activeStyle = {
-  transition: 'all 0.3s ease-in-out',
-  textTransform: 'capitalize',
-}
-
 const pages = [
+  'system-status',
   'overview',
-  'accounts',
-  'oracles',
+  'collateral-factors',
+  'sandbox',
+  'asset-distribution',
+  'oracle-deviation',
   'liquidity',
-  'backstop',
-  'assumptions',
-  'qualitative-anlysis',
-  'risk-parameters',
-  'simulation'
+  // 'backstop',
+  // 'assumptions',
+  //'qualitative-anlysis',
 ]
+
+const humanPagesMap = {
+  liquidity: "DEX Liquidity"
+}
 
 
 const Sidenav = (props) => {
-  const [hash, setHash] = useState(null);
-  const urlHash = (window.location.hash || "").replace('#', '')
-
-  // happens only once
-  useEffect(() => {
-    // window.addEventListener('load', ()=> {
-    //   if(!hash && urlHash.length){
-    //     setHash(urlHash)
-    //     setTimeout(()=> {
-    //       document.querySelector('#' + urlHash).scrollIntoView({
-    //         behavior: 'auto'
-    //       });
-    //     }, 100)
-    //   }
-    // }, {once: true});// fires only once
-  }, [])
-
   return (
     <div className="side-bar box-space">
-      <Header/>
+      {/* <Header/> */}
       <aside>
         <nav>
           <ul>
             {pages.map(page=> <li key={page}>
               <a
                 href={'#'+page}
-                style={activeStyle}
-                className={hash === page ? 'primary' : 'secondary'}
-                onClick={()=> setHash(page)}
+                data-to-scrollspy-id={page}
+                className='nav-link'
               >
-                {page}
+                {humanPagesMap[page] || page.split('-').join(' ')}
               </a>
             </li>)}
           </ul>

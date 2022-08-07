@@ -3,9 +3,8 @@ import {observer} from "mobx-react"
 import Box from "../components/Box"
 import DataTable from 'react-data-table-component'
 import mainStore from '../stores/main.store'
-import {whaleFriendlyFormater} from '../components/WhaleFriendly'
-import {removeTokenPrefix} from '../utils'
 import Ramzor from '../components/Ramzor'
+import Token from '../components/Token'
 
 const percentFrom = (base, num) => {
   const percent = ((num / base) * 100) - 100
@@ -18,24 +17,24 @@ const percentFrom = (base, num) => {
 
 const columns = [
   {
-      name: 'asset',
+      name: 'Asset',
       selector: row => row.key,
-      format: row => removeTokenPrefix(row.key),
+      format: row => <Token value={row.key}/>,
       sortable: true,
   },
   {
-      name: 'oracle',
+      name: 'Platform’s Oracle Price ',
       selector: row => row.oracle,
       sortable: true,
   },  
   {
-      name: 'cex_price',
+      name: 'CEX Price',
       selector: row => row.cex_price,
       format: row => percentFrom(row.oracle, row.cex_price),
       sortable: true,
   },  
   {
-      name: 'dex_price',
+      name: 'DEX Price',
       selector: row => row.dex_price,
       format: row => percentFrom(row.oracle, row.dex_price),
       sortable: true,
@@ -59,7 +58,7 @@ class Oracles extends Component {
 
     return (
       <div>
-        <Box loading={loading}>
+        <Box loading={loading} time={json_time}>
           {!loading && <DataTable
               columns={columns}
               data={data}

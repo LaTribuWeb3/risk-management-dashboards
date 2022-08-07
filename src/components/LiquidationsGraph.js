@@ -1,7 +1,45 @@
 import React, { Component } from "react";
 import {observer} from "mobx-react"
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceLine, ResponsiveContainer } from 'recharts';
 import {COLORS} from '../constants'
+import mainStore from '../stores/main.store'
+import {removeTokenPrefix} from '../utils'
+import {WhaleFriendlyAxisTick, whaleFriendlyFormater} from '../components/WhaleFriendly'
+import BoxRow from '../components/BoxRow'
+
+
+const CustomTooltip = ({ active, payload, label }) => {
+  if (active && payload && payload.length) {
+    const content = Object.assign({}, payload[0].payload)
+    const colorMap = {}
+    payload.forEach(({dataKey, color})=> {
+      colorMap[dataKey] = color
+    })
+    const price = content.x.toFixed(2)
+    delete content.x
+    const total = Object.entries(content).reduce((acc, [k, v])=> {
+      return acc + parseFloat(v)
+    }, 0).toFixed(2)
+    return (
+      <div className="tooltip-container">
+        <BoxRow slim={true}>
+          <div>Price</div>
+          <div>{whaleFriendlyFormater(price)}</div>
+        </BoxRow>
+        {(Object.entries(content).map(([k ,v], i) => {
+        k = k === 'x' ? 'Price' : k
+         return <BoxRow slim={true} key={i}>
+          <div style={{color: colorMap[k]}}>{removeTokenPrefix(k)}</div>
+          <div>{whaleFriendlyFormater(v)}</div>
+        </BoxRow>}))}
+        <BoxRow slim={true}>
+          <div>Total</div>
+          <div>{whaleFriendlyFormater(total)}</div>
+        </BoxRow>
+      </div>
+    );
+  }
+}
 
 class LiquidationsGraph extends Component {
 
@@ -20,25 +58,30 @@ class LiquidationsGraph extends Component {
     })
     const dataKeys = Object.keys(graphKeys)
     const dataSet = Object.values(graphData).sort((a, b) => a.x - b.x)
+    const rawData = Object.assign({}, mainStore['oracles_data'] || {})
+    const asset = this.props.data.key
+    const currentPrice = (rawData[asset] || {}).oracle
     return (
-      <div>
+      <div style={{ width: '100%', height: '30vh' }}>
+      <ResponsiveContainer>
         <AreaChart
-          width={1000}
-          height={400}
           data={dataSet}
-          margin={{
-            top: 10,
-            right: 30,
-            left: 30,
-            bottom: 0,
-          }}
         >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="x" />
-          <YAxis />
-          <Tooltip />
+          {/* <CartesianGrid strokeDasharray="3 3" /> */}
+          {currentPrice && <ReferenceLine 
+            alwaysShow={true} 
+            x={currentPrice} 
+            label={`current`} 
+            stroke="var(--primary"
+            strokeWidth="1"
+          />}
+          {/* <ReferenceLine y={650000} label="Max" stroke="red" /> */}
+          <XAxis tickCount={55} type="number" dataKey="x" />
+          <YAxis tick={<WhaleFriendlyAxisTick />}/>
+          <Tooltip content={CustomTooltip}/>
           {dataKeys.map((k, i)=> <Area key={i} type="monotone" dataKey={k} stackId="1" stroke={COLORS[i]} fill={COLORS[i]} />)}
         </AreaChart>
+      </ResponsiveContainer>
       </div>
     )
   }

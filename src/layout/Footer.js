@@ -12,11 +12,11 @@ class Footer extends Component {
     const color = mainStore.blackMode ? '#edf0f3' : 'black';
     return (
       <footer className="footer box-space">
-        <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '1px'}}>
+        <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '1px', width: '100%'}}>
           {/* <img style={{width: '50px', margin: '0 auto', display: 'block'}} src={`/risk-dao-black.svg`}/> */}
           <h5 style={{textAlign: 'center', margin: '10px', color}}>Join the DAO</h5>
           <div style={{ 
-            width: '150px',
+            width: '200px',
             display: 'flex',
             justifyContent: 'space-around',
           }}>

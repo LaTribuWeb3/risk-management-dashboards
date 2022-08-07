@@ -3,6 +3,8 @@
   --yellow-text: #cfb23c;
   --green-text: var(--ins-color);
   --data-font-size: calc(var(--font-size) - 2.5px);
+  --header-height: 20vh;
+  --sidebar-width: 20vw;
 }
 
 .clickable{
@@ -15,14 +17,17 @@
 
 .side-bar {
   position: fixed;
-  top: 0;
+  top: var(--header-height);
+  bottom: 0;
   left: 0;
   min-width: 200px;
-  width: 20vw;
-  height: 100vh;
+  width: var(--sidebar-width);
+  height: calc(100vh - var(--header-height) );
 }
 
 .main-content {
+  padding: 30px;
+  padding-top: 0;
   overflow-y: scroll;
   scroll-behavior: smooth;
   position: fixed;
@@ -31,14 +36,19 @@
   max-width: calc(100vw - 200px);
   width: 80vw;
   height: 100vh;
+  /* hide scrollbar */
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
+}
+.main-content::-webkit-scrollbar { 
+  display: none;  /* Safari and Chrome */
 }
 
 .footer {
   width: 100%;
   display: flex;
   justify-content: center;
-  position: absolute;
-  bottom: 0;
+  margin-left: calc(var(--sidebar-width) / -2);
 }
 
 .rdt_Table{
@@ -48,7 +58,17 @@
   font-size: var(--font-size);
   font-weight: var(--font-weight);
   margin-left: 2px!important;
+  width: calc(100% - 2px)!important;/* bugFix */
 }
+
+.rdt_Table > div {
+  background-color: var(--card-background-color)!important;
+  color: var(--color); 
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+  font-weight: var(--font-weight);
+}
+
 .rdt_TableRow{
   background-color: var(--card-background-color)!important;
   color: var(--color); 
@@ -63,7 +83,6 @@
   font-family: var(--font-family);
   font-size: var(--font-size);
   font-weight: var(--font-weight);
-  
 }
 .rdt_TableCell{
   color: var(--color);
@@ -95,6 +114,14 @@
 
 text {
   font-size: var(--data-font-size);
+  color: var(--color);
+}
+.data-text {
+  font-size: var(--data-font-size);
+  color: var(--color);
+}
+.recharts-legend-item-text {
+  font-size: var(--data-font-size);
 }
 
 .plus-minus {
@@ -106,4 +133,90 @@ text {
 }
 .plus-minus:hover {
   background:rgba(120, 120, 120, 0.1);
+}
+
+.box-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(120, 120, 120, 0.1);
+  color: var(--color);
+}
+
+.box-row:last-child{
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.transition {
+  transition: all 0.3s ease-out;
+}
+
+.highlight {
+  padding: 0.125rem 0.25rem;
+  background-color: var(--mark-background-color);
+  color: var(--mark-color);
+  vertical-align: baseline;
+}
+
+.nav-link{
+  transition: all 0.3s ease-in-out;
+  text-transform: capitalize;
+  color: var(--secondary);
+}
+
+.active-scroll-spy {
+  color: var(--primary);
+  font-weight: bold;
+}
+
+section {
+  min-height: 100vh;
+}
+
+.tooltip-container{
+  border-radius: var(--border-radius);
+  box-shadow: var(--card-box-shadow);
+  padding: 20px;
+  background-color: var(--background-color);
+  min-width: 200px;
+  z-index: 100000;
+  font-size: var(--data-font-size);
+  max-height: 30vh;
+  overflow: hidden;
+}
+
+line.recharts-reference-line-line{
+  stroke-dasharray: 5 10;
+}
+
+.recharts-sector{
+  stroke: none;
+}
+
+.description {
+  width: 80%;
+}
+
+section {
+  margin-bottom: 50px!important;
+}
+
+h1 {
+  padding-top: 20px;
+}
+
+details.hide-details summary::after{
+  display: none;
+} 
+
+.rdt_TableCol > [data-column-id] > div{
+  white-space: normal;
+  word-break: keep-all;
+}
+
+[data-tooltip].nudge:hover::before {
+  margin-left: 70px;
 }

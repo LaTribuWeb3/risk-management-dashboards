@@ -5,14 +5,16 @@ import SlippageChart from "../components/SlippageChart"
 import DataTable from 'react-data-table-component'
 import mainStore from '../stores/main.store'
 import {whaleFriendlyFormater} from '../components/WhaleFriendly'
-import {removeTokenPrefix, precentFormatter} from '../utils'
+import { precentFormatter} from '../utils'
+import
 
 const columns = [
   {
-      name: 'asset',
+      name: 'Asset',
       selector: row => row.key,
-      format: row => removeTokenPrefix(row.key),
+      format: row => <Token value={row.key}/>,
       sortable: true,
+      grow: 2,
   },    
   {
       name: 'count',
@@ -74,7 +76,7 @@ class Liquidity extends Component {
 
     return (
       <div>
-        <Box loading={loading}>
+        <Box loading={loading} time={json_time}>
           {!loading && <DataTable
               expandableRows
               columns={columns}

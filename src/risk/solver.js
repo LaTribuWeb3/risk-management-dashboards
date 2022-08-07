@@ -2,7 +2,7 @@ export default class Solver {
   constructor(rawDataObj) {
       this.liquidationPenalty = 0.1
       this.collaterals = []
-      this.stables = ["auUSDC", "auUSDT"]
+      this.stables = ["auUSDC", "auUSDT", "USDT.e", "USDC.e"]
       this.shortStableLfs = [1, 1.5, 2]
       this.longStableLfs = [0.25, 0.5, 1]
       this.otherLfs = [0.5, 1, 1.5]
@@ -97,12 +97,12 @@ export default class Solver {
                       resultMintCaps[long] = this.min(resultMintCaps[long], dc)
                       match = true
 
-                      if(cfs[long] === cf) efficientFrontier.push({"long" : long, "short" : short, "mintCap" : prevDc})
+                      if(cfs[long] === cf) efficientFrontier.push({"asset" : long, "short" : short, "change" : "mintCap", "recommendation" : "decrease " + long + " mint cap to " + prevDc.toString(), "newCap" : prevDc})
                   }
                   if(dc >= borrowCaps[short]) {
                       match = true
 
-                      if(cfs[long] === cf) efficientFrontier.push({"long" : long, "short" : short, "borrowCap" : prevDc})                        
+                      if(cfs[long] === cf) efficientFrontier.push({"asset" : long, "short" : short, "change" : "borrowCap", "recommendation" : "decrease " + short + " borrow cap to " + prevDc.toString(), "newCap" : prevDc})                        
                   }
 
                   if(match) {
@@ -142,6 +142,8 @@ export default class Solver {
                   }
               }
           }
+
+          return cfg
 
           for(const cap of this.caps[asset]) {
               if(cap > cfg.mintCaps[asset]) {

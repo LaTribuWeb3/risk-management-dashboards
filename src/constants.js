@@ -1,4 +1,5 @@
-export const TOKEN_PREFIX = 'au'
+export const TOKEN_PREFIX = window.APP_CONFIG.TOKEN_PREFIX
+export const BLOCK_EXPLORER = window.APP_CONFIG.BLOCK_EXPLORER
 export const COLORS = [
   "#1095C1",
   "#9410C1",

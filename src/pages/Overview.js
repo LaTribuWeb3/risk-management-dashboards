@@ -5,8 +5,20 @@ import BoxGrid from "../components/BoxGrid"
 import mainStore from '../stores/main.store'
 import WhaleFriendly from '../components/WhaleFriendly'
 import BoxRow from '../components/BoxRow'
+import OverviewPieCharts from '../components/OverviewPieCharts'
 
-const humanTxt = txt => txt.split('_').join(' ')
+const txtMap = {
+  "total_debt": "Total Debt",
+  "top_1_debt": "Debt of Top 1 User",
+  "top_10_debt": "Debt of Top 10 Users",
+  "median_debt": "Median Debt per User",
+  "total_collateral": "Total Collateral",
+  "top_1_collateral": "Collateral of Top 1 User",
+  "top_10_collateral": "Collateral of Top 10 Users",
+  "median_collateral": "Median Collateral per User",
+}
+
+const humanTxt = txt => txtMap[txt]
 
 class Overview extends Component {
   render (){
@@ -15,24 +27,46 @@ class Overview extends Component {
     if(json_time){
       delete rawData.json_time
     }
+    
     const loading = mainStore['overview_loading']
-    const half = !loading ? parseInt(Object.entries(rawData).length / 2) : 0
-    const firstHalf = !loading ? Object.entries(rawData).slice(0, half) : []
-    const secondHalf = !loading ? Object.entries(rawData).slice(half) : []
+    const data = Object.entries(rawData).filter(([k, v])=> k.indexOf('nl_') === -1)
+    const firstHalf = !loading ? data
+      .filter(([k, v])=>{
+        return k.indexOf('collateral') > -1
+      })
+      .sort(([a],[b])=>{
+        if(a > b) return -1
+        if(a < b) return 1
+        return 0
+      }) : []
+    const secondHalf = !loading ? data
+      .filter(([k, v])=>{
+        return k.indexOf('debt') > -1
+      })
+      .sort(([a],[b])=>{
+        if(a > b) return -1
+        if(a < b) return 1
+        return 0
+      }) : []
     return (
       <div>
+        <OverviewPieCharts/>
         <BoxGrid>
-          <Box loading={loading}>
-            {firstHalf.map(([k, v])=> <BoxRow key={k}>
-              <div>{humanTxt(k)}</div>
-              <div>$<WhaleFriendly num={v} /></div>
-            </BoxRow>)}
+          <Box loading={loading} time={json_time}>
+            <div>
+              {firstHalf.map(([k, v])=> <BoxRow key={k}>
+                <div>{humanTxt(k)}</div>
+                <div><WhaleFriendly num={v} /></div>
+              </BoxRow>)}
+            </div>
           </Box>
-          <Box loading={loading}>
-            {secondHalf.map(([k, v])=> <BoxRow key={k}>
-              <div>{humanTxt(k)}</div>
-              <div>$<WhaleFriendly num={v} /></div>
-            </BoxRow>)}
+          <Box loading={loading} time={json_time}>
+            <div>
+              {secondHalf.map(([k, v])=> <BoxRow key={k}>
+                <div>{humanTxt(k)}</div>
+                <div><WhaleFriendly num={v} /></div>
+              </BoxRow>)}
+            </div>
           </Box>
         </BoxGrid>
       </div>
