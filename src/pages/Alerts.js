@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import {observer} from "mobx-react"
 import Box from "../components/Box"
+import BoxRow from "../components/BoxRow"
 import BoxGrid from "../components/BoxGrid"
 import alertStore from '../stores/alert.store'
 import DataTable from 'react-data-table-component'
@@ -19,10 +20,10 @@ const AlertText = props => {
     style.backgroundImage = `var(--icon-valid)`
   }
   if (type === 'review'){
-    style.backgroundImage = `url('icons/exclamation-triangle.svg')`
+    style.backgroundImage = `var(--icon-review)`
   }
-  if(type === 'action required'){
-    style.backgroundImage = `var(--icon-invalid)`
+  if(type === 'danger'){
+    style.backgroundImage = `url('icons/exclamation-triangle.svg')`
   }
   return (<div style={style}>{props.children}</div>)
 }
@@ -32,13 +33,13 @@ const Alert = props => {
   const hasAlerts = alert.data.length || alert.negative
 
   return (
-    <details>
+    <BoxRow>
       <summary>
         <AlertText type={alert.type}>{alert.title}</AlertText>
       </summary>
-      {alert.type === 'healthy' && <kbd style={{backgroundColor: 'var(--ins-color)'}}>No Issues</kbd>}
-      {alert.type === 'danger' && <a href={alert.link} ><kbd style={{backgroundColor: 'var(--red-text)'}}>Action Required</kbd></a>}
-      {alert.type === 'review' && <a href={alert.link} ><kbd style={{backgroundColor: 'var(--yellow-text)'}}>Review</kbd></a>}
+      {alert.type === 'healthy' && <kbd className="status-tag" style={{backgroundColor: 'var(--ins-color)'}}>Healthy Status</kbd>}
+      {alert.type === 'danger' && <a href={alert.link} ><kbd className="status-tag" style={{backgroundColor: 'var(--red-text)'}}>Action Required</kbd></a>}
+      {alert.type === 'review' && <a href={alert.link} ><kbd className="status-tag" style={{backgroundColor: 'var(--yellow-text)'}}>Needs Review</kbd></a>}
       {alert.showTable && !!alert.data.length && <Box>
           <DataTable
             data={alert.data}
@@ -46,7 +47,7 @@ const Alert = props => {
             defaultSortFieldId={1}
           />
         </Box>}
-    </details>
+    </BoxRow>
   )
 }
 
