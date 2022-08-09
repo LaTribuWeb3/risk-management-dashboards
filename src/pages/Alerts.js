@@ -37,9 +37,9 @@ const Alert = props => {
       <summary>
         <AlertText type={alert.type}>{alert.title}</AlertText>
       </summary>
-      {alert.type === 'healthy' && <kbd className="status-tag" style={{backgroundColor: 'var(--ins-color)'}}>Healthy Status</kbd>}
+      {alert.type === 'healthy' && <kbd className="status-tag" style={{backgroundColor: 'var(--ins-color)'}}>Healthy</kbd>}
       {alert.type === 'danger' && <a href={alert.link} ><kbd className="status-tag" style={{backgroundColor: 'var(--red-text)'}}>Action Required</kbd></a>}
-      {alert.type === 'review' && <a href={alert.link} ><kbd className="status-tag" style={{backgroundColor: 'var(--yellow-text)'}}>Needs Review</kbd></a>}
+      {alert.type === 'review' && <a href={alert.link} ><kbd className="status-tag" style={{backgroundColor: 'var(--yellow-text)'}}>Review</kbd></a>}
       {alert.showTable && !!alert.data.length && <Box>
           <DataTable
             data={alert.data}
