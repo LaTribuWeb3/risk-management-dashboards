@@ -167,6 +167,16 @@ text {
   transition: all 0.3s ease-in-out;
   text-transform: capitalize;
   color: var(--secondary);
+  padding: 0;
+}
+
+.nav-link > span {
+  padding: 13px;
+  display: inline-block;
+}
+
+aside li {
+  padding: 0!important;
 }
 
 .active-scroll-spy {

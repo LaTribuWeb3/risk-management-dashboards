@@ -1,7 +1,6 @@
 import React from "react"
 import {observer} from "mobx-react"
-import Footer from './Footer'
-import Header from './Header'
+import mainStore from "../stores/main.store"
 
 const pages = [
   'system-status',
@@ -21,11 +20,16 @@ const humanPagesMap = {
   liquidity: "DEX Liquidity"
 }
 
-
 const Sidenav = (props) => {
   return (
     <div className="side-bar box-space">
       {/* <Header/> */}
+      <fieldset>
+          <label htmlFor="switch">
+            <input onChange={mainStore.toggleProView} defaultChecked={mainStore.proView} type="checkbox" id="switch" name="switch" role="switch"/>
+            <span>Pro View</span>
+          </label>
+        </fieldset>
       <aside>
         <nav>
           <ul>
@@ -35,7 +39,9 @@ const Sidenav = (props) => {
                 data-to-scrollspy-id={page}
                 className='nav-link'
               >
-                {humanPagesMap[page] || page.split('-').join(' ')}
+                {mainStore.proViewShow(page) && <span>
+                  {humanPagesMap[page] || page.split('-').join(' ')}
+                </span>}
               </a>
             </li>)}
           </ul>

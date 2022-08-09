@@ -4,6 +4,12 @@ import axios from "axios"
 const platformId = window.APP_CONFIG.PLATFORM_ID
 const apiEndpoints = ['overview', 'accounts', 'dex_liquidity', 'oracles', 'usd_volume_for_slippage', 'current_simulation_risk',
                       'risk_params', 'lending_platform_current', 'whale_accounts', 'open_liquidations']
+const defaultSections = {
+  'system-status': true,
+  'overview': true,
+  'asset-distribution': true,
+} 
+
 
 class MainStore {
 
@@ -11,6 +17,7 @@ class MainStore {
   blackMode =  true
   loading = {}
   apiData = {}
+  proView = false
 
   constructor () {
     this.init()
@@ -23,6 +30,10 @@ class MainStore {
     });
     makeAutoObservable(this)
   }
+
+  toggleProView = () => this.proView = !this.proView
+
+  proViewShow = (section) => this.proView || defaultSections[section]
 
   setBlackMode = (mode) => {
     this.blackMode = mode
