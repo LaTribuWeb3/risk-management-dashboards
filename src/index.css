@@ -188,7 +188,7 @@ nav ul {
   font-weight: bold;
 }
 
-section {
+section > {
   min-height: 100vh;
 }
 
