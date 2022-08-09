@@ -171,12 +171,16 @@ text {
 }
 
 .nav-link > span {
-  padding: 13px;
+  padding: 14px;
   display: inline-block;
 }
 
 aside li {
   padding: 0!important;
+}
+
+nav ul {
+  margin-left: 0!important;
 }
 
 .active-scroll-spy {
