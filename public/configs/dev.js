@@ -1,7 +1,7 @@
 window.APP_CONFIG = {
-  PLATFORM_ID: '0',
-  TOKEN_PREFIX: 'au',
-  BLOCK_EXPLORER: 'https://aurorascan.dev',
-  WHITE_LOGO: 'wit-dh.png',
-  BLACK_LOGO: 'blk-dh.png'
+  PLATFORM_ID: '2',
+  TOKEN_PREFIX: '',
+  BLOCK_EXPLORER: 'https://arbiscan.io',
+  WHITE_LOGO: 'vesta.svg',
+  BLACK_LOGO: 'vesta.svg',
 }
