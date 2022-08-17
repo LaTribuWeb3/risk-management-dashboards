@@ -14,12 +14,8 @@ const pages = [
   // 'backstop',
   // 'assumptions',
   //'qualitative-anlysis',
-].filter(p => {
-  if(window.APP_CONFIG.feature_flags.system_status === false && p === 'system-status'){
-    return false
-  }
-  return true
-})
+]
+ 
 
 const humanPagesMap = {
   liquidity: "DEX Liquidity"

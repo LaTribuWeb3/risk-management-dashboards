@@ -3,8 +3,6 @@ import {observer} from "mobx-react"
 import Box from "../components/Box"
 import DataTable from 'react-data-table-component'
 import mainStore from '../stores/main.store'
-import {removeTokenPrefix} from '../utils'
-import riskStore from '../stores/risk.store'
 import BlockExplorerLink from "../components/BlockExplorerLink"
 import {whaleFriendlyFormater} from "../components/WhaleFriendly"
 
@@ -27,37 +25,6 @@ const columns = [
   },
 ]
 
-const expendedBoxStyle = {margin: '30px', width: '100%', minHeight: '100px', padding: '30px'}
-
-const humanizeRecommendation = r => {
-  const rItems = r.split(' ')
-  rItems[1] = removeTokenPrefix(rItems[1])
-  if(rItems[2] === 'mint'){
-    rItems[2] = 'supply'
-  }
-  return rItems.join(' ')
-}
-
-const Recommendation = (props) => {
-  let recommendations = []
-  riskStore.recommendations.forEach(r=> {
-    if(r.asset === props.data.asset){
-      recommendations.push(r.recommendation)
-    }
-  })
-  recommendations = [... new Set(recommendations)]
-  return <div style={{display: 'flex', justifyContent: 'space-between', width: '100%'}}>
-    <article style={expendedBoxStyle}>
-      <h6>to improve collateral factor</h6>
-      {recommendations.map(r=> <div key={r}>
-        <a onClick={()=>riskStore.preformRecommendation(r)}>
-          {humanizeRecommendation(r)}
-        </a>
-      </div>)}
-    </article>
-  </div>
-}
-
 class OpenLiquidations extends Component {
   render (){
     const {loading} = mainStore['open_liquidations_loading']
@@ -67,13 +34,23 @@ class OpenLiquidations extends Component {
       delete rawData.json_time
     }
     const {data} = rawData
+    debugger
+    const totalDebt = data.reduce((acc, val) => acc + Number(val.user_debt_wo_looping), 0)
+    const smallLiquidations = totalDebt < 1000
     return (
       <div>
         <Box loading={loading} time={json_time}>
-          {!loading && <DataTable
-              columns={columns}
-              data={data}
-          />}
+          {!loading && <div>
+            {!smallLiquidations && <DataTable
+                columns={columns}
+                data={data}
+            />}
+            {smallLiquidations && 
+              <div style={{textAlign: 'center', padding: "50px"}}>
+                Total open liquidations are lower than $1k 😀  
+              </div>
+            }
+          </div>}
         </Box>
       </div>
     )

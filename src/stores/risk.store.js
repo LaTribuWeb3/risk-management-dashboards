@@ -20,6 +20,12 @@ class RiskStore {
   looping = false
   incrementationOptions = {}
   recommendations = []
+  asterixs = {
+    worstDay: false,
+    usage: false,
+    caps: false,
+  }
+
   constructor (){
     this.initPromise = this.init()
     makeAutoObservable(this)

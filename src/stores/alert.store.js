@@ -19,6 +19,7 @@ class AlertStore {
   loading = true
   valueAtRisk = null
   liquidationsAtRisk = null
+  varLarJsonTime = null
   constructor() {
     makeAutoObservable(this)
     this.init()
@@ -27,6 +28,7 @@ class AlertStore {
   init = async () => {
     this.getValueRisk()
     this.getLiquidationsRisk()
+    this.getVarLarJsonTime()
     const alerts = await Promise.all([
       this.getCollateralFactor(),
       this.getOpenLiquidations(),
@@ -37,6 +39,13 @@ class AlertStore {
     runInAction(() => {
       this.alerts = alerts
       this.loading = false
+    })
+  }
+
+  getVarLarJsonTime = async () => {
+    const data = await mainStore['current_simulation_risk_request']
+    runInAction(()=> {
+      this.varLarJsonTime = data.json_time
     })
   }
 

@@ -8,6 +8,7 @@ const defaultSections = {
   'system-status': true,
   'overview': true,
   'asset-distribution': true,
+  
 } 
 
 

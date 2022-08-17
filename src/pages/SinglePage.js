@@ -16,12 +16,12 @@ class SinglePage extends Component {
     const {proViewShow} = mainStore
     return (
       <ScrollSpy offsetBottom={400} scrollThrottle={100} parentScrollContainerRef={this.props.scrollContainer}>
-        {window.APP_CONFIG.feature_flags.system_status && <section id="system-status">
+        <section id="system-status">
           {mainStore.proViewShow("system-status") && <div>
             <h2>System Status</h2>
             <Alerts/>
           </div>}
-        </section>}
+        </section>
         <section id="overview">
           {mainStore.proViewShow("overview") && <div>
             <hgroup>

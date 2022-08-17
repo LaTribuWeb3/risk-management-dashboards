@@ -69,13 +69,13 @@ class Alerts extends Component {
     return (
       <div>
         <AtRisk/>
-        <BoxGrid>
+        {window.APP_CONFIG.feature_flags.alerts && <BoxGrid>
           <Box loading={alertStore.loading}>
             <div>
               {alertStore.alerts.map((alert, i)=> <Alert key={i} alert={alert}/>)}
             </div>
           </Box>
-        </BoxGrid>
+        </BoxGrid>}
       </div>
     )
   }

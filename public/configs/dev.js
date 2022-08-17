@@ -5,6 +5,6 @@ window.APP_CONFIG = {
   WHITE_LOGO: 'aurigami.svg',
   BLACK_LOGO: 'aurigami.svg',  
   feature_flags: {
-    system_status: false
+    alerts: false
   },
 }

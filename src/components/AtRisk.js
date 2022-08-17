@@ -7,7 +7,7 @@ import BoxGrid from "../components/BoxGrid"
 
 const AtRisk = props => {
   return <BoxGrid>
-    <Box>
+    <Box time={alertStore.varLarJsonTime}>
       <BoxRow>
         <h5 style={{margin: 0}}>Value at Risk on Worst Day Simulation</h5>
         <h5 style={{margin: 0}}>{alertStore.valueAtRisk}</h5>
@@ -20,7 +20,7 @@ const AtRisk = props => {
       </hgroup>
 
     </Box>
-    <Box>
+    <Box time={alertStore.varLarJsonTime}>
       <BoxRow>
         <h5 style={{margin: 0}}>Liquidations on Worst Day Simulation</h5>
         <h5 style={{margin: 0}}>{alertStore.liquidationsAtRisk}</h5>
