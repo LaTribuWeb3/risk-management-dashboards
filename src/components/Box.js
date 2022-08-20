@@ -12,6 +12,7 @@ const Box = props => {
     height: props.height,
     display: 'flex',
     flexDirection: 'column',
+    justifyContent: 'space-between'
   }
   return (
     <article style={box} aria-busy={props.loading}>
