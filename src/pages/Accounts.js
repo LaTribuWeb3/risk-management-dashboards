@@ -76,14 +76,14 @@ class Accounts extends Component {
       {
           name: 'Top 10 Accounts Collateral',
           selector: row =>  Number(row[prefixLooping('top_10_collateral')]),
-          format: row => < TopTenAccounts accounts={row.whales.big_collateral} value={whaleFriendlyFormater(row[prefixLooping('top_10_collateral')])}/>,
+          format: row => < TopTenAccounts row={row} accounts={row.whales.big_collateral} value={whaleFriendlyFormater(row[prefixLooping('top_10_collateral')])}/>,
           sortable: true,
           minWidth: usersMinWidth
       },
       {
           name: 'Top 10 Accounts Debt',
           selector: row =>  Number(row[prefixLooping('top_10_debt')]),
-          format: row => <TopTenAccounts accounts={row.whales.big_debt} value={whaleFriendlyFormater(row[prefixLooping('top_10_debt')])}/>,
+          format: row => <TopTenAccounts row={row} accounts={row.whales.big_debt} value={whaleFriendlyFormater(row[prefixLooping('top_10_debt')])}/>,
           sortable: true,
           minWidth: usersMinWidth
       },
@@ -126,6 +126,7 @@ class Accounts extends Component {
     }
 
     const text = "* Big account included in the list"
+    const onRowExpandToggled = (expanded, row) => row.expanded = expanded
     
     return (
       <div>
@@ -144,6 +145,7 @@ class Accounts extends Component {
               data={data}
               expandableRowsComponent={LiquidationsGraph}
               expandableRowExpanded={rowPreExpanded}
+              onRowExpandToggled={onRowExpandToggled}
           />}
         </Box>
       </div>

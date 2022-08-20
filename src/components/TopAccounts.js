@@ -6,7 +6,7 @@ import BlockExplorerLink from '../components/BlockExplorerLink'
 
 export const usersMinWidth = '180px'
 
-export const TopTenAccounts = props => {
+export const TopTenAccounts = observer(props => {
   const {accounts, value} = props
   let hasWhales = false
   for (const account of accounts) {
@@ -17,12 +17,12 @@ export const TopTenAccounts = props => {
   }
   return (
     <div style={{display: 'flex', width: '100%'}}>
-      <details style={{padding: '0', border: 'none', marginBottom: '0', width: usersMinWidth}}>
+      <details open={props.row.expanded} style={{padding: '1rem 0', border: 'none', marginBottom: '0', width: usersMinWidth, overflow: 'auto', overflowX: 'hidden'}}>
         <summary>{value} {hasWhales &&<span>*</span>}</summary>
-        <div style={{display: 'flex', flexDirection: 'column', width: usersMinWidth, }}>
+        <div style={{display: 'flex', flexDirection: 'column', width: '100%', overflow: 'none', }}>
           {accounts.map(account=> {
-            return <div key={account.id} style={{display: 'flex', maxWidth: '100%'}}>
-              <div style={{maxWidth: '40%'}}>
+            return <div key={account.id} style={{display: 'flex',width: '100%', justifyContent: 'space-between'}}>
+              <div style={{maxWidth: '45%'}}>
                 <BlockExplorerLink  address={account.id}/>
               </div>
               <div>{whaleFriendlyFormater(account.size)} </div>
@@ -32,7 +32,7 @@ export const TopTenAccounts = props => {
       </details>
     </div>
   )
-}
+})
 
 const TopAccounts = props => {
   const {row} = props
