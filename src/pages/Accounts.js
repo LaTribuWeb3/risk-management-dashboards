@@ -89,15 +89,15 @@ class Accounts extends Component {
       },
       {
           name: 'Top 1 Account Collateral',
-          selector: row =>  Number(row[prefixLooping('top_1_collateral')]),
-          format: row => whaleFriendlyFormater(row[prefixLooping('top_1_collateral')]),
+          selector: row =>  Number(row['top_1_collateral']),
+          format: row => whaleFriendlyFormater(row['top_1_collateral']),
           sortable: true,
           minWidth: '140px'
       },
       {
           name: 'Top 1 Account Debt',
-          selector: row =>  Number(row[prefixLooping('top_1_debt')]),
-          format: row => whaleFriendlyFormater(row[prefixLooping('top_1_debt')]),
+          selector: row =>  Number(row['top_1_debt']),
+          format: row => whaleFriendlyFormater(row['top_1_debt']),
           sortable: true,
           minWidth: '140px'
       },
