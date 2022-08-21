@@ -7,6 +7,7 @@ import {whaleFriendlyFormater} from './WhaleFriendly'
 import {removeTokenPrefix} from '../utils'
 import riskStore from '../stores/risk.store'
 import Token from './Token'
+import Asterisk, {hasAtLeastOneAsterisk} from './Asterisk'
 
 const currentCapFormater = num => {
   if (num === Infinity) {
@@ -39,7 +40,7 @@ const currentColumns = [
   {
       name: 'Recommended Collateral Factor',
       selector: row => row.collateral_factor,
-      format: row => row.collateral_factor.toFixed(2),
+      format: row => <Asterisk row={row} field={"collateral_factor"}/>,
   },
 ];
 
@@ -47,9 +48,10 @@ class RiskParametersCurrent extends Component {
   render (){
     const {loading, currentData} = riskStore
     const {json_time: currentJsonTime} = mainStore['lending_platform_current_data'] || {}
+    const text = hasAtLeastOneAsterisk(currentData, "collateral_factor") ? "* If usage will increase, reduction of CF might be required to avoid bad debt." : ""
     return (
       <div>
-        <Box loading={loading} time={currentJsonTime}>
+        <Box loading={loading} time={currentJsonTime} text={text}>
           <hgroup>
             <h6>According to Existing Caps</h6>
             <p className="description">Recommended collateral factors according to existing supply and borrow caps set by the platform.</p>

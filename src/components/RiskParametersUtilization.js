@@ -6,6 +6,7 @@ import mainStore from '../stores/main.store'
 import {whaleFriendlyFormater} from './WhaleFriendly'
 import riskStore from '../stores/risk.store'
 import Token from './Token'
+import Asterisk, {hasAtLeastOneAsterisk} from './Asterisk'
 
 const currentColumns = [
   {
@@ -43,7 +44,7 @@ const currentColumns = [
   {
       name: 'Recommended Collateral Factor',
       selector: row => row.collateral_factor,
-      format: row => row.collateral_factor.toFixed(2),
+      format: row => <Asterisk row={row} field={"collateral_factor"}/>,
       grow: 2,
   },
 ];
@@ -52,10 +53,10 @@ class RiskParametersUtilization extends Component {
   render (){
     const {loading, utilization} = riskStore
     const {json_time: currentJsonTime} = mainStore['lending_platform_current_data'] || {}
-
+    const text = hasAtLeastOneAsterisk(utilization, "collateral_factor") ? "* if user composition will change, reduction of CF might be required to avoid bad debt." : ""
     return (
       <div>
-        <Box loading={loading} time={currentJsonTime}>
+        <Box loading={loading} time={currentJsonTime} text={text}>
           <hgroup>
             <h6>According to Current Usage</h6>
             <p >Recommended collateral factors according to current supply and borrow usage</p>

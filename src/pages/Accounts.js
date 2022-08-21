@@ -7,6 +7,7 @@ import LiquidationsGraph from '../components/LiquidationsGraph'
 import {whaleFriendlyFormater} from '../components/WhaleFriendly'
 import { makeAutoObservable, runInAction } from "mobx"
 import Token from "../components/Token"
+import {TopTenAccounts, usersMinWidth} from "../components/TopAccounts"
 
 
 class LocalStore {
@@ -75,35 +76,36 @@ class Accounts extends Component {
       {
           name: 'Top 10 Accounts Collateral',
           selector: row =>  Number(row[prefixLooping('top_10_collateral')]),
-          format: row => whaleFriendlyFormater(row[prefixLooping('top_10_collateral')]),
+          format: row => < TopTenAccounts row={row} accounts={row.whales.big_collateral} value={whaleFriendlyFormater(row[prefixLooping('top_10_collateral')])}/>,
           sortable: true,
-          minWidth: '140px'
+          minWidth: usersMinWidth
       },
       {
           name: 'Top 10 Accounts Debt',
           selector: row =>  Number(row[prefixLooping('top_10_debt')]),
-          format: row => whaleFriendlyFormater(row[prefixLooping('top_10_debt')]),
+          format: row => <TopTenAccounts row={row} accounts={row.whales.big_debt} value={whaleFriendlyFormater(row[prefixLooping('top_10_debt')])}/>,
           sortable: true,
-          minWidth: '140px'
+          minWidth: usersMinWidth
       },
       {
           name: 'Top 1 Account Collateral',
-          selector: row =>  Number(row[prefixLooping('top_1_collateral')]),
-          format: row => whaleFriendlyFormater(row[prefixLooping('top_1_collateral')]),
+          selector: row =>  Number(row['top_1_collateral']),
+          format: row => whaleFriendlyFormater(row['top_1_collateral']),
           sortable: true,
           minWidth: '140px'
       },
       {
           name: 'Top 1 Account Debt',
-          selector: row =>  Number(row[prefixLooping('top_1_debt')]),
-          format: row => whaleFriendlyFormater(row[prefixLooping('top_1_debt')]),
+          selector: row =>  Number(row['top_1_debt']),
+          format: row => whaleFriendlyFormater(row['top_1_debt']),
           sortable: true,
           minWidth: '140px'
       },
     ]
 
-    const loading = mainStore['accounts_loading']
-    const rawData = mainStore['accounts_data'] || {}
+    const loading = mainStore['accounts_loading'] || mainStore['whale_accounts_loading']
+    const rawData = Object.assign({}, mainStore['accounts_data'] || {})
+    const whaleData = mainStore['whale_accounts_data'] || {}
     
     const {json_time} = rawData
     if(json_time){
@@ -112,6 +114,7 @@ class Accounts extends Component {
     const data = !loading ? Object.entries(rawData)
     .map(([k, v])=> {
       v.key = k
+      v.whales = whaleData[k]
       return v
     })
     .sort((a, b)=> {
@@ -121,10 +124,13 @@ class Accounts extends Component {
     if(data.length){
       data[0].defaultExpanded = true  
     }
+
+    const text = "* Big account included in the list"
+    const onRowExpandToggled = (expanded, row) => row.expanded = expanded
     
     return (
       <div>
-        <Box loading={loading} time={json_time}>
+        <Box loading={loading} time={json_time} text={text}>
         <fieldset>
           <label htmlFor="switch">
             <input onChange={localStore.toggleLooping} defaultChecked={localStore.looping} type="checkbox" id="switch" name="switch" role="switch"/>
@@ -139,6 +145,7 @@ class Accounts extends Component {
               data={data}
               expandableRowsComponent={LiquidationsGraph}
               expandableRowExpanded={rowPreExpanded}
+              onRowExpandToggled={onRowExpandToggled}
           />}
         </Box>
       </div>

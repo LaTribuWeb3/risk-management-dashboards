@@ -51,6 +51,8 @@ class SlippageChart extends Component {
     }
     const [biggest, secondBiggest] = dataSet.sort((a, b)=> b.value - a.value)
     const dataMax = Math.min(secondBiggest.value * 2, biggest.value)
+    const color = mainStore.blackMode ? 'white' : 'black';
+
     return (
       <div style={{display: 'flex', justifyContent: 'space-between', width: '100%'}}>
         <article style={expendedBoxStyle}>
@@ -63,11 +65,14 @@ class SlippageChart extends Component {
             </BarChart>
           </ResponsiveContainer>
         </article>
-        <div className="box-space" style={{width: '50%'}}>
+        <div className="box-space" style={{width: '50%', display: 'flex', justifyContent: 'space-between', flexDirection: 'column'}}>
           <hgroup>
             <h1></h1>
             <p>Max liquidation size that can be executed with a single transaction according to current available DEX liquidity.</p>
           </hgroup>
+          <div style={{width: '50%'}}>
+            <img src={`/images/${color}-powered-by-kyberswap.png`}/>
+          </div>
         </div>
           {/* <h6>top 5 accounts</h6>
           <div style={{display: 'flex', justifyContent: 'space-between', flexDirection: 'column'}}>

@@ -1,6 +1,6 @@
 import React from 'react'
 import {observer} from 'mobx-react'
-import LastUpdate from './LastUpdate'
+import BoxFooter from './BoxFooter'
 
 const Box = props => {
   const box = {
@@ -9,12 +9,15 @@ const Box = props => {
     marginTop: 0,
     padding: '40px',
     marginBottom: 'var(--spacing)',
-    height: props.height
+    height: props.height,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between'
   }
   return (
     <article style={box} aria-busy={props.loading}>
       {props.children}
-      {props.time && <LastUpdate time={props.time}/>}
+      <BoxFooter {...props}/>
     </article>
   )
 }

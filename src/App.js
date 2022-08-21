@@ -29,6 +29,7 @@ class App extends React.Component {
           <Header />
           <div ref={this.scrollContainer} className="main-content">
             <Sidenav/>
+            <h1>Risk Management Dashboard</h1>
             <main>
               <Routes>
                 <Route exact path="/"  element={<SinglePage scrollContainer={this.scrollContainer}/>}/>

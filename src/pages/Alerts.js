@@ -1,40 +1,57 @@
 import React, { Component } from "react";
 import {observer} from "mobx-react"
 import Box from "../components/Box"
+import BoxRow from "../components/BoxRow"
 import BoxGrid from "../components/BoxGrid"
 import alertStore from '../stores/alert.store'
 import DataTable from 'react-data-table-component'
 import AtRisk from '../components/AtRisk'
 
-const Alert = props => {
-  const { alert } = props
-  const hasAlerts = alert.data.length || alert.negative
+const AlertText = props => {
+  const { type, hasAlerts } = props
   const style = { 
-    backgroundImage: `var(${hasAlerts ? '--icon-invalid' : '--icon-valid'})`,
     display: 'inline-block',
     minWidth: '26px',
     minHeight: '26px',
     paddingLeft: '30px',
     textTransform: 'capitalize',
   }
+  if(type === 'healthy'){
+    style.backgroundImage = `var(--icon-valid)`
+  }
+  if (type === 'review'){
+    style.backgroundImage = `var(--icon-review)`
+  }
+  if(type === 'danger'){
+    style.backgroundImage = `url('icons/exclamation-triangle.svg')`
+  }
+  return (<div style={style}>{props.children}</div>)
+}
 
-  const noIssues = !alert.data.length && !alert.singleMetric 
-  const noDetails = alert.singleMetric
+const Alert = props => {
+  const { alert } = props
+  const hasAlerts = alert.data.length || alert.negative
+
   return (
-    <details className={noDetails ? "hide-details" : ""}>
-      <summary>
-        <div style={style}>{alert.title} </div>
-        {alert.singleMetric && <span style={{marginLeft: '15px'}} data-tooltip={alert.tooltip}>{alert.singleMetric}</span>}
-      </summary>
-      {!!alert.data.length && <Box>
+    <>
+      <BoxRow>
+        <summary>
+          <AlertText type={alert.type}>{alert.title}</AlertText>
+        </summary>
+        {alert.type === 'healthy' && <kbd className="status-tag" style={{backgroundColor: 'var(--ins-color)'}}>Healthy</kbd>}
+        {alert.type === 'danger' && <a href={alert.link} ><kbd className="status-tag" style={{backgroundColor: 'var(--red-text)'}}>Action Required</kbd></a>}
+        {alert.type === 'review' && <a href={alert.link} ><kbd className="status-tag" style={{backgroundColor: 'var(--yellow-text)'}}>Review</kbd></a>}
+      </BoxRow>
+      <div>
+        {alert.showTable && !!alert.data.length && <Box>
           <DataTable
             data={alert.data}
             columns={alert.columns}
             defaultSortFieldId={1}
           />
         </Box>}
-      {noIssues && <kbd style={{backgroundColor: 'var(--ins-color)'}}>No Issues</kbd>}
-    </details>
+      </div>
+    </>
   )
 }
 
@@ -52,13 +69,13 @@ class Alerts extends Component {
     return (
       <div>
         <AtRisk/>
-        <BoxGrid>
+        {window.APP_CONFIG.feature_flags.alerts && <BoxGrid>
           <Box loading={alertStore.loading}>
             <div>
               {alertStore.alerts.map((alert, i)=> <Alert key={i} alert={alert}/>)}
             </div>
           </Box>
-        </BoxGrid>
+        </BoxGrid>}
       </div>
     )
   }

@@ -5,6 +5,7 @@ import DataTable from 'react-data-table-component'
 import mainStore from '../stores/main.store'
 import {whaleFriendlyFormater} from './WhaleFriendly'
 import Token from './Token'
+import Asterisk, {hasAtLeastOneAsterisk} from './Asterisk'
 
 const columns = [
   {
@@ -28,7 +29,7 @@ const columns = [
   {
       name: 'Max Collateral Factor',
       selector: row => row['max_collateral'],
-      format: row => row['max_collateral'].toFixed(2),
+      format: row =>  <Asterisk row={row} field={"max_collateral"}/>,
       sortable: true,
   },  
 ];
@@ -44,9 +45,10 @@ class RiskParametersSimulation extends Component {
     const data = !loading ? Object.entries(rawData).map(([k, v])=> {
       return Object.assign({ key: k}, v.summary)
     }) : []
+    const text = hasAtLeastOneAsterisk(data, "max_collateral") ? "* Decreasing CF to Max CF is recommended." : ""
     return (
       <div>
-        <Box loading={loading}  time={json_time}>
+        <Box loading={loading}  time={json_time} text={text}>
           <hgroup>
             <h6>According to Worst Day Scenario</h6>
             <p className="description">Worst day simulation is done according to the worst day price-drop in ETH history. Other assets are being normalized according to their volatility compared to ETH. The simulation takes into consideration the current collateral factors and current users’ usage to present total liquidations and bad debt that would have accrued in the platform. The Max CF is the highest collateral factor that won’t create bad debt for the platform in case the same scenario repeats today</p>

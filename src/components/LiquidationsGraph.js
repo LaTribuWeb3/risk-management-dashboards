@@ -76,7 +76,7 @@ class LiquidationsGraph extends Component {
             strokeWidth="1"
           />}
           {/* <ReferenceLine y={650000} label="Max" stroke="red" /> */}
-          <XAxis tickCount={55} type="number" dataKey="x" />
+          <XAxis tickCount={55} domain={[0, 'dataMax']} type="number" dataKey="x" />
           <YAxis tick={<WhaleFriendlyAxisTick />}/>
           <Tooltip content={CustomTooltip}/>
           {dataKeys.map((k, i)=> <Area key={i} type="monotone" dataKey={k} stackId="1" stroke={COLORS[i]} fill={COLORS[i]} />)}

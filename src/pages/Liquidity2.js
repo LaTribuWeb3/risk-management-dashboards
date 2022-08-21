@@ -6,29 +6,9 @@ import DataTable from 'react-data-table-component'
 import mainStore from '../stores/main.store'
 import {whaleFriendlyFormater} from '../components/WhaleFriendly'
 import {precentFormatter} from '../utils'
-import BlockExplorerLink from '../components/BlockExplorerLink'
 import Token from '../components/Token'
+import TopAccounts, {usersMinWidth} from '../components/TopAccounts'
 
-const usersMinWidth = '180px'
-
-const Users = row => {
-  const users = row.users.sort((a,b)=> Number(b.size) - Number(a.size))
-  return <div style={{display: 'flex', width: '100%'}}>
-    <details style={{padding: '0', border: 'none', marginBottom: '0', width: usersMinWidth}}>
-      <summary>{precentFormatter(row.top_5)}</summary>
-      <div style={{display: 'flex', flexDirection: 'column', width: usersMinWidth, }}>
-        {users.map(user => {
-          return <div key={user.user} style={{display: 'flex', maxWidth: '100%'}}>
-              <div style={{maxWidth: '40%'}}>
-                <BlockExplorerLink  address={user.user}/>
-              </div>
-              <div >{whaleFriendlyFormater(user.size)}</div>
-            </div>
-        })}
-      </div>
-    </details>
-  </div>
-}
 
 const columns = [
   {
@@ -60,7 +40,7 @@ const columns = [
   {
       name: 'Top 5 LP',
       selector: row => row.top_5,
-      format: row => Users(row),
+      format: row => <TopAccounts row={row} />,
       minWidth: usersMinWidth
   },
   {
@@ -82,7 +62,6 @@ class Liquidity extends Component {
     const rawData = Object.assign({}, mainStore['dex_liquidity_data'] || {})
     const {json_time} = rawData
 
-    debugger
     if(json_time){
       delete rawData.json_time
     }

@@ -11,7 +11,7 @@ class OverviewPieCharts extends Component {
   
   render() {
     const loading = mainStore['accounts_loading']
-    const rawData = mainStore['accounts_data'] || {}
+    const rawData = Object.assign({}, mainStore['accounts_data'] || {})
     const {json_time} = rawData
     if(json_time){
       delete rawData.json_time

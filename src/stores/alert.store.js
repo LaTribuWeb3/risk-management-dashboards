@@ -19,6 +19,7 @@ class AlertStore {
   loading = true
   valueAtRisk = null
   liquidationsAtRisk = null
+  varLarJsonTime = null
   constructor() {
     makeAutoObservable(this)
     this.init()
@@ -27,6 +28,7 @@ class AlertStore {
   init = async () => {
     this.getValueRisk()
     this.getLiquidationsRisk()
+    this.getVarLarJsonTime()
     const alerts = await Promise.all([
       this.getCollateralFactor(),
       this.getOpenLiquidations(),
@@ -37,6 +39,13 @@ class AlertStore {
     runInAction(() => {
       this.alerts = alerts
       this.loading = false
+    })
+  }
+
+  getVarLarJsonTime = async () => {
+    const data = await mainStore['current_simulation_risk_request']
+    runInAction(()=> {
+      this.varLarJsonTime = data.json_time
     })
   }
 
@@ -78,49 +87,29 @@ class AlertStore {
 
   getOpenLiquidations = async () => {
     const alerts = []
-    const columns = [
-      {
-        name: 'User',
-        selector: row => row.user,
-        format: row => <BlockExplorerLink address={row.user}/>,
-        sortable: true,
-      },
-      {
-        name: 'Debt Size',
-        selector: row => whaleFriendlyFormater(row.debt),
-        sortable: true,
-      },
-    ]
+
     const { data: openLiquidations } = mainStore.clean( await mainStore['open_liquidations_request'])
+    let totalLiquidations = 0
     openLiquidations.forEach(ol=> {
-      alerts.push({
-        user: ol.account,
-        debt: ol.user_debt_wo_looping
-      })
+      totalLiquidations += Number(ol.user_debt_wo_looping)
     })
+    let type = 'healthy'
+    if(totalLiquidations > 1000){
+      type = 'review'
+    }
+    if(totalLiquidations > 100000){
+      type = 'danger'
+    }
     return {
       title: 'open liquidations',
       data: alerts,
-      columns
+      type,
+      link: '#open-liquidations'
     }
   }
 
   getOracleAlert = async () => {
     const oracles = mainStore.clean(await mainStore['oracles_request'])
-    const columns = [
-      {
-        name: 'Asset',
-        selector: row => row.asset,
-        format: row => <Token value={row.asset}/>,
-        sortable: true,
-      },
-      {
-        name: 'Deviation',
-        selector: row => row.diff,
-        format: row => <Ramzor red={row.diff >5 || row.diff < -5}> {row.diff.toFixed(2)}%</Ramzor>,
-        sortable: true,
-      }
-    ]
     const alerts = Object.entries(oracles)
       .map(([key, row]) => {
         const diff = Math.max(percentFromDiff(row.oracle, row.cex_price), percentFromDiff(row.oracle, row.dex_price))
@@ -133,43 +122,19 @@ class AlertStore {
         }
       })
       .filter(r => !!r)
-
+      const type = alerts.length ? 'review' : 'healthy'
       return {
           title: 'oracles',
           data: alerts,
-          columns
+          type,
+          link: '#oracle-deviation'
       }
   }
 
   getWhaleAlert = async () => {
     const whales = mainStore.clean(await mainStore['whale_accounts_request'])
     const alerts = []
-    const columns = [
-      {
-        name: 'Asset',
-        selector: row => removeTokenPrefix(row.asset),
-        format: row => <Token value={row.asset}/>,
-        sortable: true,
-      },
-      {
-        name: 'Collateral / Debt',
-        selector: row => row.type,
-        sortable: true,
-      },
-      {
-        name: 'Size',
-        selector: row => row.size,
-        format: row => whaleFriendlyFormater(row.size),
-        sortable: true,
-      },
-      {
-        name: 'Address',
-        selector: row => row.account,
-        format: row => <BlockExplorerLink address={row.account}/>,
-        sortable: true,
-      }
 
-    ]
     Object.entries(whales)
       .map(([key, row]) => {
         row.big_collateral.forEach(({id: account, size})=> {
@@ -189,10 +154,12 @@ class AlertStore {
           })        
         })
       })
+    const type = alerts.length ? 'review' : 'healthy'
     return {
       title: 'whales',
       data: alerts,
-      columns
+      type,
+      link: '#asset-distribution'
     }
   }
 
@@ -281,38 +248,42 @@ class AlertStore {
           })
         }
       })
+
+    const type = alerts.length ? 'review' : 'healthy'
     return {
       title: 'utilization',
       data: alerts,
-      columns
+      columns,
+      type,
+      showTable: true,
     }
   }
 
   getCollateralFactor = async () => {
     const alerts = []
-    const columns = [
-      {
-        name: 'Asset',
-        selector: row => removeTokenPrefix(row.asset),
-        format: row => <Token value={row.asset}/>,
-        sortable: true,
-      },
-      {
-        name: 'Current CF',
-        selector: row => row.currentCF,
-        sortable: true,
-      },
-      {
-        name: 'Recommended CF',
-        selector: row => row.recommendedCF,
-        sortable: true,
-      },
-      {
-        name: 'Based On',
-        selector: row => row.basedOn,
-        sortable: true,
-      }
-    ]
+    // const columns = [
+    //   {
+    //     name: 'Asset',
+    //     selector: row => removeTokenPrefix(row.asset),
+    //     format: row => <Token value={row.asset}/>,
+    //     sortable: true,
+    //   },
+    //   {
+    //     name: 'Current CF',
+    //     selector: row => row.currentCF,
+    //     sortable: true,
+    //   },
+    //   {
+    //     name: 'Recommended CF',
+    //     selector: row => row.recommendedCF,
+    //     sortable: true,
+    //   },
+    //   {
+    //     name: 'Based On',
+    //     selector: row => row.basedOn,
+    //     sortable: true,
+    //   }
+    // ]
     const [currentUtilization, currentCap, simulation] = await riskStore.getRecommendations()
     //getCurrentCollateralFactor
     currentUtilization.forEach(row => {
@@ -351,10 +322,12 @@ class AlertStore {
         })
       }
     })
+    const type = alerts.length ? 'review' : 'success'
     return {
       title: 'collateral factors',
       data: alerts,
-      columns: columns
+      type,
+      link: '#collateral-factors'
     }
   }
 }
