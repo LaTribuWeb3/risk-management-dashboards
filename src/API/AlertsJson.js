@@ -6,7 +6,7 @@ class AlertsJson extends Component {
 
   render() {
     return (<div id="json">
-      {JSON.stringify(alertStore.alerts, null, 2)}
+      {JSON.stringify(alertStore.alerts)}
     </div>)
   }
 }
