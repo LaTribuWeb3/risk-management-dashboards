@@ -14,7 +14,6 @@ class PoolsStore {
 
   init = () => {
     apiEndpoints.forEach(this.fetchData);
-    console.log('poolsStore fired');
   }
 
   clean = data => {

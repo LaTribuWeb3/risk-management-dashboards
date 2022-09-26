@@ -2,7 +2,7 @@ import React from "react"
 import {observer} from "mobx-react"
 import mainStore from "../stores/main.store"
 import poolsStore from "../stores/pools.store"
-
+import { tokenName } from "../utils"
 
 
 
@@ -16,10 +16,9 @@ const Tabnav = (props) => {
   return (
     <div className="tabnav">
       {loading ? <text>loading...</text> : rawData.map((pool, i) => {
-        return <button key={i}>{pool['address']}</button>
+        return <button key={i}>{tokenName(pool['underlying'])}</button>
       })
       }
-
     </div>
   )
 }

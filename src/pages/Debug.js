@@ -8,9 +8,11 @@ import { makeAutoObservable, runInAction } from "mobx"
 
 class Debug extends Component {
     render() {
-        const rawData = Object.assign({}, poolsStore['pools_data'] || {})
+        const rawData = poolsStore['pools_data'];
         return(
+            <div>
         <pre>{JSON.stringify(rawData, null, 2)}</pre>
+        </div>
         )
     }
 }
