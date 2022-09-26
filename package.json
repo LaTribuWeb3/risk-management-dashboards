@@ -32,6 +32,7 @@
     "build-aurigami": "REACT_APP_CONFIG=aurigami && npm run build",
     "build-nervos": "REACT_APP_CONFIG=nervos && npm run build",
     "build-vesta": "REACT_APP_CONFIG=vesta && npm run build",
+    "build-gearbox": "REACT_APP_CONFIG=gearbox && npm run build",
     "test": "react-app-rewired test",
     "eject": "react-app-rewired eject"
   },
