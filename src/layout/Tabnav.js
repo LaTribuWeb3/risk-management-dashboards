@@ -1,6 +1,5 @@
 import React from "react"
 import {observer} from "mobx-react"
-import mainStore from "../stores/main.store"
 import poolsStore from "../stores/pools.store"
 import { tokenName } from "../utils"
 

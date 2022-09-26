@@ -1,7 +1,7 @@
 import { makeAutoObservable } from "mobx"
 import axios from "axios"
 
-const apiEndpoints = ['pools', 'data/tokens?fakeMainnet=0']
+const apiEndpoints = ['data/tokens?fakeMainnet=0', 'pools']
 class PoolsStore {
   constructor () {
     this.init()
@@ -14,14 +14,6 @@ class PoolsStore {
 
   init = () => {
     apiEndpoints.forEach(this.fetchData);
-  }
-
-  clean = data => {
-    const clean = Object.assign({}, data)
-    if(clean.json_time) {
-      delete clean.json_time
-    }
-    return clean
   }
 
   fetchData = (endpoint) => {
