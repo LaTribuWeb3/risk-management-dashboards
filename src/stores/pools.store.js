@@ -1,10 +1,7 @@
 import { makeAutoObservable } from "mobx"
 import axios from "axios"
 
-const platformId = window.APP_CONFIG.PLATFORM_ID
-const apiEndpoints = ['pools']
-
-
+const apiEndpoints = ['pools', 'data/tokens?fakeMainnet=0']
 class PoolsStore {
   constructor () {
     this.init()
@@ -16,7 +13,8 @@ class PoolsStore {
   apiData = {}
 
   init = () => {
-    apiEndpoints.forEach(this.fetchData)
+    apiEndpoints.forEach(this.fetchData);
+    console.log('poolsStore fired');
   }
 
   clean = data => {
@@ -30,7 +28,7 @@ class PoolsStore {
   fetchData = (endpoint) => {
     this[endpoint + '_loading'] = true
     this[endpoint + '_data'] = null
-    this[endpoint + '_request'] = axios.get(`${this.apiUrl}/${endpoint}/${platformId}`)
+    this[endpoint + '_request'] = axios.get(`${this.apiUrl}/${endpoint}/`)
     .then(({data})=> {
       this[endpoint + '_loading'] = false
       this[endpoint + '_data'] = data
