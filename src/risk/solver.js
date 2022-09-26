@@ -66,10 +66,6 @@ export default class Solver {
           if(! this.parsedData[long]) this.parsedData[long] = {}
           this.parsedData[long][short] = Object.assign({}, perPairResult)
       }
-
-      console.log(JSON.stringify(this.parsedData, null, 2))
-      console.log("supply caps", this.supplyCaps)
-      console.log("borrow caps", this.borrowCaps)      
   }
 
   mergeArrays(arr1, arr2) {
