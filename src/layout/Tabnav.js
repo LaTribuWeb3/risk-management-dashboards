@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import {observer} from "mobx-react"
 import poolsStore from "../stores/pools.store"
 import { tokenName } from "../utils"
@@ -6,7 +6,7 @@ import { tokenName } from "../utils"
 
 
 const Tabnav = (props) => {
-  const loading = poolsStore['pools_loading'];
+  const loading = poolsStore['pools_loading'] || poolsStore['data/tokens?fakeMainnet=0_loading'];
   const rawData = poolsStore['pools_data'];
   
 
