@@ -9,7 +9,8 @@ import Simulation from "./Simulation";
 import Alerts from './Alerts';
 import OpenLiquidations from "./OpenLiquidations";
 import ScrollSpy from "react-ui-scrollspy";
-import mainStore from '../stores/main.store'
+import mainStore from '../stores/main.store';
+import Debug from './Debug';
 
 class SinglePage extends Component {
   render (){
@@ -87,6 +88,7 @@ class SinglePage extends Component {
             <Liquidity/>
           </div>}
         </section>
+        <Debug />
       </ScrollSpy>
     )
   }
