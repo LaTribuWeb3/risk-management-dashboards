@@ -19,11 +19,10 @@ export const precentFormatter = (num) => {
 }
 
 
-
-const tokenData = Object.assign({}, poolsStore['data/tokens?fakeMainnet=0_data'] || {});
+const tokenData = Object.assign([], poolsStore['data/tokens?fakeMainnet=0_data'] || []);
 export const tokenName = (address) => {
   for (const token in tokenData) {
-    if (tokenData[token].address == address) {
+    if (tokenData[token].address.toLowerCase() === address.toLowerCase()) {
       return tokenData[token].symbol;
     }
   }
