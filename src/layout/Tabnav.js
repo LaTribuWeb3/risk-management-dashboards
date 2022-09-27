@@ -3,6 +3,7 @@ import {observer} from "mobx-react"
 import poolsStore from "../stores/pools.store"
 import alertStore from '../stores/alert.store'
 import mainStore from "../stores/main.store"
+import dummy from './dummy_api.json'
 
 // const Tabnav = (props) => {
 class Tabnav extends Component {
@@ -16,7 +17,11 @@ class Tabnav extends Component {
       const poolAddress = event.target.selectedOptions[0].value;
       alertStore.valueAtRisk = poolAddress;
 
-      // mainStore['account_data'] = poolsStore['pool_data']['0x7407180AE470113761d3EC99Aa973cf8Bd127c68'];
+      const dummyForPool = dummy[poolAddress];
+      console.log(dummyForPool);
+      console.log('aaaaaaaaaaaaa', mainStore['accounts_data']);
+      mainStore['accounts_data'] = dummyForPool;
+      console.log('bbbbbbbbbbbbbbb', mainStore['accounts_data']);
 
       if(selectedLabel.includes('DAI')) {
         alertStore.liquidationsAtRisk = 100;
