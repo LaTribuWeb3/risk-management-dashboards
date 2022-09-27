@@ -1,0 +1,1957 @@
+{
+    "0x7407180AE470113761d3EC99Aa973cf8Bd127c68": {
+        "auETH": {
+            "big_collateral": [
+                {
+                    "id": "0x0F77bd45Ac65A7C87bf07F1e8c2b08C5717A9728",
+                    "size": 408178.0008997337,
+                    "whale_flag": 1
+                },
+                {
+                    "id": "0xe55eD2c7734ebB3E7e9Ddaae18B1Ee592a6C8A7B",
+                    "size": 174056.5246573525,
+                    "whale_flag": 1
+                },
+                {
+                    "id": "0x26847c398EeeBd6f47639169dA5792867a34B532",
+                    "size": 159261.15541105293,
+                    "whale_flag": 1
+                },
+                {
+                    "id": "0xda336c3a95e37dEdb162Df281A2706D4F663C0f7",
+                    "size": 103247.80698552517,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x4b0d342812b6D104a126D266037768cdbBcD86f2",
+                    "size": 56371.84467172783,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x6b542bd3fEC146cC2187C8EA78db54743461FC3D",
+                    "size": 39512.936655840596,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xf592c858eB93fF948C5a5A589a7B4FE6acbdBD83",
+                    "size": 35966.59574273828,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x2cfa2FECDA2B3BCF7e26D92b432A24C9DfD239cb",
+                    "size": 32297.06030742861,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x686D78620aa846b1bDb29DEDaf94e2AB47208A04",
+                    "size": 26838.614192539735,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xc9f04a539087c89B8A24729869738220E08B5e2D",
+                    "size": 21537.140993123954,
+                    "whale_flag": 0
+                }
+            ],
+            "big_debt": [
+                {
+                    "id": "0x0F77bd45Ac65A7C87bf07F1e8c2b08C5717A9728",
+                    "size": 358036.62389771536,
+                    "whale_flag": 1
+                },
+                {
+                    "id": "0xe55eD2c7734ebB3E7e9Ddaae18B1Ee592a6C8A7B",
+                    "size": 177109.1899141369,
+                    "whale_flag": 1
+                },
+                {
+                    "id": "0x26847c398EeeBd6f47639169dA5792867a34B532",
+                    "size": 84862.38188101156,
+                    "whale_flag": 1
+                },
+                {
+                    "id": "0x2B8cD75D3E679531918FEeBb9f095a17c982baCa",
+                    "size": 12548.635339155968,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x1B52AE6662bD445aa77CCC61596b7B6fe3d9be1B",
+                    "size": 5989.07048102914,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xB7Bd98d7e660A73bb1851d8B89e2DdA3a8CDF208",
+                    "size": 5257.141992807384,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xb87ed741EdCdEB0dB4C1F4Fbb663b8f3345A4CF6",
+                    "size": 4346.952374245503,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xc022d3d173F04C9759756f8BbF5FF58654CA67a7",
+                    "size": 3777.437992047594,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x68182A96A56eFd1F42e87317c034bdEb9445CD97",
+                    "size": 2514.0812227159804,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xB032c6B6c084b9a1863930241FbA76a9F2204705",
+                    "size": 2212.24125325204,
+                    "whale_flag": 0
+                }
+            ],
+            "total_collateral": "1327955.087406932",
+            "total_debt": "672133.6095198666"
+        },
+        "auSTNEAR": {
+            "big_collateral": [
+                {
+                    "id": "0xFB505Aa37508B641CE4D8f066867Db3B3F66185D",
+                    "size": 846851.5015400308,
+                    "whale_flag": 1
+                },
+                {
+                    "id": "0xab5687826469a1916eB9E1470c06b0DCF21581F2",
+                    "size": 112156.82220648818,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x24CF63D40519D09Ef7826885d1A33F80c64cA9a8",
+                    "size": 93650.04098152585,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x6E415FC6934a7c95F1d75c27E96ea49A0662A61b",
+                    "size": 70073.60410244997,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xA76dbA1c076E47b5f94523AeE8aF9a69952A74d2",
+                    "size": 38150.13092562484,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x610322AeF748238C52E920a15Dd9A8845C9c0318",
+                    "size": 37724.45009934273,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x00326E37CEf76788F6b0cF643c94481D60BD3D58",
+                    "size": 30653.419966403148,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x9956bd7BA47Ba3F3E4e6F8C9D6060F6ED72c3d4B",
+                    "size": 29464.266672680955,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x373F080C8c4A84f9B9578d0Bd860B8b3506b536f",
+                    "size": 29258.25077493138,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xEB20033b26d6540F7c421f8296CceADbE489F6A2",
+                    "size": 27375.00882864593,
+                    "whale_flag": 0
+                }
+            ],
+            "big_debt": [
+                {
+                    "id": "0x25A087dC3512e3BE548F0cA13233ae29d3781bdC",
+                    "size": 0,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x815918dBa307E25802dC984cf157A3cADE4b8e61",
+                    "size": 0,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x85Ff34cCDD3cB36A4553D57009371be35eb72870",
+                    "size": 0,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xEF46b09B69647412c129EbD8739Bdf0F0C10dCcd",
+                    "size": 0,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xdf137F34e8593701a7149d96EA4d12DCb1fa8c14",
+                    "size": 0,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xe29f5ad2A33c76CCACa2d2e3226fF80085cE4573",
+                    "size": 0,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x4D0cf84B27Df1D7aB3Bd33A1371c99eA7b58a261",
+                    "size": 0,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xd5474294994976bD11187bBef1ed7FaD7AcD3a49",
+                    "size": 0,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x10bf1Dcb5ab7860baB1C3320163C6dddf8DCC0e4",
+                    "size": 0,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x170B6EE0387762Acb551310e817FEbe5F98157BD",
+                    "size": 0,
+                    "whale_flag": 0
+                }
+            ],
+            "total_collateral": "1587227.9647712836",
+            "total_debt": "0.0"
+        },
+        "auUSDC": {
+            "big_collateral": [
+                {
+                    "id": "0xa0f2E2F7B3Ab58e3E52b74f08d94AE52778d46df",
+                    "size": 2011648.4539246196,
+                    "whale_flag": 1
+                },
+                {
+                    "id": "0x4e65175f05B4140a0747c29cce997CD4BB7190d4",
+                    "size": 1341004.4060183251,
+                    "whale_flag": 1
+                },
+                {
+                    "id": "0x0F77bd45Ac65A7C87bf07F1e8c2b08C5717A9728",
+                    "size": 756655.0577874872,
+                    "whale_flag": 1
+                },
+                {
+                    "id": "0xA208611EE627B0564Bc4B664e223DDb7Fd6dFCe0",
+                    "size": 544320.0966908416,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xfF3fc772434505ABff38EEcDe3C689D4b0254528",
+                    "size": 174331.17216600987,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xAe4C7F2B914b7DfCD5E1d22D30b4325910aA709E",
+                    "size": 173999.90644681526,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xda336c3a95e37dEdb162Df281A2706D4F663C0f7",
+                    "size": 136549.6484491132,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xe55eD2c7734ebB3E7e9Ddaae18B1Ee592a6C8A7B",
+                    "size": 111880.82951209023,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xf5641315BfACFE268996707fEdabDfea899Df2eb",
+                    "size": 101047.75598525388,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xc32F4DAF699a665bec2E56496c39685af1FA7f5E",
+                    "size": 80533.16889549073,
+                    "whale_flag": 0
+                }
+            ],
+            "big_debt": [
+                {
+                    "id": "0xa0f2E2F7B3Ab58e3E52b74f08d94AE52778d46df",
+                    "size": 1586875.7839048347,
+                    "whale_flag": 1
+                },
+                {
+                    "id": "0x4e65175f05B4140a0747c29cce997CD4BB7190d4",
+                    "size": 978928.1395406662,
+                    "whale_flag": 1
+                },
+                {
+                    "id": "0x0F77bd45Ac65A7C87bf07F1e8c2b08C5717A9728",
+                    "size": 319640.37155202456,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xe55eD2c7734ebB3E7e9Ddaae18B1Ee592a6C8A7B",
+                    "size": 237478.510977071,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xda336c3a95e37dEdb162Df281A2706D4F663C0f7",
+                    "size": 137236.82456834006,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xBe3d3C05f01DDAeF13000ec0324a3D732A382fEE",
+                    "size": 85461.41116391544,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xf5641315BfACFE268996707fEdabDfea899Df2eb",
+                    "size": 80157.80498005323,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x02b79dF8c38f29f39888557c0A89917Fd99ddF77",
+                    "size": 77943.15362436764,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xBEa645Da9c7f6De1f7E287759CcBFd5ab9f57C08",
+                    "size": 33117.79374697444,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xa659AA95Ca03e03a3384d9FdE450EB183dA98e88",
+                    "size": 30520.380712668633,
+                    "whale_flag": 0
+                }
+            ],
+            "total_collateral": "6468797.684783069",
+            "total_debt": "4086517.8634614693"
+        },
+        "auUSDT": {
+            "big_collateral": [
+                {
+                    "id": "0xAe4C7F2B914b7DfCD5E1d22D30b4325910aA709E",
+                    "size": 174876.101268,
+                    "whale_flag": 1
+                },
+                {
+                    "id": "0xBe3d3C05f01DDAeF13000ec0324a3D732A382fEE",
+                    "size": 128079.695805,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xe55eD2c7734ebB3E7e9Ddaae18B1Ee592a6C8A7B",
+                    "size": 111519.780401,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x4Deb56a42fc63650B2F0bFb9AbE1850e3a091371",
+                    "size": 111512.412492,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x86063C3980d0c0b6888697A33C52c041bAAdA70F",
+                    "size": 110218.917443,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xbBbcb69342b76E84762e46C96a61Fb4c8989dC1D",
+                    "size": 100889.330349,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x0F77bd45Ac65A7C87bf07F1e8c2b08C5717A9728",
+                    "size": 99573.706985,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x69Ce25d4732c4e7d2d352A775Dad9475514B71d5",
+                    "size": 98544.671343,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x5f5Dafbd7e961dA20C2de547E0265072A0f9f906",
+                    "size": 69637.611595,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xA76dbA1c076E47b5f94523AeE8aF9a69952A74d2",
+                    "size": 57594.907657,
+                    "whale_flag": 0
+                }
+            ],
+            "big_debt": [
+                {
+                    "id": "0xe55eD2c7734ebB3E7e9Ddaae18B1Ee592a6C8A7B",
+                    "size": 136605.469714,
+                    "whale_flag": 1
+                },
+                {
+                    "id": "0x4Deb56a42fc63650B2F0bFb9AbE1850e3a091371",
+                    "size": 83205.587748,
+                    "whale_flag": 1
+                },
+                {
+                    "id": "0x69Ce25d4732c4e7d2d352A775Dad9475514B71d5",
+                    "size": 68289.674767,
+                    "whale_flag": 1
+                },
+                {
+                    "id": "0x4b0d342812b6D104a126D266037768cdbBcD86f2",
+                    "size": 50914.171854,
+                    "whale_flag": 1
+                },
+                {
+                    "id": "0x5f5Dafbd7e961dA20C2de547E0265072A0f9f906",
+                    "size": 33569.614645,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x4c55e9808c46865B41eB873b86F2711F55Dbf4AE",
+                    "size": 23603.481634,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xc97888f8c9e43BF695E892F4f2bfff303A6dFd22",
+                    "size": 14718.697628,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xe7DDD3aaCE7c18566Aba0778247062966d6B3d1b",
+                    "size": 10065.979515,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xE6fa01F59b9A7378C947cf717e8d833fDdc9C11B",
+                    "size": 8558.369346,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x87edb4a99d71a4D6B7daE61902bcCA8f7cb65945",
+                    "size": 5888.333668,
+                    "whale_flag": 0
+                }
+            ],
+            "total_collateral": "1705372.1724639998",
+            "total_debt": "488874.515443"
+        },
+        "auWBTC": {
+            "big_collateral": [
+                {
+                    "id": "0xe55eD2c7734ebB3E7e9Ddaae18B1Ee592a6C8A7B",
+                    "size": 822772.7883462695,
+                    "whale_flag": 1
+                },
+                {
+                    "id": "0x02b79dF8c38f29f39888557c0A89917Fd99ddF77",
+                    "size": 206393.9910762282,
+                    "whale_flag": 1
+                },
+                {
+                    "id": "0x8f16dC9db0a34733Fd87Eb497F71f568AF18bbCf",
+                    "size": 98825.69441802181,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xbBbcb69342b76E84762e46C96a61Fb4c8989dC1D",
+                    "size": 96507.13370016181,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xB9Eb8c1a688Cb64D0f8315b8ED885E4064352334",
+                    "size": 54840.7747037098,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xd92Fdb169Bf65654bC88383fD142a66Dd456cf63",
+                    "size": 24727.572882056003,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x0fb020a741Fd45503C01BbE2353B9690508828Fd",
+                    "size": 20177.9418357494,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xff2469082cc5BF7e626fbfa9c25F467411d84cc2",
+                    "size": 19596.5386843062,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x70922272023357e07D7152656b13129C1A01a100",
+                    "size": 17919.583566702,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xEEf1B2fA1743E9215E1d8881d52B886618453C5e",
+                    "size": 15074.754490078401,
+                    "whale_flag": 0
+                }
+            ],
+            "big_debt": [
+                {
+                    "id": "0xe55eD2c7734ebB3E7e9Ddaae18B1Ee592a6C8A7B",
+                    "size": 317828.0761824732,
+                    "whale_flag": 1
+                },
+                {
+                    "id": "0xB9Eb8c1a688Cb64D0f8315b8ED885E4064352334",
+                    "size": 16592.736360891002,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xEB20033b26d6540F7c421f8296CceADbE489F6A2",
+                    "size": 6115.922267464201,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x915719D987f0726AC3A9Fa339B03C37374483F98",
+                    "size": 1079.0973049434,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x3f191D416EDDaAc38960EBD32db905dc5dE275B2",
+                    "size": 1076.5247756182002,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x66E4115772b0dDBa2D85975F5F83BaBeB8f4AFe6",
+                    "size": 384.50939342860005,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xB4765Bee75A0fa0a2f66Bf68CE1796c55854c154",
+                    "size": 273.7095143956,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x0fb020a741Fd45503C01BbE2353B9690508828Fd",
+                    "size": 203.66753464900003,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xAbD4c34Cc6BB50f49B633Ed82eA9a3bb44CBBCEC",
+                    "size": 95.32014381620002,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x4FfD0A59a26cB2Aa76D403215e4cC2845C053994",
+                    "size": 78.630778191,
+                    "whale_flag": 0
+                }
+            ],
+            "total_collateral": "1438246.2223910864",
+            "total_debt": "344145.80503753433"
+        },
+        "auWNEAR": {
+            "big_collateral": [
+                {
+                    "id": "0xe55eD2c7734ebB3E7e9Ddaae18B1Ee592a6C8A7B",
+                    "size": 529051.7462537395,
+                    "whale_flag": 1
+                },
+                {
+                    "id": "0xa659AA95Ca03e03a3384d9FdE450EB183dA98e88",
+                    "size": 65306.01613789222,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x0F77bd45Ac65A7C87bf07F1e8c2b08C5717A9728",
+                    "size": 60395.06058933914,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x4e65175f05B4140a0747c29cce997CD4BB7190d4",
+                    "size": 46901.293128794154,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xf20e28F405e0Fee9504a8dC3DD2c1B6baAE2E66F",
+                    "size": 26017.560357286937,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x5b82D74307d75Fde3A5Da2cdfEB60ED60430f2A8",
+                    "size": 20187.180094412033,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x8C39b7cB82B9D791ADCc9387098944B635C17B32",
+                    "size": 13322.706991498968,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x27D93B6F9347cf7679413a9A9261588eA57881f7",
+                    "size": 11456.452023390857,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x69C12E388C841fC939eeF61544EfC92A96efa221",
+                    "size": 10313.697235398084,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xE17c0dDae38FF804d973a2B065ff2Fa1Ff788B1D",
+                    "size": 9440.465945596856,
+                    "whale_flag": 0
+                }
+            ],
+            "big_debt": [
+                {
+                    "id": "0xFB505Aa37508B641CE4D8f066867Db3B3F66185D",
+                    "size": 273295.7349640486,
+                    "whale_flag": 1
+                },
+                {
+                    "id": "0xe55eD2c7734ebB3E7e9Ddaae18B1Ee592a6C8A7B",
+                    "size": 200224.41229745335,
+                    "whale_flag": 1
+                },
+                {
+                    "id": "0x557364BA5DF09db866cB81578D14a91698296f7C",
+                    "size": 26171.406520049775,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x6CED59A8D2dA7bdf3E6c2920F632421A8f3c34D1",
+                    "size": 18119.196439277563,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x4c422130f5327FC051b9e86D7B70dec962c69874",
+                    "size": 16688.97781295376,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x1E1d607efDF48E28929b118cC3d1DD733C264740",
+                    "size": 10710.596617591003,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x9956bd7BA47Ba3F3E4e6F8C9D6060F6ED72c3d4B",
+                    "size": 8295.24138362115,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xA76dbA1c076E47b5f94523AeE8aF9a69952A74d2",
+                    "size": 7580.620471026477,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x69C12E388C841fC939eeF61544EfC92A96efa221",
+                    "size": 6873.801999617105,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x9e3A2e6dc6d5b795b10537e65Db75FB904d88A82",
+                    "size": 5916.591336565897,
+                    "whale_flag": 0
+                }
+            ],
+            "total_collateral": "1023817.2849455895",
+            "total_debt": "627271.7172976378"
+        },
+        "json_time": 1664218804.948152
+    },
+    
+    "0xe498cfF18B4854F30EbAD56beea8d0Abaf40a244": {
+        "auETH": {
+            "big_collateral": [
+                {
+                    "id": "0x0F77bd45Ac65A7C87bf07F1e8c2b08C5717A9728",
+                    "size": 408178.0008997337,
+                    "whale_flag": 1
+                },
+                {
+                    "id": "0xe55eD2c7734ebB3E7e9Ddaae18B1Ee592a6C8A7B",
+                    "size": 174056.5246573525,
+                    "whale_flag": 1
+                },
+                {
+                    "id": "0x26847c398EeeBd6f47639169dA5792867a34B532",
+                    "size": 159261.15541105293,
+                    "whale_flag": 1
+                },
+                {
+                    "id": "0xda336c3a95e37dEdb162Df281A2706D4F663C0f7",
+                    "size": 103247.80698552517,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x4b0d342812b6D104a126D266037768cdbBcD86f2",
+                    "size": 56371.84467172783,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x6b542bd3fEC146cC2187C8EA78db54743461FC3D",
+                    "size": 39512.936655840596,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xf592c858eB93fF948C5a5A589a7B4FE6acbdBD83",
+                    "size": 35966.59574273828,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x2cfa2FECDA2B3BCF7e26D92b432A24C9DfD239cb",
+                    "size": 32297.06030742861,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x686D78620aa846b1bDb29DEDaf94e2AB47208A04",
+                    "size": 26838.614192539735,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xc9f04a539087c89B8A24729869738220E08B5e2D",
+                    "size": 21537.140993123954,
+                    "whale_flag": 0
+                }
+            ],
+            "big_debt": [
+                {
+                    "id": "0x0F77bd45Ac65A7C87bf07F1e8c2b08C5717A9728",
+                    "size": 358036.62389771536,
+                    "whale_flag": 1
+                },
+                {
+                    "id": "0xe55eD2c7734ebB3E7e9Ddaae18B1Ee592a6C8A7B",
+                    "size": 177109.1899141369,
+                    "whale_flag": 1
+                },
+                {
+                    "id": "0x26847c398EeeBd6f47639169dA5792867a34B532",
+                    "size": 84862.38188101156,
+                    "whale_flag": 1
+                },
+                {
+                    "id": "0x2B8cD75D3E679531918FEeBb9f095a17c982baCa",
+                    "size": 12548.635339155968,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x1B52AE6662bD445aa77CCC61596b7B6fe3d9be1B",
+                    "size": 5989.07048102914,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xB7Bd98d7e660A73bb1851d8B89e2DdA3a8CDF208",
+                    "size": 5257.141992807384,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xb87ed741EdCdEB0dB4C1F4Fbb663b8f3345A4CF6",
+                    "size": 4346.952374245503,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xc022d3d173F04C9759756f8BbF5FF58654CA67a7",
+                    "size": 3777.437992047594,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x68182A96A56eFd1F42e87317c034bdEb9445CD97",
+                    "size": 2514.0812227159804,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xB032c6B6c084b9a1863930241FbA76a9F2204705",
+                    "size": 2212.24125325204,
+                    "whale_flag": 0
+                }
+            ],
+            "total_collateral": "1327955.087406932",
+            "total_debt": "672133.6095198666"
+        },
+        "auSTNEAR": {
+            "big_collateral": [
+                {
+                    "id": "0xFB505Aa37508B641CE4D8f066867Db3B3F66185D",
+                    "size": 846851.5015400308,
+                    "whale_flag": 1
+                },
+                {
+                    "id": "0xab5687826469a1916eB9E1470c06b0DCF21581F2",
+                    "size": 112156.82220648818,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x24CF63D40519D09Ef7826885d1A33F80c64cA9a8",
+                    "size": 93650.04098152585,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x6E415FC6934a7c95F1d75c27E96ea49A0662A61b",
+                    "size": 70073.60410244997,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xA76dbA1c076E47b5f94523AeE8aF9a69952A74d2",
+                    "size": 38150.13092562484,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x610322AeF748238C52E920a15Dd9A8845C9c0318",
+                    "size": 37724.45009934273,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x00326E37CEf76788F6b0cF643c94481D60BD3D58",
+                    "size": 30653.419966403148,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x9956bd7BA47Ba3F3E4e6F8C9D6060F6ED72c3d4B",
+                    "size": 29464.266672680955,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x373F080C8c4A84f9B9578d0Bd860B8b3506b536f",
+                    "size": 29258.25077493138,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xEB20033b26d6540F7c421f8296CceADbE489F6A2",
+                    "size": 27375.00882864593,
+                    "whale_flag": 0
+                }
+            ],
+            "big_debt": [
+                {
+                    "id": "0x25A087dC3512e3BE548F0cA13233ae29d3781bdC",
+                    "size": 0,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x815918dBa307E25802dC984cf157A3cADE4b8e61",
+                    "size": 0,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x85Ff34cCDD3cB36A4553D57009371be35eb72870",
+                    "size": 0,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xEF46b09B69647412c129EbD8739Bdf0F0C10dCcd",
+                    "size": 0,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xdf137F34e8593701a7149d96EA4d12DCb1fa8c14",
+                    "size": 0,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xe29f5ad2A33c76CCACa2d2e3226fF80085cE4573",
+                    "size": 0,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x4D0cf84B27Df1D7aB3Bd33A1371c99eA7b58a261",
+                    "size": 0,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xd5474294994976bD11187bBef1ed7FaD7AcD3a49",
+                    "size": 0,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x10bf1Dcb5ab7860baB1C3320163C6dddf8DCC0e4",
+                    "size": 0,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x170B6EE0387762Acb551310e817FEbe5F98157BD",
+                    "size": 0,
+                    "whale_flag": 0
+                }
+            ],
+            "total_collateral": "1587227.9647712836",
+            "total_debt": "0.0"
+        },
+        "auUSDC": {
+            "big_collateral": [
+                {
+                    "id": "0xa0f2E2F7B3Ab58e3E52b74f08d94AE52778d46df",
+                    "size": 2011648.4539246196,
+                    "whale_flag": 1
+                },
+                {
+                    "id": "0x4e65175f05B4140a0747c29cce997CD4BB7190d4",
+                    "size": 1341004.4060183251,
+                    "whale_flag": 1
+                },
+                {
+                    "id": "0x0F77bd45Ac65A7C87bf07F1e8c2b08C5717A9728",
+                    "size": 756655.0577874872,
+                    "whale_flag": 1
+                },
+                {
+                    "id": "0xA208611EE627B0564Bc4B664e223DDb7Fd6dFCe0",
+                    "size": 544320.0966908416,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xfF3fc772434505ABff38EEcDe3C689D4b0254528",
+                    "size": 174331.17216600987,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xAe4C7F2B914b7DfCD5E1d22D30b4325910aA709E",
+                    "size": 173999.90644681526,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xda336c3a95e37dEdb162Df281A2706D4F663C0f7",
+                    "size": 136549.6484491132,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xe55eD2c7734ebB3E7e9Ddaae18B1Ee592a6C8A7B",
+                    "size": 111880.82951209023,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xf5641315BfACFE268996707fEdabDfea899Df2eb",
+                    "size": 101047.75598525388,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xc32F4DAF699a665bec2E56496c39685af1FA7f5E",
+                    "size": 80533.16889549073,
+                    "whale_flag": 0
+                }
+            ],
+            "big_debt": [
+                {
+                    "id": "0xa0f2E2F7B3Ab58e3E52b74f08d94AE52778d46df",
+                    "size": 1586875.7839048347,
+                    "whale_flag": 1
+                },
+                {
+                    "id": "0x4e65175f05B4140a0747c29cce997CD4BB7190d4",
+                    "size": 978928.1395406662,
+                    "whale_flag": 1
+                },
+                {
+                    "id": "0x0F77bd45Ac65A7C87bf07F1e8c2b08C5717A9728",
+                    "size": 319640.37155202456,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xe55eD2c7734ebB3E7e9Ddaae18B1Ee592a6C8A7B",
+                    "size": 237478.510977071,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xda336c3a95e37dEdb162Df281A2706D4F663C0f7",
+                    "size": 137236.82456834006,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xBe3d3C05f01DDAeF13000ec0324a3D732A382fEE",
+                    "size": 85461.41116391544,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xf5641315BfACFE268996707fEdabDfea899Df2eb",
+                    "size": 80157.80498005323,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x02b79dF8c38f29f39888557c0A89917Fd99ddF77",
+                    "size": 77943.15362436764,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xBEa645Da9c7f6De1f7E287759CcBFd5ab9f57C08",
+                    "size": 33117.79374697444,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xa659AA95Ca03e03a3384d9FdE450EB183dA98e88",
+                    "size": 30520.380712668633,
+                    "whale_flag": 0
+                }
+            ],
+            "total_collateral": "6468797.684783069",
+            "total_debt": "4086517.8634614693"
+        },
+        "auUSDT": {
+            "big_collateral": [
+                {
+                    "id": "0xAe4C7F2B914b7DfCD5E1d22D30b4325910aA709E",
+                    "size": 174876.101268,
+                    "whale_flag": 1
+                },
+                {
+                    "id": "0xBe3d3C05f01DDAeF13000ec0324a3D732A382fEE",
+                    "size": 128079.695805,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xe55eD2c7734ebB3E7e9Ddaae18B1Ee592a6C8A7B",
+                    "size": 111519.780401,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x4Deb56a42fc63650B2F0bFb9AbE1850e3a091371",
+                    "size": 111512.412492,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x86063C3980d0c0b6888697A33C52c041bAAdA70F",
+                    "size": 110218.917443,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xbBbcb69342b76E84762e46C96a61Fb4c8989dC1D",
+                    "size": 100889.330349,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x0F77bd45Ac65A7C87bf07F1e8c2b08C5717A9728",
+                    "size": 99573.706985,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x69Ce25d4732c4e7d2d352A775Dad9475514B71d5",
+                    "size": 98544.671343,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x5f5Dafbd7e961dA20C2de547E0265072A0f9f906",
+                    "size": 69637.611595,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xA76dbA1c076E47b5f94523AeE8aF9a69952A74d2",
+                    "size": 57594.907657,
+                    "whale_flag": 0
+                }
+            ],
+            "big_debt": [
+                {
+                    "id": "0xe55eD2c7734ebB3E7e9Ddaae18B1Ee592a6C8A7B",
+                    "size": 136605.469714,
+                    "whale_flag": 1
+                },
+                {
+                    "id": "0x4Deb56a42fc63650B2F0bFb9AbE1850e3a091371",
+                    "size": 83205.587748,
+                    "whale_flag": 1
+                },
+                {
+                    "id": "0x69Ce25d4732c4e7d2d352A775Dad9475514B71d5",
+                    "size": 68289.674767,
+                    "whale_flag": 1
+                },
+                {
+                    "id": "0x4b0d342812b6D104a126D266037768cdbBcD86f2",
+                    "size": 50914.171854,
+                    "whale_flag": 1
+                },
+                {
+                    "id": "0x5f5Dafbd7e961dA20C2de547E0265072A0f9f906",
+                    "size": 33569.614645,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x4c55e9808c46865B41eB873b86F2711F55Dbf4AE",
+                    "size": 23603.481634,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xc97888f8c9e43BF695E892F4f2bfff303A6dFd22",
+                    "size": 14718.697628,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xe7DDD3aaCE7c18566Aba0778247062966d6B3d1b",
+                    "size": 10065.979515,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xE6fa01F59b9A7378C947cf717e8d833fDdc9C11B",
+                    "size": 8558.369346,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x87edb4a99d71a4D6B7daE61902bcCA8f7cb65945",
+                    "size": 5888.333668,
+                    "whale_flag": 0
+                }
+            ],
+            "total_collateral": "1705372.1724639998",
+            "total_debt": "488874.515443"
+        },
+        "auWBTC": {
+            "big_collateral": [
+                {
+                    "id": "0xe55eD2c7734ebB3E7e9Ddaae18B1Ee592a6C8A7B",
+                    "size": 822772.7883462695,
+                    "whale_flag": 1
+                },
+                {
+                    "id": "0x02b79dF8c38f29f39888557c0A89917Fd99ddF77",
+                    "size": 206393.9910762282,
+                    "whale_flag": 1
+                },
+                {
+                    "id": "0x8f16dC9db0a34733Fd87Eb497F71f568AF18bbCf",
+                    "size": 98825.69441802181,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xbBbcb69342b76E84762e46C96a61Fb4c8989dC1D",
+                    "size": 96507.13370016181,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xB9Eb8c1a688Cb64D0f8315b8ED885E4064352334",
+                    "size": 54840.7747037098,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xd92Fdb169Bf65654bC88383fD142a66Dd456cf63",
+                    "size": 24727.572882056003,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x0fb020a741Fd45503C01BbE2353B9690508828Fd",
+                    "size": 20177.9418357494,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xff2469082cc5BF7e626fbfa9c25F467411d84cc2",
+                    "size": 19596.5386843062,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x70922272023357e07D7152656b13129C1A01a100",
+                    "size": 17919.583566702,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xEEf1B2fA1743E9215E1d8881d52B886618453C5e",
+                    "size": 15074.754490078401,
+                    "whale_flag": 0
+                }
+            ],
+            "big_debt": [
+                {
+                    "id": "0xe55eD2c7734ebB3E7e9Ddaae18B1Ee592a6C8A7B",
+                    "size": 317828.0761824732,
+                    "whale_flag": 1
+                },
+                {
+                    "id": "0xB9Eb8c1a688Cb64D0f8315b8ED885E4064352334",
+                    "size": 16592.736360891002,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xEB20033b26d6540F7c421f8296CceADbE489F6A2",
+                    "size": 6115.922267464201,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x915719D987f0726AC3A9Fa339B03C37374483F98",
+                    "size": 1079.0973049434,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x3f191D416EDDaAc38960EBD32db905dc5dE275B2",
+                    "size": 1076.5247756182002,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x66E4115772b0dDBa2D85975F5F83BaBeB8f4AFe6",
+                    "size": 384.50939342860005,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xB4765Bee75A0fa0a2f66Bf68CE1796c55854c154",
+                    "size": 273.7095143956,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x0fb020a741Fd45503C01BbE2353B9690508828Fd",
+                    "size": 203.66753464900003,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xAbD4c34Cc6BB50f49B633Ed82eA9a3bb44CBBCEC",
+                    "size": 95.32014381620002,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x4FfD0A59a26cB2Aa76D403215e4cC2845C053994",
+                    "size": 78.630778191,
+                    "whale_flag": 0
+                }
+            ],
+            "total_collateral": "1438246.2223910864",
+            "total_debt": "344145.80503753433"
+        },
+        "auWNEAR": {
+            "big_collateral": [
+                {
+                    "id": "0xe55eD2c7734ebB3E7e9Ddaae18B1Ee592a6C8A7B",
+                    "size": 529051.7462537395,
+                    "whale_flag": 1
+                },
+                {
+                    "id": "0xa659AA95Ca03e03a3384d9FdE450EB183dA98e88",
+                    "size": 65306.01613789222,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x0F77bd45Ac65A7C87bf07F1e8c2b08C5717A9728",
+                    "size": 60395.06058933914,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x4e65175f05B4140a0747c29cce997CD4BB7190d4",
+                    "size": 46901.293128794154,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xf20e28F405e0Fee9504a8dC3DD2c1B6baAE2E66F",
+                    "size": 26017.560357286937,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x5b82D74307d75Fde3A5Da2cdfEB60ED60430f2A8",
+                    "size": 20187.180094412033,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x8C39b7cB82B9D791ADCc9387098944B635C17B32",
+                    "size": 13322.706991498968,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x27D93B6F9347cf7679413a9A9261588eA57881f7",
+                    "size": 11456.452023390857,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x69C12E388C841fC939eeF61544EfC92A96efa221",
+                    "size": 10313.697235398084,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xE17c0dDae38FF804d973a2B065ff2Fa1Ff788B1D",
+                    "size": 9440.465945596856,
+                    "whale_flag": 0
+                }
+            ],
+            "big_debt": [
+                {
+                    "id": "0xFB505Aa37508B641CE4D8f066867Db3B3F66185D",
+                    "size": 273295.7349640486,
+                    "whale_flag": 1
+                },
+                {
+                    "id": "0xe55eD2c7734ebB3E7e9Ddaae18B1Ee592a6C8A7B",
+                    "size": 200224.41229745335,
+                    "whale_flag": 1
+                },
+                {
+                    "id": "0x557364BA5DF09db866cB81578D14a91698296f7C",
+                    "size": 26171.406520049775,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x6CED59A8D2dA7bdf3E6c2920F632421A8f3c34D1",
+                    "size": 18119.196439277563,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x4c422130f5327FC051b9e86D7B70dec962c69874",
+                    "size": 16688.97781295376,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x1E1d607efDF48E28929b118cC3d1DD733C264740",
+                    "size": 10710.596617591003,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x9956bd7BA47Ba3F3E4e6F8C9D6060F6ED72c3d4B",
+                    "size": 8295.24138362115,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xA76dbA1c076E47b5f94523AeE8aF9a69952A74d2",
+                    "size": 7580.620471026477,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x69C12E388C841fC939eeF61544EfC92A96efa221",
+                    "size": 6873.801999617105,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x9e3A2e6dc6d5b795b10537e65Db75FB904d88A82",
+                    "size": 5916.591336565897,
+                    "whale_flag": 0
+                }
+            ],
+            "total_collateral": "1023817.2849455895",
+            "total_debt": "627271.7172976378"
+        },
+        "json_time": 1664218804.948152
+    },
+    
+    "0x97DfAA1Ba82b7F6c0c15C977804aa2c2Ba07921b": {
+        "auETH": {
+            "big_collateral": [
+                {
+                    "id": "0x0F77bd45Ac65A7C87bf07F1e8c2b08C5717A9728",
+                    "size": 408178.0008997337,
+                    "whale_flag": 1
+                },
+                {
+                    "id": "0xe55eD2c7734ebB3E7e9Ddaae18B1Ee592a6C8A7B",
+                    "size": 174056.5246573525,
+                    "whale_flag": 1
+                },
+                {
+                    "id": "0x26847c398EeeBd6f47639169dA5792867a34B532",
+                    "size": 159261.15541105293,
+                    "whale_flag": 1
+                },
+                {
+                    "id": "0xda336c3a95e37dEdb162Df281A2706D4F663C0f7",
+                    "size": 103247.80698552517,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x4b0d342812b6D104a126D266037768cdbBcD86f2",
+                    "size": 56371.84467172783,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x6b542bd3fEC146cC2187C8EA78db54743461FC3D",
+                    "size": 39512.936655840596,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xf592c858eB93fF948C5a5A589a7B4FE6acbdBD83",
+                    "size": 35966.59574273828,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x2cfa2FECDA2B3BCF7e26D92b432A24C9DfD239cb",
+                    "size": 32297.06030742861,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x686D78620aa846b1bDb29DEDaf94e2AB47208A04",
+                    "size": 26838.614192539735,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xc9f04a539087c89B8A24729869738220E08B5e2D",
+                    "size": 21537.140993123954,
+                    "whale_flag": 0
+                }
+            ],
+            "big_debt": [
+                {
+                    "id": "0x0F77bd45Ac65A7C87bf07F1e8c2b08C5717A9728",
+                    "size": 358036.62389771536,
+                    "whale_flag": 1
+                },
+                {
+                    "id": "0xe55eD2c7734ebB3E7e9Ddaae18B1Ee592a6C8A7B",
+                    "size": 177109.1899141369,
+                    "whale_flag": 1
+                },
+                {
+                    "id": "0x26847c398EeeBd6f47639169dA5792867a34B532",
+                    "size": 84862.38188101156,
+                    "whale_flag": 1
+                },
+                {
+                    "id": "0x2B8cD75D3E679531918FEeBb9f095a17c982baCa",
+                    "size": 12548.635339155968,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x1B52AE6662bD445aa77CCC61596b7B6fe3d9be1B",
+                    "size": 5989.07048102914,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xB7Bd98d7e660A73bb1851d8B89e2DdA3a8CDF208",
+                    "size": 5257.141992807384,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xb87ed741EdCdEB0dB4C1F4Fbb663b8f3345A4CF6",
+                    "size": 4346.952374245503,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xc022d3d173F04C9759756f8BbF5FF58654CA67a7",
+                    "size": 3777.437992047594,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x68182A96A56eFd1F42e87317c034bdEb9445CD97",
+                    "size": 2514.0812227159804,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xB032c6B6c084b9a1863930241FbA76a9F2204705",
+                    "size": 2212.24125325204,
+                    "whale_flag": 0
+                }
+            ],
+            "total_collateral": "1327955.087406932",
+            "total_debt": "672133.6095198666"
+        },
+        "auSTNEAR": {
+            "big_collateral": [
+                {
+                    "id": "0xFB505Aa37508B641CE4D8f066867Db3B3F66185D",
+                    "size": 846851.5015400308,
+                    "whale_flag": 1
+                },
+                {
+                    "id": "0xab5687826469a1916eB9E1470c06b0DCF21581F2",
+                    "size": 112156.82220648818,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x24CF63D40519D09Ef7826885d1A33F80c64cA9a8",
+                    "size": 93650.04098152585,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x6E415FC6934a7c95F1d75c27E96ea49A0662A61b",
+                    "size": 70073.60410244997,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xA76dbA1c076E47b5f94523AeE8aF9a69952A74d2",
+                    "size": 38150.13092562484,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x610322AeF748238C52E920a15Dd9A8845C9c0318",
+                    "size": 37724.45009934273,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x00326E37CEf76788F6b0cF643c94481D60BD3D58",
+                    "size": 30653.419966403148,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x9956bd7BA47Ba3F3E4e6F8C9D6060F6ED72c3d4B",
+                    "size": 29464.266672680955,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x373F080C8c4A84f9B9578d0Bd860B8b3506b536f",
+                    "size": 29258.25077493138,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xEB20033b26d6540F7c421f8296CceADbE489F6A2",
+                    "size": 27375.00882864593,
+                    "whale_flag": 0
+                }
+            ],
+            "big_debt": [
+                {
+                    "id": "0x25A087dC3512e3BE548F0cA13233ae29d3781bdC",
+                    "size": 0,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x815918dBa307E25802dC984cf157A3cADE4b8e61",
+                    "size": 0,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x85Ff34cCDD3cB36A4553D57009371be35eb72870",
+                    "size": 0,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xEF46b09B69647412c129EbD8739Bdf0F0C10dCcd",
+                    "size": 0,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xdf137F34e8593701a7149d96EA4d12DCb1fa8c14",
+                    "size": 0,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xe29f5ad2A33c76CCACa2d2e3226fF80085cE4573",
+                    "size": 0,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x4D0cf84B27Df1D7aB3Bd33A1371c99eA7b58a261",
+                    "size": 0,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xd5474294994976bD11187bBef1ed7FaD7AcD3a49",
+                    "size": 0,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x10bf1Dcb5ab7860baB1C3320163C6dddf8DCC0e4",
+                    "size": 0,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x170B6EE0387762Acb551310e817FEbe5F98157BD",
+                    "size": 0,
+                    "whale_flag": 0
+                }
+            ],
+            "total_collateral": "1587227.9647712836",
+            "total_debt": "0.0"
+        },
+        "auUSDC": {
+            "big_collateral": [
+                {
+                    "id": "0xa0f2E2F7B3Ab58e3E52b74f08d94AE52778d46df",
+                    "size": 2011648.4539246196,
+                    "whale_flag": 1
+                },
+                {
+                    "id": "0x4e65175f05B4140a0747c29cce997CD4BB7190d4",
+                    "size": 1341004.4060183251,
+                    "whale_flag": 1
+                },
+                {
+                    "id": "0x0F77bd45Ac65A7C87bf07F1e8c2b08C5717A9728",
+                    "size": 756655.0577874872,
+                    "whale_flag": 1
+                },
+                {
+                    "id": "0xA208611EE627B0564Bc4B664e223DDb7Fd6dFCe0",
+                    "size": 544320.0966908416,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xfF3fc772434505ABff38EEcDe3C689D4b0254528",
+                    "size": 174331.17216600987,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xAe4C7F2B914b7DfCD5E1d22D30b4325910aA709E",
+                    "size": 173999.90644681526,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xda336c3a95e37dEdb162Df281A2706D4F663C0f7",
+                    "size": 136549.6484491132,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xe55eD2c7734ebB3E7e9Ddaae18B1Ee592a6C8A7B",
+                    "size": 111880.82951209023,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xf5641315BfACFE268996707fEdabDfea899Df2eb",
+                    "size": 101047.75598525388,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xc32F4DAF699a665bec2E56496c39685af1FA7f5E",
+                    "size": 80533.16889549073,
+                    "whale_flag": 0
+                }
+            ],
+            "big_debt": [
+                {
+                    "id": "0xa0f2E2F7B3Ab58e3E52b74f08d94AE52778d46df",
+                    "size": 1586875.7839048347,
+                    "whale_flag": 1
+                },
+                {
+                    "id": "0x4e65175f05B4140a0747c29cce997CD4BB7190d4",
+                    "size": 978928.1395406662,
+                    "whale_flag": 1
+                },
+                {
+                    "id": "0x0F77bd45Ac65A7C87bf07F1e8c2b08C5717A9728",
+                    "size": 319640.37155202456,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xe55eD2c7734ebB3E7e9Ddaae18B1Ee592a6C8A7B",
+                    "size": 237478.510977071,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xda336c3a95e37dEdb162Df281A2706D4F663C0f7",
+                    "size": 137236.82456834006,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xBe3d3C05f01DDAeF13000ec0324a3D732A382fEE",
+                    "size": 85461.41116391544,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xf5641315BfACFE268996707fEdabDfea899Df2eb",
+                    "size": 80157.80498005323,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x02b79dF8c38f29f39888557c0A89917Fd99ddF77",
+                    "size": 77943.15362436764,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xBEa645Da9c7f6De1f7E287759CcBFd5ab9f57C08",
+                    "size": 33117.79374697444,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xa659AA95Ca03e03a3384d9FdE450EB183dA98e88",
+                    "size": 30520.380712668633,
+                    "whale_flag": 0
+                }
+            ],
+            "total_collateral": "6468797.684783069",
+            "total_debt": "4086517.8634614693"
+        },
+        "auUSDT": {
+            "big_collateral": [
+                {
+                    "id": "0xAe4C7F2B914b7DfCD5E1d22D30b4325910aA709E",
+                    "size": 174876.101268,
+                    "whale_flag": 1
+                },
+                {
+                    "id": "0xBe3d3C05f01DDAeF13000ec0324a3D732A382fEE",
+                    "size": 128079.695805,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xe55eD2c7734ebB3E7e9Ddaae18B1Ee592a6C8A7B",
+                    "size": 111519.780401,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x4Deb56a42fc63650B2F0bFb9AbE1850e3a091371",
+                    "size": 111512.412492,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x86063C3980d0c0b6888697A33C52c041bAAdA70F",
+                    "size": 110218.917443,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xbBbcb69342b76E84762e46C96a61Fb4c8989dC1D",
+                    "size": 100889.330349,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x0F77bd45Ac65A7C87bf07F1e8c2b08C5717A9728",
+                    "size": 99573.706985,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x69Ce25d4732c4e7d2d352A775Dad9475514B71d5",
+                    "size": 98544.671343,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x5f5Dafbd7e961dA20C2de547E0265072A0f9f906",
+                    "size": 69637.611595,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xA76dbA1c076E47b5f94523AeE8aF9a69952A74d2",
+                    "size": 57594.907657,
+                    "whale_flag": 0
+                }
+            ],
+            "big_debt": [
+                {
+                    "id": "0xe55eD2c7734ebB3E7e9Ddaae18B1Ee592a6C8A7B",
+                    "size": 136605.469714,
+                    "whale_flag": 1
+                },
+                {
+                    "id": "0x4Deb56a42fc63650B2F0bFb9AbE1850e3a091371",
+                    "size": 83205.587748,
+                    "whale_flag": 1
+                },
+                {
+                    "id": "0x69Ce25d4732c4e7d2d352A775Dad9475514B71d5",
+                    "size": 68289.674767,
+                    "whale_flag": 1
+                },
+                {
+                    "id": "0x4b0d342812b6D104a126D266037768cdbBcD86f2",
+                    "size": 50914.171854,
+                    "whale_flag": 1
+                },
+                {
+                    "id": "0x5f5Dafbd7e961dA20C2de547E0265072A0f9f906",
+                    "size": 33569.614645,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x4c55e9808c46865B41eB873b86F2711F55Dbf4AE",
+                    "size": 23603.481634,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xc97888f8c9e43BF695E892F4f2bfff303A6dFd22",
+                    "size": 14718.697628,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xe7DDD3aaCE7c18566Aba0778247062966d6B3d1b",
+                    "size": 10065.979515,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xE6fa01F59b9A7378C947cf717e8d833fDdc9C11B",
+                    "size": 8558.369346,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x87edb4a99d71a4D6B7daE61902bcCA8f7cb65945",
+                    "size": 5888.333668,
+                    "whale_flag": 0
+                }
+            ],
+            "total_collateral": "1705372.1724639998",
+            "total_debt": "488874.515443"
+        },
+        "auWBTC": {
+            "big_collateral": [
+                {
+                    "id": "0xe55eD2c7734ebB3E7e9Ddaae18B1Ee592a6C8A7B",
+                    "size": 822772.7883462695,
+                    "whale_flag": 1
+                },
+                {
+                    "id": "0x02b79dF8c38f29f39888557c0A89917Fd99ddF77",
+                    "size": 206393.9910762282,
+                    "whale_flag": 1
+                },
+                {
+                    "id": "0x8f16dC9db0a34733Fd87Eb497F71f568AF18bbCf",
+                    "size": 98825.69441802181,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xbBbcb69342b76E84762e46C96a61Fb4c8989dC1D",
+                    "size": 96507.13370016181,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xB9Eb8c1a688Cb64D0f8315b8ED885E4064352334",
+                    "size": 54840.7747037098,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xd92Fdb169Bf65654bC88383fD142a66Dd456cf63",
+                    "size": 24727.572882056003,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x0fb020a741Fd45503C01BbE2353B9690508828Fd",
+                    "size": 20177.9418357494,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xff2469082cc5BF7e626fbfa9c25F467411d84cc2",
+                    "size": 19596.5386843062,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x70922272023357e07D7152656b13129C1A01a100",
+                    "size": 17919.583566702,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xEEf1B2fA1743E9215E1d8881d52B886618453C5e",
+                    "size": 15074.754490078401,
+                    "whale_flag": 0
+                }
+            ],
+            "big_debt": [
+                {
+                    "id": "0xe55eD2c7734ebB3E7e9Ddaae18B1Ee592a6C8A7B",
+                    "size": 317828.0761824732,
+                    "whale_flag": 1
+                },
+                {
+                    "id": "0xB9Eb8c1a688Cb64D0f8315b8ED885E4064352334",
+                    "size": 16592.736360891002,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xEB20033b26d6540F7c421f8296CceADbE489F6A2",
+                    "size": 6115.922267464201,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x915719D987f0726AC3A9Fa339B03C37374483F98",
+                    "size": 1079.0973049434,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x3f191D416EDDaAc38960EBD32db905dc5dE275B2",
+                    "size": 1076.5247756182002,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x66E4115772b0dDBa2D85975F5F83BaBeB8f4AFe6",
+                    "size": 384.50939342860005,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xB4765Bee75A0fa0a2f66Bf68CE1796c55854c154",
+                    "size": 273.7095143956,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x0fb020a741Fd45503C01BbE2353B9690508828Fd",
+                    "size": 203.66753464900003,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xAbD4c34Cc6BB50f49B633Ed82eA9a3bb44CBBCEC",
+                    "size": 95.32014381620002,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x4FfD0A59a26cB2Aa76D403215e4cC2845C053994",
+                    "size": 78.630778191,
+                    "whale_flag": 0
+                }
+            ],
+            "total_collateral": "1438246.2223910864",
+            "total_debt": "344145.80503753433"
+        },
+        "auWNEAR": {
+            "big_collateral": [
+                {
+                    "id": "0xe55eD2c7734ebB3E7e9Ddaae18B1Ee592a6C8A7B",
+                    "size": 529051.7462537395,
+                    "whale_flag": 1
+                },
+                {
+                    "id": "0xa659AA95Ca03e03a3384d9FdE450EB183dA98e88",
+                    "size": 65306.01613789222,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x0F77bd45Ac65A7C87bf07F1e8c2b08C5717A9728",
+                    "size": 60395.06058933914,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x4e65175f05B4140a0747c29cce997CD4BB7190d4",
+                    "size": 46901.293128794154,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xf20e28F405e0Fee9504a8dC3DD2c1B6baAE2E66F",
+                    "size": 26017.560357286937,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x5b82D74307d75Fde3A5Da2cdfEB60ED60430f2A8",
+                    "size": 20187.180094412033,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x8C39b7cB82B9D791ADCc9387098944B635C17B32",
+                    "size": 13322.706991498968,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x27D93B6F9347cf7679413a9A9261588eA57881f7",
+                    "size": 11456.452023390857,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x69C12E388C841fC939eeF61544EfC92A96efa221",
+                    "size": 10313.697235398084,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xE17c0dDae38FF804d973a2B065ff2Fa1Ff788B1D",
+                    "size": 9440.465945596856,
+                    "whale_flag": 0
+                }
+            ],
+            "big_debt": [
+                {
+                    "id": "0xFB505Aa37508B641CE4D8f066867Db3B3F66185D",
+                    "size": 273295.7349640486,
+                    "whale_flag": 1
+                },
+                {
+                    "id": "0xe55eD2c7734ebB3E7e9Ddaae18B1Ee592a6C8A7B",
+                    "size": 200224.41229745335,
+                    "whale_flag": 1
+                },
+                {
+                    "id": "0x557364BA5DF09db866cB81578D14a91698296f7C",
+                    "size": 26171.406520049775,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x6CED59A8D2dA7bdf3E6c2920F632421A8f3c34D1",
+                    "size": 18119.196439277563,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x4c422130f5327FC051b9e86D7B70dec962c69874",
+                    "size": 16688.97781295376,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x1E1d607efDF48E28929b118cC3d1DD733C264740",
+                    "size": 10710.596617591003,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x9956bd7BA47Ba3F3E4e6F8C9D6060F6ED72c3d4B",
+                    "size": 8295.24138362115,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0xA76dbA1c076E47b5f94523AeE8aF9a69952A74d2",
+                    "size": 7580.620471026477,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x69C12E388C841fC939eeF61544EfC92A96efa221",
+                    "size": 6873.801999617105,
+                    "whale_flag": 0
+                },
+                {
+                    "id": "0x9e3A2e6dc6d5b795b10537e65Db75FB904d88A82",
+                    "size": 5916.591336565897,
+                    "whale_flag": 0
+                }
+            ],
+            "total_collateral": "1023817.2849455895",
+            "total_debt": "627271.7172976378"
+        },
+        "json_time": 1664218804.948152
+    }
+}

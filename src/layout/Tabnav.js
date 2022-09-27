@@ -4,6 +4,7 @@ import poolsStore from "../stores/pools.store"
 import alertStore from '../stores/alert.store'
 import mainStore from "../stores/main.store"
 import dummy from './dummy_api.json'
+import dummyWhales from './dummy_whales.json'
 
 // const Tabnav = (props) => {
 class Tabnav extends Component {
@@ -20,7 +21,8 @@ class Tabnav extends Component {
       const dummyForPool = dummy[poolAddress];
       console.log(dummyForPool);
       console.log('aaaaaaaaaaaaa', mainStore['accounts_data']);
-      mainStore['accounts_data'] = dummyForPool;
+      mainStore['accounts_data'] = dummyForPool; // poolsStore['pools_d_data'][poolAddress]
+      mainStore['whale_accounts_data'] = dummyWhales[poolAddress]; // poolsStore['pool_whale_data'][poolAddress]
       console.log('bbbbbbbbbbbbbbb', mainStore['accounts_data']);
 
       if(selectedLabel.includes('DAI')) {
