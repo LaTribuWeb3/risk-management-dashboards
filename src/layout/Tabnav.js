@@ -10,12 +10,6 @@ class Tabnav extends Component {
 
 
 
-  setActiveTab(tab) {
-    poolsStore['tab'] = tab;
-    console.log('tab click is', tab)
-    console.log('pool tab is', poolsStore['tab'])
-  }
-
   render() {
     const loading = poolsStore['data/tokens?fakeMainnet=0_loading']
       || poolsStore['pools_loading']
@@ -25,11 +19,14 @@ class Tabnav extends Component {
     const creditAccountData = Object.assign([], poolsStore['data/creditAccounts?fakeMainnet=0_data'] || []);
     console.log('tab is', poolsStore['tab']);
 
+    function setActiveTab(tab) {
+      poolsStore.setActiveTab(tab);
+      selectedPoolData(tab);
+    }
 
-    function onPoolSelect(event) {
+    function selectedPoolData(tab) {
       mainStore['overview_loading'] = true;
-      const selectedLabel = event.target.selectedOptions[0].label;
-      const selectedPoolAddress = event.target.selectedOptions[0].value;
+      const selectedPoolAddress = tab;
       alertStore.valueAtRisk = selectedPoolAddress;
 
       const selectedPool = poolsData.find(p => p.address === selectedPoolAddress);
@@ -104,10 +101,10 @@ class Tabnav extends Component {
       <div className="tabnav">
         {loading ? <span>loading...</span> : poolsData.map((pool, i) => {
           const symbol = tokenData.find(t => t.address === pool.underlying)?.symbol;
-        return <button onClick={() => poolsStore.setActiveTab(pool.address)} className={'tab ' + (poolsStore['tab'] == pool.address ? 'active' : '')} key={i} value={pool.address} id={symbol} >{symbol}</button>
-      })
-      }
-    
+          return <button onClick={() => setActiveTab(pool.address)} className={'tab ' + (poolsStore['tab'] == pool.address ? 'active' : '')} key={i} value={pool.address} id={symbol} >{symbol}</button>
+        })
+        }
+
       </div>
     )
   }
