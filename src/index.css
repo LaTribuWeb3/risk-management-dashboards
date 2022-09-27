@@ -247,12 +247,17 @@ h2{
 }
 
 .tabnav {
-  text-align: center;
+  text-align: left;
+  background-color: #1f2d38;
 }
 .tabnav button {
   font-weight: bold;
+  transition: 1s;
+  border-radius: 0px;
   display: inline-block;
+  max-width: 150px;
   padding: 5px 20px;
+  margin-bottom: 0px;
   cursor: pointer;
   background-color: #ccc;
 }

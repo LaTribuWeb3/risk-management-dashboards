@@ -101,7 +101,7 @@ class Tabnav extends Component {
       <div className="tabnav">
         {loading ? <span>loading...</span> : poolsData.map((pool, i) => {
           const symbol = tokenData.find(t => t.address === pool.underlying)?.symbol;
-          return <button onClick={() => setActiveTab(pool.address)} className={'tab ' + (poolsStore['tab'] == pool.address ? 'active' : '')} key={i} value={pool.address} id={symbol} >{symbol}</button>
+          return <button onClick={() => setActiveTab(pool.address)} className={'button ' + (poolsStore['tab'] == pool.address ? 'active' : '')} key={i} value={pool.address} id={symbol} >{symbol}</button>
         })
         }
 
