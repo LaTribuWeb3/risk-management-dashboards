@@ -255,10 +255,10 @@ h2{
   padding: 5px 20px;
   cursor: pointer;
 }
-.tab button:hover {
+.tabnav button:hover {
   background-color: #ddd;
 }
-.tab button.active {
+.tabnav button.active {
   background-color: #ccc;
 }
 .tabcontent {

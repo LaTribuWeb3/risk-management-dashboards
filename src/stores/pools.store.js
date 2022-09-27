@@ -13,7 +13,12 @@ class PoolsStore {
   apiData = {}
 
   init = () => {
+    this['tab'] = null;
     apiEndpoints.forEach(this.fetchData);
+  }
+
+  setActiveTab(tab){
+    this.tab = tab;
   }
 
   fetchData = (endpoint) => {
@@ -23,10 +28,12 @@ class PoolsStore {
     .then(({data})=> {
       this[endpoint + '_loading'] = false
       this[endpoint + '_data'] = data
+      if(endpoint == 'pools'){
+        this['tab'] = data[0].address;
+      }
       return data
     })
     .catch(console.error)
   }
 }
-
 export default new PoolsStore()
