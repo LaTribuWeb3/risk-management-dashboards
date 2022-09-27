@@ -73,13 +73,21 @@ class Example extends PureComponent {
   };
 
   render() {
-    const {data, dataKey} = this.props
-    const cleanData = data.map((item) => {
-      return {
-        name: removeTokenPrefix(item.key),
-        value: parseInt(item[dataKey])
-      }
+    const {data} = this.props
+    console.log('piechart', data);
+    const cleanData = [];
+    Object.entries(data).forEach(([key, val]) => {
+      cleanData.push({
+        name: key,
+        value: val
+      });
     })
+    // const cleanData = data.map(([k,v]) => {
+    //   return {
+    //     name: k,
+    //     value: parseInt(v)
+    //   }
+    // })
     return (
       <ResponsiveContainer>
         <PieChart>

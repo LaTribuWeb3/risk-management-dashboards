@@ -1,7 +1,7 @@
 import { makeAutoObservable } from "mobx"
 import axios from "axios"
 
-const apiEndpoints = ['data/tokens?fakeMainnet=0', 'pools']
+const apiEndpoints = ['data/tokens?fakeMainnet=0', 'pools', 'data/creditAccounts?fakeMainnet=0']
 class PoolsStore {
   constructor () {
     this.init()

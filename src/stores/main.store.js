@@ -41,7 +41,9 @@ class MainStore {
   }
 
   init = () => {
-    apiEndpoints.forEach(this.fetchData)
+    this['overview_loading'] = true;
+    this['overview_data'] = null;
+    // apiEndpoints.forEach(this.fetchData)
   }
 
   clean = data => {

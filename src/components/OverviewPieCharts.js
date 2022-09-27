@@ -10,26 +10,21 @@ import mainStore from '../stores/main.store'
 class OverviewPieCharts extends Component {
   
   render() {
-    const loading = mainStore['accounts_loading']
-    const rawData = Object.assign({}, mainStore['accounts_data'] || {})
-    const {json_time} = rawData
-    if(json_time){
-      delete rawData.json_time
-    }
-    const data = !loading ? Object.entries(rawData).map(([k, v])=> {
-      v.key = k
-      return v
-    }) : []
+    const overviewData = Object.assign({}, mainStore['overview_data'] || {})
+    const json_time = Math.floor(Date.now()/1000);
+    const loading = mainStore['overview_loading']; // TODO
+
+    console.log('pie data', overviewData.collateralGraphData);
     return (
       <BoxGrid>
         <Box loading={loading} height={450} time={json_time}>
           <h6 style={{margin: 0}}>Collateral</h6>
-          {!loading && <PieChart data={data} dataKey={'total_collateral'}/>}
+          {!loading && <PieChart data={overviewData.collateralGraphData}/>}
         </Box>
-        <Box loading={loading} height={450} time={json_time}>
+        {/* <Box loading={loading} height={450} time={json_time}>
           <h6 style={{margin: 0}}>Debt</h6>
           {!loading && <PieChart data={data} dataKey={'total_debt'}/>}
-        </Box>
+        </Box> */}
       </BoxGrid>
     )
   }

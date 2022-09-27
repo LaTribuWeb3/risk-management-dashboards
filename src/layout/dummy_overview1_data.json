@@ -1,0 +1,17 @@
+{
+    "collateral": {
+        "totalCollateral": 1,
+        "top1Collateral": 1,
+        "top10Collateral": 1
+    },
+    "debt": {
+        "totalDebt": 1,
+        "top1Debt": 1,
+        "top10Debt": 1
+    },
+    "collateralGraphData" : {
+        "USDC": 10000000,
+        "WETH": 30000000,
+        "DAI": 40000000
+    }
+}

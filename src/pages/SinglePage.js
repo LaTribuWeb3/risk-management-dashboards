@@ -20,12 +20,12 @@ class SinglePage extends Component {
       <div>
         <Tabnav />
         <ScrollSpy offsetBottom={400} scrollThrottle={100} parentScrollContainerRef={this.props.scrollContainer}>
-          <section id="system-status">
+          {/* <section id="system-status">
             {mainStore.proViewShow("system-status") && <div>
               <h2>System Status</h2>
               <Alerts />
             </div>}
-          </section>
+          </section> */}
           <section id="overview">
             {mainStore.proViewShow("overview") && <div>
               <hgroup>
@@ -35,7 +35,7 @@ class SinglePage extends Component {
               <Overview />
             </div>}
           </section>
-          <section id="collateral-factors">
+          {/* <section id="collateral-factors">
             {mainStore.proViewShow("collateral-factors") && <div>
               <h2>Collateral Factor Recommendations</h2>
               <RiskParameters />
@@ -90,7 +90,7 @@ class SinglePage extends Component {
               </hgroup>
               <Liquidity />
             </div>}
-          </section>
+          </section> */}
         </ScrollSpy>
         <Debug />
       </div>

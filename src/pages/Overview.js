@@ -22,52 +22,67 @@ const humanTxt = txt => txtMap[txt]
 
 class Overview extends Component {
   render (){
-    const rawData = Object.assign({}, mainStore['overview_data'] || {})
-    const {json_time} = rawData
-    if(json_time){
-      delete rawData.json_time
-    }
+    const overviewData = Object.assign({}, mainStore['overview_data'] || {})
+    
+    console.log('overview.overviewData', overviewData);
+    const jsonTime = Math.floor(Date.now()/1000);
     
     const loading = mainStore['overview_loading']
-    const data = Object.entries(rawData)
-      .filter(([k, v])=> k.indexOf('nl_') === -1)
-      .filter(([k, v])=> k.indexOf('median') === -1)
-    const firstHalf = !loading ? data
-      .filter(([k, v])=>{
-        return k.indexOf('collateral') > -1
-      })
-      .sort(([a],[b])=>{
-        if(a > b) return -1
-        if(a < b) return 1
-        return 0
-      }) : []
-    const secondHalf = !loading ? data
-      .filter(([k, v])=>{
-        return k.indexOf('debt') > -1
-      })
-      .sort(([a],[b])=>{
-        if(a > b) return -1
-        if(a < b) return 1
-        return 0
-      }) : []
+    // const data = Object.entries(rawData)
+    //   .filter(([k, v])=> k.indexOf('nl_') === -1)
+    //   .filter(([k, v])=> k.indexOf('median') === -1)
+    // const firstHalf = !loading ? data
+    //   .filter(([k, v])=>{
+    //     return k.indexOf('collateral') > -1
+    //   })
+    //   .sort(([a],[b])=>{
+    //     if(a > b) return -1
+    //     if(a < b) return 1
+    //     return 0
+    //   }) : []
+    // const secondHalf = !loading ? data
+    //   .filter(([k, v])=>{
+    //     return k.indexOf('debt') > -1
+    //   })
+    //   .sort(([a],[b])=>{
+    //     if(a > b) return -1
+    //     if(a < b) return 1
+    //     return 0
+    //   }) : []
     return (
       <div>
         <OverviewPieCharts/>
         <BoxGrid>
-          <Box loading={loading} time={json_time}>
+          <Box loading={loading} time={jsonTime}>
             <div>
-              {firstHalf.map(([k, v])=> <BoxRow key={k}>
-                <div>{humanTxt(k)}</div>
-                <div><WhaleFriendly num={v} /></div>
-              </BoxRow>)}
+              <BoxRow key='total_collateral'>
+                <div>Total Collateral</div>
+                <div><WhaleFriendly num={overviewData.collateral?.totalCollateral} /></div>
+              </BoxRow>
+              <BoxRow key='top1collateral'>
+                <div>Collateral of Top 1 User</div>
+                <div><WhaleFriendly num={overviewData.collateral?.top1Collateral} /></div>
+              </BoxRow>
+              <BoxRow key='top10collateral'>
+                <div>Collateral of Top 10 Users</div>
+                <div><WhaleFriendly num={overviewData.collateral?.top10Collateral} /></div>
+              </BoxRow>
             </div>
           </Box>
-          <Box loading={loading} time={json_time}>
+          <Box loading={loading} time={jsonTime}>
             <div>
-              {secondHalf.map(([k, v])=> <BoxRow key={k}>
-                <div>{humanTxt(k)}</div>
-                <div><WhaleFriendly num={v} /></div>
-              </BoxRow>)}
+              <BoxRow key='total_debt'>
+                <div>Total Debt</div>
+                <div><WhaleFriendly num={overviewData.debt?.totalDebt} /></div>
+              </BoxRow>
+              <BoxRow key='top1debt'>
+                <div>Debt of Top 1 User</div>
+                <div><WhaleFriendly num={overviewData.debt?.top1Debt} /></div>
+              </BoxRow>
+              <BoxRow key='top10debt'>
+                <div>Debt of Top 10 Users</div>
+                <div><WhaleFriendly num={overviewData.debt?.top10Debt} /></div>
+              </BoxRow>
             </div>
           </Box>
         </BoxGrid>
