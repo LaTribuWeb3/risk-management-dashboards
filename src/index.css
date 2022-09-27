@@ -254,12 +254,14 @@ h2{
   display: inline-block;
   padding: 5px 20px;
   cursor: pointer;
+  background-color: #ccc;
 }
 .tabnav button:hover {
-  background-color: #ddd;
+  background-color: #46b09b;
 }
 .tabnav button.active {
-  background-color: #ccc;
+  background-color: #1095c1;
+  
 }
 .tabcontent {
   display: none;
