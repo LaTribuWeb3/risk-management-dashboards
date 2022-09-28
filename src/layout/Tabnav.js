@@ -103,31 +103,35 @@ class Tabnav extends Component {
         const calculatedTop10Debt = 0; // TODO
 
 
-
+        // compute pool's tokens sums
       const indexedTokenSum = {};
       for (let i = 0; i < creditAccountsForPool.length; i++) {
         for (let j = 0; j < creditAccountsForPool[i].tokenBalances.length; j++) {
           const tokenAddress = creditAccountsForPool[i].tokenBalances[j].address;
           const amount = creditAccountsForPool[i].tokenBalances[j].amount;
+          const indexedToken = tokenData.filter(tk => tk.address == tokenAddress)[0];
           const valToAddBN = BigNumber(amount);
           if (valToAddBN.gt(0)) {
-            const symbol = tokenAddress;// find token symbol from token address
+            const symbol = indexedToken['symbol'];;// find token symbol from token address
             let lastValue = indexedTokenSum[symbol];
             if (lastValue === undefined) {
               lastValue = 0;
             }
             const lastValBN = BigNumber(lastValue);
 
-            const tokenDecimals = 6 // todo replace by good value
+            const tokenDecimals = indexedToken['decimals']; // todo replace by good value
             let newTokenAmount = lastValBN.plus(valToAddBN);
             // console.log(newTokenAmount.toString());
             newTokenAmount = newTokenAmount.div(BigNumber(10).pow(tokenDecimals));
+            const indexedTokenPrice = BigNumber(indexedToken['priceUSD18Decimals']).div(BigNumber(10).pow(18));
+            newTokenAmount = BigNumber(newTokenAmount).multipliedBy(BigNumber(indexedTokenPrice));
             // console.log(newTokenAmount.toString());
             newTokenAmount = newTokenAmount.toNumber();
             // console.log(newTokenAmount.toString());
             indexedTokenSum[symbol] = newTokenAmount;
           }
         }
+        console.log('indexed token sum', indexedTokenSum)
 
         const dataOverview = {
           collateral: {
