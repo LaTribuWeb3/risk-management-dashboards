@@ -17,7 +17,8 @@ class Tabnav extends Component {
     const poolsData = Object.assign([], poolsStore['pools_data'] || []);
     const tokenData = Object.assign([], poolsStore['data/tokens?fakeMainnet=0_data'] || []);
     const creditAccountData = Object.assign([], poolsStore['data/creditAccounts?fakeMainnet=0_data'] || []);
-    console.log('tab is', poolsStore['tab']);
+
+
 
     function setActiveTab(tab) {
       poolsStore.setActiveTab(tab);
@@ -32,12 +33,42 @@ class Tabnav extends Component {
       const selectedPool = poolsData.find(p => p.address === selectedPoolAddress);
       const creditAccountsForPool = creditAccountData.filter(ca => ca.poolAddress === selectedPoolAddress);
 
-      const calculatedTotalCollateral = 0; // TODO
+
       const calculatedTop1Collateral = 0; // TODO
       const calculatedTop10Collateral = 0; // TODO
       const calculatedTotalDebt = Number(selectedPool.totalBorrowed); // multiply by price of underlying token
       const calculatedTop1Debt = 0; // TODO
       const calculatedTop10Debt = 0; // TODO
+
+
+
+      // compute value in $ for each credit account
+      for (let i = 0; i < creditAccountsForPool.length; i++) {
+        let collateralValue = 0;
+        for (let j = 0; j < creditAccountsForPool[i].tokenBalances.length; j++) {
+          const tokenAddress = creditAccountsForPool[i].tokenBalances[j].address;
+          const amountWDecimals = creditAccountsForPool[i].tokenBalances[j].amount;
+          const token = tokenData.filter(tk => tk.address == tokenAddress);
+          const tokenDecimals = token[0]['decimals'];
+          const tokenPrice = ((BigNumber(token[0]['priceUSD18Decimals']).div(1e18))).toString();
+          const amount = (BigNumber(amountWDecimals).div(BigNumber(10).pow(tokenDecimals))).toString();
+          if (amountWDecimals !== '0') {
+            collateralValue = BigNumber(collateralValue).plus(BigNumber(amount).multipliedBy(BigNumber(tokenPrice)));
+          }
+        }
+        creditAccountsForPool[i]['collateralValue'] = collateralValue.toString();
+      }
+
+      // compute total collateral value for pool
+      let totalCollateral = 0
+      for (let i = 0; i < creditAccountsForPool.length; i++) {
+        totalCollateral = BigNumber(totalCollateral).plus(BigNumber(creditAccountsForPool[i]['collateralValue']));
+      }
+      const calculatedTotalCollateral = totalCollateral;
+
+
+
+
 
       const indexedTokenSum = {};
       for (let i = 0; i < creditAccountsForPool.length; i++) {
@@ -55,11 +86,11 @@ class Tabnav extends Component {
 
             const tokenDecimals = 6 // todo replace by good value
             let newTokenAmount = lastValBN.plus(valToAddBN);
-            console.log(newTokenAmount.toString());
+            // console.log(newTokenAmount.toString());
             newTokenAmount = newTokenAmount.div(BigNumber(10).pow(tokenDecimals));
-            console.log(newTokenAmount.toString());
+            // console.log(newTokenAmount.toString());
             newTokenAmount = newTokenAmount.toNumber();
-            console.log(newTokenAmount.toString());
+            // console.log(newTokenAmount.toString());
             indexedTokenSum[symbol] = newTokenAmount;
           }
         }
@@ -98,13 +129,15 @@ class Tabnav extends Component {
     }
 
     return (
-      <div className="tabnav">
-        {loading ? <span>loading...</span> : poolsData.map((pool, i) => {
-          const symbol = tokenData.find(t => t.address === pool.underlying)?.symbol;
-          return <button onClick={() => setActiveTab(pool.address)} className={'button ' + (poolsStore['tab'] == pool.address ? 'active' : '')} key={i} value={pool.address} id={symbol} >{symbol}</button>
-        })
-        }
-
+      <div className="navwrapper">
+        <span>Select Pool</span>
+        <div className="tabnav">
+          {loading ? <span>loading...</span> : poolsData.map((pool, i) => {
+            const symbol = tokenData.find(t => t.address === pool.underlying)?.symbol;
+            return <button onClick={() => setActiveTab(pool.address)} className={'button ' + (poolsStore['tab'] == pool.address ? 'active' : '')} key={i} value={pool.address} id={symbol} >{symbol}</button>
+          })
+          }
+        </div>
       </div>
     )
   }
