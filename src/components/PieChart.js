@@ -74,7 +74,6 @@ class Example extends PureComponent {
 
   render() {
     const {data} = this.props
-    console.log('piechart', data);
     const cleanData = [];
     Object.entries(data).forEach(([key, val]) => {
       cleanData.push({

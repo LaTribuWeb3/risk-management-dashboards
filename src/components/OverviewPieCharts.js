@@ -13,8 +13,7 @@ class OverviewPieCharts extends Component {
     const overviewData = Object.assign({}, mainStore['overview_data'] || {})
     const json_time = Math.floor(Date.now()/1000);
     const loading = mainStore['overview_loading']; // TODO
-
-    console.log('pie data', overviewData.collateralGraphData);
+    
     return (
       <BoxGrid>
         <Box loading={loading} height={450} time={json_time}>
