@@ -33,15 +33,6 @@ class Tabnav extends Component {
       const selectedPool = poolsData.find(p => p.address === selectedPoolAddress);
       const creditAccountsForPool = creditAccountData.filter(ca => ca.poolAddress === selectedPoolAddress);
 
-
-
-      const calculatedTop10Collateral = 0; // TODO
-      const calculatedTotalDebt = Number(selectedPool.totalBorrowed); // multiply by price of underlying token
-      const calculatedTop1Debt = 0; // TODO
-      const calculatedTop10Debt = 0; // TODO
-
-
-
       // compute value in $ for each credit account
       for (let i = 0; i < creditAccountsForPool.length; i++) {
         let collateralValue = 0;
@@ -68,16 +59,48 @@ class Tabnav extends Component {
       //////END
 
       // compute top 1 collateral
-      let currentTopOne = 0;
+      let currentTopOneCollateral = 0;
       for (let i = 0; i < creditAccountsForPool.length; i++) {
-        if(BigNumber(currentTopOne).isLessThan(BigNumber(creditAccountsForPool[i]['collateralValue']))){
-          currentTopOne = creditAccountsForPool[i]['collateralValue']
+        if(BigNumber(currentTopOneCollateral).isLessThan(BigNumber(creditAccountsForPool[i]['collateralValue']))){
+          currentTopOneCollateral = creditAccountsForPool[i]['collateralValue']
         }
       }
-      const calculatedTop1Collateral = currentTopOne; 
+
+      const calculatedTop1Collateral = currentTopOneCollateral; 
       //////END
 
+      // compute top 10 collateral
+      let collateralArray = [];
+      for (let i = 0; i < creditAccountsForPool.length; i++) {
+        collateralArray.push(creditAccountsForPool[i]['collateralValue'])
+        }
+        console.log('collateralArray is', collateralArray);
+        collateralArray.sort((a, b) => a - b);
+        console.log('sorted',collateralArray);
+        const calculatedTop10Collateral = 0; // TODO
 
+
+      // compute total debt
+      let totalDebt = 0;
+      const poolUnderlying = tokenData.filter(tk => tk.address == selectedPool['underlying']);
+      const underlyingPrice = BigNumber(poolUnderlying[0]['priceUSD18Decimals']).div(BigNumber(10).pow(18));
+      totalDebt = BigNumber(selectedPool.totalBorrowed).div(BigNumber(10).pow(poolUnderlying[0]['decimals']));
+      totalDebt = BigNumber (totalDebt).multipliedBy(BigNumber(underlyingPrice));
+      const calculatedTotalDebt = totalDebt.toString();
+
+      // compute top 1 debt
+      let currentTopOneDebt = 0;
+      for (let i = 0; i < creditAccountsForPool.length; i++) {
+        if(BigNumber(currentTopOneDebt).isLessThan(BigNumber(creditAccountsForPool[i]['borrowedAmountPlusInterestAndFees']))){
+          currentTopOneDebt = creditAccountsForPool[i]['borrowedAmountPlusInterestAndFees']
+        }
+      }
+      currentTopOneDebt = BigNumber(currentTopOneDebt).div(BigNumber(10).pow(poolUnderlying[0]['decimals']));
+      currentTopOneDebt = BigNumber(currentTopOneDebt).multipliedBy(BigNumber(underlyingPrice));
+      const calculatedTop1Debt = currentTopOneDebt.toString(); 
+      //////END
+
+        const calculatedTop10Debt = 0; // TODO
 
 
 
