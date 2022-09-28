@@ -34,7 +34,7 @@ class Tabnav extends Component {
       const creditAccountsForPool = creditAccountData.filter(ca => ca.poolAddress === selectedPoolAddress);
 
 
-      const calculatedTop1Collateral = 0; // TODO
+
       const calculatedTop10Collateral = 0; // TODO
       const calculatedTotalDebt = Number(selectedPool.totalBorrowed); // multiply by price of underlying token
       const calculatedTop1Debt = 0; // TODO
@@ -65,6 +65,17 @@ class Tabnav extends Component {
         totalCollateral = BigNumber(totalCollateral).plus(BigNumber(creditAccountsForPool[i]['collateralValue']));
       }
       const calculatedTotalCollateral = totalCollateral;
+      //////END
+
+      // compute top 1 collateral
+      let currentTopOne = 0;
+      for (let i = 0; i < creditAccountsForPool.length; i++) {
+        if(BigNumber(currentTopOne).isLessThan(BigNumber(creditAccountsForPool[i]['collateralValue']))){
+          currentTopOne = creditAccountsForPool[i]['collateralValue']
+        }
+      }
+      const calculatedTop1Collateral = currentTopOne; 
+      //////END
 
 
 
