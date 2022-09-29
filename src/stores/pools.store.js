@@ -49,9 +49,6 @@ class PoolsStore {
       .catch(console.error);
   };
 
-
-
-
   /// DATA TRANSFORMATION
   selectedPoolData(tab) {
     const poolsData = Object.assign([], this["pools_data"] || []);
@@ -70,7 +67,6 @@ class PoolsStore {
     const creditAccountsForPool = creditAccountData.filter(
       (ca) => ca.poolAddress === tab
     );
-
 
     // compute value in $ for each credit account
     for (let i = 0; i < creditAccountsForPool.length; i++) {
@@ -129,7 +125,10 @@ class PoolsStore {
     collateralArray.sort((a, b) => b - a);
     collateralArray = collateralArray.slice(0, 10);
     let initialCollateralValue = 0;
-    collateralArray = collateralArray.reduce((prev, curr) => Number(prev) + Number(curr), initialCollateralValue);
+    collateralArray = collateralArray.reduce(
+      (prev, curr) => Number(prev) + Number(curr),
+      initialCollateralValue
+    );
     const calculatedTop10Collateral = collateralArray.toString();
 
     // compute total debt
@@ -172,24 +171,22 @@ class PoolsStore {
     /// compute top 10 debt
     let debtArray = [];
     for (let i = 0; i < creditAccountsForPool.length; i++) {
-      debtArray.push(creditAccountsForPool[i]['borrowedAmountPlusInterestAndFees']);
+      debtArray.push(
+        creditAccountsForPool[i]["borrowedAmountPlusInterestAndFees"]
+      );
     }
     debtArray.sort((a, b) => b - a);
     debtArray = debtArray.slice(0, 10);
     let debtValue = 0;
-    for(let i = 0; i < debtArray.length; i++){
-      debtValue = BigNumber(debtValue).plus(BigNumber(debtArray[i]))
+    for (let i = 0; i < debtArray.length; i++) {
+      debtValue = BigNumber(debtValue).plus(BigNumber(debtArray[i]));
     }
 
-    debtValue = BigNumber(debtValue).div(BigNumber(10).pow(poolUnderlying[0]["decimals"]))
-    debtArray = Number(underlyingPrice)*Number(debtValue);
+    debtValue = BigNumber(debtValue).div(
+      BigNumber(10).pow(poolUnderlying[0]["decimals"])
+    );
+    debtArray = Number(underlyingPrice) * Number(debtValue);
     const calculatedTop10Debt = debtValue.toString();
-
-
-
-
-
-
 
     // compute pool's tokens sums
     const indexedTokenSum = {};
