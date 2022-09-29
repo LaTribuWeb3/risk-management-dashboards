@@ -253,7 +253,8 @@ h2 {
 
 .tabnav {
   text-align: left;
-  background-color: #1f2d38;
+  background-color: var(--card-background-color);
+  box-shadow: var(--card-box-shadow);
 }
 .tabnav button {
   font-weight: bold;
