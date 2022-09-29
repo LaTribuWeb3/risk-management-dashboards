@@ -55,7 +55,10 @@ class PoolsStore {
       [],
       this["data/tokens?fakeMainnet=0_data"] || []
     );
-    console.log('credit account data is now', this["data/creditAccounts?fakeMainnet=0_data"])
+    console.log(
+      "credit account data is now",
+      this["data/creditAccounts?fakeMainnet=0_data"]
+    );
     const creditAccountData = Object.assign(
       [],
       this["data/creditAccounts?fakeMainnet=0_data"] || []
@@ -64,11 +67,11 @@ class PoolsStore {
 
     const selectedPool = poolsData.find((p) => p.address === tab);
 
-    console.log('credit accounts data', creditAccountData)
+    console.log("credit accounts data", creditAccountData);
     const creditAccountsForPool = creditAccountData.filter(
       (ca) => ca.poolAddress === tab
     );
-    console.log('credit accounts for pools', creditAccountsForPool)
+    console.log("credit accounts for pools", creditAccountsForPool);
 
     // compute value in $ for each credit account
     for (let i = 0; i < creditAccountsForPool.length; i++) {
@@ -177,7 +180,7 @@ class PoolsStore {
         const indexedToken = tokenData.filter(
           (tk) => tk.address == tokenAddress
         )[0];
-        
+
         let valToAddBN = BigNumber(amount);
         if (valToAddBN.gt(0)) {
           const symbol = indexedToken["symbol"];
@@ -191,14 +194,17 @@ class PoolsStore {
           const indexedTokenPrice = BigNumber(
             indexedToken["priceUSD18Decimals"]
           ).div(BigNumber(10).pow(18));
-          valToAddBN = BigNumber(valToAddBN).div(BigNumber(10).pow(tokenDecimals));
-          valToAddBN = BigNumber(valToAddBN).multipliedBy(BigNumber(indexedTokenPrice))
+          valToAddBN = BigNumber(valToAddBN).div(
+            BigNumber(10).pow(tokenDecimals)
+          );
+          valToAddBN = BigNumber(valToAddBN).multipliedBy(
+            BigNumber(indexedTokenPrice)
+          );
           let newTokenAmount = lastValBN.plus(valToAddBN);
           newTokenAmount = newTokenAmount.toNumber();
           indexedTokenSum[symbol] = newTokenAmount;
         }
       }
-      console.log('indexed token sum is', indexedTokenSum)
       const dataOverview = {
         collateral: {
           totalCollateral: calculatedTotalCollateral,
