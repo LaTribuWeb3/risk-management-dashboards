@@ -9,7 +9,7 @@ import { waitForElementToBeRemoved } from "@testing-library/react";
 const apiEndpoints = [
   "data/tokens?fakeMainnet=0",
   "pools",
-  //"data/creditAccounts?fakeMainnet=0",
+  "data/creditAccounts?fakeMainnet=0",
 ];
 class PoolsStore {
   constructor() {
@@ -23,12 +23,12 @@ class PoolsStore {
   init = () => {
     this["tab"] = null;
     apiEndpoints.forEach(this.fetchData);
-    this["data/creditAccounts?fakeMainnet=0_data"] = dummyData;
   };
 
   setActiveTab(tab) {
     this.tab = tab;
     mainStore["overview_loading"] = true;
+    mainStore["overview_data"] = null;
     this.selectedPoolData(tab);
   }
 
