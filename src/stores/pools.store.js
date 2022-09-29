@@ -4,6 +4,7 @@ import BigNumber from "bignumber.js";
 import mainStore from "../stores/main.store";
 import alertStore from "../stores/alert.store";
 import dummyData from "./dummydata.json";
+import { waitForElementToBeRemoved } from "@testing-library/react";
 
 const apiEndpoints = [
   "data/tokens?fakeMainnet=0",
@@ -48,16 +49,15 @@ class PoolsStore {
       .catch(console.error);
   };
 
+
+
+
   /// DATA TRANSFORMATION
   selectedPoolData(tab) {
     const poolsData = Object.assign([], this["pools_data"] || []);
     const tokenData = Object.assign(
       [],
       this["data/tokens?fakeMainnet=0_data"] || []
-    );
-    console.log(
-      "credit account data is now",
-      this["data/creditAccounts?fakeMainnet=0_data"]
     );
     const creditAccountData = Object.assign(
       [],
@@ -67,11 +67,10 @@ class PoolsStore {
 
     const selectedPool = poolsData.find((p) => p.address === tab);
 
-    console.log("credit accounts data", creditAccountData);
     const creditAccountsForPool = creditAccountData.filter(
       (ca) => ca.poolAddress === tab
     );
-    console.log("credit accounts for pools", creditAccountsForPool);
+
 
     // compute value in $ for each credit account
     for (let i = 0; i < creditAccountsForPool.length; i++) {
@@ -127,10 +126,11 @@ class PoolsStore {
     for (let i = 0; i < creditAccountsForPool.length; i++) {
       collateralArray.push(creditAccountsForPool[i]["collateralValue"]);
     }
-    console.log("collateralArray is", collateralArray);
-    collateralArray.sort((a, b) => a - b);
-    console.log("sorted", collateralArray);
-    const calculatedTop10Collateral = 0; // TODO
+    collateralArray.sort((a, b) => b - a);
+    collateralArray = collateralArray.slice(0, 10);
+    let initialCollateralValue = 0;
+    collateralArray = collateralArray.reduce((prev, curr) => Number(prev) + Number(curr), initialCollateralValue);
+    const calculatedTop10Collateral = collateralArray.toString();
 
     // compute total debt
     let totalDebt = 0;
@@ -169,7 +169,27 @@ class PoolsStore {
     const calculatedTop1Debt = currentTopOneDebt.toString();
     //////END
 
-    const calculatedTop10Debt = 0; // TODO
+    /// compute top 10 debt
+    let debtArray = [];
+    for (let i = 0; i < creditAccountsForPool.length; i++) {
+      debtArray.push(creditAccountsForPool[i]['borrowedAmountPlusInterestAndFees']);
+    }
+    debtArray.sort((a, b) => b - a);
+    debtArray = debtArray.slice(0, 10);
+    let debtValue = 0;
+    for(let i = 0; i < debtArray.length; i++){
+      debtValue = BigNumber(debtValue).plus(BigNumber(debtArray[i]))
+    }
+
+    debtValue = BigNumber(debtValue).div(BigNumber(10).pow(poolUnderlying[0]["decimals"]))
+    debtArray = Number(underlyingPrice)*Number(debtValue);
+    const calculatedTop10Debt = debtValue.toString();
+
+
+
+
+
+
 
     // compute pool's tokens sums
     const indexedTokenSum = {};
