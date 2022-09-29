@@ -1,25 +1,29 @@
 import React, { Component } from "react";
-import { observer } from "mobx-react"
-import Overview from './Overview'
-import Liquidity from './Liquidity2'
+import { observer } from "mobx-react";
+import Overview from "./Overview";
+import Liquidity from "./Liquidity2";
 import Accounts from "./Accounts";
 import Oracles from "./Oracles";
 import RiskParameters from "./RiskParameters";
 import Simulation from "./Simulation";
-import Alerts from './Alerts';
+import Alerts from "./Alerts";
 import OpenLiquidations from "./OpenLiquidations";
 import ScrollSpy from "react-ui-scrollspy";
-import mainStore from '../stores/main.store';
-import Debug from './Debug';
+import mainStore from "../stores/main.store";
+import Debug from "./Debug";
 import Tabnav from "../layout/Tabnav";
 
 class SinglePage extends Component {
   render() {
-    const { proViewShow } = mainStore
+    const { proViewShow } = mainStore;
     return (
       <div>
         <Tabnav />
-        <ScrollSpy offsetBottom={400} scrollThrottle={100} parentScrollContainerRef={this.props.scrollContainer}>
+        <ScrollSpy
+          offsetBottom={400}
+          scrollThrottle={100}
+          parentScrollContainerRef={this.props.scrollContainer}
+        >
           {/* <section id="system-status">
             {mainStore.proViewShow("system-status") && <div>
               <h2>System Status</h2>
@@ -27,13 +31,15 @@ class SinglePage extends Component {
             </div>}
           </section> */}
           <section id="overview">
-            {mainStore.proViewShow("overview") && <div>
-              <hgroup>
-                <h2>Overview</h2>
-                <p className="description">State of the platform overview</p>
-              </hgroup>
-              <Overview />
-            </div>}
+            {mainStore.proViewShow("overview") && (
+              <div>
+                <hgroup>
+                  <h2>Overview</h2>
+                  <p className="description">State of the platform overview</p>
+                </hgroup>
+                <Overview />
+              </div>
+            )}
           </section>
           {/* <section id="collateral-factors">
             {mainStore.proViewShow("collateral-factors") && <div>
@@ -94,8 +100,8 @@ class SinglePage extends Component {
         </ScrollSpy>
         <Debug />
       </div>
-    )
+    );
   }
 }
 
-export default observer(SinglePage)
+export default observer(SinglePage);

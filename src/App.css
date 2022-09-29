@@ -1,9 +1,7 @@
-
-
 /**
  * Docs: Theme switcher
  */
- .switcher {
+.switcher {
   position: fixed;
   right: calc(var(--spacing) / 2 + var(--scrollbar-width, 0px));
   bottom: var(--spacing);
@@ -21,7 +19,12 @@
   height: 1rem;
   border: 0.15rem solid currentColor;
   border-radius: 50%;
-  background: linear-gradient(to right, currentColor 0%, currentColor 50%, transparent 50%);
+  background: linear-gradient(
+    to right,
+    currentColor 0%,
+    currentColor 50%,
+    transparent 50%
+  );
   content: "";
   vertical-align: bottom;
   transition: transform var(--transition);
@@ -35,9 +38,11 @@
   font-size: 0.875rem;
   white-space: nowrap;
 }
-.switcher:hover, .switcher:focus {
+.switcher:hover,
+.switcher:focus {
   max-width: 100%;
-  transition: background-color var(--transition), border-color var(--transition), color var(--transition), box-shadow var(--transition);
+  transition: background-color var(--transition), border-color var(--transition),
+    color var(--transition), box-shadow var(--transition);
 }
 .switcher:hover::after {
   transform: rotate(180deg);

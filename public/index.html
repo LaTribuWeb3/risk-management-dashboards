@@ -30,8 +30,10 @@
     <script>
       const changeFavicon = () => {
         const faviconTag = document.getElementById("faviconTag");
-        const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-        console.log({isDark})
+        const isDark = window.matchMedia(
+          "(prefers-color-scheme: dark)"
+        ).matches;
+        console.log({ isDark });
         if (isDark) {
           faviconTag.href = "%PUBLIC_URL%/risk-dao-white.svg";
         } else {
@@ -39,10 +41,12 @@
         }
       };
 
-      changeFavicon()
-      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-        changeFavicon()
-      });
+      changeFavicon();
+      window
+        .matchMedia("(prefers-color-scheme: dark)")
+        .addEventListener("change", (e) => {
+          changeFavicon();
+        });
     </script>
   </head>
   <body>

@@ -1,28 +1,31 @@
-import mainStore from './stores/main.store'
+import mainStore from "./stores/main.store";
 
 const themeSwitcher = {
-  
   // Config
-  _scheme: 'auto',
+  _scheme: "auto",
   change: {
-    light: '<i>Turn on dark mode</i>',
-    dark: '<i>Turn off dark mode</i>',
+    light: "<i>Turn on dark mode</i>",
+    dark: "<i>Turn off dark mode</i>",
   },
-  buttonsTarget: '.theme-switcher',
-  localStorageKey: 'picoPreferedColorScheme',
+  buttonsTarget: ".theme-switcher",
+  localStorageKey: "picoPreferedColorScheme",
 
   // Init
   init() {
     this.scheme = this.schemeFromLocalStorage;
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-      this.scheme = !!e.matches ? this._scheme = 'dark' : this._scheme = 'light';
-    });
+    window
+      .matchMedia("(prefers-color-scheme: dark)")
+      .addEventListener("change", (e) => {
+        this.scheme = !!e.matches
+          ? (this._scheme = "dark")
+          : (this._scheme = "light");
+      });
     this.initSwitchers();
   },
 
   // Get color scheme from local storage
   get schemeFromLocalStorage() {
-    if (typeof window.localStorage !== 'undefined') {
+    if (typeof window.localStorage !== "undefined") {
       if (window.localStorage.getItem(this.localStorageKey) !== null) {
         return window.localStorage.getItem(this.localStorageKey);
       }
@@ -32,16 +35,24 @@ const themeSwitcher = {
 
   // Prefered color scheme
   get preferedColorScheme() {
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    return window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light";
   },
 
   // Init switchers
   initSwitchers() {
     const buttons = document.querySelectorAll(this.buttonsTarget);
-    buttons.forEach(button => {
-      button.addEventListener('click', () => {
-        this.scheme == 'dark' ? this.scheme = 'light' : this.scheme = 'dark';
-      }, false);
+    buttons.forEach((button) => {
+      button.addEventListener(
+        "click",
+        () => {
+          this.scheme == "dark"
+            ? (this.scheme = "light")
+            : (this.scheme = "dark");
+        },
+        false
+      );
     });
   },
 
@@ -54,10 +65,11 @@ const themeSwitcher = {
 
   // Set scheme
   set scheme(scheme) {
-    if (scheme == 'auto') {
-      this.preferedColorScheme == 'dark' ? this._scheme = 'dark' : this._scheme = 'light';
-    }
-    else if (scheme == 'dark' || scheme == 'light') {
+    if (scheme == "auto") {
+      this.preferedColorScheme == "dark"
+        ? (this._scheme = "dark")
+        : (this._scheme = "light");
+    } else if (scheme == "dark" || scheme == "light") {
       this._scheme = scheme;
     }
     this.applyScheme();
@@ -71,21 +83,19 @@ const themeSwitcher = {
 
   // Apply scheme
   applyScheme() {
-    mainStore.setBlackMode(this.scheme === 'dark')
-    document.querySelector('html').setAttribute('data-theme', this.scheme);
+    mainStore.setBlackMode(this.scheme === "dark");
+    document.querySelector("html").setAttribute("data-theme", this.scheme);
     const buttons = document.querySelectorAll(this.buttonsTarget);
-    buttons.forEach(
-      button => {
-        const text = this.scheme == 'dark' ? this.change.dark : this.change.light;
-        button.innerHTML = text;
-        button.setAttribute('aria-label', text.replace(/<[^>]*>?/gm, ''));
-      }
-    );
+    buttons.forEach((button) => {
+      const text = this.scheme == "dark" ? this.change.dark : this.change.light;
+      button.innerHTML = text;
+      button.setAttribute("aria-label", text.replace(/<[^>]*>?/gm, ""));
+    });
   },
 
   // Store scheme to local storage
   schemeToLocalStorage() {
-    if (typeof window.localStorage !== 'undefined') {
+    if (typeof window.localStorage !== "undefined") {
       window.localStorage.setItem(this.localStorageKey, this.scheme);
     }
   },
@@ -93,8 +103,8 @@ const themeSwitcher = {
 
 // Theme switcher
 themeSwitcher.addButton({
-  tag: 'BUTTON',
-  class: 'contrast switcher theme-switcher',
-  target: 'body',
+  tag: "BUTTON",
+  class: "contrast switcher theme-switcher",
+  target: "body",
 });
 themeSwitcher.init();

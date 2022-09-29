@@ -1,5 +1,5 @@
-export const TOKEN_PREFIX = window.APP_CONFIG.TOKEN_PREFIX
-export const BLOCK_EXPLORER = window.APP_CONFIG.BLOCK_EXPLORER
+export const TOKEN_PREFIX = window.APP_CONFIG.TOKEN_PREFIX;
+export const BLOCK_EXPLORER = window.APP_CONFIG.BLOCK_EXPLORER;
 export const COLORS = [
   "#1095C1",
   "#9410C1",
@@ -9,4 +9,4 @@ export const COLORS = [
   "#1B2BE4",
   "#E41B8F",
   "#E4D41B",
-]
+];
