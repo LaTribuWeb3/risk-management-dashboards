@@ -173,16 +173,15 @@ class PoolsStore {
         )[0];
         const valToAddBN = BigNumber(amount);
         if (valToAddBN.gt(0)) {
-          const symbol = indexedToken["symbol"]; // find token symbol from token address
+          const symbol = indexedToken["symbol"];
           let lastValue = indexedTokenSum[symbol];
           if (lastValue === undefined) {
             lastValue = 0;
           }
           const lastValBN = BigNumber(lastValue);
 
-          const tokenDecimals = indexedToken["decimals"]; // todo replace by good value
+          const tokenDecimals = indexedToken["decimals"];
           let newTokenAmount = lastValBN.plus(valToAddBN);
-          // console.log(newTokenAmount.toString());
           newTokenAmount = newTokenAmount.div(BigNumber(10).pow(tokenDecimals));
           const indexedTokenPrice = BigNumber(
             indexedToken["priceUSD18Decimals"]
@@ -190,9 +189,7 @@ class PoolsStore {
           newTokenAmount = BigNumber(newTokenAmount).multipliedBy(
             BigNumber(indexedTokenPrice)
           );
-          // console.log(newTokenAmount.toString());
           newTokenAmount = newTokenAmount.toNumber();
-          // console.log(newTokenAmount.toString());
           indexedTokenSum[symbol] = newTokenAmount;
         }
       }
@@ -213,19 +210,6 @@ class PoolsStore {
 
       mainStore["overview_data"] = dataOverview;
       mainStore["overview_loading"] = false;
-
-      /*
-          if(selectedLabel.includes('DAI')) {
-            mainStore['overview_data'] = dummy1Overview;
-            alertStore.liquidationsAtRisk = 100;
-          } else if(selectedLabel.includes('USDC')) {
-            mainStore['overview_data'] = dummy2Overview;
-            alertStore.liquidationsAtRisk = 89999;
-          } else {
-            mainStore['overview_data'] = dummy3Overview;
-            alertStore.liquidationsAtRisk = 20050;
-          }
-          */
     }
   }
 }
