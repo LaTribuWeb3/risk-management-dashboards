@@ -23,8 +23,7 @@ const humanTxt = txt => txtMap[txt]
 class Overview extends Component {
   render (){
     const overviewData = Object.assign({}, mainStore['overview_data'] || {})
-    
-    console.log('overview.overviewData', overviewData);
+
     const jsonTime = Math.floor(Date.now()/1000);
     
     const loading = mainStore['overview_loading']
