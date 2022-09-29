@@ -98,7 +98,6 @@ class SinglePage extends Component {
             </div>}
           </section> */}
         </ScrollSpy>
-        <Debug />
       </div>
     );
   }
