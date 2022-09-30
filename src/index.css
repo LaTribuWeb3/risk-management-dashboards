@@ -291,4 +291,8 @@ h2 {
   padding: 35px;
   border-color: red;
   border: solid;
+  border-radius: var(--border-radius);
+  background: var(--card-background-color);
+  box-shadow: var(--card-box-shadow);
+  margin-bottom: var(--spacing);
 }

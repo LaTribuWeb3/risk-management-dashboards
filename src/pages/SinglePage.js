@@ -20,33 +20,36 @@ class SinglePage extends Component {
     return (
       <div>
         <Tabnav />
-        {poolsStore['poolHasAccounts'] == 0 ?
-        <div className="noaccountsdiv">
-          <span className="noaccounts">
-          this pool has no credit accounts.</span></div> :
-        <ScrollSpy
-          offsetBottom={400}
-          scrollThrottle={100}
-          parentScrollContainerRef={this.props.scrollContainer}
-        >
-          {/* <section id="system-status">
+        {poolsStore["poolHasAccounts"] == 0 ? (
+          <div className="noaccountsdiv">
+            <span className="noaccounts">
+              this pool has no credit accounts.
+            </span>
+          </div>
+        ) : (
+          <ScrollSpy
+            offsetBottom={400}
+            scrollThrottle={100}
+            parentScrollContainerRef={this.props.scrollContainer}
+          >
+            {/* <section id="system-status">
             {mainStore.proViewShow("system-status") && <div>
               <h2>System Status</h2>
               <Alerts />
             </div>}
           </section> */}
-          <section id="overview">
-            {mainStore.proViewShow("overview") && (
-              <div>
-                <hgroup>
-                  <h2>Overview</h2>
-                  <p className="description">State of the platform overview</p>
-                </hgroup>
-                <Overview />
-              </div>
-            )}
-          </section>
-          {/* <section id="collateral-factors">
+            <section id="overview">
+              {mainStore.proViewShow("overview") && (
+                <div>
+                  <hgroup>
+                    <h2>Overview</h2>
+                    <p className="description">State of the pool overview</p>
+                  </hgroup>
+                  <Overview />
+                </div>
+              )}
+            </section>
+            {/* <section id="collateral-factors">
             {mainStore.proViewShow("collateral-factors") && <div>
               <h2>Collateral Factor Recommendations</h2>
               <RiskParameters />
@@ -102,7 +105,8 @@ class SinglePage extends Component {
               <Liquidity />
             </div>}
           </section> */}
-        </ScrollSpy>}
+          </ScrollSpy>
+        )}
       </div>
     );
   }

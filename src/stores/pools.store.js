@@ -22,26 +22,24 @@ class PoolsStore {
 
   init = () => {
     this["tab"] = null;
-    this['poolHasAccounts'] = 0;
+    this["poolHasAccounts"] = 0;
     apiEndpoints.forEach(this.fetchData);
   };
 
   setActiveTab(tab) {
     this.tab = tab;
-    this['poolHasAccounts'] = 0;
+    this["poolHasAccounts"] = 0;
     mainStore["overview_loading"] = true;
     mainStore["overview_data"] = null;
     /// check if pool has credit accounts active:
     const PoolCreditAccounts = Object.assign(
       [],
       this["data/creditAccounts?fakeMainnet=0_data"] || []
-    ).filter(
-      (ca) => ca.poolAddress === tab
-    );
-    if(PoolCreditAccounts.length > 0){
-      this['poolHasAccounts'] = 1;
+    ).filter((ca) => ca.poolAddress === tab);
+    if (PoolCreditAccounts.length > 0) {
+      this["poolHasAccounts"] = 1;
     }
-    console.log('poolhasdata?', this['poolHasAccounts'])
+    console.log("poolhasdata?", this["poolHasAccounts"]);
     this.selectedPoolData(tab);
   }
 

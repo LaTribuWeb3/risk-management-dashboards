@@ -21,7 +21,7 @@ class Tabnav extends Component {
 
     return (
       <div className="navwrapper">
-        <span>Select Pool</span>
+        <span>Select Pool:</span>
         <div className="tabnav">
           {loading ? (
             <span>loading...</span>

@@ -3,11 +3,11 @@ import { observer } from "mobx-react";
 import mainStore from "../stores/main.store";
 
 const pages = [
-  "system-status",
+  //"system-status",
   "overview",
   "collateral-factors",
   "sandbox",
-  "asset-distribution",
+  //"asset-distribution",
   "open-liquidations",
   "oracle-deviation",
   "liquidity",
@@ -24,7 +24,7 @@ const Sidenav = (props) => {
   return (
     <div className="side-bar box-space">
       {/* <Header/> */}
-      <fieldset>
+      {/* <fieldset>
         <label htmlFor="switch">
           <input
             onChange={mainStore.toggleProView}
@@ -36,7 +36,7 @@ const Sidenav = (props) => {
           />
           <span>Pro View</span>
         </label>
-      </fieldset>
+      </fieldset> */}
       <aside>
         <nav>
           <ul>
