@@ -12,6 +12,7 @@ import ScrollSpy from "react-ui-scrollspy";
 import mainStore from "../stores/main.store";
 import Debug from "./Debug";
 import Tabnav from "../layout/Tabnav";
+import poolsStore from "../stores/pools.store";
 
 class SinglePage extends Component {
   render() {
@@ -19,6 +20,10 @@ class SinglePage extends Component {
     return (
       <div>
         <Tabnav />
+        {poolsStore['poolHasAccounts'] == 0 ?
+        <div className="noaccountsdiv">
+          <span className="noaccounts">
+          this pool has no credit accounts.</span></div> :
         <ScrollSpy
           offsetBottom={400}
           scrollThrottle={100}
@@ -97,7 +102,7 @@ class SinglePage extends Component {
               <Liquidity />
             </div>}
           </section> */}
-        </ScrollSpy>
+        </ScrollSpy>}
       </div>
     );
   }

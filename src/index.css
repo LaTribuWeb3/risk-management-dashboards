@@ -279,3 +279,16 @@ h2 {
   border: 1px solid #ccc;
   border-top: none;
 }
+.noaccountsdiv {
+  display: inline-block;
+  text-align: center;
+  width: 100%;
+  margin-top: 50px;
+  padding: 35px;
+  margin-left: calc(var(--sidebar-width) / -2);
+}
+.noaccounts {
+  padding: 35px;
+  border-color: red;
+  border: solid;
+}
