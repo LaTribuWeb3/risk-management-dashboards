@@ -25,7 +25,7 @@ class MainStore {
   blackMode = true;
   loading = {};
   apiData = {};
-  proView = false;
+  proView = true;
 
   constructor() {
     this.init();

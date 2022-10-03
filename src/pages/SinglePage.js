@@ -93,7 +93,7 @@ class SinglePage extends Component {
               </hgroup>
               <Oracles />
             </div>}
-          </section>
+          </section> */}
           <section id="liquidity">
             {mainStore.proViewShow("liquidity") && <div>
               <hgroup>
@@ -104,7 +104,7 @@ class SinglePage extends Component {
               </hgroup>
               <Liquidity />
             </div>}
-          </section> */}
+          </section>
           </ScrollSpy>
         )}
       </div>
