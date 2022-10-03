@@ -4,6 +4,7 @@ import mainStore from "../stores/main.store";
 
 const pages = [
   //"system-status",
+  "Select pools",
   "overview",
   // "collateral-factors",
   // "sandbox",

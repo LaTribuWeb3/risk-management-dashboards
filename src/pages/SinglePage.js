@@ -19,7 +19,9 @@ class SinglePage extends Component {
     const { proViewShow } = mainStore;
     return (
       <div>
+        <section id="selectPools">
         <Tabnav />
+        </section>
         {poolsStore["poolHasAccounts"] == 0 ? (
           <div className="noaccountsdiv">
             <span className="noaccounts">
