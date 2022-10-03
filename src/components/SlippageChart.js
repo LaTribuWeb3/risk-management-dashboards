@@ -28,7 +28,7 @@ const truncate = {
 
 const expendedBoxStyle = {
   margin: "30px",
-  width: "50%",
+  width: "100%",
   minHeight: "300px",
   padding: "40px",
 };
@@ -49,28 +49,13 @@ const CustomTooltip = ({ active, payload, label }) => {
 
 class SlippageChart extends Component {
   render() {
-    let market = this.props.data.toUpperCase();
-    if (market === "WETH") {
-      market = "ETH";
-    }
-    const loading = mainStore["usd_volume_for_slippage_loading"];
-    const rawData = Object.assign(
-      {},
-      mainStore["usd_volume_for_slippage_data"] || {}
-    );
-    const { json_time } = rawData;
-    if (json_time) {
-      delete rawData.json_time;
-    }
-    const data = !loading ? rawData[TOKEN_PREFIX + market] || {} : {};
-    const dataSet = Object.entries(data).map(([k, v]) => ({
-      name: removeTokenPrefix(k),
-      value: v,
-    }));
+    console.log('dataSet', this.props.data)
+    const dataSet = this.props.data
     if (!dataSet.length) {
       return null;
     }
     const [biggest, secondBiggest] = dataSet.sort((a, b) => b.value - a.value);
+    console.log('data set here is', dataSet)
     const dataMax = Math.min(secondBiggest.value * 2, biggest.value);
     const color = mainStore.blackMode ? "white" : "black";
 
@@ -97,7 +82,7 @@ class SlippageChart extends Component {
             </BarChart>
           </ResponsiveContainer>
         </article>
-        <div
+        {/* <div
           className="box-space"
           style={{
             width: "50%",
@@ -116,7 +101,7 @@ class SlippageChart extends Component {
           <div style={{ width: "50%" }}>
             <img src={`/images/${color}-powered-by-kyberswap.png`} />
           </div>
-        </div>
+        </div> */}
         {/* <h6>top 5 accounts</h6>
           <div style={{display: 'flex', justifyContent: 'space-between', flexDirection: 'column'}}>
             {users.map(({user, size}, i)=> <BoxRow key={i}>
