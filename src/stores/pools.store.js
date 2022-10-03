@@ -26,8 +26,9 @@ class PoolsStore {
     apiEndpoints.forEach(this.fetchData);
   };
 
-  setActiveTab(tab) {
+  setActiveTab(tab, symbol) {
     this.tab = tab;
+    this.activeTabSymbol = symbol;
     this["poolHasAccounts"] = 0;
     mainStore["overview_loading"] = true;
     mainStore["overview_data"] = null;
@@ -39,7 +40,6 @@ class PoolsStore {
     if (PoolCreditAccounts.length > 0) {
       this["poolHasAccounts"] = 1;
     }
-    console.log("poolhasdata?", this["poolHasAccounts"]);
     this.selectedPoolData(tab);
   }
 
@@ -150,6 +150,7 @@ class PoolsStore {
     const underlyingPrice = BigNumber(
       poolUnderlying[0]["priceUSD18Decimals"]
     ).div(BigNumber(10).pow(18));
+    console.log('totalBorrowed?',selectedPool.totalBorrowed)
     totalDebt = BigNumber(selectedPool.totalBorrowed).div(
       BigNumber(10).pow(poolUnderlying[0]["decimals"])
     );
@@ -159,6 +160,7 @@ class PoolsStore {
     // compute top 1 debt
     let currentTopOneDebt = 0;
     for (let i = 0; i < creditAccountsForPool.length; i++) {
+      console.log(creditAccountsForPool[i])
       if (
         BigNumber(currentTopOneDebt).isLessThan(
           BigNumber(
@@ -186,10 +188,12 @@ class PoolsStore {
         creditAccountsForPool[i]["borrowedAmountPlusInterestAndFees"]
       );
     }
+    console.log('debt array 1 is', debtArray)
     debtArray.sort((a, b) => b - a);
     debtArray = debtArray.slice(0, 10);
     let debtValue = 0;
     for (let i = 0; i < debtArray.length; i++) {
+      console.log('debt value is', debtValue.toString())
       debtValue = BigNumber(debtValue).plus(BigNumber(debtArray[i]));
     }
 
