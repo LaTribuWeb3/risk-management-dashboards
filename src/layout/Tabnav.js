@@ -15,8 +15,8 @@ class Tabnav extends Component {
       poolsStore["data/tokens?fakeMainnet=0_data"] || []
     );
 
-    function setActiveTab(tab) {
-      poolsStore.setActiveTab(tab);
+    function setActiveTab(tab, symbol) {
+      poolsStore.setActiveTab(tab, symbol);
     }
 
     return (
@@ -32,7 +32,7 @@ class Tabnav extends Component {
               )?.symbol;
               return (
                 <button
-                  onClick={() => setActiveTab(pool.address)}
+                  onClick={() => setActiveTab(pool.address, symbol)}
                   className={
                     "button " +
                     (poolsStore["tab"] == pool.address ? "active" : "")
