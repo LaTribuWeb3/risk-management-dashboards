@@ -143,15 +143,23 @@ class PoolsStore {
     const calculatedTop10Collateral = collateralArray.toString();
 
     // compute total debt
-    let totalDebt = 0;
+    let totalDebtArray = [];
+    for (let i = 0; i < creditAccountsForPool.length; i ++){
+      totalDebtArray.push(creditAccountsForPool[i]["borrowedAmountPlusInterestAndFees"])
+    }
+    let totalDebt = 0
+    totalDebt = totalDebtArray.reduce(
+      (prev, curr) => Number(prev) + Number(curr),
+      totalDebt
+    );
     const poolUnderlying = tokenData.filter(
       (tk) => tk.address == selectedPool["underlying"]
     );
     const underlyingPrice = BigNumber(
       poolUnderlying[0]["priceUSD18Decimals"]
     ).div(BigNumber(10).pow(18));
-    console.log('totalBorrowed?',selectedPool.totalBorrowed)
-    totalDebt = BigNumber(selectedPool.totalBorrowed).div(
+
+    totalDebt = BigNumber(totalDebt).div(
       BigNumber(10).pow(poolUnderlying[0]["decimals"])
     );
     totalDebt = BigNumber(totalDebt).multipliedBy(BigNumber(underlyingPrice));
@@ -160,7 +168,6 @@ class PoolsStore {
     // compute top 1 debt
     let currentTopOneDebt = 0;
     for (let i = 0; i < creditAccountsForPool.length; i++) {
-      console.log(creditAccountsForPool[i])
       if (
         BigNumber(currentTopOneDebt).isLessThan(
           BigNumber(
@@ -188,19 +195,17 @@ class PoolsStore {
         creditAccountsForPool[i]["borrowedAmountPlusInterestAndFees"]
       );
     }
-    console.log('debt array 1 is', debtArray)
     debtArray.sort((a, b) => b - a);
     debtArray = debtArray.slice(0, 10);
     let debtValue = 0;
     for (let i = 0; i < debtArray.length; i++) {
-      console.log('debt value is', debtValue.toString())
       debtValue = BigNumber(debtValue).plus(BigNumber(debtArray[i]));
     }
 
     debtValue = BigNumber(debtValue).div(
       BigNumber(10).pow(poolUnderlying[0]["decimals"])
     );
-    debtArray = Number(underlyingPrice) * Number(debtValue);
+    debtValue = Number(underlyingPrice) * Number(debtValue);
     const calculatedTop10Debt = debtValue.toString();
 
     // compute pool's tokens sums
