@@ -55,6 +55,7 @@ class PoolsStore {
           this["tab"] = data[0].address;
           this.poolsData = data;
         }
+        this.setActiveTab(this.tab, this.activeTabSymbol);
         return data;
       })
       .catch(console.error);
@@ -144,10 +145,12 @@ class PoolsStore {
 
     // compute total debt
     let totalDebtArray = [];
-    for (let i = 0; i < creditAccountsForPool.length; i ++){
-      totalDebtArray.push(creditAccountsForPool[i]["borrowedAmountPlusInterestAndFees"])
+    for (let i = 0; i < creditAccountsForPool.length; i++) {
+      totalDebtArray.push(
+        creditAccountsForPool[i]["borrowedAmountPlusInterestAndFees"]
+      );
     }
-    let totalDebt = 0
+    let totalDebt = 0;
     totalDebt = totalDebtArray.reduce(
       (prev, curr) => Number(prev) + Number(curr),
       totalDebt
@@ -242,6 +245,7 @@ class PoolsStore {
           indexedTokenSum[symbol] = newTokenAmount;
         }
       }
+
       const dataOverview = {
         collateral: {
           totalCollateral: calculatedTotalCollateral,
