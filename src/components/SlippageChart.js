@@ -49,13 +49,11 @@ const CustomTooltip = ({ active, payload, label }) => {
 
 class SlippageChart extends Component {
   render() {
-    console.log('dataSet', this.props.data)
-    const dataSet = this.props.data
+    const dataSet = this.props.data;
     if (!dataSet.length) {
       return null;
     }
     const [biggest, secondBiggest] = dataSet.sort((a, b) => b.value - a.value);
-    console.log('data set here is', dataSet)
     const dataMax = Math.min(secondBiggest.value * 2, biggest.value);
     const color = mainStore.blackMode ? "white" : "black";
 

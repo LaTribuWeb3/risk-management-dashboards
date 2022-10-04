@@ -20,7 +20,7 @@ class SinglePage extends Component {
     return (
       <div>
         <section id="selectPools">
-        <Tabnav />
+          <Tabnav />
         </section>
         {poolsStore["poolHasAccounts"] == 0 ? (
           <div className="noaccountsdiv">
@@ -96,17 +96,22 @@ class SinglePage extends Component {
               <Oracles />
             </div>}
           </section> */}
-          <section id="liquidity">
-            {mainStore.proViewShow("liquidity") && <div>
-              <hgroup>
-                <h2>DEX Liquidity</h2>
-                <p className="description">Monitoring available on-chain DEX liquidity per asset.
-                  The statistics monitor the top accounts portion of total liquidity as well as the average and median size of LP positions.
-                </p>
-              </hgroup>
-              <Liquidity />
-            </div>}
-          </section>
+            <section id="liquidity">
+              {mainStore.proViewShow("liquidity") && (
+                <div>
+                  <hgroup>
+                    <h2>DEX Liquidity</h2>
+                    <p className="description">
+                      Monitoring available on-chain DEX liquidity per asset. The
+                      statistics monitor the top accounts portion of total
+                      liquidity as well as the average and median size of LP
+                      positions.
+                    </p>
+                  </hgroup>
+                  <Liquidity />
+                </div>
+              )}
+            </section>
           </ScrollSpy>
         )}
       </div>

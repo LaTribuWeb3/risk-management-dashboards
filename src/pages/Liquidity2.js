@@ -60,43 +60,45 @@ class Liquidity extends Component {
   render() {
     const loading = mainStore["dex_liquidity_loading"];
     const rawData = Object.assign([], mainStore["dex_liquidity_data"] || []);
-    const symbol = poolsStore['activeTabSymbol'];
+    const symbol = poolsStore["activeTabSymbol"];
     const tokenData = Object.assign(
       [],
       poolsStore["data/tokens?fakeMainnet=0_data"] || []
     );
-    let filteredData = rawData.filter((pair) => 
-      pair.symbolOut == symbol
-    )
+    let filteredData = rawData.filter((pair) => pair.symbolOut == symbol);
     const formattedData = filteredData.map((pair, i) => {
-      let price = tokenData.filter((tk => tk.symbol == symbol))[0]["priceUSD18Decimals"];
+      let price = tokenData.filter((tk) => tk.symbol == symbol)[0][
+        "priceUSD18Decimals"
+      ];
       price = BigNumber(price).div(BigNumber(10).pow(18));
-      let liquidity = BigNumber(pair.normalizedLiquidity).multipliedBy(BigNumber(price));
+      let liquidity = BigNumber(pair.normalizedLiquidity).multipliedBy(
+        BigNumber(price)
+      );
       liquidity = Math.floor(Number(liquidity));
       return {
         name: pair.symbolIn,
         value: liquidity,
-      }
-    })
+      };
+    });
 
     return (
       <div>
         <Box loading={loading}>
-            <details open>
-              <summary>
-                <span>{symbol}</span>
-              </summary>
-              <div style={{ display: "flex" }}>
-                <SlippageChart symbol={symbol} data={formattedData} />
-              </div>
-              {/* <div style={{ marginLeft: "30px" }}>
+          <details open>
+            <summary>
+              <span>{symbol}</span>
+            </summary>
+            <div style={{ display: "flex" }}>
+              <SlippageChart symbol={symbol} data={formattedData} />
+            </div>
+            {/* <div style={{ marginLeft: "30px" }}>
                 {!!asset.lps.length && (
                   <Box>
                     <DataTable columns={columns} data={asset.lps} />
                   </Box>
                 )}
               </div> */}
-            </details>
+          </details>
         </Box>
       </div>
     );
