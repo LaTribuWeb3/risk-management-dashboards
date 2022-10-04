@@ -5,6 +5,7 @@ import DataTable from "react-data-table-component";
 import mainStore from "../stores/main.store";
 import Ramzor from "../components/Ramzor";
 import Token from "../components/Token";
+import poolsStore from "../stores/pools.store";
 
 const percentFrom = (base, num) => {
   const percent = (num / base) * 100 - 100;
@@ -26,7 +27,7 @@ const columns = [
     sortable: true,
   },
   {
-    name: "Platform’s Oracle Price ",
+    name: "Platform’s Oracle Price ($)",
     selector: (row) => row.oracle,
     sortable: true,
   },
@@ -50,23 +51,19 @@ const ExpandedComponent = ({ data }) => (
 
 class Oracles extends Component {
   render() {
-    const loading = mainStore["oracles_loading"];
+    const loading = poolsStore["oracles_loading"];
     const rawData = Object.assign({}, mainStore["oracles_data"] || {});
-    const { json_time } = rawData;
-    if (json_time) {
-      delete rawData.json_time;
-    }
-    const data = !loading
-      ? Object.entries(rawData).map(([k, v]) => {
-          v.key = k;
-          return v;
-        })
-      : [];
+    const { json_time } = Date.now;
 
     return (
       <div>
         <Box loading={loading} time={json_time}>
-          {!loading && <DataTable columns={columns} data={data} />}
+          {!loading && (
+            <DataTable
+              columns={columns}
+              data={poolsStore["oracle_deviation_data"]}
+            />
+          )}
         </Box>
       </div>
     );

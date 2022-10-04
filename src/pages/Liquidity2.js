@@ -58,7 +58,6 @@ import BigNumber from "bignumber.js";
 
 class Liquidity extends Component {
   render() {
-
     return (
       <div>
         <Box loading={poolsStore["dex_liquidity_loading"]}>
@@ -67,7 +66,10 @@ class Liquidity extends Component {
               <span>{poolsStore["activeTabSymbol"]}</span>
             </summary>
             <div style={{ display: "flex" }}>
-              <SlippageChart symbol={poolsStore["activeTabSymbol"]} data={poolsStore['liquidityData']} />
+              <SlippageChart
+                symbol={poolsStore["activeTabSymbol"]}
+                data={poolsStore["liquidityData"]}
+              />
             </div>
             {/* <div style={{ marginLeft: "30px" }}>
                 {!!asset.lps.length && (

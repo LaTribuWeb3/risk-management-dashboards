@@ -19,26 +19,71 @@ class PoolsStore {
     this.init();
     makeAutoObservable(this);
   }
+  roundTo(num, dec) {
+    const pow = Math.pow(10, dec);
+    return Math.round((num + Number.EPSILON) * pow) / pow;
+  }
 
   apiUrl = process.env.REACT_APP_API_URL || "http://dev-0.la-tribu.xyz:8081";
   poolsData = {};
 
   init = () => {
     this["tab"] = null;
-    this['activeTabSymbol'] = null;
+    this["activeTabSymbol"] = null;
     this["poolHasAccounts"] = 0;
-    this['usdc_liquidity_data'] = usdcLiquidity;
-    this['wbtc_liquidity_data'] = wbtcLiquidity;
-    this['weth_liquidity_data'] = wethLiquidity;
-    this['dai_liquidity_data'] = daiLiquidity;
-    this['steth_liquidity_data'] = stethLiquidity;
+    this["usdc_liquidity_data"] = usdcLiquidity;
+    this["wbtc_liquidity_data"] = wbtcLiquidity;
+    this["weth_liquidity_data"] = wethLiquidity;
+    this["dai_liquidity_data"] = daiLiquidity;
+    this["steth_liquidity_data"] = stethLiquidity;
+    this["oracle_deviation_data"] = null;
+    this["oracles_loading"] = true;
     this["dex_liquidity_loading"] = true;
     apiEndpoints.forEach(this.fetchData);
   };
 
+  oracleDeviation() {
+    this["oracles_loading"] = true;
+    let oracleData = Object.assign(
+      [],
+      this["data/tokens?fakeMainnet=0_data"] || []
+    );
+    let oracleArray = [];
+    oracleData.forEach((entry) => {
+      console.log(entry);
+      oracleArray.push({
+        key: entry.symbol,
+        oracle: this.roundTo(entry.priceUSD18Decimals / 1e18, 4),
+        cex_price: entry.cexPriceUSD18Decimals / 1e18,
+        dex_price: entry.dexPriceUSD18Decimals / 1e18,
+      });
+    });
+    this["oracle_deviation_data"] = oracleArray;
+    this["oracles_loading"] = false;
+  }
+
+  fetchData = (endpoint) => {
+    this[endpoint + "_loading"] = true;
+    this[endpoint + "_data"] = null;
+    this[endpoint + "_request"] = axios
+      .get(`${this.apiUrl}/${endpoint}/`)
+      .then(({ data }) => {
+        this[endpoint + "_loading"] = false;
+        this[endpoint + "_data"] = data;
+        if (endpoint == "pools") {
+          this["tab"] = data[0].address;
+          this["activeTabSymbol"] = data[0].symbol;
+          this.poolsData = data;
+        }
+        this.setActiveTab(this.tab, this.activeTabSymbol);
+        return data;
+      })
+      .catch(console.error);
+  };
+
   setActiveTab(tab, symbol) {
-    this['tab'] = tab;
-    this['activeTabSymbol'] = symbol;
+    this["tab"] = tab;
+    this["activeTabSymbol"] = symbol;
     this["poolHasAccounts"] = 0;
     mainStore["overview_loading"] = true;
     this["dex_liquidity_loading"] = true;
@@ -53,46 +98,27 @@ class PoolsStore {
     }
     this.selectedPoolData(tab);
     this.updateDexLiquidity(symbol);
+    this.oracleDeviation();
   }
 
-
-  updateDexLiquidity(symbol){
-    console.log('symbol', symbol)
-    if(symbol.toLowerCase() == 'wsteth')
-    {symbol = 'stETH'}
-    let liquidity_data = this[symbol.toLowerCase() + '_liquidity_data'];
+  updateDexLiquidity(symbol) {
+    console.log("symbol", symbol);
+    if (symbol.toLowerCase() == "wsteth") {
+      symbol = "stETH";
+    }
+    let liquidity_data = this[symbol.toLowerCase() + "_liquidity_data"];
     delete liquidity_data.json_time;
     liquidity_data = Object.entries(liquidity_data);
-    let liquidityArray = []
-    liquidity_data.forEach((entry)=> {
-      liquidityArray.push(
-      {
+    let liquidityArray = [];
+    liquidity_data.forEach((entry) => {
+      liquidityArray.push({
         name: entry[0],
-        value: entry[1][symbol]['volume'],
+        value: entry[1][symbol]["volume"],
       });
-    })
-    this['liquidityData'] = liquidityArray
+    });
+    this["liquidityData"] = liquidityArray;
     this["dex_liquidity_loading"] = false;
   }
-
-  fetchData = (endpoint) => {
-    this[endpoint + "_loading"] = true;
-    this[endpoint + "_data"] = null;
-    this[endpoint + "_request"] = axios
-      .get(`${this.apiUrl}/${endpoint}/`)
-      .then(({ data }) => {
-        this[endpoint + "_loading"] = false;
-        this[endpoint + "_data"] = data;
-        if (endpoint == "pools") {
-          this["tab"] = data[0].address;
-          this['activeTabSymbol'] = data[0].symbol;
-          this.poolsData = data;
-        }
-        this.setActiveTab(this.tab, this.activeTabSymbol);
-        return data;
-      })
-      .catch(console.error);
-  };
 
   /// DATA TRANSFORMATION
   selectedPoolData(tab) {
