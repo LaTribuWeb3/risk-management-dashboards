@@ -3,13 +3,12 @@ import axios from "axios";
 import BigNumber from "bignumber.js";
 import mainStore from "../stores/main.store";
 import alertStore from "../stores/alert.store";
-import dummyData from "./dummydata.json";
-import { waitForElementToBeRemoved } from "@testing-library/react";
+import dexLiquidity from "./dex-liquidity.json";
 
 const apiEndpoints = [
   "data/tokens?fakeMainnet=0",
-  "pools",
   "data/creditAccounts?fakeMainnet=0",
+  "pools",
 ];
 class PoolsStore {
   constructor() {
@@ -22,15 +21,19 @@ class PoolsStore {
 
   init = () => {
     this["tab"] = null;
+    this['activeTabSymbol'] = null;
     this["poolHasAccounts"] = 0;
+    this['dex_liquidity_data'] = dexLiquidity;
+    this["dex_liquidity_loading"] = true;
     apiEndpoints.forEach(this.fetchData);
   };
 
   setActiveTab(tab, symbol) {
-    this.tab = tab;
-    this.activeTabSymbol = symbol;
+    this['tab'] = tab;
+    this['activeTabSymbol'] = symbol;
     this["poolHasAccounts"] = 0;
     mainStore["overview_loading"] = true;
+    this["dex_liquidity_loading"] = true;
     mainStore["overview_data"] = null;
     /// check if pool has credit accounts active:
     const PoolCreditAccounts = Object.assign(
@@ -41,6 +44,41 @@ class PoolsStore {
       this["poolHasAccounts"] = 1;
     }
     this.selectedPoolData(tab);
+    this.updateDexLiquidity();
+  }
+
+
+  updateDexLiquidity(){
+    const rawData = Object.assign([], this["dex_liquidity_data"] || []);
+    let symbol = this['activeTabSymbol']
+    if(symbol == 'wstETH'){
+      symbol = 'stETH'
+    }
+    console.log('symbol data?', symbol)
+    const tokenData = Object.assign(
+      [],
+      this["data/tokens?fakeMainnet=0_data"] || []
+    );
+    let filteredData = rawData.filter((pair) => pair.symbolOut == symbol);
+    console.log('filtered data?', filteredData)
+    filteredData = filteredData.map((pair) => {
+      console.log('pair?', pair.symbolIn)
+      let price = tokenData.filter((tk) => tk.symbol.toLowerCase() == pair.symbolIn.toLowerCase())[0][
+        "priceUSD18Decimals"
+      ];
+      price = BigNumber(price).div(BigNumber(10).pow(18));
+      let liquidity = BigNumber(pair.normalizedLiquidity).multipliedBy(
+        BigNumber(price)
+      );
+      liquidity = Math.floor(Number(liquidity));
+      return {
+        name: pair.symbolIn,
+        value: liquidity,
+      };
+    });
+    this['liquidityData'] = filteredData;
+    console.log('data?', this['liquidityData'])
+    this["dex_liquidity_loading"] = false;
   }
 
   fetchData = (endpoint) => {
@@ -53,9 +91,10 @@ class PoolsStore {
         this[endpoint + "_data"] = data;
         if (endpoint == "pools") {
           this["tab"] = data[0].address;
+          this['activeTabSymbol'] = data[0].symbol;
           this.poolsData = data;
+          this.setActiveTab(this.tab, this.activeTabSymbol);
         }
-        this.setActiveTab(this.tab, this.activeTabSymbol);
         return data;
       })
       .catch(console.error);
