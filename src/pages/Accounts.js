@@ -77,23 +77,23 @@ class Accounts extends Component {
         sortable: true,
         minWidth: "140px",
       },
-      {
-        name: "Top 10 Accounts Collateral",
-        selector: (row) => Number(row[prefixLooping("top_10_collateral")]),
-        format: (row) => (
-          <TopTenAccounts
-            row={row}
-            name={"top10Coll"}
-            toggleTopTen={toggleTopTen}
-            accounts={row.whales.big_collateral}
-            value={whaleFriendlyFormater(
-              row[prefixLooping("top_10_collateral")]
-            )}
-          />
-        ),
-        sortable: true,
-        minWidth: usersMinWidth,
-      },
+      // {
+      //   name: "Top 10 Accounts Collateral",
+      //   selector: (row) => Number(row[prefixLooping("top_10_collateral")]),
+      //   format: (row) => (
+      //     <TopTenAccounts
+      //       row={row}
+      //       name={"top10Coll"}
+      //       toggleTopTen={toggleTopTen}
+      //       accounts={row.whales.big_collateral}
+      //       value={whaleFriendlyFormater(
+      //         row[prefixLooping("top_10_collateral")]
+      //       )}
+      //     />
+      //   ),
+      //   sortable: true,
+      //   minWidth: usersMinWidth,
+      // },
       {
         name: "Top 1 Account Collateral",
         selector: (row) => Number(row["top_1_collateral"]),
@@ -188,28 +188,23 @@ class Accounts extends Component {
     if(tableData.length){
       tableData[0].defaultExpanded = true
     }
+    console.log('tableData', tableData)
 
     const text = "* Big account included in the list";
     return (
       <div>
-        {/* <Box loading={loading} time={Date.now/1000} text={text}>
-        {window.APP_CONFIG.feature_flags.loopingToggle && <fieldset>
-          <label htmlFor="switch">
-            <input onChange={localStore.toggleLooping} defaultChecked={localStore.looping} type="checkbox" id="switch" name="switch" role="switch"/>
-            <span>Ignore correlated debt and collateral, and assets not in market</span>
-          </label>
-        </fieldset>}
+        <Box loading={loading} time={Date.now/1000} text={text}>
           {!loading && <DataTable
               expandableRows
               columns={columns}
               defaultSortFieldId={2}
               defaultSortAsc={true}
-              data={data}
+              data={tableData}
               // expandableRowsComponent={LiquidationsGraph}
               expandableRowExpanded={rowPreExpanded}
               onRowExpandToggled={onRowExpandToggled}
           />}
-        </Box> */}
+        </Box>
       </div>
     );
   }
