@@ -94,34 +94,56 @@ class Accounts extends Component {
     ]
 
     const loading = poolsStore["data/creditAccounts?fakeMainnet=0_loading"]
-
+    let tokenBalances = {}
+    let collateralData = []
 
 
     if (!loading) {
       const PoolCreditAccounts = Object.assign(poolsStore["data/creditAccounts?fakeMainnet=0_data"].filter(
         (ca) => ca.poolAddress === poolsStore["tab"]));
-      let tokenBalances = {}
+
 
 
       /// calculate USD value for each collateral token in the pool
       for (let i = 0; i < PoolCreditAccounts.length; i++) {
         for (let j = 0; j < PoolCreditAccounts[i]['tokenBalances'].length; j++) {
+          // define token infos
           const tokenAddress = PoolCreditAccounts[i]['tokenBalances'][j]['address'];
           const tokenSymbol = tokenName(tokenAddress);
           const tokenAmount = tokenPrice(tokenSymbol, PoolCreditAccounts[i]['tokenBalances'][j]['amount']);
-          if(tokenAmount != 0){
-          if(tokenBalances[tokenSymbol] == undefined)
-          {
-            tokenBalances[tokenSymbol] = tokenAmount;
+
+          // if token amount is non-null, 
+          if (tokenAmount != 0) {
+            // create token entry or
+            if (tokenBalances[tokenSymbol] == undefined) {
+              tokenBalances[tokenSymbol] = tokenAmount;
+            }
+            ///increment total token collateral value
+            else {
+              tokenBalances[tokenSymbol] = (Number(tokenBalances[tokenSymbol]) + Number(tokenAmount)).toString();
+            }
+            // arrays of collateral token
+            const tokenIndex = collateralData.findIndex((tk => tk.key == tokenSymbol));
+            console.log('token index is', tokenIndex)
+            if (tokenIndex == -1) {
+              collateralData.push(
+                {
+                  key: tokenSymbol,
+                  balances: [tokenAmount]
+                }
+              )
+            }
+            else {
+              collateralData[tokenIndex]['balances'].push(tokenAmount);
+            }
           }
-          else{
-            tokenBalances[tokenSymbol] = (Number(tokenBalances[tokenSymbol]) + Number(tokenAmount)).toString();
-          }
-        }
         }
       }
+      console.log('collateraldata', collateralData)
     }
 
+
+    ///Top 1 collateral
 
 
 
