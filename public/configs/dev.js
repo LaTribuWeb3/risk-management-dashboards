@@ -1,9 +1,9 @@
 window.APP_CONFIG = {
-  PLATFORM_ID: "0",
-  TOKEN_PREFIX: "au",
-  BLOCK_EXPLORER: "https://aurorascan.dev",
-  WHITE_LOGO: "aurigami.svg",
-  BLACK_LOGO: "aurigami.svg",
+  PLATFORM_ID: "3",
+  TOKEN_PREFIX: "",
+  BLOCK_EXPLORER: "https://etherscan.com",
+  WHITE_LOGO: "gearbox.png",
+  BLACK_LOGO: "gearbox.png",
   feature_flags: {
     alerts: false,
   },
