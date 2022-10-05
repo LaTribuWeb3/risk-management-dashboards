@@ -16,6 +16,7 @@ const apiEndpoints = [
 ];
 const defaultSections = {
   "system-status": true,
+  "select-pool": true,
   overview: true,
   "asset-distribution": true,
 };
