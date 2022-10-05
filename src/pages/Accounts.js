@@ -38,6 +38,8 @@ const localStore = new LocalStore();
 
 const rowPreExpanded = (row) => row.defaultExpanded;
 
+
+
 class Accounts extends Component {
   render() {
     const { prefixLooping } = localStore;
@@ -172,17 +174,33 @@ class Accounts extends Component {
         }
       )
     }
-    //update top 1 collateral
+
+function getMedian(arr) {
+      const mid = Math.floor(arr.length / 2),
+        nums = [...arr].sort((a, b) => a - b);
+      return arr.length % 2 !== 0 ? nums[mid] : (Number(nums[mid - 1]) + Number(nums[mid])) / 2;
+    };
+
+    //update median, top 1 and top 10 collateral
     for(let i = 0; i < collateralData.length; i++){
       const tokenIndex = tableData.findIndex(
         (tk) => tk.key == collateralData[i]['key']
       );
+      let median = getMedian(collateralData[i]['balances'])
+      tableData[tokenIndex]['median_collateral'] = median.toString()
+      /// update top 10 collateral
+      let top10 = collateralData[i]['balances'].sort((a, b) => b - a);
+      top10 = top10.slice(0, 10);
+      top10 = top10.reduce((prev, curr)=> Number(prev) + Number(curr), 0)
+      tableData[tokenIndex]['top_10_collateral'] = top10.toString();
+      /// update top 1 collateral
       for(let j = 0; j < collateralData[i]['balances'].length; j++){
         if(Number(tableData[tokenIndex]['top_1_collateral']) < Number(collateralData[i]['balances'][j])){
           tableData[tokenIndex]['top_1_collateral'] = collateralData[i]['balances'][j];
         }
       }
     }
+
 
 
     if(tableData.length){
