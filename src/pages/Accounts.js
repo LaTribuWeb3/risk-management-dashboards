@@ -10,7 +10,6 @@ import Token from "../components/Token";
 import { TopTenAccounts, usersMinWidth } from "../components/TopAccounts";
 import poolsStore from "../stores/pools.store";
 import { tokenName, tokenPrice } from "../utils";
-import BigNumber from "bignumber.js";
 
 class LocalStore {
   looping = true;
@@ -160,11 +159,35 @@ class Accounts extends Component {
         }
       }
     }
-    ///Top 1 collateral
+    // create objects in tableData and update with total_collateral
+    for(const token in tokenBalances){
+      tableData.push(
+        {
+          key: token,
+          defaultExpanded: false,
+          total_collateral: tokenBalances[token],
+          top_1_collateral: null,
+          top_10_collateral: null,
+          median_collateral: null,
+        }
+      )
+    }
+    //update top 1 collateral
+    for(let i = 0; i < collateralData.length; i++){
+      const tokenIndex = tableData.findIndex(
+        (tk) => tk.key == collateralData[i]['key']
+      );
+      for(let j = 0; j < collateralData[i]['balances'].length; j++){
+        if(Number(tableData[tokenIndex]['top_1_collateral']) < Number(collateralData[i]['balances'][j])){
+          tableData[tokenIndex]['top_1_collateral'] = collateralData[i]['balances'][j];
+        }
+      }
+    }
 
-    // if(data.length){
-    //   data[0].defaultExpanded = true
-    // }
+
+    if(tableData.length){
+      tableData[0].defaultExpanded = true
+    }
 
     const text = "* Big account included in the list";
     return (
