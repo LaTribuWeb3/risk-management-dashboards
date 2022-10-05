@@ -29,7 +29,7 @@ const truncate = {
 const expendedBoxStyle = {
   margin: "30px",
   width: "100%",
-  minHeight: "300px",
+  minHeight: "420px",
   padding: "40px",
 };
 
