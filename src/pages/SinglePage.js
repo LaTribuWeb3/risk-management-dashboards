@@ -19,7 +19,7 @@ class SinglePage extends Component {
     const { proViewShow } = mainStore;
     return (
       <div>
-        <section id="selectPools">
+        <section id="select-pool">
           <Tabnav />
         </section>
         {poolsStore["poolHasAccounts"] == 0 ? (
@@ -40,17 +40,21 @@ class SinglePage extends Component {
               <Alerts />
             </div>}
           </section> */}
-            <section id="overview">
-              {mainStore.proViewShow("overview") && (
-                <div>
-                  <hgroup>
-                    <h2>Overview</h2>
-                    <p className="description">State of the pool overview</p>
-                  </hgroup>
-                  <Overview />
-                </div>
-              )}
-            </section>
+            {mainStore["overview_loading"] ? (
+              <span>loading</span>
+            ) : (
+              <section id="overview">
+                {mainStore.proViewShow("overview") && (
+                  <div>
+                    <hgroup>
+                      <h2>Overview</h2>
+                      <p className="description">State of the pool overview</p>
+                    </hgroup>
+                    <Overview />
+                  </div>
+                )}
+              </section>
+            )}
             {/* <section id="collateral-factors">
             {mainStore.proViewShow("collateral-factors") && <div>
               <h2>Collateral Factor Recommendations</h2>
@@ -65,20 +69,26 @@ class SinglePage extends Component {
               </hgroup>
               <Simulation />
             </div>}
-          </section>
-          <section id="asset-distribution">
-            {mainStore.proViewShow("asset-distribution") && <div>
-              <hgroup>
-                <h2>Asset Distribution</h2>
-                <p className="description">
-                  The table tracks the main statistics per asset in the platform.
-                  Clicking on each row will open a graph describing the expected liquidations according to price changes of the base asset. Liquidations can be executed also if an asset price increases when the asset is the debt asset.
-                </p>
-              </hgroup>
-              <Accounts />
-            </div>}
-          </section>
-          <section id="open-liquidations">
+          </section> */}
+            <section id="asset-distribution">
+              {mainStore.proViewShow("asset-distribution") && (
+                <div>
+                  <hgroup>
+                    <h2>Asset Distribution</h2>
+                    <p className="description">
+                      The table tracks the main statistics per asset in the
+                      platform. Clicking on each row will open a graph
+                      describing the expected liquidations according to price
+                      changes of the base asset. Liquidations can be executed
+                      also if an asset price increases when the asset is the
+                      debt asset.
+                    </p>
+                  </hgroup>
+                  <Accounts />
+                </div>
+              )}
+            </section>
+            {/* <section id="open-liquidations">
             {mainStore.proViewShow("open-liquidations") && <div>
               <hgroup>
                 <h2>Open Liquidations</h2>
@@ -86,32 +96,45 @@ class SinglePage extends Component {
               </hgroup>
               <OpenLiquidations />
             </div>}
-          </section>
-          <section id="oracle-deviation">
-            {mainStore.proViewShow("oracle-deviation") && <div>
-              <hgroup>
-                <h2>Oracle Deviation</h2>
-                <p className="description">The table tracks the deviation from the oracle price feed used by the platform compared to the assets’ prices taken from Centralized Exchanges (CEX) and Decentralized Exchanges (DEX). This helps monitor any critical deviations that might indicate an oracle manipulation, de-pegging, downtime, etc.</p>
-              </hgroup>
-              <Oracles />
-            </div>}
           </section> */}
-            <section id="liquidity">
-              {mainStore.proViewShow("liquidity") && (
+            <section id="oracle-deviation">
+              {mainStore.proViewShow("oracle-deviation") && (
                 <div>
                   <hgroup>
-                    <h2>DEX Liquidity</h2>
+                    <h2>Oracle Deviation</h2>
                     <p className="description">
-                      Monitoring available on-chain DEX liquidity per asset. The
-                      statistics monitor the top accounts portion of total
-                      liquidity as well as the average and median size of LP
-                      positions.
+                      The table tracks the deviation from the oracle price feed
+                      used by the platform compared to the assets’ prices taken
+                      from Centralized Exchanges (CEX) and Decentralized
+                      Exchanges (DEX). This helps monitor any critical
+                      deviations that might indicate an oracle manipulation,
+                      de-pegging, downtime, etc.
                     </p>
                   </hgroup>
-                  <Liquidity />
+                  <Oracles />
                 </div>
               )}
             </section>
+            {poolsStore["dex_liquidity_loading"] ? (
+              <span>loading</span>
+            ) : (
+              <section id="liquidity">
+                {mainStore.proViewShow("liquidity") && (
+                  <div>
+                    <hgroup>
+                      <h2>DEX Liquidity</h2>
+                      <p className="description">
+                        Monitoring available on-chain DEX liquidity per asset.
+                        The statistics monitor the top accounts portion of total
+                        liquidity as well as the average and median size of LP
+                        positions.
+                      </p>
+                    </hgroup>
+                    <Liquidity />
+                  </div>
+                )}
+              </section>
+            )}
           </ScrollSpy>
         )}
       </div>

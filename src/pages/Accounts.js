@@ -15,8 +15,6 @@ const rowPreExpanded = (row) => row.defaultExpanded;
 
 class Accounts extends Component {
   render() {
-
-
     const onRowExpandToggled = (expanded, row) => {
       if (expanded === false) {
         row.top10Coll = false;
@@ -39,16 +37,14 @@ class Accounts extends Component {
       {
         name: "Total Collateral",
         selector: (row) => Number(row["total_collateral"]),
-        format: (row) =>
-          whaleFriendlyFormater(row["total_collateral"]),
+        format: (row) => whaleFriendlyFormater(row["total_collateral"]),
         sortable: true,
         minWidth: "140px",
       },
       {
         name: "Median Collateral",
         selector: (row) => Number(row["median_collateral"]),
-        format: (row) =>
-          whaleFriendlyFormater(row["median_collateral"]),
+        format: (row) => whaleFriendlyFormater(row["median_collateral"]),
         sortable: true,
         minWidth: "140px",
       },
@@ -61,9 +57,7 @@ class Accounts extends Component {
             name={"top10Coll"}
             toggleTopTen={toggleTopTen}
             accounts={row.whales.big_collateral}
-            value={whaleFriendlyFormater(
-              row["top_10_collateral"]
-            )}
+            value={whaleFriendlyFormater(row["top_10_collateral"])}
           />
         ),
         sortable: true,
@@ -165,11 +159,6 @@ class Accounts extends Component {
 
     // update big_collateral array
 
-
-
-
-
-    
     // median function for next block
     function getMedian(arr) {
       const mid = Math.floor(arr.length / 2),
@@ -202,7 +191,6 @@ class Accounts extends Component {
         }
       }
     }
-
 
     // auto expand first item
     if (tableData.length) {
