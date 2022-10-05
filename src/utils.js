@@ -5,7 +5,7 @@ import { relativeTimeRounding } from "moment";
 import BigNumber from "bignumber.js";
 
 function roundTo(num, dec) {
-  const pow =  Math.pow(10,dec);
+  const pow = Math.pow(10, dec);
   return Math.round((num + Number.EPSILON) * pow) / pow;
 }
 
@@ -21,7 +21,6 @@ export const precentFormatter = (num) => {
   return (num * 100).toFixed(2) + "%";
 };
 
-
 export const tokenName = (address) => {
   const tokenData = Object.assign(
     [],
@@ -34,10 +33,9 @@ export const tokenName = (address) => {
   }
 };
 
-
 export const tokenPrice = (symbol, amount) => {
-  if(amount == 0){
-    return 0
+  if (amount == 0) {
+    return 0;
   }
   const tokenData = Object.assign(
     [],
@@ -45,12 +43,17 @@ export const tokenPrice = (symbol, amount) => {
   );
   for (const token in tokenData) {
     if (tokenData[token].symbol.toLowerCase() === symbol.toLowerCase()) {
-      const tokenPrice = BigNumber(tokenData[token].priceUSD18Decimals).div(BigNumber(10).pow(18));
+      const tokenPrice = BigNumber(tokenData[token].priceUSD18Decimals).div(
+        BigNumber(10).pow(18)
+      );
       const tokenDecimals = tokenData[token].decimals;
       const tokenAmount = BigNumber(amount).div(
         BigNumber(10).pow(tokenDecimals)
       );
-      const result = roundTo(Number((BigNumber(tokenPrice).multipliedBy(BigNumber(tokenAmount)))), 2);
+      const result = roundTo(
+        Number(BigNumber(tokenPrice).multipliedBy(BigNumber(tokenAmount))),
+        2
+      );
       return result.toString();
     }
   }

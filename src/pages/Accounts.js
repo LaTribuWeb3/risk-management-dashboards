@@ -1,118 +1,138 @@
-import React, { Component } from "react"
-import { observer } from "mobx-react"
-import Box from "../components/Box"
-import DataTable from 'react-data-table-component'
-import mainStore from '../stores/main.store'
-import LiquidationsGraph from '../components/LiquidationsGraph'
-import { whaleFriendlyFormater } from '../components/WhaleFriendly'
-import { makeAutoObservable, runInAction } from "mobx"
-import Token from "../components/Token"
-import { TopTenAccounts, usersMinWidth } from "../components/TopAccounts"
-import poolsStore from "../stores/pools.store"
-import { tokenName, tokenPrice } from "../utils"
-import BigNumber from "bignumber.js"
-
+import React, { Component } from "react";
+import { observer } from "mobx-react";
+import Box from "../components/Box";
+import DataTable from "react-data-table-component";
+import mainStore from "../stores/main.store";
+import LiquidationsGraph from "../components/LiquidationsGraph";
+import { whaleFriendlyFormater } from "../components/WhaleFriendly";
+import { makeAutoObservable, runInAction } from "mobx";
+import Token from "../components/Token";
+import { TopTenAccounts, usersMinWidth } from "../components/TopAccounts";
+import poolsStore from "../stores/pools.store";
+import { tokenName, tokenPrice } from "../utils";
+import BigNumber from "bignumber.js";
 
 class LocalStore {
-  looping = true
+  looping = true;
 
   constructor() {
     if (window.APP_CONFIG.feature_flags.loopingToggle === false) {
-      this.looping = false
+      this.looping = false;
     }
-    makeAutoObservable(this)
+    makeAutoObservable(this);
   }
 
   toggleLooping = () => {
-    this.looping = !this.looping
-  }
+    this.looping = !this.looping;
+  };
 
   get loopingPrefix() {
-    return !this.looping ? '' : 'nl_'
+    return !this.looping ? "" : "nl_";
   }
 
-  prefixLooping = str => {
-    return this.loopingPrefix + str
-  }
+  prefixLooping = (str) => {
+    return this.loopingPrefix + str;
+  };
 }
 
-const localStore = new LocalStore()
+const localStore = new LocalStore();
 
-const rowPreExpanded = row => row.defaultExpanded
+const rowPreExpanded = (row) => row.defaultExpanded;
 
 class Accounts extends Component {
   render() {
-    const { prefixLooping } = localStore
+    const { prefixLooping } = localStore;
 
     const onRowExpandToggled = (expanded, row) => {
       if (expanded === false) {
-        row.top10Coll = false
-        row.top10Debt = false
+        row.top10Coll = false;
+        row.top10Debt = false;
       }
-      row.expanded = expanded
-    }
+      row.expanded = expanded;
+    };
 
     const toggleTopTen = (row, name) => {
-      row[name] = !row[name]
-    }
+      row[name] = !row[name];
+    };
     const columns = [
       {
-        name: 'Asset',
-        selector: row => row.key,
-        format: row => <Token value={row.key} />,
+        name: "Asset",
+        selector: (row) => row.key,
+        format: (row) => <Token value={row.key} />,
         sortable: true,
-        minWidth: '110px'
+        minWidth: "110px",
       },
       {
-        name: 'Total Collateral',
-        selector: row => Number(row[prefixLooping('total_collateral')]),
-        format: row => whaleFriendlyFormater(row[prefixLooping('total_collateral')]),
+        name: "Total Collateral",
+        selector: (row) => Number(row[prefixLooping("total_collateral")]),
+        format: (row) =>
+          whaleFriendlyFormater(row[prefixLooping("total_collateral")]),
         sortable: true,
-        minWidth: '140px'
+        minWidth: "140px",
       },
       {
-        name: 'Median Collateral',
-        selector: row => Number(row[prefixLooping('median_collateral')]),
-        format: row => whaleFriendlyFormater(row[prefixLooping('median_collateral')]),
+        name: "Median Collateral",
+        selector: (row) => Number(row[prefixLooping("median_collateral")]),
+        format: (row) =>
+          whaleFriendlyFormater(row[prefixLooping("median_collateral")]),
         sortable: true,
-        minWidth: '140px'
+        minWidth: "140px",
       },
       {
-        name: 'Top 10 Accounts Collateral',
-        selector: row => Number(row[prefixLooping('top_10_collateral')]),
-        format: row => < TopTenAccounts row={row} name={"top10Coll"} toggleTopTen={toggleTopTen} accounts={row.whales.big_collateral} value={whaleFriendlyFormater(row[prefixLooping('top_10_collateral')])} />,
+        name: "Top 10 Accounts Collateral",
+        selector: (row) => Number(row[prefixLooping("top_10_collateral")]),
+        format: (row) => (
+          <TopTenAccounts
+            row={row}
+            name={"top10Coll"}
+            toggleTopTen={toggleTopTen}
+            accounts={row.whales.big_collateral}
+            value={whaleFriendlyFormater(
+              row[prefixLooping("top_10_collateral")]
+            )}
+          />
+        ),
         sortable: true,
-        minWidth: usersMinWidth
+        minWidth: usersMinWidth,
       },
       {
-        name: 'Top 1 Account Collateral',
-        selector: row => Number(row['top_1_collateral']),
-        format: row => whaleFriendlyFormater(row['top_1_collateral']),
+        name: "Top 1 Account Collateral",
+        selector: (row) => Number(row["top_1_collateral"]),
+        format: (row) => whaleFriendlyFormater(row["top_1_collateral"]),
         sortable: true,
-        minWidth: '140px'
+        minWidth: "140px",
       },
-    ]
+    ];
 
-    const loading = poolsStore["data/creditAccounts?fakeMainnet=0_loading"]
-    let tokenBalances = {}
-    let collateralData = []
-
+    const loading = poolsStore["data/creditAccounts?fakeMainnet=0_loading"];
+    let tokenBalances = {};
+    let collateralData = [];
+    let tableData = [];
 
     if (!loading) {
-      const PoolCreditAccounts = Object.assign(poolsStore["data/creditAccounts?fakeMainnet=0_data"].filter(
-        (ca) => ca.poolAddress === poolsStore["tab"]));
-
-
+      const PoolCreditAccounts = Object.assign(
+        poolsStore["data/creditAccounts?fakeMainnet=0_data"].filter(
+          (ca) => ca.poolAddress === poolsStore["tab"]
+        )
+      );
 
       /// calculate USD value for each collateral token in the pool
       for (let i = 0; i < PoolCreditAccounts.length; i++) {
-        for (let j = 0; j < PoolCreditAccounts[i]['tokenBalances'].length; j++) {
+        for (
+          let j = 0;
+          j < PoolCreditAccounts[i]["tokenBalances"].length;
+          j++
+        ) {
           // define token infos
-          const tokenAddress = PoolCreditAccounts[i]['tokenBalances'][j]['address'];
+          const tokenAddress =
+            PoolCreditAccounts[i]["tokenBalances"][j]["address"];
           const tokenSymbol = tokenName(tokenAddress);
-          const tokenAmount = tokenPrice(tokenSymbol, PoolCreditAccounts[i]['tokenBalances'][j]['amount']);
+          const tokenAmount = tokenPrice(
+            tokenSymbol,
+            PoolCreditAccounts[i]["tokenBalances"][j]["amount"]
+          );
 
-          // if token amount is non-null, 
+          // if token amount is non-null,
           if (tokenAmount != 0) {
             // create token entry or
             if (tokenBalances[tokenSymbol] == undefined) {
@@ -120,42 +140,33 @@ class Accounts extends Component {
             }
             ///increment total token collateral value
             else {
-              tokenBalances[tokenSymbol] = (Number(tokenBalances[tokenSymbol]) + Number(tokenAmount)).toString();
+              tokenBalances[tokenSymbol] = (
+                Number(tokenBalances[tokenSymbol]) + Number(tokenAmount)
+              ).toString();
             }
             // arrays of collateral token
-            const tokenIndex = collateralData.findIndex((tk => tk.key == tokenSymbol));
-            console.log('token index is', tokenIndex)
+            const tokenIndex = collateralData.findIndex(
+              (tk) => tk.key == tokenSymbol
+            );
             if (tokenIndex == -1) {
-              collateralData.push(
-                {
-                  key: tokenSymbol,
-                  balances: [tokenAmount]
-                }
-              )
-            }
-            else {
-              collateralData[tokenIndex]['balances'].push(tokenAmount);
+              collateralData.push({
+                key: tokenSymbol,
+                balances: [tokenAmount],
+              });
+            } else {
+              collateralData[tokenIndex]["balances"].push(tokenAmount);
             }
           }
         }
       }
-      console.log('collateraldata', collateralData)
     }
-
-
     ///Top 1 collateral
 
-
-
-
-
-
     // if(data.length){
-    //   data[0].defaultExpanded = true  
+    //   data[0].defaultExpanded = true
     // }
 
-
-    const text = "* Big account included in the list"
+    const text = "* Big account included in the list";
     return (
       <div>
         {/* <Box loading={loading} time={Date.now/1000} text={text}>
@@ -177,8 +188,8 @@ class Accounts extends Component {
           />}
         </Box> */}
       </div>
-    )
+    );
   }
 }
 
-export default observer(Accounts)
+export default observer(Accounts);
