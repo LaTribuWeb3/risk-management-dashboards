@@ -8,7 +8,6 @@ import {whaleFriendlyFormater} from '../components/WhaleFriendly'
 import { makeAutoObservable, runInAction } from "mobx"
 import Token from "../components/Token"
 import {TopTenAccounts, usersMinWidth} from "../components/TopAccounts"
-import {TEXTS} from "../constants"
 
 
 class LocalStore {
@@ -69,25 +68,11 @@ class Accounts extends Component {
           minWidth: '140px'
       },
       {
-          name: TEXTS.TOTAL_DEBT,
-          selector: row => Number(row[prefixLooping('total_debt')]),
-          format: row => whaleFriendlyFormater(row[prefixLooping('total_debt')]),
-          sortable: true,
-          minWidth: '110px'
-      },
-      {
           name: 'Median Collateral',
           selector: row =>  Number(row[prefixLooping('median_collateral')]),
           format: row => whaleFriendlyFormater(row[prefixLooping('median_collateral')]),
           sortable: true,
           minWidth: '140px'
-      },  
-      {
-          name: 'Median Debt',
-          selector: row =>  Number(row[prefixLooping('median_debt')]),
-          format: row => whaleFriendlyFormater(row[prefixLooping('median_debt')]),
-          sortable: true,
-          minWidth: '120px'
       },  
       {
           name: 'Top 10 Accounts Collateral',
@@ -97,23 +82,9 @@ class Accounts extends Component {
           minWidth: usersMinWidth
       },
       {
-          name: 'Top 10 Accounts Debt',
-          selector: row =>  Number(row[prefixLooping('top_10_debt')]),
-          format: row => <TopTenAccounts row={row} name={"top10Debt"} toggleTopTen={toggleTopTen} accounts={row.whales.big_debt} value={whaleFriendlyFormater(row[prefixLooping('top_10_debt')])}/>,
-          sortable: true,
-          minWidth: usersMinWidth
-      },
-      {
           name: 'Top 1 Account Collateral',
           selector: row =>  Number(row['top_1_collateral']),
           format: row => whaleFriendlyFormater(row['top_1_collateral']),
-          sortable: true,
-          minWidth: '140px'
-      },
-      {
-          name: 'Top 1 Account Debt',
-          selector: row =>  Number(row['top_1_debt']),
-          format: row => whaleFriendlyFormater(row['top_1_debt']),
           sortable: true,
           minWidth: '140px'
       },
