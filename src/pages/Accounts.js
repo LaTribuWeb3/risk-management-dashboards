@@ -38,8 +38,6 @@ const localStore = new LocalStore();
 
 const rowPreExpanded = (row) => row.defaultExpanded;
 
-
-
 class Accounts extends Component {
   render() {
     const { prefixLooping } = localStore;
@@ -109,6 +107,7 @@ class Accounts extends Component {
     let tokenBalances = {};
     let collateralData = [];
     let tableData = [];
+    let whaleData = [];
 
     if (!loading) {
       const PoolCreditAccounts = Object.assign(
@@ -162,57 +161,73 @@ class Accounts extends Component {
       }
     }
     // create objects in tableData and update with total_collateral
-    for(const token in tokenBalances){
-      tableData.push(
-        {
-          key: token,
-          defaultExpanded: false,
-          total_collateral: tokenBalances[token],
-          top_1_collateral: null,
-          top_10_collateral: null,
-          median_collateral: null,
-        }
-      )
+    for (const token in tokenBalances) {
+      tableData.push({
+        key: token,
+        defaultExpanded: false,
+        total_collateral: tokenBalances[token],
+        top_1_collateral: null,
+        top_10_collateral: null,
+        median_collateral: null,
+      });
     }
 
-function getMedian(arr) {
+    // create objects in whaleData and update with total_collateral
+    for (const token in tokenBalances) {
+      whaleData.push([
+        token,
+        {
+          big_collateral: [],
+          total_collateral: tokenBalances[token],
+        },
+      ]);
+    }
+
+    // update big_collateral array
+
+    function getMedian(arr) {
       const mid = Math.floor(arr.length / 2),
         nums = [...arr].sort((a, b) => a - b);
-      return arr.length % 2 !== 0 ? nums[mid] : (Number(nums[mid - 1]) + Number(nums[mid])) / 2;
-    };
+      return arr.length % 2 !== 0
+        ? nums[mid]
+        : (Number(nums[mid - 1]) + Number(nums[mid])) / 2;
+    }
 
     //update median, top 1 and top 10 collateral
-    for(let i = 0; i < collateralData.length; i++){
+    for (let i = 0; i < collateralData.length; i++) {
       const tokenIndex = tableData.findIndex(
-        (tk) => tk.key == collateralData[i]['key']
+        (tk) => tk.key == collateralData[i]["key"]
       );
-      let median = getMedian(collateralData[i]['balances'])
-      tableData[tokenIndex]['median_collateral'] = median.toString()
+      let median = getMedian(collateralData[i]["balances"]);
+      tableData[tokenIndex]["median_collateral"] = median.toString();
       /// update top 10 collateral
-      let top10 = collateralData[i]['balances'].sort((a, b) => b - a);
+      let top10 = collateralData[i]["balances"].sort((a, b) => b - a);
       top10 = top10.slice(0, 10);
-      top10 = top10.reduce((prev, curr)=> Number(prev) + Number(curr), 0)
-      tableData[tokenIndex]['top_10_collateral'] = top10.toString();
+      top10 = top10.reduce((prev, curr) => Number(prev) + Number(curr), 0);
+      tableData[tokenIndex]["top_10_collateral"] = top10.toString();
       /// update top 1 collateral
-      for(let j = 0; j < collateralData[i]['balances'].length; j++){
-        if(Number(tableData[tokenIndex]['top_1_collateral']) < Number(collateralData[i]['balances'][j])){
-          tableData[tokenIndex]['top_1_collateral'] = collateralData[i]['balances'][j];
+      for (let j = 0; j < collateralData[i]["balances"].length; j++) {
+        if (
+          Number(tableData[tokenIndex]["top_1_collateral"]) <
+          Number(collateralData[i]["balances"][j])
+        ) {
+          tableData[tokenIndex]["top_1_collateral"] =
+            collateralData[i]["balances"][j];
         }
       }
     }
 
-
-
-    if(tableData.length){
-      tableData[0].defaultExpanded = true
+    if (tableData.length) {
+      tableData[0].defaultExpanded = true;
     }
-    console.log('tableData', tableData)
+    console.log("tableData", tableData);
 
     const text = "* Big account included in the list";
     return (
       <div>
-        <Box loading={loading} time={Date.now/1000} text={text}>
-          {!loading && <DataTable
+        <Box loading={loading} time={Date.now / 1000} text={text}>
+          {!loading && (
+            <DataTable
               expandableRows
               columns={columns}
               defaultSortFieldId={2}
@@ -221,7 +236,8 @@ function getMedian(arr) {
               // expandableRowsComponent={LiquidationsGraph}
               expandableRowExpanded={rowPreExpanded}
               onRowExpandToggled={onRowExpandToggled}
-          />}
+            />
+          )}
         </Box>
       </div>
     );
