@@ -4,6 +4,10 @@ import poolsStore from "./stores/pools.store";
 import { relativeTimeRounding } from "moment";
 import BigNumber from "bignumber.js";
 
+function roundTo(num, dec) {
+  const pow =  Math.pow(10,dec);
+  return Math.round((num + Number.EPSILON) * pow) / pow;
+}
 
 export const removeTokenPrefix = (token) => token.replace(TOKEN_PREFIX, "");
 
@@ -46,7 +50,7 @@ export const tokenPrice = (symbol, amount) => {
       const tokenAmount = BigNumber(amount).div(
         BigNumber(10).pow(tokenDecimals)
       );
-      const result = Math.floor(BigNumber(tokenPrice).multipliedBy(BigNumber(tokenAmount)));
+      const result = roundTo(Number((BigNumber(tokenPrice).multipliedBy(BigNumber(tokenAmount)))), 2);
       return result.toString();
     }
   }
