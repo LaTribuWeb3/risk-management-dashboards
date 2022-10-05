@@ -50,7 +50,6 @@ class PoolsStore {
     );
     let oracleArray = [];
     oracleData.forEach((entry) => {
-      console.log(entry);
       oracleArray.push({
         key: entry.symbol,
         oracle: this.roundTo(entry.priceUSD18Decimals / 1e18, 4),
@@ -102,7 +101,6 @@ class PoolsStore {
   }
 
   updateDexLiquidity(symbol) {
-    console.log("symbol", symbol);
     if (symbol.toLowerCase() == "wsteth") {
       symbol = "stETH";
     }
