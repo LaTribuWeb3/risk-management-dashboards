@@ -4,13 +4,13 @@ import mainStore from "../stores/main.store";
 
 const pages = [
   //"system-status",
-  "Select pools",
+  "Select-pools",
   "overview",
   // "collateral-factors",
   // "sandbox",
   // "asset-distribution",
   // "open-liquidations",
-  // "oracle-deviation",
+  "oracle-deviation",
   "liquidity",
   // 'backstop',
   // 'assumptions',
@@ -25,7 +25,7 @@ const Sidenav = (props) => {
   return (
     <div className="side-bar box-space">
       {/* <Header/> */}
-      {/* <fieldset>
+      <fieldset>
         <label htmlFor="switch">
           <input
             onChange={mainStore.toggleProView}
@@ -37,7 +37,7 @@ const Sidenav = (props) => {
           />
           <span>Pro View</span>
         </label>
-      </fieldset> */}
+      </fieldset>
       <aside>
         <nav>
           <ul>
