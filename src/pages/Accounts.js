@@ -11,36 +11,11 @@ import { TopTenAccounts, usersMinWidth } from "../components/TopAccounts";
 import poolsStore from "../stores/pools.store";
 import { tokenName, tokenPrice } from "../utils";
 
-class LocalStore {
-  looping = true;
-
-  constructor() {
-    if (window.APP_CONFIG.feature_flags.loopingToggle === false) {
-      this.looping = false;
-    }
-    makeAutoObservable(this);
-  }
-
-  toggleLooping = () => {
-    this.looping = !this.looping;
-  };
-
-  get loopingPrefix() {
-    return !this.looping ? "" : "nl_";
-  }
-
-  prefixLooping = (str) => {
-    return this.loopingPrefix + str;
-  };
-}
-
-const localStore = new LocalStore();
-
 const rowPreExpanded = (row) => row.defaultExpanded;
 
 class Accounts extends Component {
   render() {
-    const { prefixLooping } = localStore;
+
 
     const onRowExpandToggled = (expanded, row) => {
       if (expanded === false) {
@@ -63,37 +38,37 @@ class Accounts extends Component {
       },
       {
         name: "Total Collateral",
-        selector: (row) => Number(row[prefixLooping("total_collateral")]),
+        selector: (row) => Number(row["total_collateral"]),
         format: (row) =>
-          whaleFriendlyFormater(row[prefixLooping("total_collateral")]),
+          whaleFriendlyFormater(row["total_collateral"]),
         sortable: true,
         minWidth: "140px",
       },
       {
         name: "Median Collateral",
-        selector: (row) => Number(row[prefixLooping("median_collateral")]),
+        selector: (row) => Number(row["median_collateral"]),
         format: (row) =>
-          whaleFriendlyFormater(row[prefixLooping("median_collateral")]),
+          whaleFriendlyFormater(row["median_collateral"]),
         sortable: true,
         minWidth: "140px",
       },
-      // {
-      //   name: "Top 10 Accounts Collateral",
-      //   selector: (row) => Number(row[prefixLooping("top_10_collateral")]),
-      //   format: (row) => (
-      //     <TopTenAccounts
-      //       row={row}
-      //       name={"top10Coll"}
-      //       toggleTopTen={toggleTopTen}
-      //       accounts={row.whales.big_collateral}
-      //       value={whaleFriendlyFormater(
-      //         row[prefixLooping("top_10_collateral")]
-      //       )}
-      //     />
-      //   ),
-      //   sortable: true,
-      //   minWidth: usersMinWidth,
-      // },
+      {
+        name: "Top 10 Accounts Collateral",
+        selector: (row) => Number(row["top_10_collateral"]),
+        format: (row) => (
+          <TopTenAccounts
+            row={row}
+            name={"top10Coll"}
+            toggleTopTen={toggleTopTen}
+            accounts={row.whales.big_collateral}
+            value={whaleFriendlyFormater(
+              row["top_10_collateral"]
+            )}
+          />
+        ),
+        sortable: true,
+        minWidth: usersMinWidth,
+      },
       {
         name: "Top 1 Account Collateral",
         selector: (row) => Number(row["top_1_collateral"]),
@@ -168,7 +143,12 @@ class Accounts extends Component {
         total_collateral: tokenBalances[token],
         top_1_collateral: null,
         top_10_collateral: null,
+        top10Coll: true,
         median_collateral: null,
+        whales: {
+          big_collateral: [],
+          total_collateral: tokenBalances[token],
+        },
       });
     }
 
@@ -185,6 +165,12 @@ class Accounts extends Component {
 
     // update big_collateral array
 
+
+
+
+
+    
+    // median function for next block
     function getMedian(arr) {
       const mid = Math.floor(arr.length / 2),
         nums = [...arr].sort((a, b) => a - b);
@@ -217,6 +203,8 @@ class Accounts extends Component {
       }
     }
 
+
+    // auto expand first item
     if (tableData.length) {
       tableData[0].defaultExpanded = true;
     }
