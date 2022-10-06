@@ -21,7 +21,10 @@ class Tabnav extends Component {
 
     return (
       <div className="navwrapper">
-        <span>Select Pool:</span>
+        <hgroup>
+                      <h2>Pool</h2>
+                      <p className="description">Please select a pool</p>
+                    </hgroup>
         <div className="tabnav">
           {loading ? (
             <span>loading...</span>
