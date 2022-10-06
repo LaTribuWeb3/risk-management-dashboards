@@ -59,6 +59,7 @@ import BigNumber from "bignumber.js";
 class Liquidity extends Component {
   render() {
     const loading = poolsStore["dex_liquidity_loading"];
+    const collaterals = poolsStore["poolCollaterals"];
     let symbol = poolsStore["activeTabSymbol"];
     if (symbol.toLowerCase() == "wsteth") {
       symbol = "stETH";
@@ -74,6 +75,12 @@ class Liquidity extends Component {
       });
     });
 
+    // filter out collaterals not present in pool
+    liquidityArray = liquidityArray.filter((entry) =>
+      collaterals.includes(entry.name)
+    );
+    console.log("collateral is", collaterals);
+    console.log("liquidity pool data is", liquidityArray);
     return (
       <div>
         <Box loading={loading}>
@@ -82,10 +89,7 @@ class Liquidity extends Component {
               <span>{symbol}</span>
             </summary>
             <div style={{ display: "flex" }}>
-              <SlippageChart
-                symbol={symbol}
-                data={liquidityArray}
-              />
+              <SlippageChart symbol={symbol} data={liquidityArray} />
             </div>
             {/* <div style={{ marginLeft: "30px" }}>
                 {!!asset.lps.length && (

@@ -228,17 +228,16 @@ class Overview extends Component {
     }
 
     /// remove < 1$ tokens
-    for(const data in overviewData["collateralGraphData"]){
-      if(Number(overviewData["collateralGraphData"][data]) < 1){
-        delete overviewData["collateralGraphData"][data]
+    for (const data in overviewData["collateralGraphData"]) {
+      if (Number(overviewData["collateralGraphData"][data]) < 1) {
+        delete overviewData["collateralGraphData"][data];
       }
     }
     /// give PoolsStore the collateral symbols
-    for(const data in overviewData["collateralGraphData"]){
-      poolCollaterals.push(data)
+    for (const data in overviewData["collateralGraphData"]) {
+      poolCollaterals.push(data);
     }
-    poolsStore['poolCollaterals'] = poolCollaterals;
-
+    poolsStore["poolCollaterals"] = poolCollaterals;
 
     const jsonTime = Math.floor(Date.now() / 1000);
 

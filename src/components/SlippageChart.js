@@ -53,8 +53,15 @@ class SlippageChart extends Component {
     if (!dataSet.length) {
       return null;
     }
-    const [biggest, secondBiggest] = dataSet.sort((a, b) => b.value - a.value);
-    const dataMax = Math.min(secondBiggest.value * 2, biggest.value);
+
+    let dataMax = dataSet[0].value;
+    if (dataSet.length > 1) {
+      const [biggest, secondBiggest] = dataSet.sort(
+        (a, b) => b.value - a.value
+      );
+      dataMax = Math.min(secondBiggest.value * 2, biggest.value);
+    }
+
     const color = mainStore.blackMode ? "white" : "black";
 
     return (
