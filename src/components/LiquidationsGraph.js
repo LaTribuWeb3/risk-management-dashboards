@@ -18,6 +18,7 @@ import {
   whaleFriendlyFormater,
 } from "../components/WhaleFriendly";
 import BoxRow from "../components/BoxRow";
+import poolsStore from "../stores/pools.store";
 
 const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
@@ -61,26 +62,32 @@ class LiquidationsGraph extends Component {
   render() {
     const graphData = {};
     const graphKeys = {};
-    Object.entries(this.props.data.graph_data).forEach(([k, v]) => {
-      Object.entries(v).forEach(([x, y]) => {
-        y = parseFloat(y).toFixed(2);
-        x = parseFloat(x).toFixed(2);
-        graphData[x] = graphData[x] || {};
-        graphData[x][k] = y;
-        graphData[x].x = parseFloat(x);
-        graphKeys[k] = k;
-      });
-    });
-    const dataKeys = Object.keys(graphKeys);
-    const dataSet = Object.values(graphData).sort((a, b) => a.x - b.x);
-    const rawData = Object.assign({}, mainStore["oracles_data"] || {});
-    const asset = this.props.data.key;
-    const currentPrice = (rawData[asset] || {}).oracle;
+    const pool = poolsStore["tab"];
+    const apiData = Object.assign(poolsStore["data/liquidations"]);
+
+
+
+
+
+    // Object.entries(this.props.data.graph_data).forEach(([k, v]) => {
+    //   Object.entries(v).forEach(([x, y]) => {
+    //     y = parseFloat(y).toFixed(2);
+    //     x = parseFloat(x).toFixed(2);
+    //     graphData[x] = graphData[x] || {};
+    //     graphData[x][k] = y;
+    //     graphData[x].x = parseFloat(x);
+    //     graphKeys[k] = k;
+    //   });
+    // });
+    // const dataKeys = Object.keys(graphKeys);
+    // const dataSet = Object.values(graphData).sort((a, b) => a.x - b.x);
+    // const rawData = Object.assign({}, mainStore["oracles_data"] || {});
+    // const asset = this.props.data.key;
+    // const currentPrice = (rawData[asset] || {}).oracle;
     return (
       <div style={{ width: "100%", height: "30vh" }}>
-        <ResponsiveContainer>
+        {/* <ResponsiveContainer>
           <AreaChart data={dataSet}>
-            {/* <CartesianGrid strokeDasharray="3 3" /> */}
             {currentPrice && (
               <ReferenceLine
                 alwaysShow={true}
@@ -90,7 +97,6 @@ class LiquidationsGraph extends Component {
                 strokeWidth="1"
               />
             )}
-            {/* <ReferenceLine y={650000} label="Max" stroke="red" /> */}
             <XAxis
               tickCount={55}
               domain={[0, "dataMax"]}
@@ -110,7 +116,7 @@ class LiquidationsGraph extends Component {
               />
             ))}
           </AreaChart>
-        </ResponsiveContainer>
+        </ResponsiveContainer> */}
       </div>
     );
   }

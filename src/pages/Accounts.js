@@ -196,7 +196,6 @@ class Accounts extends Component {
     if (tableData.length) {
       tableData[0].defaultExpanded = true;
     }
-    console.log("tableData", tableData);
 
     const text = "* Big account included in the list";
     return (
@@ -209,7 +208,7 @@ class Accounts extends Component {
               defaultSortFieldId={2}
               defaultSortAsc={true}
               data={tableData}
-              // expandableRowsComponent={LiquidationsGraph}
+              expandableRowsComponent={LiquidationsGraph}
               expandableRowExpanded={rowPreExpanded}
               onRowExpandToggled={onRowExpandToggled}
             />

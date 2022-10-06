@@ -13,6 +13,7 @@ const apiEndpoints = [
   "data/tokens?fakeMainnet=0",
   "data/creditAccounts?fakeMainnet=0",
   "pools",
+  'data/liquidations',
 ];
 class PoolsStore {
   constructor() {
