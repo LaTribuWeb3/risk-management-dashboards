@@ -57,6 +57,7 @@ function roundTo(num, dec) {
 class Oracles extends Component {
   render() {
     const loading = poolsStore["data/tokens?fakeMainnet=0_loading"];
+    const collaterals = poolsStore['poolCollaterals'];
     const { json_time } = Date.now;
     let oracleData = Object.assign(
       [],
@@ -71,6 +72,10 @@ class Oracles extends Component {
         dex_price: entry.dexPriceUSD18Decimals / 1e18,
       });
     });
+
+  // filter out collaterals not present in pool
+oracleArray = oracleArray.filter((entry) => collaterals.includes(entry.key));
+
 
     return (
       <div>
