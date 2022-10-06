@@ -58,17 +58,33 @@ import BigNumber from "bignumber.js";
 
 class Liquidity extends Component {
   render() {
+    const loading = poolsStore["dex_liquidity_loading"];
+    let symbol = poolsStore["activeTabSymbol"];
+    if (symbol.toLowerCase() == "wsteth") {
+      symbol = "stETH";
+    }
+    let liquidity_data = poolsStore[symbol.toLowerCase() + "_liquidity_data"];
+    delete liquidity_data.json_time;
+    liquidity_data = Object.entries(liquidity_data);
+    let liquidityArray = [];
+    liquidity_data.forEach((entry) => {
+      liquidityArray.push({
+        name: entry[0],
+        value: entry[1][symbol]["volume"],
+      });
+    });
+
     return (
       <div>
-        <Box loading={poolsStore["dex_liquidity_loading"]}>
+        <Box loading={loading}>
           <details open>
             <summary>
-              <span>{poolsStore["activeTabSymbol"]}</span>
+              <span>{symbol}</span>
             </summary>
             <div style={{ display: "flex" }}>
               <SlippageChart
-                symbol={poolsStore["activeTabSymbol"]}
-                data={poolsStore["liquidityData"]}
+                symbol={symbol}
+                data={liquidityArray}
               />
             </div>
             {/* <div style={{ marginLeft: "30px" }}>

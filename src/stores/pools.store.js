@@ -33,13 +33,13 @@ class PoolsStore {
     this['poolCollaterals'] = [];
     this["activeTabSymbol"] = null;
     this["poolHasAccounts"] = 0;
+    apiEndpoints.forEach(this.fetchData);
     this["usdc_liquidity_data"] = usdcLiquidity;
     this["wbtc_liquidity_data"] = wbtcLiquidity;
     this["weth_liquidity_data"] = wethLiquidity;
     this["dai_liquidity_data"] = daiLiquidity;
     this["steth_liquidity_data"] = stethLiquidity;
-    this["dex_liquidity_loading"] = true;
-    apiEndpoints.forEach(this.fetchData);
+    this["dex_liquidity_loading"] = false;
   };
 
   fetchData = (endpoint) => {
@@ -53,10 +53,9 @@ class PoolsStore {
         if (endpoint == "pools") {
           this["tab"] = data[0].address;
           this["activeTabSymbol"] = data[0].symbol;
-          this.poolsData = data;
         }
-        this.setActiveTab(this.tab, this.activeTabSymbol);
         return data;
+        
       })
       .catch(console.error);
   };
@@ -66,7 +65,6 @@ class PoolsStore {
     this["activeTabSymbol"] = symbol;
     this["poolHasAccounts"] = 0;
     mainStore["overview_loading"] = true;
-    this["dex_liquidity_loading"] = true;
     mainStore["overview_data"] = null;
     /// check if pool has credit accounts active:
     const PoolCreditAccounts = Object.assign(
@@ -77,27 +75,9 @@ class PoolsStore {
       this["poolHasAccounts"] = 1;
       mainStore["overview_loading"] = false;
     }
-    this.updateDexLiquidity(symbol);
-    
   }
 
-  updateDexLiquidity(symbol) {
-    if (symbol.toLowerCase() == "wsteth") {
-      symbol = "stETH";
-    }
-    let liquidity_data = this[symbol.toLowerCase() + "_liquidity_data"];
-    delete liquidity_data.json_time;
-    liquidity_data = Object.entries(liquidity_data);
-    let liquidityArray = [];
-    liquidity_data.forEach((entry) => {
-      liquidityArray.push({
-        name: entry[0],
-        value: entry[1][symbol]["volume"],
-      });
-    });
-    this["liquidityData"] = liquidityArray;
-    this["dex_liquidity_loading"] = false;
-  }
+
 }
 
 export default new PoolsStore();
