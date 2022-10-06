@@ -37,8 +37,6 @@ class PoolsStore {
     this["weth_liquidity_data"] = wethLiquidity;
     this["dai_liquidity_data"] = daiLiquidity;
     this["steth_liquidity_data"] = stethLiquidity;
-    this["oracle_deviation_data"] = null;
-    this["oracles_loading"] = true;
     this["dex_liquidity_loading"] = true;
     apiEndpoints.forEach(this.fetchData);
   };
@@ -79,7 +77,6 @@ class PoolsStore {
     }
     this.selectedPoolData(tab);
     this.updateDexLiquidity(symbol);
-    this.oracleDeviation();
   }
 
   updateDexLiquidity(symbol) {
