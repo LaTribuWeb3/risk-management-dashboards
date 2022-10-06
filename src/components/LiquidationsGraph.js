@@ -6,6 +6,7 @@ import mainStore from '../stores/main.store'
 import {removeTokenPrefix} from '../utils'
 import {WhaleFriendlyAxisTick, whaleFriendlyFormater} from '../components/WhaleFriendly'
 import BoxRow from '../components/BoxRow'
+import poolsStore from "../stores/pools.store";
 
 
 const CustomTooltip = ({ active, payload, label }) => {
@@ -29,7 +30,7 @@ const CustomTooltip = ({ active, payload, label }) => {
         {(Object.entries(content).map(([k ,v], i) => {
         k = k === 'x' ? 'Price' : k
          return <BoxRow slim={true} key={i}>
-          <div style={{color: colorMap[k]}}>{removeTokenPrefix(k)}</div>
+          <div style={{color: colorMap[k]}}>{poolsStore['activeTabSymbol']}</div>
           <div>{whaleFriendlyFormater(v)}</div>
         </BoxRow>}))}
         <BoxRow slim={true}>
@@ -59,9 +60,7 @@ class LiquidationsGraph extends Component {
     const dataKeys = Object.keys(graphKeys)
     const dataSet = Object.values(graphData).sort((a, b) => a.x - b.x)
     const dataSetItemProps = Object.keys(dataSet[0]).filter(p => p != 'x')
-    const rawData = Object.assign({}, mainStore['oracles_data'] || {})
-    const asset = this.props.data.key
-    const currentPrice = (rawData[asset] || {}).oracle
+    const currentPrice = Math.max(...dataSet.map((_) => _.x))
     const biggestValue = dataSet
       .map(o => o.x)
       .sort((a, b) => b - a)[0]
