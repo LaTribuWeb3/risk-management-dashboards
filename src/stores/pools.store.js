@@ -30,7 +30,7 @@ class PoolsStore {
 
   init = () => {
     this["tab"] = null;
-    this['poolCollaterals'] = [];
+    this["poolCollaterals"] = [];
     this["activeTabSymbol"] = null;
     this["poolHasAccounts"] = 0;
     apiEndpoints.forEach(this.fetchData);
@@ -55,7 +55,6 @@ class PoolsStore {
           this["activeTabSymbol"] = data[0].symbol;
         }
         return data;
-        
       })
       .catch(console.error);
   };
@@ -76,8 +75,6 @@ class PoolsStore {
       mainStore["overview_loading"] = false;
     }
   }
-
-
 }
 
 export default new PoolsStore();
