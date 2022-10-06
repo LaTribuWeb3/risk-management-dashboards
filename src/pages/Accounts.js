@@ -192,10 +192,20 @@ class Accounts extends Component {
       }
     }
 
-    // auto expand first item
+    // auto expand first item and delete underlying
     if (tableData.length) {
       tableData[0].defaultExpanded = true;
+
+      // delete underlying
+      let underlying = poolsStore["pools_data"].filter(
+          (ca) => ca.address === poolsStore["tab"]
+        );
+      underlying = tokenName(underlying[0]["underlying"])
+      const underlyingIndex = tableData.findIndex((tk)=> tk.key == underlying);
+      tableData.splice(underlyingIndex, 1)
     }
+
+ 
 
     const text = "* Big account included in the list";
     return (
