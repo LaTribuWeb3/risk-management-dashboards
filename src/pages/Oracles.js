@@ -8,6 +8,8 @@ import Token from "../components/Token";
 import poolsStore from "../stores/pools.store";
 
 const percentFrom = (base, num) => {
+  if(base <=0 || num <=0)
+  {return 'NA'}
   const percent = (num / base) * 100 - 100;
   return (
     <Ramzor
