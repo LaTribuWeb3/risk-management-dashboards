@@ -54,10 +54,6 @@ function roundTo(num, dec) {
   return Math.round((num + Number.EPSILON) * pow) / pow;
 }
 
-
-
-
-
 class Oracles extends Component {
   render() {
     const loading = poolsStore["data/tokens?fakeMainnet=0_loading"];
@@ -79,12 +75,7 @@ class Oracles extends Component {
     return (
       <div>
         <Box loading={loading} time={json_time}>
-          {!loading && (
-            <DataTable
-              columns={columns}
-              data={oracleArray}
-            />
-          )}
+          {!loading && <DataTable columns={columns} data={oracleArray} />}
         </Box>
       </div>
     );
