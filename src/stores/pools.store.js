@@ -43,25 +43,6 @@ class PoolsStore {
     apiEndpoints.forEach(this.fetchData);
   };
 
-  oracleDeviation() {
-    this["oracles_loading"] = true;
-    let oracleData = Object.assign(
-      [],
-      this["data/tokens?fakeMainnet=0_data"] || []
-    );
-    let oracleArray = [];
-    oracleData.forEach((entry) => {
-      oracleArray.push({
-        key: entry.symbol,
-        oracle: this.roundTo(entry.priceUSD18Decimals / 1e18, 4),
-        cex_price: entry.cexPriceUSD18Decimals / 1e18,
-        dex_price: entry.dexPriceUSD18Decimals / 1e18,
-      });
-    });
-    this["oracle_deviation_data"] = oracleArray;
-    this["oracles_loading"] = false;
-  }
-
   fetchData = (endpoint) => {
     this[endpoint + "_loading"] = true;
     this[endpoint + "_data"] = null;

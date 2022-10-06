@@ -49,10 +49,33 @@ const ExpandedComponent = ({ data }) => (
   <pre>{JSON.stringify(data, null, 2)}</pre>
 );
 
+function roundTo(num, dec) {
+  const pow = Math.pow(10, dec);
+  return Math.round((num + Number.EPSILON) * pow) / pow;
+}
+
+  poolsStore["oracles_loading"] = true;
+  let oracleData = Object.assign(
+    [],
+    poolsStore["data/tokens?fakeMainnet=0_data"] || []
+  );
+  let oracleArray = [];
+  oracleData.forEach((entry) => {
+    oracleArray.push({
+      key: entry.symbol,
+      oracle: roundTo(entry.priceUSD18Decimals / 1e18, 4),
+      cex_price: entry.cexPriceUSD18Decimals / 1e18,
+      dex_price: entry.dexPriceUSD18Decimals / 1e18,
+    });
+  });
+  poolsStore["oracles_loading"] = false;
+
+
+
 class Oracles extends Component {
   render() {
     const loading = poolsStore["oracles_loading"];
-    const rawData = Object.assign({}, mainStore["oracles_data"] || {});
+    const rawData = oracleArray;
     const { json_time } = Date.now;
 
     return (
@@ -61,7 +84,7 @@ class Oracles extends Component {
           {!loading && (
             <DataTable
               columns={columns}
-              data={poolsStore["oracle_deviation_data"]}
+              data={oracleArray}
             />
           )}
         </Box>
