@@ -202,9 +202,11 @@ class Accounts extends Component {
       );
       underlying = tokenName(underlying[0]["underlying"]);
       const underlyingIndex = tableData.findIndex((tk) => tk.key == underlying);
-      tableData.splice(underlyingIndex, 1);
+      if (underlyingIndex != -1) {
+        tableData.splice(underlyingIndex, 1);
+      }
     }
-
+    console.log('tableData', tableData)
     const text = "* Big account included in the list";
     return (
       <div>
