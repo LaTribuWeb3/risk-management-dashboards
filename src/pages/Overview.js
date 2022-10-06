@@ -233,7 +233,7 @@ class Overview extends Component {
 
     return (
       <div>
-        <OverviewPieCharts />
+        <OverviewPieCharts data={overviewData} />
         <BoxGrid>
           <Box loading={loading} time={jsonTime}>
             <div>

@@ -74,9 +74,10 @@ class PoolsStore {
     ).filter((ca) => ca.poolAddress === tab);
     if (PoolCreditAccounts.length > 0) {
       this["poolHasAccounts"] = 1;
+      mainStore["overview_loading"] = false;
     }
-    this.selectedPoolData(tab);
     this.updateDexLiquidity(symbol);
+    
   }
 
   updateDexLiquidity(symbol) {

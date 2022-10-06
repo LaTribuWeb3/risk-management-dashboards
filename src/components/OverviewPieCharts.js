@@ -18,7 +18,7 @@ import mainStore from "../stores/main.store";
 
 class OverviewPieCharts extends Component {
   render() {
-    const overviewData = Object.assign({}, mainStore["overview_data"] || {});
+    const overviewData = this.props.data;
     const json_time = Math.floor(Date.now() / 1000);
     const loading = mainStore["overview_loading"]; // TODO
 
