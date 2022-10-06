@@ -79,8 +79,6 @@ class Liquidity extends Component {
     liquidityArray = liquidityArray.filter((entry) =>
       collaterals.includes(entry.name)
     );
-    console.log("collateral is", collaterals);
-    console.log("liquidity pool data is", liquidityArray);
     return (
       <div>
         <Box loading={loading}>

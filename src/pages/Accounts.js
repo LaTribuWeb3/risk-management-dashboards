@@ -10,6 +10,8 @@ import Token from "../components/Token";
 import { TopTenAccounts, usersMinWidth } from "../components/TopAccounts";
 import poolsStore from "../stores/pools.store";
 import { tokenName, tokenPrice } from "../utils";
+import { tab } from "@testing-library/user-event/dist/tab";
+
 
 const rowPreExpanded = (row) => row.defaultExpanded;
 
@@ -139,6 +141,7 @@ class Accounts extends Component {
         top_10_collateral: null,
         top10Coll: true,
         median_collateral: null,
+        graph_data: null,
         whales: {
           big_collateral: [],
           total_collateral: tokenBalances[token],
@@ -206,7 +209,45 @@ class Accounts extends Component {
         tableData.splice(underlyingIndex, 1);
       }
     }
-    console.log('tableData', tableData)
+
+    // include graph data in tableData
+    let apiGraphData = Object.assign(poolsStore["data/liquidations_data"]);
+    apiGraphData = apiGraphData.filter((entry) => entry.poolAddress == poolsStore["tab"]);
+    apiGraphData = apiGraphData[0].liquidations;
+    let graphDataArray = []
+    for (const data in apiGraphData){
+      let graphData = {};
+      graphData[data] = {};
+      let graphArray = {};
+      for (const point in apiGraphData[data]){
+        graphArray[apiGraphData[data][point]['priceUsd']] = apiGraphData[data][point]['normalizedTotalLiquidationUsd'];
+
+      }
+      graphData[data] = graphArray;
+      graphDataArray.push(graphData)
+    }
+
+    //// TENTATIVE DE PENETRATION DE TABLE DATA
+    for(const token in tableData){
+      for (let i = 0; i < graphDataArray.length; i++){
+        const d = graphDataArray[i][tableData[token].key];
+        if(d !== undefined){
+          tableData[token]['graph_data'] = graphDataArray[i];
+        }
+      }
+    }
+
+
+    console.log('graph data is', graphDataArray);
+    console.log('tabledata is', tableData);
+
+
+
+
+
+
+
+
     const text = "* Big account included in the list";
     return (
       <div>
