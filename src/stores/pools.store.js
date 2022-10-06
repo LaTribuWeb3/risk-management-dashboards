@@ -30,6 +30,7 @@ class PoolsStore {
 
   init = () => {
     this["tab"] = null;
+    this['poolCollaterals'] = [];
     this["activeTabSymbol"] = null;
     this["poolHasAccounts"] = 0;
     this["usdc_liquidity_data"] = usdcLiquidity;

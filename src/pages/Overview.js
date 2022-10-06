@@ -26,6 +26,7 @@ const humanTxt = (txt) => txtMap[txt];
 class Overview extends Component {
   render() {
     let overviewData = {};
+    let poolCollaterals = [];
     const tab = poolsStore["tab"];
     const poolsData = Object.assign([], poolsStore["pools_data"] || []);
     const tokenData = Object.assign(
@@ -223,9 +224,21 @@ class Overview extends Component {
         },
         collateralGraphData: indexedTokenSum,
       };
-
       overviewData = dataOverview;
     }
+
+    /// remove < 1$ tokens
+    for(const data in overviewData["collateralGraphData"]){
+      if(Number(overviewData["collateralGraphData"][data]) < 1){
+        delete overviewData["collateralGraphData"][data]
+      }
+    }
+    /// give PoolsStore the collateral symbols
+    for(const data in overviewData["collateralGraphData"]){
+      poolCollaterals.push(data)
+    }
+    poolsStore['poolCollaterals'] = poolCollaterals;
+
 
     const jsonTime = Math.floor(Date.now() / 1000);
 
