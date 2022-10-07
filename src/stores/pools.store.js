@@ -39,10 +39,10 @@ class PoolsStore {
       .then(({ data }) => {
         this[endpoint + "_loading"] = false;
         this[endpoint + "_data"] = data;
-        if (endpoint == "pools") {
-          this["tab"] = data[0].address;
-          this["activeTabSymbol"] = data[0].symbol;
-        }
+        // if (endpoint == "pools") {
+        //   this["tab"] = data[0].address;
+        //   this["activeTabSymbol"] = data[0].symbol;
+        // }
         return data;
       })
       .catch(console.error);

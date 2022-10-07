@@ -22,7 +22,13 @@ class SinglePage extends Component {
         <section id="select-pool">
           <Tabnav />
         </section>
-        {poolsStore["poolHasAccounts"] == 0 ? (
+        {poolsStore["activeTabSymbol"] === null ?
+          <div className="noaccountsdiv">
+            <span className="noaccounts">
+              No pool selected
+            </span>
+          </div> :
+         poolsStore["poolHasAccounts"] === 0 ? (
           <div className="noaccountsdiv">
             <span className="noaccounts">
               this pool has no credit accounts.
