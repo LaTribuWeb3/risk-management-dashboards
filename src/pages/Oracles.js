@@ -1,10 +1,9 @@
-import React, { Component } from "react";
-import { observer } from "mobx-react";
 import Box from "../components/Box";
+import { Component } from "react";
 import DataTable from "react-data-table-component";
-import mainStore from "../stores/main.store";
 import Ramzor from "../components/Ramzor";
 import Token from "../components/Token";
+import { observer } from "mobx-react";
 import poolsStore from "../stores/pools.store";
 
 const percentFrom = (base, num) => {
@@ -48,9 +47,9 @@ const columns = [
   },
 ];
 
-const ExpandedComponent = ({ data }) => (
-  <pre>{JSON.stringify(data, null, 2)}</pre>
-);
+// const ExpandedComponent = ({ data }) => (
+//   <pre>{JSON.stringify(data, null, 2)}</pre>
+// );
 
 function roundTo(num, dec) {
   const pow = Math.pow(10, dec);
