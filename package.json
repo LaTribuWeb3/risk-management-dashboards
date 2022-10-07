@@ -35,7 +35,8 @@
     "build-vesta": "REACT_APP_CONFIG=vesta && npm run build",
     "build-gearbox": "REACT_APP_CONFIG=gearbox && npm run build",
     "test": "react-app-rewired test",
-    "eject": "react-app-rewired eject"
+    "eject": "react-app-rewired eject",
+    "deploy": "npm run build-gearbox && scp -r ./build/* ubuntu@dev-0.la-tribu.xyz:/app/gearbox/dashboard"
   },
   "eslintConfig": {
     "extends": [

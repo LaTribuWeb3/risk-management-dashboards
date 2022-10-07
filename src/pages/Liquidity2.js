@@ -1,7 +1,7 @@
-import { Component } from "react";
-import { observer } from "mobx-react";
 import Box from "../components/Box";
+import { Component } from "react";
 import SlippageChart from "../components/SlippageChart";
+import { observer } from "mobx-react";
 import poolsStore from "../stores/pools.store";
 
 // const columns = [
@@ -57,7 +57,12 @@ class Liquidity extends Component {
     if (symbol.toLowerCase() == "wsteth") {
       symbol = "stETH";
     }
-    let liquidity_data = poolsStore[symbol.toLowerCase() + "_liquidity_data"];
+    let liquidity_data = poolsStore["data/liquidity_data"];
+    for (let i = 0; i < liquidity_data.length; i++) {
+      if (liquidity_data[i]["debtToken"] === symbol) {
+        liquidity_data = liquidity_data[i]["slippage"];
+      }
+    }
     delete liquidity_data.json_time;
     liquidity_data = Object.entries(liquidity_data);
     let liquidityArray = [];

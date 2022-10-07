@@ -1,20 +1,21 @@
-import { Component } from "react";
-import { observer } from "mobx-react";
-import mainStore from "../stores/main.store";
 import {
-  BarChart,
   Bar,
-  XAxis,
-  YAxis,
+  BarChart,
   ResponsiveContainer,
   Tooltip,
+  XAxis,
+  YAxis,
 } from "recharts";
-import { COLORS } from "../constants";
 import {
-  whaleFriendlyFormater,
   WhaleFriendlyAxisTick,
+  whaleFriendlyFormater,
 } from "../components/WhaleFriendly";
+
 import BoxRow from "./BoxRow";
+import { COLORS } from "../constants";
+import { Component } from "react";
+import mainStore from "../stores/main.store";
+import { observer } from "mobx-react";
 
 const truncate = {
   maxWidth: "200px",
@@ -52,7 +53,6 @@ class SlippageChart extends Component {
     }
     dataSet.sort((a, b) => b.value - a.value);
     let dataMax = dataSet[0].value;
-    console.log("datamax", dataSet);
 
     // if (dataSet.length > 1) {
     //   const [biggest, secondBiggest] = dataSet.sort(

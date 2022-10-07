@@ -1,19 +1,13 @@
-import { makeAutoObservable } from "mobx";
 import axios from "axios";
-import BigNumber from "bignumber.js";
 import mainStore from "../stores/main.store";
-import alertStore from "../stores/alert.store";
-import usdcLiquidity from "./USDC_pool_usd_volume_for_slippage.json";
-import wbtcLiquidity from "./WBTC_pool_usd_volume_for_slippage.json";
-import wethLiquidity from "./WETH_pool_usd_volume_for_slippage.json";
-import daiLiquidity from "./DAI_pool_usd_volume_for_slippage.json";
-import stethLiquidity from "./stETH_pool_usd_volume_for_slippage.json";
+import { makeAutoObservable } from "mobx";
 
 const apiEndpoints = [
   "data/tokens?fakeMainnet=0",
   "data/creditAccounts?fakeMainnet=0",
   "pools",
   "data/liquidations",
+  "data/liquidity",
 ];
 class PoolsStore {
   constructor() {
@@ -34,11 +28,6 @@ class PoolsStore {
     this["activeTabSymbol"] = null;
     this["poolHasAccounts"] = 0;
     apiEndpoints.forEach(this.fetchData);
-    this["usdc_liquidity_data"] = usdcLiquidity;
-    this["wbtc_liquidity_data"] = wbtcLiquidity;
-    this["weth_liquidity_data"] = wethLiquidity;
-    this["dai_liquidity_data"] = daiLiquidity;
-    this["steth_liquidity_data"] = stethLiquidity;
     this["dex_liquidity_loading"] = false;
   };
 
