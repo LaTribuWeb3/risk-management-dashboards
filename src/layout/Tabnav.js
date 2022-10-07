@@ -25,32 +25,40 @@ class Tabnav extends Component {
           <h2>Pool</h2>
           <p className="description">Please select a pool</p>
         </hgroup>
-        <div className="tabnav">
-          {loading ? (
-            <span>loading...</span>
-          ) : (
-            poolsData.map((pool, i) => {
-              const symbol = tokenData.find(
-                (t) => t.address === pool.underlying
-              )?.symbol;
-              return (
-                <button
-                  onClick={() => setActiveTab(pool.address, symbol)}
-                  className={
-                    "button " +
-                    (poolsStore["tab"] == pool.address ? "active" : "")
-                  }
-                  key={i}
-                  value={pool.address}
-                  id={symbol}
-                >
-                  {symbol}
-                </button>
-              );
-            })
-          )}
+        {/* <div className="tabnav"> */}
+        <table className="tabnav">
+          <tr>
+            {loading ? (
+                    <span>loading...</span>
+                  ) : (
+                    poolsData.map((pool, i) => {
+                      const symbol = tokenData.find(
+                        (t) => t.address === pool.underlying
+                      )?.symbol;
+                      return (
+                        
+                      <td class="tabnav-td">
+                        <button
+                          onClick={() => setActiveTab(pool.address, symbol)}
+                          className={
+                            "tnbtn " +
+                            (poolsStore["tab"] === pool.address ? "active" : "")
+                          }
+                          key={i}
+                          value={pool.address}
+                          id={symbol}
+                        >
+                          {symbol}
+                        </button>
+                    </td>
+                      );
+                    })
+                  )}
+          </tr>
+</table>
+          
         </div>
-      </div>
+      // </div>
     );
   }
 }
