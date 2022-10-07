@@ -10,11 +10,17 @@ class Top10Accounts extends Component {
   toggle = (e) => {
     this.props.toggleTopTen(this.props.row, this.props.name);
     e.preventDefault();
+    console.log('props row, props name', this.props.row, this.props.name)
   };
 
   render() {
+    let toggled = false;
+    function toggleThis(e){
+      toggled = !toggled
+    }
     const { props } = this;
-    const { accounts, value } = props;
+    let { accounts, value } = props;
+    accounts.sort((a, b) => b['size'] - a['size']);
     let hasWhales = false;
     for (const account of accounts) {
       if (!!account.whale_flag) {
@@ -25,8 +31,8 @@ class Top10Accounts extends Component {
     return (
       <div style={{ display: "flex", width: "100%" }}>
         <details
-          onClick={this.toggle}
-          open={props.row[props.name]}
+          onClick={toggleThis}
+          open={toggled}
           style={{
             padding: "1rem 0",
             border: "none",

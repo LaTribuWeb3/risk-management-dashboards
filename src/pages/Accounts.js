@@ -25,7 +25,11 @@ class Accounts extends Component {
     };
 
     const toggleTopTen = (row, name) => {
-      row[name] = !row[name];
+      if( row[name] == undefined){
+        row[name] = true;
+      }
+      else{
+      row[name] = !row[name];}
     };
     const columns = [
       {
@@ -141,7 +145,6 @@ class Accounts extends Component {
         total_collateral: tokenBalances[token],
         top_1_collateral: null,
         top_10_collateral: null,
-        top10Coll: true,
         median_collateral: null,
         graph_data: null,
         whales: {
@@ -172,7 +175,7 @@ class Accounts extends Component {
             userArrays[tokenSymbol] = [];
             userArrays[tokenSymbol].push({
               id: whaleCreditAccounts[i]["address"],
-              size: tokenAmount,
+              size: Number(tokenAmount),
               whale_flag: 1,
             })
           }
@@ -266,6 +269,7 @@ class Accounts extends Component {
           tableData[0].defaultExpanded = true;
         }
     const text = "* Big account included in the list";
+
     return (
       <div>
         <Box loading={loading} time={Date.now / 1000} text={text}>
