@@ -18,13 +18,8 @@ class Tabnav extends Component {
       poolsStore["data/tokens?fakeMainnet=0_data"] || []
     );
 
-    const allCreditAccounts = Object.assign(
-      [],
-      poolsStore["data/creditAccounts?fakeMainnet=0_data"] || []);
-
     function setActiveTab(tab, symbol) {
-        console.log('allCreditAccounts', allCreditAccounts);
-        poolsStore.setActiveTab(tab, symbol, allCreditAccounts);
+        poolsStore.setActiveTab(tab, symbol);
       
     }
 
@@ -46,8 +41,7 @@ class Tabnav extends Component {
                       )?.symbol;
 
                       if(i === 0 && poolsStore["tab"] === null) {
-                        console.log('i ==', 0);
-                        poolsStore.setActiveTab(pool.address, symbol, allCreditAccounts);
+                        poolsStore.setActiveTab(pool.address, symbol);
                       }
                       return (
                         
