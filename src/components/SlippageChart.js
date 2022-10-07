@@ -53,14 +53,16 @@ class SlippageChart extends Component {
     if (!dataSet.length) {
       return null;
     }
-
+    dataSet.sort((a,b) => b.value - a.value)
     let dataMax = dataSet[0].value;
-    if (dataSet.length > 1) {
-      const [biggest, secondBiggest] = dataSet.sort(
-        (a, b) => b.value - a.value
-      );
-      dataMax = Math.min(secondBiggest.value * 2, biggest.value);
-    }
+    console.log('datamax', dataSet)
+    
+    // if (dataSet.length > 1) {
+    //   const [biggest, secondBiggest] = dataSet.sort(
+    //     (a, b) => b.value - a.value
+    //   );
+    //   dataMax = Math.min(secondBiggest.value * 2, biggest.value);
+    // }
 
     const color = mainStore.blackMode ? "white" : "black";
 
