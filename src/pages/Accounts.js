@@ -229,10 +229,7 @@ class Accounts extends Component {
       }
     }
 
-    // auto expand first item
-    if (tableData.length) {
-      tableData[0].defaultExpanded = true;
-    }
+
 
     // include graph data in tableData
     let apiGraphData = Object.assign(poolsStore["data/liquidations_data"]);
@@ -262,6 +259,12 @@ class Accounts extends Component {
         }
       }
     }
+
+        // sort by size and auto expand first item
+        if (tableData.length) {
+          tableData.sort((a, b) => b['total_collateral'] - a['total_collateral']);
+          tableData[0].defaultExpanded = true;
+        }
     const text = "* Big account included in the list";
     return (
       <div>
@@ -271,7 +274,7 @@ class Accounts extends Component {
               expandableRows
               columns={columns}
               defaultSortFieldId={2}
-              defaultSortAsc={true}
+              defaultSortAsc={false}
               data={tableData}
               expandableRowsComponent={LiquidationsGraph}
               expandableRowExpanded={rowPreExpanded}
