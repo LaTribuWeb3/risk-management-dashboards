@@ -77,7 +77,7 @@ class Accounts extends Component {
     let tokenBalances = {};
     let collateralData = [];
     let tableData = [];
-    let whaleData = [];
+    let userArrays = {};
 
     if (!loading) {
       const PoolCreditAccounts = Object.assign(
@@ -129,7 +129,10 @@ class Accounts extends Component {
           }
         }
       }
+
     }
+
+
     // create objects in tableData and update with total_collateral
     for (const token in tokenBalances) {
       tableData.push({
@@ -148,18 +151,50 @@ class Accounts extends Component {
       });
     }
 
-    // create objects in whaleData and update with total_collateral
-    for (const token in tokenBalances) {
-      whaleData.push([
-        token,
-        {
-          big_collateral: [],
-          total_collateral: tokenBalances[token],
-        },
-      ]);
+    /// create userArrays for whales data
+    const whaleCreditAccounts = Object.assign(
+      poolsStore["data/creditAccounts?fakeMainnet=0_data"].filter(
+        (ca) => ca.poolAddress === poolsStore["tab"]
+      )
+    );
+    for (let i = 0; i < whaleCreditAccounts.length; i++) {
+      for (let j = 0; j < whaleCreditAccounts[i]["tokenBalances"].length; j++) {
+        // define token infos
+        const tokenAddress =
+          whaleCreditAccounts[i]["tokenBalances"][j]["address"];
+        const tokenSymbol = tokenName(tokenAddress);
+        const tokenAmount = tokenPrice(
+          tokenSymbol,
+          whaleCreditAccounts[i]["tokenBalances"][j]["amount"]
+        );
+        if (tokenAmount != 0) {
+          if (userArrays[tokenSymbol] == null) {
+            userArrays[tokenSymbol] = [];
+            userArrays[tokenSymbol].push({
+              id: whaleCreditAccounts[i]["address"],
+              size: tokenAmount,
+              whale_flag: 1,
+            })
+          }
+          else {
+            userArrays[tokenSymbol].push({
+              id: whaleCreditAccounts[i]["address"],
+              size: tokenAmount,
+              whale_flag: 1,
+            })
+          }
+        }
+      }
     }
 
     // update big_collateral array
+    for(let i = 0; i < tableData.length; i++){
+      let array = userArrays[tableData[i]["key"]];
+      array.sort((a, b) => b - a);
+      array = array.slice(0,11);
+      for(let j = 0; j < array.length; j++){
+      tableData[i]["whales"]["big_collateral"].push(array[j])}
+    }
 
     // median function for next block
     function getMedian(arr) {
@@ -227,7 +262,6 @@ class Accounts extends Component {
         }
       }
     }
-console.log('tableData is', tableData)
     const text = "* Big account included in the list";
     return (
       <div>
