@@ -1,15 +1,8 @@
-import React, { Component } from "react";
+import { Component } from "react";
 import { observer } from "mobx-react";
 import Box from "../components/Box";
 import SlippageChart from "../components/SlippageChart";
-import DataTable from "react-data-table-component";
-import mainStore from "../stores/main.store";
-import { whaleFriendlyFormater } from "../components/WhaleFriendly";
-import { precentFormatter } from "../utils";
-import Token from "../components/Token";
-import TopAccounts, { usersMinWidth } from "../components/TopAccounts";
 import poolsStore from "../stores/pools.store";
-import BigNumber from "bignumber.js";
 
 // const columns = [
 //   {

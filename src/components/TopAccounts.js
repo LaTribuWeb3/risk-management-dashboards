@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import { observer } from "mobx-react";
-import { whaleFriendlyFormater } from "../components/WhaleFriendly";
-import { precentFormatter } from "../utils";
 import BlockExplorerLink from "../components/BlockExplorerLink";
+import { Component } from "react";
+import { observer } from "mobx-react";
+import { precentFormatter } from "../utils";
+import { whaleFriendlyFormater } from "../components/WhaleFriendly";
 
 export const usersMinWidth = "180px";
 
@@ -10,17 +10,17 @@ class Top10Accounts extends Component {
   toggle = (e) => {
     this.props.toggleTopTen(this.props.row, this.props.name);
     e.preventDefault();
-    console.log('props row, props name', this.props.row, this.props.name)
+    console.log("props row, props name", this.props.row, this.props.name);
   };
 
   render() {
     let toggled = false;
-    function toggleThis(e){
-      toggled = !toggled
+    function toggleThis(e) {
+      toggled = !toggled;
     }
     const { props } = this;
     let { accounts, value } = props;
-    accounts.sort((a, b) => b['size'] - a['size']);
+    accounts.sort((a, b) => b["size"] - a["size"]);
     let hasWhales = false;
     for (const account of accounts) {
       if (!!account.whale_flag) {

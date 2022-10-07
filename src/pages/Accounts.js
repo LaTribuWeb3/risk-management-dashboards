@@ -1,19 +1,16 @@
-import React, { Component } from "react";
-import { observer } from "mobx-react";
-import Box from "../components/Box";
-import DataTable from "react-data-table-component";
-import mainStore from "../stores/main.store";
-import LiquidationsGraph from "../components/LiquidationsGraph";
-import { whaleFriendlyFormater } from "../components/WhaleFriendly";
-import { makeAutoObservable, runInAction } from "mobx";
-import Token from "../components/Token";
 import { TopTenAccounts, usersMinWidth } from "../components/TopAccounts";
-import poolsStore from "../stores/pools.store";
 import { tokenName, tokenPrice } from "../utils";
-import { tab } from "@testing-library/user-event/dist/tab";
+
+import Box from "../components/Box";
+import { Component } from "react";
+import DataTable from "react-data-table-component";
+import LiquidationsGraph from "../components/LiquidationsGraph";
+import Token from "../components/Token";
+import { observer } from "mobx-react";
+import poolsStore from "../stores/pools.store";
+import { whaleFriendlyFormater } from "../components/WhaleFriendly";
 
 const rowPreExpanded = (row) => row.defaultExpanded;
-
 class Accounts extends Component {
   render() {
     const onRowExpandToggled = (expanded, row) => {
@@ -25,11 +22,11 @@ class Accounts extends Component {
     };
 
     const toggleTopTen = (row, name) => {
-      if( row[name] == undefined){
+      if (row[name] == undefined) {
         row[name] = true;
+      } else {
+        row[name] = !row[name];
       }
-      else{
-      row[name] = !row[name];}
     };
     const columns = [
       {
@@ -133,9 +130,7 @@ class Accounts extends Component {
           }
         }
       }
-
     }
-
 
     // create objects in tableData and update with total_collateral
     for (const token in tokenBalances) {
@@ -177,26 +172,26 @@ class Accounts extends Component {
               id: whaleCreditAccounts[i]["address"],
               size: Number(tokenAmount),
               whale_flag: 1,
-            })
-          }
-          else {
+            });
+          } else {
             userArrays[tokenSymbol].push({
               id: whaleCreditAccounts[i]["address"],
               size: tokenAmount,
               whale_flag: 1,
-            })
+            });
           }
         }
       }
     }
 
     // update big_collateral array
-    for(let i = 0; i < tableData.length; i++){
+    for (let i = 0; i < tableData.length; i++) {
       let array = userArrays[tableData[i]["key"]];
       array.sort((a, b) => b - a);
-      array = array.slice(0,11);
-      for(let j = 0; j < array.length; j++){
-      tableData[i]["whales"]["big_collateral"].push(array[j])}
+      array = array.slice(0, 11);
+      for (let j = 0; j < array.length; j++) {
+        tableData[i]["whales"]["big_collateral"].push(array[j]);
+      }
     }
 
     // median function for next block
@@ -232,8 +227,6 @@ class Accounts extends Component {
       }
     }
 
-
-
     // include graph data in tableData
     let apiGraphData = Object.assign(poolsStore["data/liquidations_data"]);
     apiGraphData = apiGraphData.filter(
@@ -263,11 +256,11 @@ class Accounts extends Component {
       }
     }
 
-        // sort by size and auto expand first item
-        if (tableData.length) {
-          tableData.sort((a, b) => b['total_collateral'] - a['total_collateral']);
-          tableData[0].defaultExpanded = true;
-        }
+    // sort by size and auto expand first item
+    if (tableData.length) {
+      tableData.sort((a, b) => b["total_collateral"] - a["total_collateral"]);
+      tableData[0].defaultExpanded = true;
+    }
     const text = "* Big account included in the list";
 
     return (

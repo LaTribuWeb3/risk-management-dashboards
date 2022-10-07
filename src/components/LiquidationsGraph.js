@@ -1,18 +1,15 @@
-import React, { Component } from "react";
+import { Component } from "react";
 import { observer } from "mobx-react";
 import {
   AreaChart,
   Area,
   XAxis,
   YAxis,
-  CartesianGrid,
   Tooltip,
   ReferenceLine,
   ResponsiveContainer,
 } from "recharts";
 import { COLORS } from "../constants";
-import mainStore from "../stores/main.store";
-import { removeTokenPrefix } from "../utils";
 import {
   WhaleFriendlyAxisTick,
   whaleFriendlyFormater,
@@ -34,6 +31,7 @@ const CustomTooltip = ({ active, payload, label }) => {
         return acc + parseFloat(v);
       }, 0)
       .toFixed(2);
+
     return (
       <div className="tooltip-container">
         <BoxRow slim={true}>
@@ -78,7 +76,7 @@ class LiquidationsGraph extends Component {
     const dataSet = Object.values(graphData).sort((a, b) => a.x - b.x);
     const dataSetItemProps = Object.keys(dataSet[0]).filter((p) => p != "x");
     let currentPrice = Math.max(...dataSet.map((_) => _.x));
-    if(this.props.data.key == poolsStore["activeTabSymbol"]){
+    if (this.props.data.key == poolsStore["activeTabSymbol"]) {
       currentPrice = Math.min(...dataSet.map((_) => _.x));
     }
     const biggestValue = dataSet.map((o) => o.x).sort((a, b) => b - a)[0];
