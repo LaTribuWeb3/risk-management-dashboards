@@ -31,9 +31,10 @@ class Tabnav extends Component {
         </hgroup>
         {/* <div className="tabnav"> */}
         <table className="tabnav">
+        <tbody>
           <tr>
             {loading ? (
-                    <span>loading...</span>
+                    <td>loading...</td>
                   ) : (
                     poolsData.map((pool, i) => {
                       const symbol = tokenData.find(
@@ -63,6 +64,7 @@ class Tabnav extends Component {
                     })
                   )}
           </tr>
+          </tbody>
 </table>
           
         </div>

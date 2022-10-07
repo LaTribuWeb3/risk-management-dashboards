@@ -49,7 +49,6 @@ class PoolsStore {
   };
 
   setActiveTab(tab, symbol) {
-    console.log(`setActiveTab: ${tab} ${symbol}`)
     this["tab"] = tab;
     this["activeTabSymbol"] = symbol;
     this["poolHasAccounts"] = 0;
