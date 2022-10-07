@@ -39,7 +39,7 @@ class PoolsStore {
       .then(({ data }) => {
         this[endpoint + "_loading"] = false;
         this[endpoint + "_data"] = data;
-        // if (endpoint == "pools") {
+        // if (endpoint === "pools") {
         //   this["tab"] = data[0].address;
         //   this["activeTabSymbol"] = data[0].symbol;
         // }
@@ -48,18 +48,16 @@ class PoolsStore {
       .catch(console.error);
   };
 
-  setActiveTab(tab, symbol) {
+  setActiveTab(tab, symbol, allCreditAccounts) {
+    console.log(`setActiveTab: ${tab} ${symbol}`)
     this["tab"] = tab;
     this["activeTabSymbol"] = symbol;
     this["poolHasAccounts"] = 0;
     mainStore["overview_loading"] = true;
     mainStore["overview_data"] = null;
     /// check if pool has credit accounts active:
-    const PoolCreditAccounts = Object.assign(
-      [],
-      this["data/creditAccounts?fakeMainnet=0_data"] || []
-    ).filter((ca) => ca.poolAddress === tab);
-    if (PoolCreditAccounts.length > 0) {
+    const poolCreditAccounts = allCreditAccounts.filter((ca) => ca.poolAddress === tab);
+    if (poolCreditAccounts.length > 0) {
       this["poolHasAccounts"] = 1;
       mainStore["overview_loading"] = false;
     }

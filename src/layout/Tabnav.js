@@ -8,15 +8,24 @@ class Tabnav extends Component {
     const loading =
       poolsStore["data/tokens?fakeMainnet=0_loading"] ||
       poolsStore["pools_loading"] ||
-      poolsStore["data/creditAccounts?fakeMainnet=0_loading"];
+      poolsStore["data/creditAccounts?fakeMainnet=0_loading"] ||
+      poolsStore["data/liquidations_loading"] ||
+      poolsStore["data/liquidity_loading"] ;
+
     const poolsData = Object.assign([], poolsStore["pools_data"] || []);
     const tokenData = Object.assign(
       [],
       poolsStore["data/tokens?fakeMainnet=0_data"] || []
     );
 
+    const allCreditAccounts = Object.assign(
+      [],
+      poolsStore["data/creditAccounts?fakeMainnet=0_data"] || []);
+
     function setActiveTab(tab, symbol) {
-      poolsStore.setActiveTab(tab, symbol);
+        console.log('allCreditAccounts', allCreditAccounts);
+        poolsStore.setActiveTab(tab, symbol, allCreditAccounts);
+      
     }
 
     return (
@@ -35,9 +44,14 @@ class Tabnav extends Component {
                       const symbol = tokenData.find(
                         (t) => t.address === pool.underlying
                       )?.symbol;
+
+                      if(i === 0 && poolsStore["tab"] === null) {
+                        console.log('i ==', 0);
+                        poolsStore.setActiveTab(pool.address, symbol, allCreditAccounts);
+                      }
                       return (
                         
-                      <td class="tabnav-td">
+                      <td key={i} className="tabnav-td">
                         <button
                           onClick={() => setActiveTab(pool.address, symbol)}
                           className={
