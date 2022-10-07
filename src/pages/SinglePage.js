@@ -20,7 +20,7 @@ class SinglePage extends Component {
     const { proViewShow } = mainStore;
     return (
           <ScrollSpy
-            offsetBottom={400}
+            offsetBottom={0}
             scrollThrottle={100}
             parentScrollContainerRef={this.props.scrollContainer}
           >
