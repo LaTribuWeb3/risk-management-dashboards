@@ -251,27 +251,43 @@ h2 {
   text-align: center;
 }
 
+* {
+  box-sizing: border-box
+} 
+
 .tabnav {
-  text-align: left;
+  width: 100%;
+  table-layout: fixed;
+  /* background-color: #f1f1f1; */
   background-color: var(--card-background-color);
   box-shadow: var(--card-box-shadow);
 }
-.tabnav button {
+.tabnav-td {
+  padding: 0px;
+}
+.tabnav .tnbtn {
   font-weight: bold;
+  white-space: nowrap;
   transition: 1s;
   border-radius: 0px;
-  display: inline-block;
-  max-width: 150px;
-  padding: 5px 20px;
-  margin-bottom: 0px;
+  border:none;
+  padding: 0px;
+  margin: 0px;
+  height: 100px;
   cursor: pointer;
-  background-color: #ccc;
+  color: var(--contrast);
+  background-color: var(--card-background-color);
 }
-.tabnav button:hover {
-  background-color: #46b09b;
+.tabnav .tnbtn:hover {
+  /* color: var(--color); */
+  background-color: var(--primary-hover)
+   /* #46b09b; */
 }
-.tabnav button.active {
-  background-color: #1095c1;
+.tabnav .tnbtn.active {
+  /* color: var(--color); */
+  background-color: var(--primary);
+  color: var(--contrast);
+  /* color: var(--card-background-color); */
 }
 .tabcontent {
   display: none;
