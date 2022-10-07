@@ -101,7 +101,7 @@ class LiquidationsGraph extends Component {
             {/* <CartesianGrid strokeDasharray="3 3" /> */}
             {currentPrice && (
               <ReferenceLine
-                alwaysShow={true}
+                ifOverflow="extendDomain"
                 x={currentPrice}
                 label={`current`}
                 stroke="var(--primary"
