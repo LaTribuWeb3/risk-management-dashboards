@@ -82,7 +82,6 @@ class Overview extends Component {
   medianCollateralArray.push(creditAccountsForPool[i]["collateralValue"])
  }
 const calculatedCollateralMedian = getMedian(medianCollateralArray)
-console.log('median collateral array', medianCollateralArray)
 
     // compute total collateral value for pool
     let totalCollateral = 0;
