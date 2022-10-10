@@ -38,13 +38,10 @@ class Header extends Component {
           />
           {/* <img style={{ width: '0.7vw', margin: '0 2vw'}} src={`/logos/${color}-x.svg`}/> */}
           {logo && (
-            <div>
             <img
               style={{ height: "calc((var(--header-height) / 2) - 45px)" }}
               src={`/logos/${logo}`}
             />
-            <text className="logo">Gearbox</text>
-            </div>
           )}
         </div>
       </div>
