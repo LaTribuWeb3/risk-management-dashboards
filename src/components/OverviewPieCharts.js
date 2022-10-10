@@ -1,20 +1,9 @@
-import React, { Component } from "react";
-import { observer } from "mobx-react";
-import {
-  AreaChart,
-  Area,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  ReferenceLine,
-  ResponsiveContainer,
-} from "recharts";
-import { COLORS } from "../constants";
-import BoxGrid from "../components/BoxGrid";
 import Box from "../components/Box";
+import BoxGrid from "../components/BoxGrid";
+import { Component } from "react";
 import PieChart from "../components/PieChart";
 import mainStore from "../stores/main.store";
+import { observer } from "mobx-react";
 
 class OverviewPieCharts extends Component {
   render() {
@@ -24,7 +13,7 @@ class OverviewPieCharts extends Component {
 
     return (
       <BoxGrid>
-        <Box loading={loading} height={480} time={json_time}>
+        <Box loading={loading} height={520} time={json_time}>
           <h6 style={{ margin: 0 }}>Collateral</h6>
           {!loading && <PieChart data={overviewData.collateralGraphData} />}
         </Box>
