@@ -1,14 +1,14 @@
-import React, { Component } from "react";
-import { observer } from "mobx-react";
+import BigNumber from "bignumber.js";
 import Box from "../components/Box";
 import BoxGrid from "../components/BoxGrid";
-import mainStore from "../stores/main.store";
-import WhaleFriendly from "../components/WhaleFriendly";
 import BoxRow from "../components/BoxRow";
+import { Component } from "react";
 import OverviewPieCharts from "../components/OverviewPieCharts";
-import poolsStore from "../stores/pools.store";
-import BigNumber from "bignumber.js";
+import WhaleFriendly from "../components/WhaleFriendly";
 import alertStore from "../stores/alert.store";
+import mainStore from "../stores/main.store";
+import { observer } from "mobx-react";
+import poolsStore from "../stores/pools.store";
 
 const txtMap = {
   total_debt: "Total Debt",
@@ -25,6 +25,14 @@ const humanTxt = (txt) => txtMap[txt];
 
 class Overview extends Component {
   render() {
+        // median function
+        function getMedian(arr) {
+          const mid = Math.floor(arr.length / 2),
+            nums = [...arr].sort((a, b) => a - b);
+          return arr.length % 2 !== 0
+            ? nums[mid]
+            : (Number(nums[mid - 1]) + Number(nums[mid])) / 2;
+        }
     let overviewData = {};
     let poolCollaterals = [];
     const tab = poolsStore["tab"];
@@ -68,6 +76,13 @@ class Overview extends Component {
       }
       creditAccountsForPool[i]["collateralValue"] = collateralValue.toString();
     }
+ /// compute median collateral value
+ let medianCollateralArray = []
+ for(let i = 0; i < creditAccountsForPool.length; i++){
+  medianCollateralArray.push(creditAccountsForPool[i]["collateralValue"])
+ }
+const calculatedCollateralMedian = getMedian(medianCollateralArray)
+console.log('median collateral array', medianCollateralArray)
 
     // compute total collateral value for pool
     let totalCollateral = 0;
@@ -115,6 +130,10 @@ class Overview extends Component {
         creditAccountsForPool[i]["borrowedAmountPlusInterestAndFees"]
       );
     }
+    /// save array for median debt computation
+    let medianDebtArray = totalDebtArray
+
+    // resume total debt computation
     let totalDebt = 0;
     totalDebt = totalDebtArray.reduce(
       (prev, curr) => Number(prev) + Number(curr),
@@ -132,6 +151,16 @@ class Overview extends Component {
     );
     totalDebt = BigNumber(totalDebt).multipliedBy(BigNumber(underlyingPrice));
     const calculatedTotalDebt = totalDebt.toString();
+
+
+    // compute median debt
+    medianDebtArray = medianDebtArray.map(value => Number(BigNumber(value).div(
+      BigNumber(10).pow(poolUnderlying[0]["decimals"])
+    )))
+    medianDebtArray = medianDebtArray.map(value => Number(BigNumber(value).multipliedBy(BigNumber(underlyingPrice))
+    ))
+    const calculatedDebtMedian = getMedian(medianDebtArray);
+
 
     // compute top 1 debt
     let currentTopOneDebt = 0;
@@ -216,11 +245,13 @@ class Overview extends Component {
           totalCollateral: calculatedTotalCollateral,
           top1Collateral: calculatedTop1Collateral,
           top10Collateral: calculatedTop10Collateral,
+          medianCollateral: calculatedCollateralMedian,
         },
         debt: {
           totalDebt: calculatedTotalDebt,
           top1Debt: calculatedTop1Debt,
           top10Debt: calculatedTop10Debt,
+          medianDebt: calculatedDebtMedian,
         },
         collateralGraphData: indexedTokenSum,
       };
@@ -257,6 +288,14 @@ class Overview extends Component {
                   />
                 </div>
               </BoxRow>
+              <BoxRow key="median_collateral">
+                <div>Median Collateral per User</div>
+                <div>
+                  <WhaleFriendly
+                    num={overviewData.collateral?.medianCollateral}
+                  />
+                </div>
+              </BoxRow>
               <BoxRow key="top1collateral">
                 <div>Collateral of Top 1 User</div>
                 <div>
@@ -281,6 +320,12 @@ class Overview extends Component {
                 <div>Total Debt</div>
                 <div>
                   <WhaleFriendly num={overviewData.debt?.totalDebt} />
+                </div>
+              </BoxRow>
+              <BoxRow key="median_debt">
+                <div>Median Debt per User</div>
+                <div>
+                  <WhaleFriendly num={overviewData.debt?.medianDebt} />
                 </div>
               </BoxRow>
               <BoxRow key="top1debt">
