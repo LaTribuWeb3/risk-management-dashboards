@@ -5,7 +5,7 @@ const pages = [
   "select-pool",
   "system-status",
   "overview",
-  // "collateral-factors",
+  "collateral-factors",
   // "sandbox",
   "asset-distribution",
   // "open-liquidations",

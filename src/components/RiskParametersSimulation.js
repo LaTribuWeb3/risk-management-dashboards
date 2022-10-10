@@ -1,11 +1,12 @@
-import React, { Component } from "react";
-import { observer } from "mobx-react";
-import Box from "./Box";
-import DataTable from "react-data-table-component";
-import mainStore from "../stores/main.store";
-import { whaleFriendlyFormater } from "./WhaleFriendly";
-import Token from "./Token";
 import Asterisk, { hasAtLeastOneAsterisk } from "./Asterisk";
+
+import Box from "./Box";
+import { Component } from "react";
+import DataTable from "react-data-table-component";
+import Token from "./Token";
+import mainStore from "../stores/main.store";
+import { observer } from "mobx-react";
+import { whaleFriendlyFormater } from "./WhaleFriendly";
 
 const columns = [
   {
@@ -21,13 +22,13 @@ const columns = [
     sortable: true,
   },
   {
-    name: "Bad Debt Accrued",
+    name: "Accrued Bad Debt",
     selector: (row) => row.pnl,
     format: (row) => whaleFriendlyFormater(row.pnl),
     sortable: true,
   },
   {
-    name: "Max Collateral Factor",
+    name: "Lowest Liquidation Threshold",
     selector: (row) => row["max_collateral"],
     format: (row) => <Asterisk row={row} field={"max_collateral"} />,
     sortable: true,
@@ -47,8 +48,8 @@ class RiskParametersSimulation extends Component {
     }
     const data = !loading
       ? Object.entries(rawData).map(([k, v]) => {
-          return Object.assign({ key: k }, v.summary);
-        })
+        return Object.assign({ key: k }, v.summary);
+      })
       : [];
     const text = hasAtLeastOneAsterisk(data, "max_collateral")
       ? "* Decreasing CF to Max CF is recommended."
@@ -59,14 +60,7 @@ class RiskParametersSimulation extends Component {
           <hgroup>
             <h6>According to Worst Day Scenario</h6>
             <p className="description">
-              Worst day simulation is done according to the worst day price-drop
-              in ETH history. Other assets are being normalized according to
-              their volatility compared to ETH. The simulation takes into
-              consideration the current collateral factors and current users’
-              usage to present total liquidations and bad debt that would have
-              accrued in the platform. The Max CF is the highest collateral
-              factor that won’t create bad debt for the platform in case the
-              same scenario repeats today
+              Worst day simulation is done according to the worst day price-drop in ETH history. Other assets are being normalized according to their volatility compared to ETH. The simulation considers the current LT and users’ usage to present total liquidations and bad debt that would have accrued in the platform. The Max Liquidation Threshold is the lowest LT that won’t create bad debt for the platform in case the same scenario repeats today.
             </p>
           </hgroup>
           {!loading && <DataTable columns={columns} data={data} />}

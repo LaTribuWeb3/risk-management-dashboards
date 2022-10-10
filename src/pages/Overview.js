@@ -236,7 +236,7 @@ const calculatedCollateralMedian = getMedian(medianCollateralArray)
           indexedTokenSum[symbol] = newTokenAmount;
         }
       }
-
+      
       const dataOverview = {
         collateral: {
           totalCollateral: calculatedTotalCollateral,
@@ -266,6 +266,9 @@ const calculatedCollateralMedian = getMedian(medianCollateralArray)
       poolCollaterals.push(data);
     }
     poolsStore["poolCollaterals"] = poolCollaterals;
+
+    /// give PoolsStore the collateral values
+    poolsStore["collateralValues"] = indexedTokenSum;
 
     const jsonTime = Math.floor(Date.now() / 1000);
 

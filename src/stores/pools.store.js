@@ -25,6 +25,7 @@ class PoolsStore {
   init = () => {
     this["tab"] = null;
     this["poolCollaterals"] = [];
+    this["collateralValues"] = [];
     this["activeTabSymbol"] = null;
     this["poolHasAccounts"] = 0;
     apiEndpoints.forEach(this.fetchData);
