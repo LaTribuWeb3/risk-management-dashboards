@@ -1,10 +1,9 @@
-import React from "react";
-import { observer } from "mobx-react";
 import mainStore from "../stores/main.store";
+import { observer } from "mobx-react";
 
 const pages = [
-  //"system-status",
   "select-pool",
+  "system-status",
   "overview",
   // "collateral-factors",
   // "sandbox",

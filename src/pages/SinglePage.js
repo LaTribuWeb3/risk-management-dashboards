@@ -1,4 +1,5 @@
 import Accounts from "./Accounts";
+import Alerts from "./Alerts";
 import { Component } from "react";
 import Liquidity from "./Liquidity2";
 import Oracles from "./Oracles";
@@ -36,6 +37,18 @@ class SinglePage extends Component {
               This pool has no credit accounts.
             </span>
           </div>}
+
+          {poolsStore["activeTabSymbol"] != null
+           && poolsStore["poolHasAccounts"] > 0
+           && (
+            <section id="system-status">
+            {mainStore.proViewShow("system-status") && <div>
+           <h2>System Status</h2>
+            <Alerts />
+           </div>}
+         </section>)}
+   
+          
 
           {poolsStore["activeTabSymbol"] != null
            && poolsStore["poolHasAccounts"] > 0
