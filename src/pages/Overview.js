@@ -5,7 +5,6 @@ import BoxRow from "../components/BoxRow";
 import { Component } from "react";
 import OverviewPieCharts from "../components/OverviewPieCharts";
 import WhaleFriendly from "../components/WhaleFriendly";
-import alertStore from "../stores/alert.store";
 import mainStore from "../stores/main.store";
 import { observer } from "mobx-react";
 import poolsStore from "../stores/pools.store";
@@ -45,7 +44,6 @@ class Overview extends Component {
       [],
       poolsStore["data/creditAccounts?fakeMainnet=0_data"] || []
     );
-    alertStore.valueAtRisk = tab;
 
     const selectedPool = poolsData.find((p) => p.address === tab);
 
