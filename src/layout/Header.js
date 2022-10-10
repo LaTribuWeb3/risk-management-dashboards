@@ -40,7 +40,7 @@ class Header extends Component {
           {logo && (
             <div>
             <img
-              style={{ height: "calc((var(--header-height) / 2) - 20px)" }}
+              style={{ height: "calc((var(--header-height) / 2) - 45px)" }}
               src={`/logos/${logo}`}
             />
             <text className="logo">Gearbox</text>
