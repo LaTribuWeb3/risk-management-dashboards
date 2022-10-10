@@ -1,17 +1,12 @@
-import React, { Component } from "react";
-import { observer } from "mobx-react";
-import Overview from "./Overview";
-import Liquidity from "./Liquidity2";
 import Accounts from "./Accounts";
+import { Component } from "react";
+import Liquidity from "./Liquidity2";
 import Oracles from "./Oracles";
-import RiskParameters from "./RiskParameters";
-import Simulation from "./Simulation";
-import Alerts from "./Alerts";
-import OpenLiquidations from "./OpenLiquidations";
+import Overview from "./Overview";
 import ScrollSpy from "react-ui-scrollspy";
-import mainStore from "../stores/main.store";
-import Debug from "./Debug";
 import Tabnav from "../layout/Tabnav";
+import mainStore from "../stores/main.store";
+import { observer } from "mobx-react";
 import poolsStore from "../stores/pools.store";
 
 class SinglePage extends Component {
@@ -38,11 +33,9 @@ class SinglePage extends Component {
            &&poolsStore["poolHasAccounts"] === 0 &&
           <div className="noaccountsdiv">
             <span className="noaccounts">
-              this pool has no credit accounts.
+              This pool has no credit accounts.
             </span>
           </div>}
-
-          {mainStore["overview_loading"] && <span>loading</span>}
 
           {poolsStore["activeTabSymbol"] != null
            && poolsStore["poolHasAccounts"] > 0
