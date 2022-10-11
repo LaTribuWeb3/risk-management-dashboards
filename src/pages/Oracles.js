@@ -79,7 +79,7 @@ class Oracles extends Component {
     oracleArray = oracleArray.filter((entry) =>
       collaterals.includes(entry.key)
     );
-console.log("oracle array", oracleArray)
+    console.log("oracle array", oracleArray);
     return (
       <div>
         <Box loading={loading} time={json_time}>

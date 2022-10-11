@@ -18,8 +18,10 @@
 }
 
 .logo {
-  font-family:Rubik, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-  -webkit-font-smoothing:antialiased;
+  font-family: Rubik, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
   font-size: 48px;
   line-height: 1.55;
   font-weight: 600;
@@ -262,8 +264,8 @@ h2 {
 }
 
 * {
-  box-sizing: border-box
-} 
+  box-sizing: border-box;
+}
 
 .tabnav {
   width: 100%;
@@ -280,7 +282,7 @@ h2 {
   white-space: nowrap;
   transition: 1s;
   border-radius: 0px;
-  border:none;
+  border: none;
   padding: 0px;
   margin: 0px;
   height: 100px;
@@ -290,8 +292,8 @@ h2 {
 }
 .tabnav .tnbtn:hover {
   /* color: var(--color); */
-  background-color: var(--primary-hover)
-   /* #46b09b; */
+  background-color: var(--primary-hover);
+  /* #46b09b; */
 }
 .tabnav .tnbtn.active {
   /* color: var(--color); */

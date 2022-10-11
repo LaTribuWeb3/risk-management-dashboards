@@ -24,14 +24,14 @@ const humanTxt = (txt) => txtMap[txt];
 
 class Overview extends Component {
   render() {
-        // median function
-        function getMedian(arr) {
-          const mid = Math.floor(arr.length / 2),
-            nums = [...arr].sort((a, b) => a - b);
-          return arr.length % 2 !== 0
-            ? nums[mid]
-            : (Number(nums[mid - 1]) + Number(nums[mid])) / 2;
-        }
+    // median function
+    function getMedian(arr) {
+      const mid = Math.floor(arr.length / 2),
+        nums = [...arr].sort((a, b) => a - b);
+      return arr.length % 2 !== 0
+        ? nums[mid]
+        : (Number(nums[mid - 1]) + Number(nums[mid])) / 2;
+    }
     let overviewData = {};
     let poolCollaterals = [];
     const tab = poolsStore["tab"];
@@ -74,12 +74,12 @@ class Overview extends Component {
       }
       creditAccountsForPool[i]["collateralValue"] = collateralValue.toString();
     }
- /// compute median collateral value
- let medianCollateralArray = []
- for(let i = 0; i < creditAccountsForPool.length; i++){
-  medianCollateralArray.push(creditAccountsForPool[i]["collateralValue"])
- }
-const calculatedCollateralMedian = getMedian(medianCollateralArray)
+    /// compute median collateral value
+    let medianCollateralArray = [];
+    for (let i = 0; i < creditAccountsForPool.length; i++) {
+      medianCollateralArray.push(creditAccountsForPool[i]["collateralValue"]);
+    }
+    const calculatedCollateralMedian = getMedian(medianCollateralArray);
 
     // compute total collateral value for pool
     let totalCollateral = 0;
@@ -128,7 +128,7 @@ const calculatedCollateralMedian = getMedian(medianCollateralArray)
       );
     }
     /// save array for median debt computation
-    let medianDebtArray = totalDebtArray
+    let medianDebtArray = totalDebtArray;
 
     // resume total debt computation
     let totalDebt = 0;
@@ -149,15 +149,16 @@ const calculatedCollateralMedian = getMedian(medianCollateralArray)
     totalDebt = BigNumber(totalDebt).multipliedBy(BigNumber(underlyingPrice));
     const calculatedTotalDebt = totalDebt.toString();
 
-
     // compute median debt
-    medianDebtArray = medianDebtArray.map(value => Number(BigNumber(value).div(
-      BigNumber(10).pow(poolUnderlying[0]["decimals"])
-    )))
-    medianDebtArray = medianDebtArray.map(value => Number(BigNumber(value).multipliedBy(BigNumber(underlyingPrice))
-    ))
+    medianDebtArray = medianDebtArray.map((value) =>
+      Number(
+        BigNumber(value).div(BigNumber(10).pow(poolUnderlying[0]["decimals"]))
+      )
+    );
+    medianDebtArray = medianDebtArray.map((value) =>
+      Number(BigNumber(value).multipliedBy(BigNumber(underlyingPrice)))
+    );
     const calculatedDebtMedian = getMedian(medianDebtArray);
-
 
     // compute top 1 debt
     let currentTopOneDebt = 0;
@@ -236,7 +237,7 @@ const calculatedCollateralMedian = getMedian(medianCollateralArray)
           indexedTokenSum[symbol] = newTokenAmount;
         }
       }
-      
+
       const dataOverview = {
         collateral: {
           totalCollateral: calculatedTotalCollateral,

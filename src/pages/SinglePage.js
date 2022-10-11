@@ -4,7 +4,7 @@ import { Component } from "react";
 import Liquidity from "./Liquidity2";
 import Oracles from "./Oracles";
 import Overview from "./Overview";
-import RiskParameters from "./RiskParameters"
+import RiskParameters from "./RiskParameters";
 import ScrollSpy from "react-ui-scrollspy";
 import Tabnav from "../layout/Tabnav";
 import mainStore from "../stores/main.store";
@@ -20,39 +20,37 @@ class SinglePage extends Component {
         scrollThrottle={100}
         parentScrollContainerRef={this.props.scrollContainer}
       >
-
         <section id="select-pool">
           <Tabnav />
         </section>
-        {poolsStore["activeTabSymbol"] === null &&
+        {poolsStore["activeTabSymbol"] === null && (
           <div className="noaccountsdiv">
-            <span className="noaccounts">
-              No pool selected
-            </span>
-          </div>}
-        {poolsStore["activeTabSymbol"] != null
-          && poolsStore["poolHasAccounts"] === 0 &&
-          <div className="noaccountsdiv">
-            <span className="noaccounts">
-              This pool has no credit accounts.
-            </span>
-          </div>}
+            <span className="noaccounts">No pool selected</span>
+          </div>
+        )}
+        {poolsStore["activeTabSymbol"] != null &&
+          poolsStore["poolHasAccounts"] === 0 && (
+            <div className="noaccountsdiv">
+              <span className="noaccounts">
+                This pool has no credit accounts.
+              </span>
+            </div>
+          )}
 
-        {poolsStore["activeTabSymbol"] != null
-          && poolsStore["poolHasAccounts"] > 0
-          && (
+        {poolsStore["activeTabSymbol"] != null &&
+          poolsStore["poolHasAccounts"] > 0 && (
             <section id="system-status">
-              {mainStore.proViewShow("system-status") && <div>
-                <h2>System Status</h2>
-                <Alerts />
-              </div>}
-            </section>)}
+              {mainStore.proViewShow("system-status") && (
+                <div>
+                  <h2>System Status</h2>
+                  <Alerts />
+                </div>
+              )}
+            </section>
+          )}
 
-
-
-        {poolsStore["activeTabSymbol"] != null
-          && poolsStore["poolHasAccounts"] > 0
-          && (
+        {poolsStore["activeTabSymbol"] != null &&
+          poolsStore["poolHasAccounts"] > 0 && (
             <section id="overview">
               {mainStore.proViewShow("overview") && (
                 <div>
@@ -63,21 +61,22 @@ class SinglePage extends Component {
                   <Overview />
                 </div>
               )}
-            </section>)}
-        {poolsStore["activeTabSymbol"] != null
-          && poolsStore["poolHasAccounts"] > 0
-          && (
+            </section>
+          )}
+        {poolsStore["activeTabSymbol"] != null &&
+          poolsStore["poolHasAccounts"] > 0 && (
             <section id="collateral-factors">
-              {mainStore.proViewShow("collateral-factors") && <div>
-                <h2>Collateral Factor Recommendations</h2>
-                <RiskParameters />
-              </div>}
-            </section>)}
+              {mainStore.proViewShow("collateral-factors") && (
+                <div>
+                  <h2>Collateral Factor Recommendations</h2>
+                  <RiskParameters />
+                </div>
+              )}
+            </section>
+          )}
 
-
-        {poolsStore["activeTabSymbol"] != null
-          && poolsStore["poolHasAccounts"] > 0
-          && (
+        {poolsStore["activeTabSymbol"] != null &&
+          poolsStore["poolHasAccounts"] > 0 && (
             <section id="asset-distribution">
               {mainStore.proViewShow("asset-distribution") && (
                 <div>
@@ -95,12 +94,11 @@ class SinglePage extends Component {
                   <Accounts />
                 </div>
               )}
-            </section>)}
+            </section>
+          )}
 
-
-        {poolsStore["activeTabSymbol"] != null
-          && poolsStore["poolHasAccounts"] > 0
-          && (
+        {poolsStore["activeTabSymbol"] != null &&
+          poolsStore["poolHasAccounts"] > 0 && (
             <section id="oracle-deviation">
               {mainStore.proViewShow("oracle-deviation") && (
                 <div>
@@ -118,26 +116,29 @@ class SinglePage extends Component {
                   <Oracles />
                 </div>
               )}
-            </section>)}
+            </section>
+          )}
 
-
-        {poolsStore["activeTabSymbol"] != null
-          && poolsStore["poolHasAccounts"] > 0
-          && (
+        {poolsStore["activeTabSymbol"] != null &&
+          poolsStore["poolHasAccounts"] > 0 && (
             <section id="liquidity">
               {mainStore.proViewShow("liquidity") && (
                 <div>
                   <hgroup>
                     <h2>DEX Liquidity</h2>
                     <p className="description">
-                    Monitoring available on-chain DEX liquidity per asset. The graph shows maximum liquidation size that can be executed in a single transaction according to current available DEX liquidity w.r.t current liquidation bonus offered by the platform.
+                      Monitoring available on-chain DEX liquidity per asset. The
+                      graph shows maximum liquidation size that can be executed
+                      in a single transaction according to current available DEX
+                      liquidity w.r.t current liquidation bonus offered by the
+                      platform.
                     </p>
                   </hgroup>
                   <Liquidity />
                 </div>
               )}
-            </section>)
-        }
+            </section>
+          )}
       </ScrollSpy>
     );
   }

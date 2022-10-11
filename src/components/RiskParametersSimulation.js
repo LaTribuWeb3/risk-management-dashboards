@@ -48,8 +48,8 @@ class RiskParametersSimulation extends Component {
     }
     const data = !loading
       ? Object.entries(rawData).map(([k, v]) => {
-        return Object.assign({ key: k }, v.summary);
-      })
+          return Object.assign({ key: k }, v.summary);
+        })
       : [];
     const text = hasAtLeastOneAsterisk(data, "max_collateral")
       ? "* Decreasing CF to Max CF is recommended."
@@ -60,7 +60,13 @@ class RiskParametersSimulation extends Component {
           <hgroup>
             <h6>According to Worst Day Scenario</h6>
             <p className="description">
-              Worst day simulation is done according to the worst day price-drop in ETH history. Other assets are being normalized according to their volatility compared to ETH. The simulation considers the current LT and users’ usage to present total liquidations and bad debt that would have accrued in the platform. The Max Liquidation Threshold is the lowest LT that won’t create bad debt for the platform in case the same scenario repeats today.
+              Worst day simulation is done according to the worst day price-drop
+              in ETH history. Other assets are being normalized according to
+              their volatility compared to ETH. The simulation considers the
+              current LT and users’ usage to present total liquidations and bad
+              debt that would have accrued in the platform. The Max Liquidation
+              Threshold is the lowest LT that won’t create bad debt for the
+              platform in case the same scenario repeats today.
             </p>
           </hgroup>
           {!loading && <DataTable columns={columns} data={data} />}

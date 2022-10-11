@@ -32,7 +32,7 @@ const currentColumns = [
 class RiskParametersUtilization extends Component {
   render() {
     const { loading } = poolsStore["pools_loading"];
-    const { json_time: currentJsonTime } = Date.now/1000;
+    const { json_time: currentJsonTime } = Date.now / 1000;
     const collaterals = poolsStore["poolCollaterals"];
     const collateralsValue = poolsStore["collateralValues"];
     let utilization = [];
@@ -40,18 +40,15 @@ class RiskParametersUtilization extends Component {
     poolTokens = poolTokens.find((p) => p.address === poolsStore["tab"]);
     poolTokens = poolTokens["allowedTokens"];
     poolTokens = poolTokens.filter((entry) =>
-    collaterals.includes(tokenName(entry.tokenAddress))
-  );
-  poolTokens = poolTokens.map((e) => (
-    {asset: tokenName(e.tokenAddress),
-    supply: collateralsValue[tokenName(e.tokenAddress)],
-    currentLT: e.liquidationThreshold/10000,
-    recommendedLT: e.recommendedLiquidationThreshold/10000
-})
-  )
-console.log('token pool', poolTokens)
-
-
+      collaterals.includes(tokenName(entry.tokenAddress))
+    );
+    poolTokens = poolTokens.map((e) => ({
+      asset: tokenName(e.tokenAddress),
+      supply: collateralsValue[tokenName(e.tokenAddress)],
+      currentLT: e.liquidationThreshold / 10000,
+      recommendedLT: e.recommendedLiquidationThreshold / 10000,
+    }));
+    console.log("token pool", poolTokens);
 
     const text = hasAtLeastOneAsterisk(utilization, "collateral_factor")
       ? "* if user composition will change, reduction of CF might be required to avoid bad debt."
@@ -62,12 +59,10 @@ console.log('token pool', poolTokens)
           <hgroup>
             <h6>According to Current Usage</h6>
             <p>
-            Recommended LTs according to current collateral and borrow usage.
+              Recommended LTs according to current collateral and borrow usage.
             </p>
           </hgroup>
-          {!loading && (
-            <DataTable columns={currentColumns} data={poolTokens} />
-          )}
+          {!loading && <DataTable columns={currentColumns} data={poolTokens} />}
         </Box>
       </div>
     );

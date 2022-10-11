@@ -10,7 +10,7 @@ class Tabnav extends Component {
       poolsStore["pools_loading"] ||
       poolsStore["data/creditAccounts?fakeMainnet=0_loading"] ||
       poolsStore["data/liquidations_loading"] ||
-      poolsStore["data/liquidity_loading"] ;
+      poolsStore["data/liquidity_loading"];
 
     const poolsData = Object.assign([], poolsStore["pools_data"] || []);
     const tokenData = Object.assign(
@@ -19,55 +19,54 @@ class Tabnav extends Component {
     );
 
     function setActiveTab(tab, symbol) {
-        poolsStore.setActiveTab(tab, symbol);
-      
+      poolsStore.setActiveTab(tab, symbol);
     }
 
     return (
       <div className="navwrapper">
         <hgroup>
           <h2>Pool</h2>
-          <p className="description">Select one of the Gearbox pools to display its related dashboard</p>
+          <p className="description">
+            Select one of the Gearbox pools to display its related dashboard
+          </p>
         </hgroup>
         {/* <div className="tabnav"> */}
         <table className="tabnav">
-        <tbody>
-          <tr>
-            {loading ? (
-                    <td>loading...</td>
-                  ) : (
-                    poolsData.map((pool, i) => {
-                      const symbol = tokenData.find(
-                        (t) => t.address === pool.underlying
-                      )?.symbol;
+          <tbody>
+            <tr>
+              {loading ? (
+                <td>loading...</td>
+              ) : (
+                poolsData.map((pool, i) => {
+                  const symbol = tokenData.find(
+                    (t) => t.address === pool.underlying
+                  )?.symbol;
 
-                      if(i === 0 && poolsStore["tab"] === null) {
-                        poolsStore.setActiveTab(pool.address, symbol);
-                      }
-                      return (
-                        
-                      <td key={i} className="tabnav-td">
-                        <button
-                          onClick={() => setActiveTab(pool.address, symbol)}
-                          className={
-                            "tnbtn " +
-                            (poolsStore["tab"] === pool.address ? "active" : "")
-                          }
-                          key={i}
-                          value={pool.address}
-                          id={symbol}
-                        >
-                          {symbol}
-                        </button>
+                  if (i === 0 && poolsStore["tab"] === null) {
+                    poolsStore.setActiveTab(pool.address, symbol);
+                  }
+                  return (
+                    <td key={i} className="tabnav-td">
+                      <button
+                        onClick={() => setActiveTab(pool.address, symbol)}
+                        className={
+                          "tnbtn " +
+                          (poolsStore["tab"] === pool.address ? "active" : "")
+                        }
+                        key={i}
+                        value={pool.address}
+                        id={symbol}
+                      >
+                        {symbol}
+                      </button>
                     </td>
-                      );
-                    })
-                  )}
-          </tr>
+                  );
+                })
+              )}
+            </tr>
           </tbody>
-</table>
-          
-        </div>
+        </table>
+      </div>
       // </div>
     );
   }
