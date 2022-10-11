@@ -130,10 +130,7 @@ class SinglePage extends Component {
                   <hgroup>
                     <h2>DEX Liquidity</h2>
                     <p className="description">
-                      Monitoring available on-chain DEX liquidity per asset.
-                      The statistics monitor the top accounts portion of total
-                      liquidity as well as the average and median size of LP
-                      positions.
+                    Monitoring available on-chain DEX liquidity per asset. The graph shows maximum liquidation size that can be executed in a single transaction according to current available DEX liquidity w.r.t current liquidation bonus offered by the platform.
                     </p>
                   </hgroup>
                   <Liquidity />
