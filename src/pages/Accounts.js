@@ -88,8 +88,9 @@ class Accounts extends Component {
         )
       );
 
-      console.log('PoolCreditAccounts', PoolCreditAccounts)
-      jsonTime = Math.floor(PoolCreditAccounts["0"]["UpdateData"]["lastUpdate"]/1000);
+      jsonTime = Math.floor(
+        PoolCreditAccounts["0"]["UpdateData"]["lastUpdate"] / 1000
+      );
       /// calculate USD value for each collateral token in the pool
       for (let i = 0; i < PoolCreditAccounts.length; i++) {
         for (
@@ -264,8 +265,6 @@ class Accounts extends Component {
       tableData.sort((a, b) => b["total_collateral"] - a["total_collateral"]);
       tableData[0].defaultExpanded = true;
     }
-
-
 
     return (
       <div>

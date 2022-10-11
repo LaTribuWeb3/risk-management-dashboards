@@ -42,9 +42,7 @@ class Top10Accounts extends Component {
             overflowX: "hidden",
           }}
         >
-          <summary>
-            {value}
-          </summary>
+          <summary>{value}</summary>
           <div
             style={{
               display: "flex",

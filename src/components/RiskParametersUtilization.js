@@ -38,7 +38,7 @@ class RiskParametersUtilization extends Component {
     let utilization = [];
     let poolTokens = poolsStore["pools_data"];
     poolTokens = poolTokens.find((p) => p.address === poolsStore["tab"]);
-    const jsonTime = Math.floor(poolTokens["UpdateData"]["lastUpdate"]/1000);
+    const jsonTime = Math.floor(poolTokens["UpdateData"]["lastUpdate"] / 1000);
     poolTokens = poolTokens["allowedTokens"];
     poolTokens = poolTokens.filter((entry) =>
       collaterals.includes(tokenName(entry.tokenAddress))

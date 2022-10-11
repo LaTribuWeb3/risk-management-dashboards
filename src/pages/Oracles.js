@@ -64,7 +64,9 @@ class Oracles extends Component {
       [],
       poolsStore["data/tokens?fakeMainnet=0_data"] || []
     );
-    const jsonTime = Math.floor(oracleData["0"]["updateData"]["lastUpdate"]/1000);
+    const jsonTime = Math.floor(
+      oracleData["0"]["updateData"]["lastUpdate"] / 1000
+    );
     let oracleArray = [];
     oracleData.forEach((entry) => {
       oracleArray.push({
@@ -79,7 +81,6 @@ class Oracles extends Component {
     oracleArray = oracleArray.filter((entry) =>
       collaterals.includes(entry.key)
     );
-    console.log("time", oracleData["0"]["updateData"]["lastUpdate"]);
     return (
       <div>
         <Box loading={loading} time={jsonTime}>
