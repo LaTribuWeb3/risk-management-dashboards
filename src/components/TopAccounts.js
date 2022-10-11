@@ -43,7 +43,7 @@ class Top10Accounts extends Component {
           }}
         >
           <summary>
-            {value} {hasWhales && <span>*</span>}
+            {value}
           </summary>
           <div
             style={{

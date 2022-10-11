@@ -261,11 +261,10 @@ class Accounts extends Component {
       tableData.sort((a, b) => b["total_collateral"] - a["total_collateral"]);
       tableData[0].defaultExpanded = true;
     }
-    const text = "* Big account included in the list";
 
     return (
       <div>
-        <Box loading={loading} time={Date.now / 1000} text={text}>
+        <Box loading={loading} time={Date.now / 1000}>
           {!loading && (
             <DataTable
               expandableRows
