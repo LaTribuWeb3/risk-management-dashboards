@@ -271,7 +271,8 @@ class Overview extends Component {
     /// give PoolsStore the collateral values
     poolsStore["collateralValues"] = indexedTokenSum;
 
-    const jsonTime = Math.floor(Date.now() / 1000);
+
+    const jsonTime = Math.floor(selectedPool["UpdateData"]["lastUpdate"]/1000);
 
     const loading = mainStore["overview_loading"];
 

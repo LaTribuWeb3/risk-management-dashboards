@@ -32,12 +32,13 @@ const currentColumns = [
 class RiskParametersUtilization extends Component {
   render() {
     const { loading } = poolsStore["pools_loading"];
-    const { json_time: currentJsonTime } = Date.now / 1000;
+
     const collaterals = poolsStore["poolCollaterals"];
     const collateralsValue = poolsStore["collateralValues"];
     let utilization = [];
     let poolTokens = poolsStore["pools_data"];
     poolTokens = poolTokens.find((p) => p.address === poolsStore["tab"]);
+    const jsonTime = Math.floor(poolTokens["UpdateData"]["lastUpdate"]/1000);
     poolTokens = poolTokens["allowedTokens"];
     poolTokens = poolTokens.filter((entry) =>
       collaterals.includes(tokenName(entry.tokenAddress))
@@ -48,14 +49,13 @@ class RiskParametersUtilization extends Component {
       currentLT: e.liquidationThreshold / 10000,
       recommendedLT: e.recommendedLiquidationThreshold / 10000,
     }));
-    console.log("token pool", poolTokens);
 
     const text = hasAtLeastOneAsterisk(utilization, "collateral_factor")
       ? "* if user composition will change, reduction of CF might be required to avoid bad debt."
       : "";
     return (
       <div>
-        <Box loading={loading} time={currentJsonTime} text={text}>
+        <Box loading={loading} time={jsonTime} text={text}>
           <hgroup>
             <h6>According to Current Usage</h6>
             <p>

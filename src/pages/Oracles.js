@@ -60,11 +60,11 @@ class Oracles extends Component {
   render() {
     const loading = poolsStore["data/tokens?fakeMainnet=0_loading"];
     const collaterals = poolsStore["poolCollaterals"];
-    const { json_time } = Date.now;
     let oracleData = Object.assign(
       [],
       poolsStore["data/tokens?fakeMainnet=0_data"] || []
     );
+    const jsonTime = Math.floor(oracleData["0"]["updateData"]["lastUpdate"]/1000);
     let oracleArray = [];
     oracleData.forEach((entry) => {
       oracleArray.push({
@@ -79,10 +79,10 @@ class Oracles extends Component {
     oracleArray = oracleArray.filter((entry) =>
       collaterals.includes(entry.key)
     );
-    console.log("oracle array", oracleArray);
+    console.log("time", oracleData["0"]["updateData"]["lastUpdate"]);
     return (
       <div>
-        <Box loading={loading} time={json_time}>
+        <Box loading={loading} time={jsonTime}>
           {!loading && <DataTable columns={columns} data={oracleArray} />}
         </Box>
       </div>

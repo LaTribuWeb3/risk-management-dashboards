@@ -63,8 +63,10 @@ class Liquidity extends Component {
         liquidity_data = liquidity_data[i]["slippage"];
       }
     }
+    const jsonTime = liquidity_data.json_time;
     delete liquidity_data.json_time;
     liquidity_data = Object.entries(liquidity_data);
+
     let liquidityArray = [];
     liquidity_data.forEach((entry) => {
       liquidityArray.push({
@@ -79,7 +81,7 @@ class Liquidity extends Component {
     );
     return (
       <div>
-        <Box loading={loading}>
+        <Box loading={loading} time={jsonTime}>
           <details open>
             <summary>
               <span>{symbol}</span>

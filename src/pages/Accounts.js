@@ -79,6 +79,7 @@ class Accounts extends Component {
     let collateralData = [];
     let tableData = [];
     let userArrays = {};
+    let jsonTime = null;
 
     if (!loading) {
       const PoolCreditAccounts = Object.assign(
@@ -87,6 +88,8 @@ class Accounts extends Component {
         )
       );
 
+      console.log('PoolCreditAccounts', PoolCreditAccounts)
+      jsonTime = Math.floor(PoolCreditAccounts["0"]["UpdateData"]["lastUpdate"]/1000);
       /// calculate USD value for each collateral token in the pool
       for (let i = 0; i < PoolCreditAccounts.length; i++) {
         for (
@@ -262,9 +265,11 @@ class Accounts extends Component {
       tableData[0].defaultExpanded = true;
     }
 
+
+
     return (
       <div>
-        <Box loading={loading} time={Date.now / 1000}>
+        <Box loading={loading} time={jsonTime}>
           {!loading && (
             <DataTable
               expandableRows
