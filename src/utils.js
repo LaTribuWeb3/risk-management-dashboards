@@ -57,13 +57,17 @@ export const tokenPrice = (symbol, amount) => {
   }
 };
 
-
-export const getRecommendedLT = (collateralValue, collateralName, underlyingName, riskParameters) => {
+export const getRecommendedLT = (
+  collateralValue,
+  collateralName,
+  underlyingName,
+  riskParameters
+) => {
   // console.log('collateralValue', collateralValue)
   // console.log('collateralName', collateralName)
   // console.log('underlyingName', underlyingName)
   // console.log('riskParameters', riskParameters)
-  if(riskParameters == null){
+  if (riskParameters == null) {
     return "No Pool Data";
   }
 
@@ -72,60 +76,65 @@ export const getRecommendedLT = (collateralValue, collateralName, underlyingName
   /// select token data for tName
   let tokenRiskData = riskParameters[collateralName + "-" + underlyingName];
   if (tokenRiskData == undefined) {
-    console.log("cannot find token -- " + collateralName + " -- in risk parameters");
-    return "Not Found"
+    console.log(
+      "cannot find token -- " + collateralName + " -- in risk parameters"
+    );
+    return "Not Found";
   }
 
   // rearrange data
   tokenRiskData = Object.values(tokenRiskData)[0];
   const formattedData = [];
-  tokenRiskData.forEach(t => {
-    const fData = formattedData.find(f => f.dc == t.dc)
+  tokenRiskData.forEach((t) => {
+    const fData = formattedData.find((f) => f.dc == t.dc);
     if (fData == undefined) {
       formattedData.push({
         dc: t.dc,
-        values: [{
-          lf: t.lf,
-          md: t.md,
-          li: t.li
-        }]
-      })
-    }
-    else {
+        values: [
+          {
+            lf: t.lf,
+            md: t.md,
+            li: t.li,
+          },
+        ],
+      });
+    } else {
       fData.values.push({
         lf: t.lf,
         md: t.md,
-        li: t.li
+        li: t.li,
       });
     }
-  })
-  formattedData.sort((a,b) => a.dc - b.dc)
+  });
+  formattedData.sort((a, b) => a.dc - b.dc);
 
   // find closest DC value to collateralValue
   const collateralInMillions = collateralValue / 1e6;
   let selectedFData = formattedData[0];
-  for(let i = 1; i < formattedData.length; i ++){
+  for (let i = 1; i < formattedData.length; i++) {
     const fData = formattedData[i];
-    if(fData.dc < collateralInMillions){
+    if (fData.dc < collateralInMillions) {
       selectedFData = fData;
-    }
-    else{
+    } else {
       const distanceFromFData = collateralInMillions - fData.dc;
       const distanceFromPrevious = collateralInMillions - selectedFData.dc;
-      if(distanceFromFData < distanceFromPrevious){
+      if (distanceFromFData < distanceFromPrevious) {
         selectedFData = fData;
       }
-      break
+      break;
     }
-
   }
 
   // compute recommended LT
-  let meanMD = selectedFData.values.filter(_ => Lfs.includes(_.lf)).map(_ => _.md)
-  meanMD = meanMD.reduce((a,b) => a + b, 0) / meanMD.length;
-  let meanLI = selectedFData.values.filter(_ => Lfs.includes(_.lf)).map(_ => _.li)
-  meanLI = meanLI.reduce((a,b) => a + b, 0) / meanLI.length;
-  console.log('meanLI meanMD', meanLI, meanMD)
+  let meanMD = selectedFData.values
+    .filter((_) => Lfs.includes(_.lf))
+    .map((_) => _.md);
+  meanMD = meanMD.reduce((a, b) => a + b, 0) / meanMD.length;
+  let meanLI = selectedFData.values
+    .filter((_) => Lfs.includes(_.lf))
+    .map((_) => _.li);
+  meanLI = meanLI.reduce((a, b) => a + b, 0) / meanLI.length;
+  console.log("meanLI meanMD", meanLI, meanMD);
 
-  return 1 - meanMD - meanLI
-}
+  return 1 - meanMD - meanLI;
+};

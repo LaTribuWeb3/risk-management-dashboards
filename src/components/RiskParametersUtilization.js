@@ -31,34 +31,46 @@ const currentColumns = [
 
 class RiskParametersUtilization extends Component {
   render() {
-    const { loading } = poolsStore["pools_loading"] || poolsStore["data/riskparams_loading"] || poolsStore["tab"] == undefined;
+    const { loading } =
+      poolsStore["pools_loading"] ||
+      poolsStore["data/riskparams_loading"] ||
+      poolsStore["tab"] == undefined;
     const collaterals = poolsStore["poolCollaterals"];
     const collateralsValue = poolsStore["collateralValues"];
     const riskParameters = poolsStore["data/riskparams_data"];
 
-
     const poolData = poolsStore["pools_data"];
     const selectedPool = poolData.find((p) => p.address === poolsStore["tab"]);
     const underlying = selectedPool["underlying"];
-    const riskParametersForPool = riskParameters.find(_ => _.underlying == tokenName(underlying));
-    const jsonTime = Math.floor(selectedPool["UpdateData"]["lastUpdate"] / 1000);
-    let poolTokens = selectedPool["allowedTokens"].filter((entry) =>
-      collaterals.includes(tokenName(entry.tokenAddress)) && entry.tokenAddress != underlying);
+    const riskParametersForPool = riskParameters.find(
+      (_) => _.underlying == tokenName(underlying)
+    );
+    const jsonTime = Math.floor(
+      selectedPool["UpdateData"]["lastUpdate"] / 1000
+    );
+    let poolTokens = selectedPool["allowedTokens"].filter(
+      (entry) =>
+        collaterals.includes(tokenName(entry.tokenAddress)) &&
+        entry.tokenAddress != underlying
+    );
     poolTokens = poolTokens.map((e) => ({
       asset: tokenName(e.tokenAddress),
       supply: collateralsValue[tokenName(e.tokenAddress)],
       currentLT: e.liquidationThreshold / 10000,
-      recommendedLT: getRecommendedLT(collateralsValue[tokenName(e.tokenAddress)], tokenName(e.tokenAddress), tokenName(underlying), riskParametersForPool?.solverData),
+      recommendedLT: getRecommendedLT(
+        collateralsValue[tokenName(e.tokenAddress)],
+        tokenName(e.tokenAddress),
+        tokenName(underlying),
+        riskParametersForPool?.solverData
+      ),
     }));
-
-
 
     // const text = hasAtLeastOneAsterisk(utilization, "collateral_factor")
     //   ? "* if user composition will change, reduction of CF might be required to avoid bad debt."
     //   : "";
     return (
       <div>
-        <Box loading={loading} time={jsonTime} >
+        <Box loading={loading} time={jsonTime}>
           <hgroup>
             <h6>According to Current Usage</h6>
             <p>
