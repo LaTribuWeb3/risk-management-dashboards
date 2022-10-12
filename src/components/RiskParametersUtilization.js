@@ -32,10 +32,10 @@ const currentColumns = [
 class RiskParametersUtilization extends Component {
   render() {
     const { loading } = poolsStore["pools_loading"];
-
+    let utilization = [];
     const collaterals = poolsStore["poolCollaterals"];
     const collateralsValue = poolsStore["collateralValues"];
-    let utilization = [];
+
     let poolTokens = poolsStore["pools_data"];
     poolTokens = poolTokens.find((p) => p.address === poolsStore["tab"]);
     const jsonTime = Math.floor(poolTokens["UpdateData"]["lastUpdate"] / 1000);
