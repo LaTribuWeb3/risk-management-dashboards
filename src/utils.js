@@ -63,10 +63,6 @@ export const getRecommendedLT = (
   underlyingName,
   riskParameters
 ) => {
-  // console.log('collateralValue', collateralValue)
-  // console.log('collateralName', collateralName)
-  // console.log('underlyingName', underlyingName)
-  // console.log('riskParameters', riskParameters)
   if (riskParameters == null) {
     return "No Pool Data";
   }
@@ -134,7 +130,6 @@ export const getRecommendedLT = (
     .filter((_) => Lfs.includes(_.lf))
     .map((_) => _.li);
   meanLI = meanLI.reduce((a, b) => a + b, 0) / meanLI.length;
-  console.log("meanLI meanMD", meanLI, meanMD);
 
   return 1 - meanMD - meanLI;
 };
