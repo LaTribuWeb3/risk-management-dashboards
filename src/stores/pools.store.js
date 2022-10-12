@@ -8,6 +8,7 @@ const apiEndpoints = [
   "pools",
   "data/liquidations",
   "data/liquidity",
+  "data/riskparams"
 ];
 class PoolsStore {
   constructor() {
