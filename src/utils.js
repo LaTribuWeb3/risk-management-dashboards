@@ -130,6 +130,79 @@ export const getRecommendedLT = (
     .filter((_) => Lfs.includes(_.lf))
     .map((_) => _.li);
   meanLI = meanLI.reduce((a, b) => a + b, 0) / meanLI.length;
-
+  console.log('fired')
   return 1 - meanMD - meanLI;
 };
+
+
+export const sandboxSwitch = (row, field, up) => {
+  let tokenRiskData = row.riskParameters[row.asset + "-" + row.underlying];
+  if (tokenRiskData == undefined) {
+    console.log(
+      "cannot find token -- " + row.asset + " -- in risk parameters"
+    );
+    return "Not Found";
+  }
+
+  // rearrange data
+  tokenRiskData = Object.values(tokenRiskData)[0];
+  const formattedData = [];
+  tokenRiskData.forEach((t) => {
+    const fData = formattedData.find((f) => f.dc == t.dc);
+    if (fData == undefined) {
+      formattedData.push({
+        dc: t.dc,
+        values: [
+          {
+            lf: t.lf,
+            md: t.md,
+            li: t.li,
+          },
+        ],
+      });
+    } else {
+      fData.values.push({
+        lf: t.lf,
+        md: t.md,
+        li: t.li,
+      });
+    }
+  });
+  formattedData.sort((a, b) => a.dc - b.dc);
+
+    // find closest DC value to collateralValue
+    const collateralInMillions = row.sandboxValue;
+    let selectedFData = formattedData[0];
+    for (let i = 1; i < formattedData.length; i++) {
+      const fData = formattedData[i];
+      if (fData.dc < collateralInMillions) {
+        selectedFData = fData;
+      } else {
+        const distanceFromFData = collateralInMillions - fData.dc;
+        const distanceFromPrevious = collateralInMillions - selectedFData.dc;
+        if (distanceFromFData < distanceFromPrevious) {
+          selectedFData = fData;
+        }
+        break;
+      }
+    }
+const index = formattedData.map(e => e.dc).indexOf(selectedFData.dc);
+if(up == "1"){
+  if(formattedData[index + 1] == undefined){
+    console.log('out of the simulation bounds')
+  }
+  else{
+  return row["sandboxValue"] = formattedData[index + 1].dc}
+  
+}
+else if(up == 0){
+  if(formattedData[index - 1] == undefined){
+    console.log('out of the simulation bounds')
+  }
+  else{
+  return row["sandboxValue"] = formattedData[index - 1].dc}
+}
+else{
+  console.log('error')
+}
+}

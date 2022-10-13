@@ -1,9 +1,9 @@
 import Box from "../components/Box";
 import CapInput from "../components/CapInput";
-import CfDiff from "../components/CfDiff";
 import { Component } from "react";
 import DataTable from "react-data-table-component";
 import Token from "../components/Token";
+import { getRecommendedLT } from "../utils";
 import mainStore from "../stores/main.store";
 import { observer } from "mobx-react";
 import riskStore from "../stores/risk.store";
@@ -17,7 +17,7 @@ const columns = [
   {
     name: "Supply",
     selector: (row) => row.mint_cap,
-    format: (row) => <CapInput row={row} field={"mint_cap"} />,
+    format: (row) => <CapInput row={row} field={"sandboxValue"} />,
     grow: 2,
   },
   {
@@ -27,11 +27,12 @@ const columns = [
   },
   {
     name: "Recommended Collateral Factor",
-    selector: (row) => row.collateral_factor,
-    format: (row) => <CfDiff row={row} />,
+    selector: (row) => row.simulationLT,
+    format: (row) => getRecommendedLT(row.sandboxValue, row.asset, row.underlying, row.riskParameters),
     grow: 2,
   },
 ];
+
 
 
 class Simulation extends Component {

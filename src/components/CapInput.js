@@ -1,6 +1,6 @@
 import React from "react";
 import { observer } from "mobx-react";
-import riskStore from "../stores/risk.store";
+import { sandboxSwitch } from "../utils";
 
 const formatter = new Intl.NumberFormat("en-US", {
   style: "currency",
@@ -35,13 +35,13 @@ class CapInput extends React.Component {
         <span>
           <div style={buttonsStyle}>
             <div
-              onClick={() => riskStore.incrament(row, field)}
+              onClick={() => sandboxSwitch(row,field, '1')}
               className="plus-minus"
             >
               +
             </div>
             <div
-              onClick={() => riskStore.decrament(row, field)}
+              onClick={() => sandboxSwitch(row,field, "0")}
               className="plus-minus"
             >
               -
