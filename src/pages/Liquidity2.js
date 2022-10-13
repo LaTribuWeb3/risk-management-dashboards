@@ -58,12 +58,14 @@ class Liquidity extends Component {
       symbol = "stETH";
     }
     let liquidity_data = poolsStore["data/liquidity_data"];
+    const jsonTime = liquidity_data[0]["slippage"]["json_time"];
     for (let i = 0; i < liquidity_data.length; i++) {
       if (liquidity_data[i]["debtToken"] === symbol) {
         liquidity_data = liquidity_data[i]["slippage"];
       }
     }
-    const jsonTime = liquidity_data.json_time;
+
+    
     delete liquidity_data.json_time;
     liquidity_data = Object.entries(liquidity_data);
 
