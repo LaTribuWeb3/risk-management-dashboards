@@ -6,6 +6,7 @@ import Oracles from "./Oracles";
 import Overview from "./Overview";
 import RiskParameters from "./RiskParameters";
 import ScrollSpy from "react-ui-scrollspy";
+import Simulation from "./Simulation";
 import Tabnav from "../layout/Tabnav";
 import mainStore from "../stores/main.store";
 import { observer } from "mobx-react";
@@ -74,6 +75,22 @@ class SinglePage extends Component {
               )}
             </section>
           )}
+
+        {poolsStore["activeTabSymbol"] != null &&
+          poolsStore["poolHasAccounts"] > 0 && (
+            <section id="sandbox">
+              {mainStore.proViewShow("sandbox") && <div>
+                <hgroup>
+                  <h2> Risk Parameters Sandbox</h2>
+                  <p className="description">The sandbox lets you set different Supply and Borrow caps to get Collateral Factor recommendations according to different caps. The tool also provides optimization setting recommendations. </p>
+                </hgroup>
+                <Simulation />
+              </div>}
+            </section>
+          )}
+
+
+
 
         {poolsStore["activeTabSymbol"] != null &&
           poolsStore["poolHasAccounts"] > 0 && (
