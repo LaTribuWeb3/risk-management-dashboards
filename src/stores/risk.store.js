@@ -1,4 +1,5 @@
 import { makeAutoObservable, runInAction } from "mobx";
+
 import Solver from "../risk/solver";
 import mainStore from "../stores/main.store";
 
@@ -13,6 +14,8 @@ const tweakCurrentCap = (cap) => {
 };
 
 class RiskStore {
+  currentRiskLoading = true;
+  currentRiskData = [];
   data = [];
   currentData = [];
   utilization = [];

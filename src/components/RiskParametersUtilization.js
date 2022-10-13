@@ -6,6 +6,7 @@ import DataTable from "react-data-table-component";
 import Token from "./Token";
 import { observer } from "mobx-react";
 import poolsStore from "../stores/pools.store";
+import riskStore from "../stores/risk.store";
 import { whaleFriendlyFormater } from "./WhaleFriendly";
 
 const currentColumns = [
@@ -64,6 +65,9 @@ class RiskParametersUtilization extends Component {
         riskParametersForPool?.solverData
       ),
     }));
+
+    riskStore["currentRiskData"] = poolTokens;
+    riskStore["currentRiskLoading"] = false;
 
     // const text = hasAtLeastOneAsterisk(utilization, "collateral_factor")
     //   ? "* if user composition will change, reduction of CF might be required to avoid bad debt."
