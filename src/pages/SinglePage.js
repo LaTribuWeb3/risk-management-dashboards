@@ -79,18 +79,22 @@ class SinglePage extends Component {
         {poolsStore["activeTabSymbol"] != null &&
           poolsStore["poolHasAccounts"] > 0 && (
             <section id="sandbox">
-              {mainStore.proViewShow("sandbox") && <div>
-                <hgroup>
-                  <h2> Risk Parameters Sandbox</h2>
-                  <p className="description">The sandbox lets you set different Supply and Borrow caps to get Collateral Factor recommendations according to different caps. The tool also provides optimization setting recommendations. </p>
-                </hgroup>
-                <Simulation />
-              </div>}
+              {mainStore.proViewShow("sandbox") && (
+                <div>
+                  <hgroup>
+                    <h2> Risk Parameters Sandbox</h2>
+                    <p className="description">
+                      The sandbox lets you set different Supply and Borrow caps
+                      to get Collateral Factor recommendations according to
+                      different caps. The tool also provides optimization
+                      setting recommendations.{" "}
+                    </p>
+                  </hgroup>
+                  <Simulation />
+                </div>
+              )}
             </section>
           )}
-
-
-
 
         {poolsStore["activeTabSymbol"] != null &&
           poolsStore["poolHasAccounts"] > 0 && (

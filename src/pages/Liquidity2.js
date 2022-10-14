@@ -63,7 +63,6 @@ class Liquidity extends Component {
       }
     }
 
-    
     delete liquidity_data.json_time;
     liquidity_data = Object.entries(liquidity_data);
 

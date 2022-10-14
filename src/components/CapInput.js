@@ -35,13 +35,13 @@ class CapInput extends React.Component {
         <span>
           <div style={buttonsStyle}>
             <div
-              onClick={() => sandboxSwitch(row,field, '1')}
+              onClick={() => sandboxSwitch(row, field, "1")}
               className="plus-minus"
             >
               +
             </div>
             <div
-              onClick={() => sandboxSwitch(row,field, "0")}
+              onClick={() => sandboxSwitch(row, field, "0")}
               className="plus-minus"
             >
               -

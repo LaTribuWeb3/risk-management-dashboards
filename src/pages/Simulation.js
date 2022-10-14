@@ -28,12 +28,16 @@ const columns = [
   {
     name: "Recommended Collateral Factor",
     selector: (row) => row.simulationLT,
-    format: (row) => getRecommendedLT(row.sandboxValue, row.asset, row.underlying, row.riskParameters),
+    format: (row) =>
+      getRecommendedLT(
+        row.sandboxValue,
+        row.asset,
+        row.underlying,
+        row.riskParameters
+      ),
     grow: 2,
   },
 ];
-
-
 
 class Simulation extends Component {
   render() {
@@ -44,10 +48,7 @@ class Simulation extends Component {
         <Box loading={loading} time={json_time}>
           {/* <h6>Risk Parameters Recommendations</h6> */}
           {!loading && (
-            <DataTable
-              columns={columns}
-              data={riskStore.currentRiskData}
-            />
+            <DataTable columns={columns} data={riskStore.currentRiskData} />
           )}
         </Box>
       </div>

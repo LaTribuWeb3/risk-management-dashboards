@@ -59,9 +59,9 @@ class RiskParametersUtilization extends Component {
       underlying: tokenName(underlying),
       riskParameters: riskParametersForPool?.risk,
       supply: collateralsValue[tokenName(e.tokenAddress)],
-      sandboxValue:collateralsValue[tokenName(e.tokenAddress)]/1e6,
+      sandboxValue: collateralsValue[tokenName(e.tokenAddress)] / 1e6,
       currentLT: e.liquidationThreshold / 10000,
-      simulationLT : getRecommendedLT(
+      simulationLT: getRecommendedLT(
         collateralsValue[tokenName(e.tokenAddress)],
         tokenName(e.tokenAddress),
         tokenName(underlying),
