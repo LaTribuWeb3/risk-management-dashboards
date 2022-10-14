@@ -54,9 +54,7 @@ class Liquidity extends Component {
     const loading = poolsStore["dex_liquidity_loading"];
     const collaterals = poolsStore["poolCollaterals"];
     let symbol = poolsStore["activeTabSymbol"];
-    if (symbol.toLowerCase() === "wsteth") {
-      symbol = "stETH";
-    }
+
     let liquidity_data = poolsStore["data/liquidity_data"];
     const jsonTime = liquidity_data[0]["slippage"]["json_time"];
     for (let i = 0; i < liquidity_data.length; i++) {

@@ -57,7 +57,7 @@ class RiskParametersUtilization extends Component {
     poolTokens = poolTokens.map((e) => ({
       asset: tokenName(e.tokenAddress),
       underlying: tokenName(underlying),
-      riskParameters: riskParametersForPool?.solverData,
+      riskParameters: riskParametersForPool?.risk,
       supply: collateralsValue[tokenName(e.tokenAddress)],
       sandboxValue:collateralsValue[tokenName(e.tokenAddress)]/1e6,
       currentLT: e.liquidationThreshold / 10000,
@@ -65,13 +65,13 @@ class RiskParametersUtilization extends Component {
         collateralsValue[tokenName(e.tokenAddress)],
         tokenName(e.tokenAddress),
         tokenName(underlying),
-        riskParametersForPool?.solverData
+        riskParametersForPool?.risk
       ),
       recommendedLT: getRecommendedLT(
         collateralsValue[tokenName(e.tokenAddress)],
         tokenName(e.tokenAddress),
         tokenName(underlying),
-        riskParametersForPool?.solverData
+        riskParametersForPool?.risk
       ),
     }));
 
