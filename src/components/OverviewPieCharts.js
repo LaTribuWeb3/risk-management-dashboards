@@ -10,15 +10,15 @@ class OverviewPieCharts extends Component {
     const overviewData = this.props.data;
     const json_time = this.props.time;
     const loading = mainStore["overview_loading"]; // TODO
-    const barColors = ["#006400", "#708090", "#ff0000", "#ffa500","#ffff00","#00ff00", "#00fa9a", "#00ffff","#1e90ff", "#fa8072", "#eee8aa", "#ff1493"]
+
 
     
 
     return (
       <BoxGrid>
-        <Box loading={loading} height={520} time={json_time}>
+        <Box loading={loading} height={560} time={json_time}>
           <h6 style={{ margin: 0 }}>Collateral</h6>
-          {!loading && <PieChart data={overviewData.collateralGraphData} fill={barColors}/>}
+          {!loading && <PieChart data={overviewData.collateralGraphData}/>}
         </Box>
         {/* <Box loading={loading} height={450} time={json_time}>
           <h6 style={{margin: 0}}>Debt</h6>

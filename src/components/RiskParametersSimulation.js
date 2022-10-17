@@ -1,11 +1,9 @@
-import Asterisk, { hasAtLeastOneAsterisk } from "./Asterisk";
-
 import Box from "./Box";
 import { Component } from "react";
 import DataTable from "react-data-table-component";
 import Token from "./Token";
-import mainStore from "../stores/main.store";
 import { observer } from "mobx-react";
+import poolsStore from "../stores/pools.store";
 import { whaleFriendlyFormater } from "./WhaleFriendly";
 
 const columns = [
@@ -30,33 +28,43 @@ const columns = [
   {
     name: "Lowest Liquidation Threshold",
     selector: (row) => row["max_collateral"],
-    format: (row) => <Asterisk row={row} field={"max_collateral"} />,
+    format: (row) => row.max_collateral,
     sortable: true,
   },
 ];
 
 class RiskParametersSimulation extends Component {
   render() {
-    const loading = mainStore["current_simulation_risk_loading"];
+    const loading = poolsStore["data/riskparams_loading"];
     const rawData = Object.assign(
       {},
-      mainStore["current_simulation_risk_data"] || {}
+      poolsStore["data/riskparams_data"] || {}
     );
-    const { json_time } = rawData;
-    if (json_time) {
-      delete rawData.json_time;
+    const tab = poolsStore['activeTabSymbol'];
+    let data = [];
+
+
+    for (const entry in rawData) {
+      if (rawData[entry]['underlying'] == tab) {
+        for (const point in rawData[entry]['current']){
+          data.push({
+            key: point,
+            total_liquidation: rawData[entry]['current'][point]["total_liquidation"],
+            pnl: rawData[entry]['current'][point]["pnl"],
+            max_drop: rawData[entry]['current'][point]["max_drop"],
+            max_collateral: rawData[entry]['current'][point]["max_collateral"]
+          })
+        }
+      }
     }
-    const data = !loading
-      ? Object.entries(rawData).map(([k, v]) => {
-          return Object.assign({ key: k }, v.summary);
-        })
-      : [];
-    const text = hasAtLeastOneAsterisk(data, "max_collateral")
-      ? "* Decreasing CF to Max CF is recommended."
-      : "";
+
+    console.log('data?', data)
+
+
+    const { json_time } = rawData["0"]["json_time"]
     return (
       <div>
-        <Box loading={loading} time={json_time} text={text}>
+        <Box loading={loading} time={json_time} >
           <hgroup>
             <h6>According to Worst Day Scenario</h6>
             <p className="description">
