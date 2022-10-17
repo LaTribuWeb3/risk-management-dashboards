@@ -3,15 +3,35 @@ import BoxGrid from "../components/BoxGrid";
 import BoxRow from "../components/BoxRow";
 import alertStore from "../stores/alert.store";
 import { observer } from "mobx-react";
+import poolsStore from "../stores/pools.store";
 
 const AtRisk = (props) => {
+  const rawData = Object.assign(
+    {},
+    poolsStore["data/riskparams_data"] || {}
+  );
+  const tab = poolsStore['activeTabSymbol'];
+  let valueAtRisk = 0;
+  let liquidationsAtRisk = 0;
+
+  for (const entry in rawData) {
+    if (rawData[entry]['underlying'] == tab) {
+      for (const point in rawData[entry]['current']){
+        liquidationsAtRisk += rawData[entry]['current'][point]["total_liquidation"];
+        valueAtRisk += rawData[entry]['current'][point]["pnl"];
+        }
+      }
+    }
+    alertStore.valueAtRisk = valueAtRisk.toFixed(2);
+    alertStore.liquidationsAtRisk = liquidationsAtRisk.toFixed(2);
+
   return (
     <>
       <BoxGrid>
         <Box time={alertStore.varLarJsonTime}>
           <BoxRow>
             <h5 style={{ margin: 0 }}>Value at Risk on Worst Day Simulation</h5>
-            <h5 style={{ margin: 0 }}>{alertStore.valueAtRisk}</h5>
+            <h5 style={{ margin: 0 }}>${alertStore.valueAtRisk}</h5>
           </BoxRow>
           <hgroup style={{ margin: 0 }}>
             <p style={{ margin: 0 }}>
@@ -25,7 +45,7 @@ const AtRisk = (props) => {
         <Box time={alertStore.varLarJsonTime}>
           <BoxRow>
             <h5 style={{ margin: 0 }}>Liquidations on Worst Day Simulation</h5>
-            <h5 style={{ margin: 0 }}>{alertStore.liquidationsAtRisk}</h5>
+            <h5 style={{ margin: 0 }}>${alertStore.liquidationsAtRisk}</h5>
           </BoxRow>
           <hgroup style={{ margin: 0 }}>
             <p style={{ margin: 0 }}>
