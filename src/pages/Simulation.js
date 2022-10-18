@@ -28,7 +28,7 @@ const columns = [
   {
     name: "Recommended Collateral Factor",
     selector: (row) => row.simulationLT,
-    format: (row) => <SimulationDisplay row={row}/>,
+    format: (row) => <SimulationDisplay row={row} />,
     grow: 2,
   },
 ];

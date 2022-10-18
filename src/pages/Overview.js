@@ -36,10 +36,7 @@ class Overview extends Component {
     let poolCollaterals = [];
     const tab = poolsStore["tab"];
     const poolsData = Object.assign([], poolsStore["pools_data"] || []);
-    const tokenData = Object.assign(
-      [],
-      poolsStore["tokens_data"] || []
-    );
+    const tokenData = Object.assign([], poolsStore["tokens_data"] || []);
     const creditAccountData = Object.assign(
       [],
       poolsStore["creditAccounts_data"] || []

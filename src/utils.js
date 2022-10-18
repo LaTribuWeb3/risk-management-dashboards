@@ -20,10 +20,7 @@ export const precentFormatter = (num) => {
 };
 
 export const tokenName = (address) => {
-  const tokenData = Object.assign(
-    [],
-    poolsStore["tokens_data"] || []
-  );
+  const tokenData = Object.assign([], poolsStore["tokens_data"] || []);
   for (const token in tokenData) {
     if (tokenData[token].address.toLowerCase() === address.toLowerCase()) {
       return tokenData[token].symbol;
@@ -35,10 +32,7 @@ export const tokenPrice = (symbol, amount) => {
   if (amount == 0) {
     return 0;
   }
-  const tokenData = Object.assign(
-    [],
-    poolsStore["tokens_data"] || []
-  );
+  const tokenData = Object.assign([], poolsStore["tokens_data"] || []);
   for (const token in tokenData) {
     if (tokenData[token].symbol.toLowerCase() === symbol.toLowerCase()) {
       const tokenPrice = BigNumber(tokenData[token].priceUSD18Decimals).div(
@@ -242,20 +236,30 @@ export const sandboxSwitch = (row, field, up) => {
     }
   }
   const index = formattedData.map((e) => e.dc).indexOf(selectedFData.dc);
-console.log()
+  console.log();
   if (up == "1") {
     if (formattedData[index + 1] == undefined) {
       console.log("out of the simulation bounds");
     } else {
       row["sandboxValue"] = formattedData[index + 1].dc;
-      row["simulationLT"] = getRecommendedLT(formattedData[index + 1].dc, row.asset, row.underlying, row.riskParameters);
+      row["simulationLT"] = getRecommendedLT(
+        formattedData[index + 1].dc,
+        row.asset,
+        row.underlying,
+        row.riskParameters
+      );
     }
   } else if (up == 0) {
     if (formattedData[index - 1] == undefined) {
       console.log("out of the simulation bounds");
     } else {
       row["sandboxValue"] = formattedData[index - 1].dc;
-      row["simulationLT"] = getRecommendedLT(formattedData[index - 1].dc, row.asset, row.underlying, row.riskParameters);
+      row["simulationLT"] = getRecommendedLT(
+        formattedData[index - 1].dc,
+        row.asset,
+        row.underlying,
+        row.riskParameters
+      );
     }
   } else {
     console.log("error");

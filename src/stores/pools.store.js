@@ -21,18 +21,24 @@ class PoolsStore {
   }
 
   getApiVersion = () => {
-    const qsApiVersion = new URLSearchParams(window.location.search).get('api-version')
-    if(qsApiVersion) return new Promise(resolve => resolve(qsApiVersion))
-    return axios.get(`https://raw.githubusercontent.com/Risk-DAO/version-control/main/gearbox`).then(({data})=> data.trim().replace('\n', ''))
-  } 
-  
+    const qsApiVersion = new URLSearchParams(window.location.search).get(
+      "api-version"
+    );
+    if (qsApiVersion) return new Promise((resolve) => resolve(qsApiVersion));
+    return axios
+      .get(
+        `https://raw.githubusercontent.com/Risk-DAO/version-control/main/gearbox`
+      )
+      .then(({ data }) => data.trim().replace("\n", ""));
+  };
 
-  apiUrl = "https://raw.githubusercontent.com/Risk-DAO/simulation-results/main/gearbox";
+  apiUrl =
+    "https://raw.githubusercontent.com/Risk-DAO/simulation-results/main/gearbox";
   poolsData = {};
 
   init = () => {
     this["version"] = null;
-    this.apiVersionPromise = this.getApiVersion()
+    this.apiVersionPromise = this.getApiVersion();
     this["tab"] = null;
     this["poolCollaterals"] = [];
     this["collateralValues"] = [];
@@ -43,23 +49,23 @@ class PoolsStore {
   };
 
   fetchData = (endpoint) => {
-    this[endpoint + '_loading'] = true
-    this[endpoint + '_data'] = null
-    const apiIsV2 = this.apiUrl.indexOf("github") > -1
-    this[endpoint + '_request'] = this.apiVersionPromise.then(version=> {
-      let url;
-        url = `${this.apiUrl}/${version}/${endpoint}.json`
-      return axios.get(url)
-    })
-    .then(({data})=> {
-      this[endpoint + '_loading'] = false
-      this[endpoint + '_data'] = data
-      return data
-    })
-    .catch(console.error)
-  }
+    this[endpoint + "_loading"] = true;
+    this[endpoint + "_data"] = null;
+    const apiIsV2 = this.apiUrl.indexOf("github") > -1;
+    this[endpoint + "_request"] = this.apiVersionPromise
+      .then((version) => {
+        let url;
+        url = `${this.apiUrl}/${version}/${endpoint}.json`;
+        return axios.get(url);
+      })
+      .then(({ data }) => {
+        this[endpoint + "_loading"] = false;
+        this[endpoint + "_data"] = data;
+        return data;
+      })
+      .catch(console.error);
+  };
 
- 
   setActiveTab(tab, symbol) {
     this["tab"] = tab;
     this["activeTabSymbol"] = symbol;

@@ -14,10 +14,7 @@ class Tabnav extends Component {
       poolsStore["liquidity_loading"];
 
     const poolsData = Object.assign([], poolsStore["pools_data"] || []);
-    const tokenData = Object.assign(
-      [],
-      poolsStore["tokens_data"] || []
-    );
+    const tokenData = Object.assign([], poolsStore["tokens_data"] || []);
 
     function setActiveTab(tab, symbol) {
       poolsStore.setActiveTab(tab, symbol);
