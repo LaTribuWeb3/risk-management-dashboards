@@ -63,7 +63,12 @@ class RiskParametersUtilization extends Component {
       underlying: tokenName(underlying),
       riskParameters: riskParametersForPool?.risk,
       supply: collateralsValue[tokenName(e.tokenAddress)],
-      sandboxValue: initialSandboxValue(tokenName(e.tokenAddress),tokenName(underlying), riskParametersForPool?.risk, collateralsValue[tokenName(e.tokenAddress)] / 1e6),
+      sandboxValue: initialSandboxValue(
+        tokenName(e.tokenAddress),
+        tokenName(underlying),
+        riskParametersForPool?.risk,
+        collateralsValue[tokenName(e.tokenAddress)] / 1e6
+      ),
       currentLT: e.liquidationThreshold / 10000,
       simulationLT: getRecommendedLT(
         collateralsValue[tokenName(e.tokenAddress)],
@@ -94,7 +99,14 @@ class RiskParametersUtilization extends Component {
               Recommended LTs according to current collateral and borrow usage.
             </p>
           </hgroup>
-          {!loading && <DataTable columns={currentColumns} data={poolTokens} defaultSortFieldId={2} defaultSortAsc={false} />}
+          {!loading && (
+            <DataTable
+              columns={currentColumns}
+              data={poolTokens}
+              defaultSortFieldId={2}
+              defaultSortAsc={false}
+            />
+          )}
         </Box>
       </div>
     );

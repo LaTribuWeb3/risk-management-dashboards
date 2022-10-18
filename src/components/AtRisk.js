@@ -6,24 +6,22 @@ import { observer } from "mobx-react";
 import poolsStore from "../stores/pools.store";
 
 const AtRisk = (props) => {
-  const rawData = Object.assign(
-    {},
-    poolsStore["data/riskparams_data"] || {}
-  );
-  const tab = poolsStore['activeTabSymbol'];
+  const rawData = Object.assign({}, poolsStore["data/riskparams_data"] || {});
+  const tab = poolsStore["activeTabSymbol"];
   let valueAtRisk = 0;
   let liquidationsAtRisk = 0;
 
   for (const entry in rawData) {
-    if (rawData[entry]['underlying'] == tab) {
-      for (const point in rawData[entry]['current']){
-        liquidationsAtRisk += rawData[entry]['current'][point]["total_liquidation"];
-        valueAtRisk += rawData[entry]['current'][point]["pnl"];
-        }
+    if (rawData[entry]["underlying"] == tab) {
+      for (const point in rawData[entry]["current"]) {
+        liquidationsAtRisk +=
+          rawData[entry]["current"][point]["total_liquidation"];
+        valueAtRisk += rawData[entry]["current"][point]["pnl"];
       }
     }
-    alertStore.valueAtRisk = valueAtRisk.toFixed(2);
-    alertStore.liquidationsAtRisk = liquidationsAtRisk.toFixed(2);
+  }
+  alertStore.valueAtRisk = valueAtRisk.toFixed(2);
+  alertStore.liquidationsAtRisk = liquidationsAtRisk.toFixed(2);
 
   return (
     <>

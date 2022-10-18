@@ -36,33 +36,29 @@ const columns = [
 class RiskParametersSimulation extends Component {
   render() {
     const loading = poolsStore["data/riskparams_loading"];
-    const rawData = Object.assign(
-      {},
-      poolsStore["data/riskparams_data"] || {}
-    );
-    const tab = poolsStore['activeTabSymbol'];
+    const rawData = Object.assign({}, poolsStore["data/riskparams_data"] || {});
+    const tab = poolsStore["activeTabSymbol"];
     let data = [];
 
-
     for (const entry in rawData) {
-      if (rawData[entry]['underlying'] == tab) {
-        for (const point in rawData[entry]['current']){
+      if (rawData[entry]["underlying"] == tab) {
+        for (const point in rawData[entry]["current"]) {
           data.push({
             key: point,
-            total_liquidation: rawData[entry]['current'][point]["total_liquidation"],
-            pnl: rawData[entry]['current'][point]["pnl"],
-            max_drop: rawData[entry]['current'][point]["max_drop"],
-            max_collateral: rawData[entry]['current'][point]["max_collateral"]
-          })
+            total_liquidation:
+              rawData[entry]["current"][point]["total_liquidation"],
+            pnl: rawData[entry]["current"][point]["pnl"],
+            max_drop: rawData[entry]["current"][point]["max_drop"],
+            max_collateral: rawData[entry]["current"][point]["max_collateral"],
+          });
         }
       }
     }
 
-
-    const { json_time } = rawData["0"]["json_time"]
+    const { json_time } = rawData["0"]["json_time"];
     return (
       <div>
-        <Box loading={loading} time={json_time} >
+        <Box loading={loading} time={json_time}>
           <hgroup>
             <h6>According to Worst Day Scenario</h6>
             <p className="description">
@@ -75,7 +71,14 @@ class RiskParametersSimulation extends Component {
               platform in case the same scenario repeats today.
             </p>
           </hgroup>
-          {!loading && <DataTable columns={columns} data={data} defaultSortFieldId={2} defaultSortAsc={false}/>}
+          {!loading && (
+            <DataTable
+              columns={columns}
+              data={data}
+              defaultSortFieldId={2}
+              defaultSortAsc={false}
+            />
+          )}
         </Box>
       </div>
     );

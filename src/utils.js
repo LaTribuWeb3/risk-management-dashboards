@@ -133,7 +133,12 @@ export const getRecommendedLT = (
   return 1 - meanMD - meanLI;
 };
 
-export const initialSandboxValue = (token, underlying, riskParameters, value) => {
+export const initialSandboxValue = (
+  token,
+  underlying,
+  riskParameters,
+  value
+) => {
   let tokenRiskData = riskParameters[token + "-" + underlying];
   if (tokenRiskData == undefined) {
     console.log("cannot find token -- " + token + " -- in risk parameters");
@@ -184,8 +189,8 @@ export const initialSandboxValue = (token, underlying, riskParameters, value) =>
   }
   const index = formattedData.map((e) => e.dc).indexOf(selectedFData.dc);
 
-  return formattedData[index].dc
-}
+  return formattedData[index].dc;
+};
 
 export const sandboxSwitch = (row, field, up) => {
   let tokenRiskData = row.riskParameters[row.asset + "-" + row.underlying];

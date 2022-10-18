@@ -11,14 +11,11 @@ class OverviewPieCharts extends Component {
     const json_time = this.props.time;
     const loading = mainStore["overview_loading"]; // TODO
 
-
-    
-
     return (
       <BoxGrid>
         <Box loading={loading} height={560} time={json_time}>
           <h6 style={{ margin: 0 }}>Collateral</h6>
-          {!loading && <PieChart data={overviewData.collateralGraphData}/>}
+          {!loading && <PieChart data={overviewData.collateralGraphData} />}
         </Box>
         {/* <Box loading={loading} height={450} time={json_time}>
           <h6 style={{margin: 0}}>Debt</h6>
