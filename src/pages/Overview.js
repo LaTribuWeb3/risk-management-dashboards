@@ -38,11 +38,11 @@ class Overview extends Component {
     const poolsData = Object.assign([], poolsStore["pools_data"] || []);
     const tokenData = Object.assign(
       [],
-      poolsStore["data/tokens?fakeMainnet=0_data"] || []
+      poolsStore["tokens_data"] || []
     );
     const creditAccountData = Object.assign(
       [],
-      poolsStore["data/creditAccounts?fakeMainnet=0_data"] || []
+      poolsStore["creditAccounts_data"] || []
     );
 
     const selectedPool = poolsData.find((p) => p.address === tab);

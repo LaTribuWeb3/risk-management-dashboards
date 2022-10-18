@@ -58,11 +58,11 @@ function roundTo(num, dec) {
 
 class Oracles extends Component {
   render() {
-    const loading = poolsStore["data/tokens?fakeMainnet=0_loading"];
+    const loading = poolsStore["tokens_loading"];
     const collaterals = poolsStore["poolCollaterals"];
     let oracleData = Object.assign(
       [],
-      poolsStore["data/tokens?fakeMainnet=0_data"] || []
+      poolsStore["tokens_data"] || []
     );
     const jsonTime = Math.floor(
       oracleData["0"]["updateData"]["lastUpdate"] / 1000

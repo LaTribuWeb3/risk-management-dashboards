@@ -22,7 +22,7 @@ export const precentFormatter = (num) => {
 export const tokenName = (address) => {
   const tokenData = Object.assign(
     [],
-    poolsStore["data/tokens?fakeMainnet=0_data"] || []
+    poolsStore["tokens_data"] || []
   );
   for (const token in tokenData) {
     if (tokenData[token].address.toLowerCase() === address.toLowerCase()) {
@@ -37,7 +37,7 @@ export const tokenPrice = (symbol, amount) => {
   }
   const tokenData = Object.assign(
     [],
-    poolsStore["data/tokens?fakeMainnet=0_data"] || []
+    poolsStore["tokens_data"] || []
   );
   for (const token in tokenData) {
     if (tokenData[token].symbol.toLowerCase() === symbol.toLowerCase()) {

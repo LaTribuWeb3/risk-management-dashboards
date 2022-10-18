@@ -55,7 +55,7 @@ class Liquidity extends Component {
     const collaterals = poolsStore["poolCollaterals"];
     let symbol = poolsStore["activeTabSymbol"];
 
-    let liquidity_data = poolsStore["data/liquidity_data"];
+    let liquidity_data = poolsStore["liquidity_data"];
     const jsonTime = liquidity_data[0]["slippage"]["json_time"];
     for (let i = 0; i < liquidity_data.length; i++) {
       if (liquidity_data[i]["debtToken"] === symbol) {

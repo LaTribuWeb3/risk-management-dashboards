@@ -74,7 +74,7 @@ class Accounts extends Component {
       },
     ];
 
-    const loading = poolsStore["data/creditAccounts?fakeMainnet=0_loading"];
+    const loading = poolsStore["creditAccounts_loading"];
     let tokenBalances = {};
     let collateralData = [];
     let tableData = [];
@@ -83,7 +83,7 @@ class Accounts extends Component {
 
     if (!loading) {
       const PoolCreditAccounts = Object.assign(
-        poolsStore["data/creditAccounts?fakeMainnet=0_data"].filter(
+        poolsStore["creditAccounts_data"].filter(
           (ca) => ca.poolAddress === poolsStore["tab"]
         )
       );
@@ -155,7 +155,7 @@ class Accounts extends Component {
 
     /// create userArrays for whales data
     const whaleCreditAccounts = Object.assign(
-      poolsStore["data/creditAccounts?fakeMainnet=0_data"].filter(
+      poolsStore["creditAccounts_data"].filter(
         (ca) => ca.poolAddress === poolsStore["tab"]
       )
     );
@@ -232,7 +232,7 @@ class Accounts extends Component {
     }
 
     // include graph data in tableData
-    let apiGraphData = Object.assign(poolsStore["data/liquidations_data"]);
+    let apiGraphData = Object.assign(poolsStore["liquidations_data"]);
     apiGraphData = apiGraphData.filter(
       (entry) => entry.poolAddress == poolsStore["tab"]
     );

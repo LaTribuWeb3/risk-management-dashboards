@@ -3,12 +3,12 @@ import mainStore from "../stores/main.store";
 import { makeAutoObservable } from "mobx";
 
 const apiEndpoints = [
-  "data/tokens?fakeMainnet=0",
-  "data/creditAccounts?fakeMainnet=0",
+  "tokens",
+  "creditAccounts",
   "pools",
-  "data/liquidations",
-  "data/liquidity",
-  "data/riskparams",
+  "liquidations",
+  "liquidity",
+  "risk",
 ];
 class PoolsStore {
   constructor() {
@@ -20,10 +20,19 @@ class PoolsStore {
     return Math.round((num + Number.EPSILON) * pow) / pow;
   }
 
-  apiUrl = process.env.REACT_APP_API_URL || "http://dev-0.la-tribu.xyz:8081";
+  getApiVersion = () => {
+    const qsApiVersion = new URLSearchParams(window.location.search).get('api-version')
+    if(qsApiVersion) return new Promise(resolve => resolve(qsApiVersion))
+    return axios.get(`https://raw.githubusercontent.com/Risk-DAO/version-control/main/gearbox`).then(({data})=> data.trim().replace('\n', ''))
+  } 
+  
+
+  apiUrl = "https://raw.githubusercontent.com/Risk-DAO/simulation-results/main/gearbox";
   poolsData = {};
 
   init = () => {
+    this["version"] = null;
+    this.apiVersionPromise = this.getApiVersion()
     this["tab"] = null;
     this["poolCollaterals"] = [];
     this["collateralValues"] = [];
@@ -34,22 +43,23 @@ class PoolsStore {
   };
 
   fetchData = (endpoint) => {
-    this[endpoint + "_loading"] = true;
-    this[endpoint + "_data"] = null;
-    this[endpoint + "_request"] = axios
-      .get(`${this.apiUrl}/${endpoint}/`)
-      .then(({ data }) => {
-        this[endpoint + "_loading"] = false;
-        this[endpoint + "_data"] = data;
-        // if (endpoint === "pools") {
-        //   this["tab"] = data[0].address;
-        //   this["activeTabSymbol"] = data[0].symbol;
-        // }
-        return data;
-      })
-      .catch(console.error);
-  };
+    this[endpoint + '_loading'] = true
+    this[endpoint + '_data'] = null
+    const apiIsV2 = this.apiUrl.indexOf("github") > -1
+    this[endpoint + '_request'] = this.apiVersionPromise.then(version=> {
+      let url;
+        url = `${this.apiUrl}/${version}/${endpoint}.json`
+      return axios.get(url)
+    })
+    .then(({data})=> {
+      this[endpoint + '_loading'] = false
+      this[endpoint + '_data'] = data
+      return data
+    })
+    .catch(console.error)
+  }
 
+ 
   setActiveTab(tab, symbol) {
     this["tab"] = tab;
     this["activeTabSymbol"] = symbol;
@@ -59,7 +69,7 @@ class PoolsStore {
     /// check if pool has credit accounts active:
     const PoolCreditAccounts = Object.assign(
       [],
-      this["data/creditAccounts?fakeMainnet=0_data"] || []
+      this["creditAccounts_data"] || []
     ).filter((ca) => ca.poolAddress === tab);
     if (PoolCreditAccounts.length > 0) {
       this["poolHasAccounts"] = 1;

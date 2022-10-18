@@ -6,7 +6,7 @@ import { observer } from "mobx-react";
 import poolsStore from "../stores/pools.store";
 
 const AtRisk = (props) => {
-  const rawData = Object.assign({}, poolsStore["data/riskparams_data"] || {});
+  const rawData = Object.assign({}, poolsStore["risk_data"] || {});
   const tab = poolsStore["activeTabSymbol"];
   let valueAtRisk = 0;
   let liquidationsAtRisk = 0;

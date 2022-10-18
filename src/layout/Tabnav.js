@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+
 import { observer } from "mobx-react";
 import poolsStore from "../stores/pools.store";
 
@@ -6,16 +7,16 @@ import poolsStore from "../stores/pools.store";
 class Tabnav extends Component {
   render() {
     const loading =
-      poolsStore["data/tokens?fakeMainnet=0_loading"] ||
+      poolsStore["tokens_loading"] ||
       poolsStore["pools_loading"] ||
-      poolsStore["data/creditAccounts?fakeMainnet=0_loading"] ||
-      poolsStore["data/liquidations_loading"] ||
-      poolsStore["data/liquidity_loading"];
+      poolsStore["creditAccounts_loading"] ||
+      poolsStore["liquidations_loading"] ||
+      poolsStore["liquidity_loading"];
 
     const poolsData = Object.assign([], poolsStore["pools_data"] || []);
     const tokenData = Object.assign(
       [],
-      poolsStore["data/tokens?fakeMainnet=0_data"] || []
+      poolsStore["tokens_data"] || []
     );
 
     function setActiveTab(tab, symbol) {

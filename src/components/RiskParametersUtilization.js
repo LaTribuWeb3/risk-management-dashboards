@@ -38,11 +38,11 @@ class RiskParametersUtilization extends Component {
   render() {
     const { loading } =
       poolsStore["pools_loading"] ||
-      poolsStore["data/riskparams_loading"] ||
+      poolsStore["risk_loading"] ||
       poolsStore["tab"] == undefined;
     const collaterals = poolsStore["poolCollaterals"];
     const collateralsValue = poolsStore["collateralValues"];
-    const riskParameters = poolsStore["data/riskparams_data"];
+    const riskParameters = poolsStore["risk_data"];
 
     const poolData = poolsStore["pools_data"];
     const selectedPool = poolData.find((p) => p.address === poolsStore["tab"]);

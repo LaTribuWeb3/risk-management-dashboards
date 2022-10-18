@@ -35,8 +35,8 @@ const columns = [
 
 class RiskParametersSimulation extends Component {
   render() {
-    const loading = poolsStore["data/riskparams_loading"];
-    const rawData = Object.assign({}, poolsStore["data/riskparams_data"] || {});
+    const loading = poolsStore["risk_loading"];
+    const rawData = Object.assign({}, poolsStore["risk_data"] || {});
     const tab = poolsStore["activeTabSymbol"];
     let data = [];
 
