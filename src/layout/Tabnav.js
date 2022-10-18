@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import { Component } from "react";
 import { observer } from "mobx-react";
 import poolsStore from "../stores/pools.store";
 
@@ -25,9 +25,9 @@ class Tabnav extends Component {
     return (
       <div className="navwrapper">
         <hgroup>
-          <h2>Pool</h2>
+          <h2>Market</h2>
           <p className="description">
-            Select one of the Gearbox pools to display its related dashboard
+            Select one of the Gearbox markets to display its related dashboard
           </p>
         </hgroup>
         {/* <div className="tabnav"> */}

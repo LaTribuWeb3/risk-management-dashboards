@@ -21,19 +21,19 @@ class SinglePage extends Component {
         scrollThrottle={100}
         parentScrollContainerRef={this.props.scrollContainer}
       >
-        <section id="select-pool">
+        <section id="select-market">
           <Tabnav />
         </section>
         {poolsStore["activeTabSymbol"] === null && (
           <div className="noaccountsdiv">
-            <span className="noaccounts">No pool selected</span>
+            <span className="noaccounts">No market selected</span>
           </div>
         )}
         {poolsStore["activeTabSymbol"] != null &&
           poolsStore["poolHasAccounts"] === 0 && (
             <div className="noaccountsdiv">
               <span className="noaccounts">
-                This pool has no credit accounts.
+                This market has no credit accounts.
               </span>
             </div>
           )}
@@ -57,7 +57,7 @@ class SinglePage extends Component {
                 <div>
                   <hgroup>
                     <h2>Overview</h2>
-                    <p className="description">State of the pool overview</p>
+                    <p className="description">State of the market overview</p>
                   </hgroup>
                   <Overview />
                 </div>
