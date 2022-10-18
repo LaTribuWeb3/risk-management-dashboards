@@ -242,20 +242,20 @@ export const sandboxSwitch = (row, field, up) => {
     }
   }
   const index = formattedData.map((e) => e.dc).indexOf(selectedFData.dc);
-
+console.log()
   if (up == "1") {
     if (formattedData[index + 1] == undefined) {
       console.log("out of the simulation bounds");
     } else {
       row["sandboxValue"] = formattedData[index + 1].dc;
-      row["recommendedLT"] = this.getRecommendedLT(formattedData[index + 1].dc, row.asset, row.underlying, row.riskParameters);
+      row["recommendedLT"] = getRecommendedLT(formattedData[index + 1].dc, row.asset, row.underlying, row.riskParameters);
     }
   } else if (up == 0) {
     if (formattedData[index - 1] == undefined) {
       console.log("out of the simulation bounds");
     } else {
       row["sandboxValue"] = formattedData[index - 1].dc;
-      row["recommendedLT"] = this.getRecommendedLT(formattedData[index - 1].dc, row.asset, row.underlying, row.riskParameters);
+      row["recommendedLT"] = getRecommendedLT(formattedData[index - 1].dc, row.asset, row.underlying, row.riskParameters);
     }
   } else {
     console.log("error");
