@@ -248,14 +248,14 @@ console.log()
       console.log("out of the simulation bounds");
     } else {
       row["sandboxValue"] = formattedData[index + 1].dc;
-      row["recommendedLT"] = getRecommendedLT(formattedData[index + 1].dc, row.asset, row.underlying, row.riskParameters);
+      row["simulationLT"] = getRecommendedLT(formattedData[index + 1].dc, row.asset, row.underlying, row.riskParameters);
     }
   } else if (up == 0) {
     if (formattedData[index - 1] == undefined) {
       console.log("out of the simulation bounds");
     } else {
       row["sandboxValue"] = formattedData[index - 1].dc;
-      row["recommendedLT"] = getRecommendedLT(formattedData[index - 1].dc, row.asset, row.underlying, row.riskParameters);
+      row["simulationLT"] = getRecommendedLT(formattedData[index - 1].dc, row.asset, row.underlying, row.riskParameters);
     }
   } else {
     console.log("error");
