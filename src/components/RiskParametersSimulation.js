@@ -58,8 +58,6 @@ class RiskParametersSimulation extends Component {
       }
     }
 
-    console.log('data?', data)
-
 
     const { json_time } = rawData["0"]["json_time"]
     return (
@@ -77,7 +75,7 @@ class RiskParametersSimulation extends Component {
               platform in case the same scenario repeats today.
             </p>
           </hgroup>
-          {!loading && <DataTable columns={columns} data={data} />}
+          {!loading && <DataTable columns={columns} data={data} defaultSortFieldId={2} defaultSortAsc={false}/>}
         </Box>
       </div>
     );

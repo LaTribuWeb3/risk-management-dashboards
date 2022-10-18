@@ -14,19 +14,23 @@ const currentColumns = [
     name: "Asset",
     selector: (row) => row.asset,
     format: (row) => <Token value={row.asset} />,
+    sortable: true,
   },
   {
     name: "Current Supply",
     selector: (row) => row.supply,
     format: (row) => whaleFriendlyFormater(row.supply),
+    sortable: true,
   },
   {
     name: "Current Liquidation Threshold",
     selector: (row) => row.currentLT,
+    sortable: true,
   },
   {
     name: "Recommended Liquidation Threshold",
     selector: (row) => row.recommendedLT,
+    sortable: true,
   },
 ];
 
@@ -90,7 +94,7 @@ class RiskParametersUtilization extends Component {
               Recommended LTs according to current collateral and borrow usage.
             </p>
           </hgroup>
-          {!loading && <DataTable columns={currentColumns} data={poolTokens} />}
+          {!loading && <DataTable columns={currentColumns} data={poolTokens} defaultSortFieldId={2} defaultSortAsc={false} />}
         </Box>
       </div>
     );
