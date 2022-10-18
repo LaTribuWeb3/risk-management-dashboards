@@ -246,14 +246,12 @@ export const sandboxSwitch = (row, field, up) => {
     if (formattedData[index + 1] == undefined) {
       console.log("out of the simulation bounds");
     } else {
-      // TO DO : update recommended LT value in the risk data
       return (row["sandboxValue"] = formattedData[index + 1].dc);
     }
   } else if (up == 0) {
     if (formattedData[index - 1] == undefined) {
       console.log("out of the simulation bounds");
     } else {
-      // TO DO : update recommended LT value in the risk data
       return (row["sandboxValue"] = formattedData[index - 1].dc);
     }
   } else {

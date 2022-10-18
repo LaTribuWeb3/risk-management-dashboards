@@ -2,7 +2,7 @@ import mainStore from "../stores/main.store";
 import { observer } from "mobx-react";
 
 const pages = [
-  "select-market",
+  "select-pool",
   "system-status",
   "overview",
   "collateral-factors",
