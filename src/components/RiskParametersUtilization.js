@@ -1,4 +1,4 @@
-import { getRecommendedLT, tokenName } from "../utils";
+import { getRecommendedLT, initialSandboxValue, tokenName } from "../utils";
 
 import Box from "./Box";
 import { Component } from "react";
@@ -59,7 +59,7 @@ class RiskParametersUtilization extends Component {
       underlying: tokenName(underlying),
       riskParameters: riskParametersForPool?.risk,
       supply: collateralsValue[tokenName(e.tokenAddress)],
-      sandboxValue: collateralsValue[tokenName(e.tokenAddress)] / 1e6,
+      sandboxValue: initialSandboxValue(tokenName(e.tokenAddress),tokenName(underlying), riskParametersForPool?.risk, collateralsValue[tokenName(e.tokenAddress)] / 1e6),
       currentLT: e.liquidationThreshold / 10000,
       simulationLT: getRecommendedLT(
         collateralsValue[tokenName(e.tokenAddress)],
