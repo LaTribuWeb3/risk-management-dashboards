@@ -48,7 +48,6 @@ const CustomTooltip = ({ active, payload, label }) => {
 class SlippageChart extends Component {
   render() {
     const dataSet = [this.props.data];
-    console.log('datamax is', dataSet.length)
     if (!dataSet.length) {
       return null;
     }
