@@ -114,7 +114,6 @@ export const getRecommendedLT = (
       break;
     }
   }
-  console.log('selectedFdata', selectedFData)
 
   // compute recommended LT
   let meanMD = selectedFData.values
