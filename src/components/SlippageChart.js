@@ -36,8 +36,10 @@ const CustomTooltip = ({ active, payload, label }) => {
     const { name, value, liquidation } = Object.assign({}, payload[0].payload);
     return (
       <div className="tooltip-container">
-          <div>Liquidity Depth: {whaleFriendlyFormater(value)}</div>
-          <div>Max liquidation on worst day: {whaleFriendlyFormater(liquidation)}</div>
+        <div>Liquidity Depth: {whaleFriendlyFormater(value)}</div>
+        <div>
+          Max liquidation on worst day: {whaleFriendlyFormater(liquidation)}
+        </div>
       </div>
     );
   }
@@ -56,17 +58,15 @@ class SlippageChart extends Component {
     dataSet.sort((a, b) => b.liquidation - a.liquidation);
     let liquidationMax = dataSet[0].liquidation;
 
-    if(valueMax > liquidationMax){
-      dataMax = valueMax
-    }
-    else{
-      dataMax = liquidationMax
+    if (valueMax > liquidationMax) {
+      dataMax = valueMax;
+    } else {
+      dataMax = liquidationMax;
     }
 
-    if(dataMax < 1){
+    if (dataMax < 1) {
       dataMax = 1000;
     }
-
 
     const color = mainStore.blackMode ? "white" : "black";
 
@@ -81,7 +81,7 @@ class SlippageChart extends Component {
         <article style={expendedBoxStyle}>
           <ResponsiveContainer>
             <BarChart data={dataSet}>
-              <XAxis dataKey="name"/>
+              <XAxis dataKey="name" />
               <YAxis
                 type="number"
                 domain={[0, dataMax]}
@@ -89,16 +89,30 @@ class SlippageChart extends Component {
                 allowDataOverflow={true}
               />
               <Tooltip content={CustomTooltip} />
-              <Legend verticalAlign="bottom" height={36}/>
+              <Legend verticalAlign="bottom" height={36} />
               <Bar name="Liquidity Depth" dataKey="value" fill={COLORS[0]} />
-              <Bar name="Worst liquidation simulation" dataKey="liquidation" fill={COLORS[1]} />
+              <Bar
+                name="Worst Liquidation Simulation"
+                dataKey="liquidation"
+                fill={COLORS[10]}
+              />
             </BarChart>
           </ResponsiveContainer>
         </article>
-        <div className="box-space" style={{width: '80%', display: 'flex', justifyContent: 'space-between', flexDirection: 'column'}}>
+        <div
+          className="box-space"
+          style={{
+            width: "80%",
+            display: "flex",
+            justifyContent: "space-between",
+            flexDirection: "column",
+          }}
+        >
           <hgroup>
             <h1></h1>
-            <p>Max Liquidation in a single transaction for up to 5% slippage.</p>
+            <p>
+              Max Liquidation in a single transaction for up to 5% slippage.
+            </p>
           </hgroup>
         </div>
       </div>

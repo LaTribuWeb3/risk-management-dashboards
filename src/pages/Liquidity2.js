@@ -79,29 +79,29 @@ class Liquidity extends Component {
       collaterals.includes(entry.name)
     );
     const riskData = Object.assign({}, poolsStore["risk_data"] || {});
-    for(let i = 0; i < liquidityArray.length; i++){
-      for(const entry in riskData){
-        console.log("value", liquidityArray[i].value)
-        if (riskData[entry]["underlying"] == symbol){
-          liquidityArray[i]["liquidation"] = riskData[entry]["current"][liquidityArray[i].name]["total_liquidation"]
+    for (let i = 0; i < liquidityArray.length; i++) {
+      for (const entry in riskData) {
+        if (riskData[entry]["underlying"] == symbol) {
+          liquidityArray[i]["liquidation"] =
+            riskData[entry]["current"][liquidityArray[i].name][
+              "total_liquidation"
+            ];
         }
       }
     }
 
-    console.log('liquidityArray', liquidityArray)
-
     return (
       <div>
         <Box loading={loading} time={jsonTime}>
-          <p>
-          </p>
-          {liquidityArray.map((asset, i) => 
-          <details key={i} open>
-            <summary>{asset.name}</summary>
-            <div style={{ display: 'flex' }}>
-              <SlippageChart data={asset} i={i} />
-            </div>
-          </details>)}
+          <p></p>
+          {liquidityArray.map((asset, i) => (
+            <details key={i} open>
+              <summary>{asset.name}</summary>
+              <div style={{ display: "flex" }}>
+                <SlippageChart data={asset} i={i} />
+              </div>
+            </details>
+          ))}
         </Box>
       </div>
     );

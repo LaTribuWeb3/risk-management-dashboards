@@ -33,18 +33,17 @@ const columns = [
   },
 ];
 
-
-function display(props){
-
- return <div>
-  {props.max_collateral == -1 ? "Not Found" : props.max_collateral.toFixed(2)}
- </div>
+function display(props) {
+  return (
+    <div>
+      {props.max_collateral == -1
+        ? "Not Found"
+        : props.max_collateral.toFixed(2)}
+    </div>
+  );
 }
-function displayWhaleFriendly(props){
-
- return <div>
-  {props == -1 ? "Not Found" : whaleFriendlyFormater(props)}
- </div>
+function displayWhaleFriendly(props) {
+  return <div>{props == -1 ? "Not Found" : whaleFriendlyFormater(props)}</div>;
 }
 
 class RiskParametersSimulation extends Component {
@@ -57,26 +56,25 @@ class RiskParametersSimulation extends Component {
     for (const entry in rawData) {
       if (rawData[entry]["underlying"] == tab) {
         for (const point in rawData[entry]["current"]) {
-          if(rawData[entry]["current"][point] != null){
-          data.push({
-            key: point,
-            total_liquidation:
-              rawData[entry]["current"][point]["total_liquidation"],
-            pnl: rawData[entry]["current"][point]["pnl"],
-            max_drop: rawData[entry]["current"][point]["max_drop"],
-            max_collateral: rawData[entry]["current"][point]["max_collateral"],
-          });
-        }
-        else{
-          data.push({
-            key: point,
-            total_liquidation:
-              -1,
-            pnl: -1,
-            max_drop: -1,
-            max_collateral: -1,
-          });
-        }
+          if (rawData[entry]["current"][point] != null) {
+            data.push({
+              key: point,
+              total_liquidation:
+                rawData[entry]["current"][point]["total_liquidation"],
+              pnl: rawData[entry]["current"][point]["pnl"],
+              max_drop: rawData[entry]["current"][point]["max_drop"],
+              max_collateral:
+                rawData[entry]["current"][point]["max_collateral"],
+            });
+          } else {
+            data.push({
+              key: point,
+              total_liquidation: -1,
+              pnl: -1,
+              max_drop: -1,
+              max_collateral: -1,
+            });
+          }
         }
       }
     }
