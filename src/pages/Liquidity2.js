@@ -94,6 +94,7 @@ class Liquidity extends Component {
       }
       }
     }
+    liquidityArray.sort((a,b) => (b.liquidation / b.value)- (a.liquidation / a.value))
 
     return (
       <div>
