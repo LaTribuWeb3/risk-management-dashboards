@@ -11,8 +11,6 @@ const AtRisk = (props) => {
   let valueAtRisk = 0;
   let liquidationsAtRisk = 0;
 
-  console.log('data', rawData)
-
   for (const entry in rawData) {
     if (rawData[entry]["underlying"] == tab) {
       for (const point in rawData[entry]["current"]) {
