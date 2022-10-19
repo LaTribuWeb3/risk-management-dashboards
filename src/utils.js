@@ -99,7 +99,7 @@ export const getRecommendedLT = (
   formattedData.sort((a, b) => a.dc - b.dc);
 
   // find closest DC value to collateralValue
-  const collateralInMillions = collateralValue / 1e6;
+  const collateralInMillions = collateralValue;
   let selectedFData = formattedData[0];
   for (let i = 1; i < formattedData.length; i++) {
     const fData = formattedData[i];
@@ -114,6 +114,7 @@ export const getRecommendedLT = (
       break;
     }
   }
+  console.log('selectedFdata', selectedFData)
 
   // compute recommended LT
   let meanMD = selectedFData.values
@@ -124,7 +125,7 @@ export const getRecommendedLT = (
     .filter((_) => Lfs.includes(_.lf))
     .map((_) => _.li);
   meanLI = meanLI.reduce((a, b) => a + b, 0) / meanLI.length;
-  return 1 - meanMD - meanLI;
+  return (1 - meanMD - meanLI).toFixed(2);
 };
 
 export const initialSandboxValue = (
@@ -236,7 +237,6 @@ export const sandboxSwitch = (row, field, up) => {
     }
   }
   const index = formattedData.map((e) => e.dc).indexOf(selectedFData.dc);
-  console.log();
   if (up == "1") {
     if (formattedData[index + 1] == undefined) {
       console.log("out of the simulation bounds");

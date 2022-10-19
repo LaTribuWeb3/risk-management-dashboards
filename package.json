@@ -36,7 +36,7 @@
     "build-gearbox": "REACT_APP_CONFIG=gearbox && npm run build",
     "test": "react-app-rewired test",
     "eject": "react-app-rewired eject",
-    "deploy": "npm run build-gearbox && scp -r ./build/* ubuntu@dev-0.la-tribu.xyz:/app/gearbox/dashboard"
+    "deploy": "npm run build-gearbox && scp -r ./build/* $DEPLOY_SERVER:/app/gearbox/dashboard"
   },
   "eslintConfig": {
     "extends": [
