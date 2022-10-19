@@ -78,24 +78,19 @@ class Liquidity extends Component {
     liquidityArray = liquidityArray.filter((entry) =>
       collaterals.includes(entry.name)
     );
+
     return (
       <div>
         <Box loading={loading} time={jsonTime}>
-          <details open>
-            <summary>
-              <span>{symbol}</span>
-            </summary>
-            <div style={{ display: "flex" }}>
-              <SlippageChart symbol={symbol} data={liquidityArray} />
+          <p>
+          </p>
+          {liquidityArray.map((asset, i) => 
+          <details key={i} open>
+            <summary>{asset.name}</summary>
+            <div style={{ display: 'flex' }}>
+              <SlippageChart data={asset} i={i} />
             </div>
-            {/* <div style={{ marginLeft: "30px" }}>
-                {!!asset.lps.length && (
-                  <Box>
-                    <DataTable columns={columns} data={asset.lps} />
-                  </Box>
-                )}
-              </div> */}
-          </details>
+          </details>)}
         </Box>
       </div>
     );
