@@ -16,22 +16,36 @@ const columns = [
   {
     name: "Total Liquidations",
     selector: (row) => row.total_liquidation,
-    format: (row) => whaleFriendlyFormater(row.total_liquidation),
+    format: (row) => displayWhaleFriendly(row.total_liquidation),
     sortable: true,
   },
   {
     name: "Accrued Bad Debt",
     selector: (row) => row.pnl,
-    format: (row) => whaleFriendlyFormater(row.pnl),
+    format: (row) => displayWhaleFriendly(row.pnl),
     sortable: true,
   },
   {
     name: "Lowest Liquidation Threshold",
     selector: (row) => row["max_collateral"],
-    format: (row) => row.max_collateral.toFixed(2),
+    format: (row) => display(row),
     sortable: true,
   },
 ];
+
+
+function display(props){
+
+ return <div>
+  {props.max_collateral == -1 ? "Not Found" : props.max_collateral.toFixed(2)}
+ </div>
+}
+function displayWhaleFriendly(props){
+
+ return <div>
+  {props == -1 ? "Not Found" : whaleFriendlyFormater(props)}
+ </div>
+}
 
 class RiskParametersSimulation extends Component {
   render() {
@@ -43,6 +57,7 @@ class RiskParametersSimulation extends Component {
     for (const entry in rawData) {
       if (rawData[entry]["underlying"] == tab) {
         for (const point in rawData[entry]["current"]) {
+          if(rawData[entry]["current"][point] != null){
           data.push({
             key: point,
             total_liquidation:
@@ -51,6 +66,17 @@ class RiskParametersSimulation extends Component {
             max_drop: rawData[entry]["current"][point]["max_drop"],
             max_collateral: rawData[entry]["current"][point]["max_collateral"],
           });
+        }
+        else{
+          data.push({
+            key: point,
+            total_liquidation:
+              -1,
+            pnl: -1,
+            max_drop: -1,
+            max_collateral: -1,
+          });
+        }
         }
       }
     }

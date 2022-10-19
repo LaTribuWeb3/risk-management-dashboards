@@ -11,13 +11,17 @@ const AtRisk = (props) => {
   let valueAtRisk = 0;
   let liquidationsAtRisk = 0;
 
+  console.log('data', rawData)
+
   for (const entry in rawData) {
     if (rawData[entry]["underlying"] == tab) {
       for (const point in rawData[entry]["current"]) {
+        if(rawData[entry]["current"][point] != null){
         liquidationsAtRisk +=
           rawData[entry]["current"][point]["total_liquidation"];
         valueAtRisk += rawData[entry]["current"][point]["pnl"];
       }
+    }
     }
   }
   alertStore.valueAtRisk = valueAtRisk.toFixed(2);
