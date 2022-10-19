@@ -6,7 +6,7 @@ const pages = [
   "system-status",
   "overview",
   "collateral-factors",
-   "sandbox",
+  "sandbox",
   "asset-distribution",
   // "open-liquidations",
   "oracle-deviation",

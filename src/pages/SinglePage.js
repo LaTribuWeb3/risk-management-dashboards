@@ -84,7 +84,8 @@ class SinglePage extends Component {
                   <hgroup>
                     <h2> Risk Parameters Sandbox</h2>
                     <p className="description">
-                    The sandbox lets you set different Supply caps, to get LTs recommendations according to different caps.{" "}
+                      The sandbox lets you set different Supply caps, to get LTs
+                      recommendations according to different caps.{" "}
                     </p>
                   </hgroup>
                   <Simulation />
