@@ -99,7 +99,7 @@ class SlippageChart extends Component {
               <Legend verticalAlign="bottom" height={36} />
               <Bar name="Liquidity Depth" dataKey="value" fill={COLORS[0]} />
               <Bar
-                name="Worse Day Liquidation Volume"
+                name="Worst Day Liquidation Volume"
                 dataKey="liquidation"
                 fill={COLORS[10]}
               />
