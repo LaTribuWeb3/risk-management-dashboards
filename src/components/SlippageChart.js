@@ -1,6 +1,7 @@
 import {
   Bar,
   BarChart,
+  Legend,
   ResponsiveContainer,
   Tooltip,
   XAxis,
@@ -11,7 +12,6 @@ import {
   whaleFriendlyFormater,
 } from "../components/WhaleFriendly";
 
-import BoxRow from "./BoxRow";
 import { COLORS } from "../constants";
 import { Component } from "react";
 import mainStore from "../stores/main.store";
@@ -33,13 +33,11 @@ const expendedBoxStyle = {
 
 const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
-    const { name, value } = Object.assign({}, payload[0].payload);
+    const { name, value, liquidation } = Object.assign({}, payload[0].payload);
     return (
       <div className="tooltip-container">
-        <BoxRow>
-          <div>{name}</div>
-          <div>{whaleFriendlyFormater(value)}</div>
-        </BoxRow>
+          <div>Liquidity Depth: {whaleFriendlyFormater(value)}</div>
+          <div>Max liquidation on worst day: {whaleFriendlyFormater(liquidation)}</div>
       </div>
     );
   }
@@ -51,8 +49,19 @@ class SlippageChart extends Component {
     if (!dataSet.length) {
       return null;
     }
+    let dataMax = 0;
     dataSet.sort((a, b) => b.value - a.value);
-    let dataMax = dataSet[0].value;
+    let valueMax = dataSet[0].value;
+
+    dataSet.sort((a, b) => b.liquidation - a.liquidation);
+    let liquidationMax = dataSet[0].liquidation;
+
+    if(valueMax > liquidationMax){
+      dataMax = valueMax
+    }
+    else{
+      dataMax = liquidationMax
+    }
 
     if(dataMax < 1){
       dataMax = 1000;
@@ -72,7 +81,7 @@ class SlippageChart extends Component {
         <article style={expendedBoxStyle}>
           <ResponsiveContainer>
             <BarChart data={dataSet}>
-              <XAxis dataKey="name" />
+              <XAxis dataKey="name"/>
               <YAxis
                 type="number"
                 domain={[0, dataMax]}
@@ -80,7 +89,9 @@ class SlippageChart extends Component {
                 allowDataOverflow={true}
               />
               <Tooltip content={CustomTooltip} />
-              <Bar dataKey="value" fill={COLORS[0]} />
+              <Legend verticalAlign="bottom" height={36}/>
+              <Bar name="Liquidity Depth" dataKey="value" fill={COLORS[0]} />
+              <Bar name="Worst liquidation simulation" dataKey="liquidation" fill={COLORS[1]} />
             </BarChart>
           </ResponsiveContainer>
         </article>

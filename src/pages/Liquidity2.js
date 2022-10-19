@@ -78,6 +78,17 @@ class Liquidity extends Component {
     liquidityArray = liquidityArray.filter((entry) =>
       collaterals.includes(entry.name)
     );
+    const riskData = Object.assign({}, poolsStore["risk_data"] || {});
+    for(let i = 0; i < liquidityArray.length; i++){
+      for(const entry in riskData){
+        console.log("value", liquidityArray[i].value)
+        if (riskData[entry]["underlying"] == symbol){
+          liquidityArray[i]["liquidation"] = riskData[entry]["current"][liquidityArray[i].name]["total_liquidation"]
+        }
+      }
+    }
+
+    console.log('liquidityArray', liquidityArray)
 
     return (
       <div>
