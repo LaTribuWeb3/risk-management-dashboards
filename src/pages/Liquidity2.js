@@ -82,11 +82,16 @@ class Liquidity extends Component {
     for (let i = 0; i < liquidityArray.length; i++) {
       for (const entry in riskData) {
         if (riskData[entry]["underlying"] == symbol) {
+          if(riskData[entry]["current"][liquidityArray[i].name] != undefined){
           liquidityArray[i]["liquidation"] =
             riskData[entry]["current"][liquidityArray[i].name][
               "total_liquidation"
             ];
         }
+        else{
+          liquidityArray[i]["liquidation"] = "Not Found"
+        }
+      }
       }
     }
 

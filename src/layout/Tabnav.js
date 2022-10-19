@@ -1,5 +1,4 @@
-import React, { Component } from "react";
-
+import { Component } from "react";
 import { observer } from "mobx-react";
 import poolsStore from "../stores/pools.store";
 

@@ -48,11 +48,7 @@ const CustomTooltip = ({ active, payload, label }) => {
 class SlippageChart extends Component {
   render() {
     let dataSet = [this.props.data];
-
-    if (dataSet[0]['name'] == "SNX"){
-      dataSet[0].liquidation = "3000000"
-
-    }
+  
     if (!dataSet.length) {
       return null;
     }
