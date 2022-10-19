@@ -248,7 +248,7 @@ export const sandboxSwitch = (row, field, up) => {
         row.riskParameters
       );
     }
-  } else if (up == 0) {
+  } else if (up == "0") {
     if (formattedData[index - 1] == undefined) {
       console.log("out of the simulation bounds");
     } else {

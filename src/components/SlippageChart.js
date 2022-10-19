@@ -47,7 +47,12 @@ const CustomTooltip = ({ active, payload, label }) => {
 
 class SlippageChart extends Component {
   render() {
-    const dataSet = [this.props.data];
+    let dataSet = [this.props.data];
+
+    if (dataSet[0]['name'] == "SNX"){
+      dataSet[0].liquidation = "3000000"
+
+    }
     if (!dataSet.length) {
       return null;
     }
@@ -67,6 +72,8 @@ class SlippageChart extends Component {
     if (dataMax < 1) {
       dataMax = 1000;
     }
+
+
 
     const color = mainStore.blackMode ? "white" : "black";
 
@@ -92,7 +99,7 @@ class SlippageChart extends Component {
               <Legend verticalAlign="bottom" height={36} />
               <Bar name="Liquidity Depth" dataKey="value" fill={COLORS[0]} />
               <Bar
-                name="Worst Liquidation Simulation"
+                name="Worse Day Liquidation Volume"
                 dataKey="liquidation"
                 fill={COLORS[10]}
               />
