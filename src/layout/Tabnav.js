@@ -11,7 +11,9 @@ class Tabnav extends Component {
       poolsStore["pools_loading"] ||
       poolsStore["creditAccounts_loading"] ||
       poolsStore["liquidations_loading"] ||
-      poolsStore["liquidity_loading"];
+      poolsStore["liquidity_loading"] ||
+      poolsStore["risk_loading"]
+
 
     const poolsData = Object.assign([], poolsStore["pools_data"] || []);
     const tokenData = Object.assign([], poolsStore["tokens_data"] || []);
