@@ -53,6 +53,8 @@ class OpenLiquidations extends Component {
       (acc, val) => acc + Number(val.debt),
       0
     );
+    poolsStore["totalLiquidations"] = totalDebt
+    poolsStore["totalLiquidations_Loading"] = false;
     const smallLiquidations = totalDebt < 1000;
 
     return (

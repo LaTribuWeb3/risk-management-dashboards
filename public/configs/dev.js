@@ -5,6 +5,6 @@ window.APP_CONFIG = {
   WHITE_LOGO: "gearboxwhite.png",
   BLACK_LOGO: "gearboxblack.png",
   feature_flags: {
-    alerts: false,
+    alerts: true,
   },
 };
