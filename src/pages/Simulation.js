@@ -21,12 +21,12 @@ const columns = [
     grow: 2,
   },
   {
-    name: "Current Collateral Factor",
+    name: "Current Liquidation Threshold",
     selector: (row) => row.currentLT,
     width: "260px",
   },
   {
-    name: "Recommended Collateral Factor",
+    name: "Recommended Liquidation Threshold",
     selector: (row) => row.simulationLT,
     format: (row) => <SimulationDisplay row={row} />,
     grow: 2,
