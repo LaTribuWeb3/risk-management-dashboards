@@ -95,7 +95,7 @@ class SlippageChart extends Component {
               <Bar
                 name="Worst Day Liquidation Volume"
                 dataKey="liquidation"
-                fill={COLORS[10]}
+                fill={COLORS[16]}
               />
             </BarChart>
           </ResponsiveContainer>
