@@ -40,10 +40,13 @@ class PoolsStore {
     this["version"] = null;
     this.apiVersionPromise = this.getApiVersion();
     this["tab"] = null;
+    this["totalLiquidations"] = null;
+    this["totalLiquidations_Loading"] = true;
     this["poolCollaterals"] = [];
     this["collateralValues"] = [];
     this["activeTabSymbol"] = null;
     this["poolHasAccounts"] = 0;
+    this["updated"] = 0;
     apiEndpoints.forEach(this.fetchData);
     this["dex_liquidity_loading"] = false;
   };

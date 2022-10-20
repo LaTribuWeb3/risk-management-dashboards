@@ -1,11 +1,12 @@
 import { makeAutoObservable, runInAction } from "mobx";
-import mainStore from "./main.store";
-import riskStore from "./risk.store";
-import { removeTokenPrefix } from "../utils";
-import { whaleFriendlyFormater } from "../components/WhaleFriendly";
-import BlockExplorerLink from "../components/BlockExplorerLink";
+
 import Ramzor from "../components/Ramzor";
 import Token from "../components/Token";
+import mainStore from "./main.store";
+import poolsStore from "./pools.store";
+import { removeTokenPrefix } from "../utils";
+import riskStore from "./risk.store";
+import { whaleFriendlyFormater } from "../components/WhaleFriendly";
 
 const priceOracleDiffThreshold = 5;
 
@@ -43,7 +44,8 @@ class AlertStore {
   };
 
   getVarLarJsonTime = async () => {
-    const data = await mainStore["current_simulation_risk_request"];
+    const data = await poolsStore["creditAccounts_data"];
+    console.log('data',data)
     runInAction(() => {
       this.varLarJsonTime = data.json_time;
     });
