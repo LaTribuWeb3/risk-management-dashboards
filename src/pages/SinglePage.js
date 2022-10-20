@@ -2,6 +2,7 @@ import Accounts from "./Accounts";
 import Alerts from "./Alerts";
 import { Component } from "react";
 import Liquidity from "./Liquidity2";
+import OpenLiquidations from "./OpenLiquidations";
 import Oracles from "./Oracles";
 import Overview from "./Overview";
 import RiskParameters from "./RiskParameters";
@@ -113,6 +114,19 @@ class SinglePage extends Component {
                   <Accounts />
                 </div>
               )}
+            </section>
+          )}
+
+        {poolsStore["activeTabSymbol"] != null &&
+          poolsStore["poolHasAccounts"] > 0 && (
+            <section id="open-liquidations">
+              {mainStore.proViewShow("open-liquidations") && <div>
+                <hgroup>
+                  <h2>Open Liquidations</h2>
+                  <p></p>
+                </hgroup>
+                <OpenLiquidations />
+              </div>}
             </section>
           )}
 
