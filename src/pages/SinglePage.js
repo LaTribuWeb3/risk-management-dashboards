@@ -120,13 +120,15 @@ class SinglePage extends Component {
         {poolsStore["activeTabSymbol"] != null &&
           poolsStore["poolHasAccounts"] > 0 && (
             <section id="open-liquidations">
-              {mainStore.proViewShow("open-liquidations") && <div>
-                <hgroup>
-                  <h2>Open Liquidations</h2>
-                  <p></p>
-                </hgroup>
-                <OpenLiquidations />
-              </div>}
+              {mainStore.proViewShow("open-liquidations") && (
+                <div>
+                  <hgroup>
+                    <h2>Open Liquidations</h2>
+                    <p></p>
+                  </hgroup>
+                  <OpenLiquidations />
+                </div>
+              )}
             </section>
           )}
 

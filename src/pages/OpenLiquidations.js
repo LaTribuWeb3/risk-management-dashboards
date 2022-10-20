@@ -37,21 +37,23 @@ class OpenLiquidations extends Component {
     const jsonTime = PoolCreditAccounts[0]["UpdateData"]["lastUpdate"] / 1000;
     let liquidationData = [];
 
-    for(let i = 0; i < PoolCreditAccounts.length; i++){
-      if(PoolCreditAccounts[i].healthFactor < 10000){
+    for (let i = 0; i < PoolCreditAccounts.length; i++) {
+      if (PoolCreditAccounts[i].healthFactor < 10000) {
         liquidationData.push({
           user: PoolCreditAccounts[i].address,
-          debt: tokenPrice(poolsStore["activeTabSymbol"], PoolCreditAccounts[i].borrowedAmountPlusInterestAndFees),
+          debt: tokenPrice(
+            poolsStore["activeTabSymbol"],
+            PoolCreditAccounts[i].borrowedAmountPlusInterestAndFees
+          ),
           collateral: PoolCreditAccounts[i].collateralValue,
-        })
+        });
       }
     }
     const totalDebt = liquidationData.reduce(
       (acc, val) => acc + Number(val.debt),
       0
     );
-const smallLiquidations = totalDebt < 1000;
-
+    const smallLiquidations = totalDebt < 1000;
 
     return (
       <div>
@@ -59,8 +61,12 @@ const smallLiquidations = totalDebt < 1000;
           {!loading && (
             <div>
               {!smallLiquidations && (
-                <DataTable columns={columns} data={liquidationData} defaultSortFieldId={2}
-                defaultSortAsc={false} />
+                <DataTable
+                  columns={columns}
+                  data={liquidationData}
+                  defaultSortFieldId={2}
+                  defaultSortAsc={false}
+                />
               )}
               {smallLiquidations && (
                 <div style={{ textAlign: "center", padding: "50px" }}>

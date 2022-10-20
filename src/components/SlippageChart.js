@@ -48,7 +48,7 @@ const CustomTooltip = ({ active, payload, label }) => {
 class SlippageChart extends Component {
   render() {
     let dataSet = [this.props.data];
-  
+
     if (!dataSet.length) {
       return null;
     }
@@ -68,8 +68,6 @@ class SlippageChart extends Component {
     if (dataMax < 1) {
       dataMax = 1000;
     }
-
-
 
     const color = mainStore.blackMode ? "white" : "black";
 
@@ -114,7 +112,8 @@ class SlippageChart extends Component {
           <hgroup>
             <h1></h1>
             <p>
-              Max Liquidation in a single transaction for up to 5% slippage versus the liquidation for the worst simulated day.
+              Max Liquidation in a single transaction for up to 5% slippage
+              versus the liquidation for the worst simulated day.
             </p>
           </hgroup>
         </div>

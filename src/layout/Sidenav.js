@@ -8,7 +8,7 @@ const pages = [
   "collateral-factors",
   "sandbox",
   "asset-distribution",
- "open-liquidations",
+  "open-liquidations",
   "oracle-deviation",
   "liquidity",
   // 'backstop',
