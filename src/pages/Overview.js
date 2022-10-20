@@ -271,7 +271,7 @@ class Overview extends Component {
     const jsonTime = Math.floor(
       selectedPool["UpdateData"]["lastUpdate"] / 1000
     );
-    poolsStore["updated"] = jsonTime
+    poolsStore["updated"] = jsonTime;
 
     const loading = mainStore["overview_loading"];
 

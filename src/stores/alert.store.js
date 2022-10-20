@@ -45,7 +45,7 @@ class AlertStore {
 
   getVarLarJsonTime = async () => {
     const data = await poolsStore["creditAccounts_data"];
-    console.log('data',data)
+    console.log("data", data);
     runInAction(() => {
       this.varLarJsonTime = data.json_time;
     });

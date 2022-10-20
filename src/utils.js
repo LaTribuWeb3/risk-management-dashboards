@@ -51,15 +51,14 @@ export const tokenPrice = (symbol, amount) => {
   }
 };
 
-
 export const isStable = (tokenName) => {
   const tokenData = Object.assign([], poolsStore["tokens_data"] || []);
   for (const token in tokenData) {
     if (tokenData[token].symbol.toLowerCase() === tokenName.toLowerCase()) {
-      return tokenData[token].isStable
+      return tokenData[token].isStable;
     }
   }
-}
+};
 
 export const getRecommendedLT = (
   collateralValue,
@@ -76,19 +75,13 @@ export const getRecommendedLT = (
 
   let Lfs = null;
 
-
-
-if(isStable(underlyingName) && !isStable(collateralName)){
-   Lfs = shortStableLfs;
-}
-else if(!isStable(underlyingName) && isStable(collateralName)){
-Lfs = longStableLfs;
-}
-else{
-  Lfs = otherLfs;
-}
-
-
+  if (isStable(underlyingName) && !isStable(collateralName)) {
+    Lfs = shortStableLfs;
+  } else if (!isStable(underlyingName) && isStable(collateralName)) {
+    Lfs = longStableLfs;
+  } else {
+    Lfs = otherLfs;
+  }
 
   /// select token data for tName
   let tokenRiskData = riskParameters[collateralName + "-" + underlyingName];
