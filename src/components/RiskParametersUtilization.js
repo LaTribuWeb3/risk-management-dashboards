@@ -4,6 +4,7 @@ import Box from "./Box";
 import { Component } from "react";
 import DataTable from "react-data-table-component";
 import Token from "./Token";
+import alertStore from "../stores/alert.store";
 import { observer } from "mobx-react";
 import poolsStore from "../stores/pools.store";
 import riskStore from "../stores/risk.store";
@@ -86,6 +87,28 @@ class RiskParametersUtilization extends Component {
 
     riskStore["currentRiskData"] = poolTokens;
     riskStore["currentRiskLoading"] = false;
+
+    // get threshold alerts
+    const collateralAlerts = []
+    for(let i = 0; i < poolTokens.length; i++){
+      if(poolTokens[i].currentLT < poolTokens[i].recommendedLT){
+        const currentLT = poolTokens[i].currentLT
+        collateralAlerts.push({
+          asset: poolTokens[i].asset,
+          currentLT,
+          recommendedCF: poolTokens[i].recommendedLT,
+          "basedOn": "caps"
+        })
+      }
+    }
+    const type = collateralAlerts.length ? 'review' : 'success'
+    alertStore["collateralAlerts"] = {
+      title: 'Liquidation Thresholds',
+      data: collateralAlerts,
+      type,
+      link: '#collateral-factors'
+    };
+    alertStore["collateralAlerts_loading"] = false;
 
     // const text = hasAtLeastOneAsterisk(utilization, "collateral_factor")
     //   ? "* if user composition will change, reduction of CF might be required to avoid bad debt."

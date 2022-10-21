@@ -20,6 +20,8 @@ class AlertStore {
     this["oracleDeviation_loading"] = true;
     this["whalesAlerts"] = null;
     this["walesAlerts_loading"] = true;
+    this["collateralAlerts"] = null;
+    this["collateralAlerts_loading"] = true;
   };
 
 //   getVarLarJsonTime = async () => {

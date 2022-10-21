@@ -106,6 +106,10 @@ class Alerts extends Component {
     const oracleDeviation = alertStore["oracleDeviation"]
     alerts.push(oracleDeviation)
 
+    // thresholds alerts
+    const collateralAlerts = alertStore["collateralAlerts"]
+    alerts.push(collateralAlerts)
+
     return (
       <div>
         <AtRisk />
