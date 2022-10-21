@@ -103,12 +103,12 @@ class Alerts extends Component {
       link: "#open-liquidations",
     });
     // oracle alerts
-    const oracleDeviation = alertStore["oracleDeviation"]
-    alerts.push(oracleDeviation)
+    const oracleDeviation = alertStore["oracleDeviation"];
+    alerts.push(oracleDeviation);
 
     // thresholds alerts
-    const collateralAlerts = alertStore["collateralAlerts"]
-    alerts.push(collateralAlerts)
+    const collateralAlerts = alertStore["collateralAlerts"];
+    alerts.push(collateralAlerts);
 
     return (
       <div>

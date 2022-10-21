@@ -89,24 +89,24 @@ class RiskParametersUtilization extends Component {
     riskStore["currentRiskLoading"] = false;
 
     // get threshold alerts
-    const collateralAlerts = []
-    for(let i = 0; i < poolTokens.length; i++){
-      if(poolTokens[i].currentLT < poolTokens[i].recommendedLT){
-        const currentLT = poolTokens[i].currentLT
+    const collateralAlerts = [];
+    for (let i = 0; i < poolTokens.length; i++) {
+      if (poolTokens[i].currentLT < poolTokens[i].recommendedLT) {
+        const currentLT = poolTokens[i].currentLT;
         collateralAlerts.push({
           asset: poolTokens[i].asset,
           currentLT,
           recommendedCF: poolTokens[i].recommendedLT,
-          "basedOn": "caps"
-        })
+          basedOn: "caps",
+        });
       }
     }
-    const type = collateralAlerts.length ? 'review' : 'success'
+    const type = collateralAlerts.length ? "review" : "success";
     alertStore["collateralAlerts"] = {
-      title: 'Liquidation Thresholds',
+      title: "Liquidation Thresholds",
       data: collateralAlerts,
       type,
-      link: '#collateral-factors'
+      link: "#collateral-factors",
     };
     alertStore["collateralAlerts_loading"] = false;
 

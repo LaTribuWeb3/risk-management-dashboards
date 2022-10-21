@@ -82,40 +82,43 @@ class Oracles extends Component {
 
     /// compute oracle alerts
     const priceOracleDiffThreshold = 5;
-    const alertArray = []
+    const alertArray = [];
 
-
-const percentFromDiff = (base, num) => {
-  const diff = (num / base) * 100 - 100;
-  return Math.abs(diff);
-};
-for(let i = 0; i < oracleArray.length; i++){
-  console.log("oracleArray[i].oracle",oracleArray[i].oracle)
-  console.log("oracleArray[i].cex_price",oracleArray[i].cex_price)
-  console.log("oracleArray[i].dex_price",oracleArray[i].dex_price)
-  if(oracleArray[i].oracle && oracleArray[i].cex_price && oracleArray[i].dex_price > 0){
-  const diff = Math.max(
-    percentFromDiff(oracleArray[i].oracle, oracleArray[i].cex_price),
-    percentFromDiff(oracleArray[i].oracle, oracleArray[i].dex_price)
-  );
-  if (diff >= priceOracleDiffThreshold) {
-    alertArray.push({
-      asset: oracleArray[i].key,
-      diff,
-    });
-  }
-}
-}
-console.log("alertArray", alertArray)
-alertArray.filter((r) => !!r);
-const type = alertArray.length ? "review" : "healthy";
-alertStore["oracleDeviation"] = {
-title: "oracles",
-data: [],
-type,
-link: "#oracle-deviation",
-};
-alertStore["oracleDeviation_loading"] = false;
+    const percentFromDiff = (base, num) => {
+      const diff = (num / base) * 100 - 100;
+      return Math.abs(diff);
+    };
+    for (let i = 0; i < oracleArray.length; i++) {
+      console.log("oracleArray[i].oracle", oracleArray[i].oracle);
+      console.log("oracleArray[i].cex_price", oracleArray[i].cex_price);
+      console.log("oracleArray[i].dex_price", oracleArray[i].dex_price);
+      if (
+        oracleArray[i].oracle &&
+        oracleArray[i].cex_price &&
+        oracleArray[i].dex_price > 0
+      ) {
+        const diff = Math.max(
+          percentFromDiff(oracleArray[i].oracle, oracleArray[i].cex_price),
+          percentFromDiff(oracleArray[i].oracle, oracleArray[i].dex_price)
+        );
+        if (diff >= priceOracleDiffThreshold) {
+          alertArray.push({
+            asset: oracleArray[i].key,
+            diff,
+          });
+        }
+      }
+    }
+    console.log("alertArray", alertArray);
+    alertArray.filter((r) => !!r);
+    const type = alertArray.length ? "review" : "healthy";
+    alertStore["oracleDeviation"] = {
+      title: "oracles",
+      data: [],
+      type,
+      link: "#oracle-deviation",
+    };
+    alertStore["oracleDeviation_loading"] = false;
 
     return (
       <div>
