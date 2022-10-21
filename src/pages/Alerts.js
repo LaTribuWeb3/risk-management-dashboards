@@ -4,6 +4,7 @@ import BoxGrid from "../components/BoxGrid";
 import BoxRow from "../components/BoxRow";
 import { Component } from "react";
 import DataTable from "react-data-table-component";
+import alertStore from "../stores/alert.store";
 import { observer } from "mobx-react";
 import poolsStore from "../stores/pools.store";
 
@@ -87,7 +88,7 @@ class Alerts extends Component {
     const alerts = [];
 
     //liquidations alerts
-    const totalLiquidations = poolsStore["totalLiquidations"];
+    const totalLiquidations = alertStore["totalLiquidations"];
     let type = "healthy";
     if (totalLiquidations > 1000) {
       type = "review";
@@ -101,14 +102,16 @@ class Alerts extends Component {
       type,
       link: "#open-liquidations",
     });
+    // oracle alerts
+    const oracleDeviation = alertStore["oracleDeviation"]
+    alerts.push(oracleDeviation)
 
-    console.log(poolsStore["totalLiquidations_Loading"]);
     return (
       <div>
         <AtRisk />
         {window.APP_CONFIG.feature_flags.alerts && (
           <BoxGrid>
-            <Box loading={poolsStore["totalLiquidations_Loading"]}>
+            <Box loading={poolsStore["totalLiquidations_loading"]}>
               <div>
                 {alerts.map((alert, i) => (
                   <Alert key={i} alert={alert} />

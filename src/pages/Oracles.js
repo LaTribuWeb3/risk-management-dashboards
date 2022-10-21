@@ -3,6 +3,7 @@ import { Component } from "react";
 import DataTable from "react-data-table-component";
 import Ramzor from "../components/Ramzor";
 import Token from "../components/Token";
+import alertStore from "../stores/alert.store";
 import { observer } from "mobx-react";
 import poolsStore from "../stores/pools.store";
 
@@ -69,8 +70,8 @@ class Oracles extends Component {
       oracleArray.push({
         key: entry.symbol,
         oracle: roundTo(entry.priceUSD18Decimals / 1e18, 4),
-        cex_price: entry.cexPriceUSD18Decimals / 1e18,
-        dex_price: entry.dexPriceUSD18Decimals / 1e18,
+        cex_price: roundTo(entry.cexPriceUSD18Decimals / 1e18, 4),
+        dex_price: roundTo(entry.dexPriceUSD18Decimals / 1e18, 4),
       });
     });
 
@@ -78,6 +79,44 @@ class Oracles extends Component {
     oracleArray = oracleArray.filter((entry) =>
       collaterals.includes(entry.key)
     );
+
+    /// compute oracle alerts
+    const priceOracleDiffThreshold = 5;
+    const alertArray = []
+
+
+const percentFromDiff = (base, num) => {
+  const diff = (num / base) * 100 - 100;
+  return Math.abs(diff);
+};
+for(let i = 0; i < oracleArray.length; i++){
+  console.log("oracleArray[i].oracle",oracleArray[i].oracle)
+  console.log("oracleArray[i].cex_price",oracleArray[i].cex_price)
+  console.log("oracleArray[i].dex_price",oracleArray[i].dex_price)
+  if(oracleArray[i].oracle && oracleArray[i].cex_price && oracleArray[i].dex_price > 0){
+  const diff = Math.max(
+    percentFromDiff(oracleArray[i].oracle, oracleArray[i].cex_price),
+    percentFromDiff(oracleArray[i].oracle, oracleArray[i].dex_price)
+  );
+  if (diff >= priceOracleDiffThreshold) {
+    alertArray.push({
+      asset: oracleArray[i].key,
+      diff,
+    });
+  }
+}
+}
+console.log("alertArray", alertArray)
+alertArray.filter((r) => !!r);
+const type = alertArray.length ? "review" : "healthy";
+alertStore["oracleDeviation"] = {
+title: "oracles",
+data: [],
+type,
+link: "#oracle-deviation",
+};
+alertStore["oracleDeviation_loading"] = false;
+
     return (
       <div>
         <Box loading={loading} time={jsonTime}>
