@@ -89,6 +89,9 @@ class Oracles extends Component {
       return Math.abs(diff);
     };
     for (let i = 0; i < oracleArray.length; i++) {
+      console.log("oracleArray[i].oracle", oracleArray[i].oracle);
+      console.log("oracleArray[i].cex_price", oracleArray[i].cex_price);
+      console.log("oracleArray[i].dex_price", oracleArray[i].dex_price);
       if (
         oracleArray[i].oracle &&
         oracleArray[i].cex_price &&
@@ -106,6 +109,7 @@ class Oracles extends Component {
         }
       }
     }
+    console.log("alertArray", alertArray);
     alertArray.filter((r) => !!r);
     const type = alertArray.length ? "review" : "healthy";
     alertStore["oracleDeviation"] = {
