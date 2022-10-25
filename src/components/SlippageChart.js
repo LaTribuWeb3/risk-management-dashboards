@@ -16,6 +16,7 @@ import { COLORS } from "../constants";
 import { Component } from "react";
 import mainStore from "../stores/main.store";
 import { observer } from "mobx-react";
+import poolsStore from "../stores/pools.store";
 
 const truncate = {
   maxWidth: "200px",
@@ -71,6 +72,12 @@ class SlippageChart extends Component {
 
     const color = mainStore.blackMode ? "white" : "black";
 
+    const poolsData = Object.assign([], poolsStore["pools_data"] || []);
+    const tab = poolsStore["tab"];
+    const selectedPool = poolsData.find((p) => p.address === tab);
+    const percent = (10000 - selectedPool["creditManagers"]["0"]["liquidationDiscount"]) / 100
+
+
     return (
       <div
         style={{
@@ -112,7 +119,7 @@ class SlippageChart extends Component {
           <hgroup>
             <h1></h1>
             <p>
-              Max Liquidation in a single transaction for up to 5% slippage
+              Max Liquidation in a single transaction for up to {percent}% slippage
               versus the liquidation for the worst simulated day.
             </p>
           </hgroup>

@@ -30,8 +30,6 @@ const AlertText = (props) => {
 };
 
 const Alert = (props) => {
-  const { alert } = props;
-  const hasAlerts = alert.data.length || alert.negative;
 
   return (
     <>
