@@ -74,13 +74,15 @@ class Accounts extends Component {
       },
     ];
 
+    
+
     const loading = poolsStore["creditAccounts_loading"];
     let tokenBalances = {};
     let collateralData = [];
     let tableData = [];
     let userArrays = {};
     let jsonTime = null;
-
+    if("tableData" + poolsStore["activeTabSymbol"] == null){
     if (!loading) {
       const PoolCreditAccounts = Object.assign(
         poolsStore["creditAccounts_data"].filter(
@@ -267,6 +269,9 @@ class Accounts extends Component {
       tableData.sort((a, b) => b["total_collateral"] - a["total_collateral"]);
       tableData[0].defaultExpanded = true;
     }
+    poolsStore["tableData" + poolsStore["activeTabSymbol"]] = tableData;
+  }
+     tableData = poolsStore["tableData" + poolsStore["activeTabSymbol"]]
 
     return (
       <div>
