@@ -273,9 +273,6 @@ class Overview extends Component {
     );
     poolsStore["updated"] = jsonTime;
 
-
-    
-
     const loading = mainStore["overview_loading"];
 
     return (
