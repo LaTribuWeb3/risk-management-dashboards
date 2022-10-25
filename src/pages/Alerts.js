@@ -110,6 +110,10 @@ class Alerts extends Component {
     const collateralAlerts = alertStore["collateralAlerts"];
     alerts.push(collateralAlerts);
 
+    //whales alerts
+    const whaleAlerts = alertStore["whaleAlerts"];
+    alerts.push(whaleAlerts)
+
     return (
       <div>
         <AtRisk />

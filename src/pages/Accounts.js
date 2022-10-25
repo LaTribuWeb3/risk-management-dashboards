@@ -198,6 +198,8 @@ class Accounts extends Component {
       }
     }
 
+    console.log('data', tableData)
+
     // median function for next block
     function getMedian(arr) {
       const mid = Math.floor(arr.length / 2),
