@@ -211,7 +211,7 @@ class Overview extends Component {
         )[0];
 
         let valToAddBN = BigNumber(amount);
-        if (valToAddBN.gt(0)) {
+        if (valToAddBN.gte(0)) {
           const symbol = indexedToken["symbol"];
           let lastValue = indexedTokenSum[symbol];
           // check if token is already inside object
@@ -252,17 +252,11 @@ class Overview extends Component {
       };
       overviewData = dataOverview;
     }
-
-    /// remove < 1$ tokens
-    for (const data in overviewData["collateralGraphData"]) {
-      if (Number(overviewData["collateralGraphData"][data]) < 1) {
-        delete overviewData["collateralGraphData"][data];
-      }
-    }
     /// give PoolsStore the collateral symbols
     for (const data in overviewData["collateralGraphData"]) {
       poolCollaterals.push(data);
     }
+    console.log('overviewData["collateralGraphData"]',overviewData["collateralGraphData"])
     poolsStore["poolCollaterals"] = poolCollaterals;
 
     /// give PoolsStore the collateral values
@@ -274,6 +268,13 @@ class Overview extends Component {
     poolsStore["updated"] = jsonTime;
 
     const loading = mainStore["overview_loading"];
+
+        /// remove < 1$ tokens
+        for (const data in overviewData["collateralGraphData"]) {
+          if (Number(overviewData["collateralGraphData"][data]) < 1) {
+            delete overviewData["collateralGraphData"][data];
+          }
+        }
 
     return (
       <div>
