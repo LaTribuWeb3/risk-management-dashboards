@@ -256,7 +256,6 @@ class Overview extends Component {
     for (const data in overviewData["collateralGraphData"]) {
       poolCollaterals.push(data);
     }
-    console.log('overviewData["collateralGraphData"]',overviewData["collateralGraphData"])
     poolsStore["poolCollaterals"] = poolCollaterals;
 
     /// give PoolsStore the collateral values
@@ -269,12 +268,12 @@ class Overview extends Component {
 
     const loading = mainStore["overview_loading"];
 
-        /// remove < 1$ tokens
-        for (const data in overviewData["collateralGraphData"]) {
-          if (Number(overviewData["collateralGraphData"][data]) < 1) {
-            delete overviewData["collateralGraphData"][data];
-          }
-        }
+    /// remove < 1$ tokens
+    for (const data in overviewData["collateralGraphData"]) {
+      if (Number(overviewData["collateralGraphData"][data]) < 1) {
+        delete overviewData["collateralGraphData"][data];
+      }
+    }
 
     return (
       <div>

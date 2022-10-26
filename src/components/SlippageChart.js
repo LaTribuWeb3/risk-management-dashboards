@@ -75,8 +75,9 @@ class SlippageChart extends Component {
     const poolsData = Object.assign([], poolsStore["pools_data"] || []);
     const tab = poolsStore["tab"];
     const selectedPool = poolsData.find((p) => p.address === tab);
-    const percent = (10000 - selectedPool["creditManagers"]["0"]["liquidationDiscount"]) / 100
-
+    const percent =
+      (10000 - selectedPool["creditManagers"]["0"]["liquidationDiscount"]) /
+      100;
 
     return (
       <div
@@ -119,8 +120,8 @@ class SlippageChart extends Component {
           <hgroup>
             <h1></h1>
             <p>
-              Max Liquidation in a single transaction for up to {percent}% slippage
-              versus the liquidation for the worst simulated day.
+              Max Liquidation in a single transaction for up to {percent}%
+              slippage versus the liquidation for the worst simulated day.
             </p>
           </hgroup>
         </div>

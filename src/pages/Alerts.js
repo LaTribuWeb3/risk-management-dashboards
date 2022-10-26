@@ -30,7 +30,6 @@ const AlertText = (props) => {
 };
 
 const Alert = (props) => {
-
   return (
     <>
       <BoxRow>
