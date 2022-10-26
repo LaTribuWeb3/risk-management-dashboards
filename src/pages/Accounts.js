@@ -80,7 +80,6 @@ class Accounts extends Component {
     let tableData = [];
     let userArrays = {};
     let jsonTime = null;
-    if ("tableData" + poolsStore["activeTabSymbol"] == null) {
       if (!loading) {
         const PoolCreditAccounts = Object.assign(
           poolsStore["creditAccounts_data"].filter(
@@ -173,7 +172,7 @@ class Accounts extends Component {
             tokenSymbol,
             whaleCreditAccounts[i]["tokenBalances"][j]["amount"]
           );
-          if (tokenAmount != 0) {
+          if (tokenAmount >= 0) {
             if (userArrays[tokenSymbol] == null) {
               userArrays[tokenSymbol] = [];
               userArrays[tokenSymbol].push({
@@ -191,7 +190,6 @@ class Accounts extends Component {
           }
         }
       }
-
       // update big_collateral array
       for (let i = 0; i < tableData.length; i++) {
         let array = userArrays[tableData[i]["key"]];
@@ -201,8 +199,6 @@ class Accounts extends Component {
           tableData[i]["whales"]["big_collateral"].push(array[j]);
         }
       }
-
-      console.log("data", tableData);
 
       // median function for next block
       function getMedian(arr) {
@@ -271,9 +267,7 @@ class Accounts extends Component {
         tableData.sort((a, b) => b["total_collateral"] - a["total_collateral"]);
         tableData[0].defaultExpanded = true;
       }
-      poolsStore["tableData" + poolsStore["activeTabSymbol"]] = tableData;
-    }
-    tableData = poolsStore["tableData" + poolsStore["activeTabSymbol"]];
+
 
     return (
       <div>
