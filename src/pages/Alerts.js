@@ -1,12 +1,10 @@
 import AtRisk from "../components/AtRisk";
 import Box from "../components/Box";
-import BoxGrid from "../components/BoxGrid";
 import BoxRow from "../components/BoxRow";
 import { Component } from "react";
 import DataTable from "react-data-table-component";
 import alertStore from "../stores/alert.store";
 import { observer } from "mobx-react";
-import poolsStore from "../stores/pools.store";
 
 const AlertText = (props) => {
   const { type, hasAlerts } = props;
@@ -113,7 +111,7 @@ class Alerts extends Component {
     return (
       <div>
         <AtRisk />
-        {window.APP_CONFIG.feature_flags.alerts && (
+        {/* {window.APP_CONFIG.feature_flags.alerts && (
           <BoxGrid>
             <Box loading={poolsStore["totalLiquidations_loading"]}>
               <div>
@@ -123,7 +121,7 @@ class Alerts extends Component {
               </div>
             </Box>
           </BoxGrid>
-        )}
+        )} */}
       </div>
     );
   }
