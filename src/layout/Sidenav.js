@@ -11,6 +11,7 @@ const pages = [
   "open-liquidations",
   "oracle-deviation",
   "liquidity",
+  "stable-monitoring",
   // 'backstop',
   // 'assumptions',
   //'qualitative-anlysis',

@@ -8,6 +8,7 @@ import Overview from "./Overview";
 import RiskParameters from "./RiskParameters";
 import ScrollSpy from "react-ui-scrollspy";
 import Simulation from "./Simulation";
+import StableMonitoring from "./StableMonitoring";
 import Tabnav from "../layout/Tabnav";
 import mainStore from "../stores/main.store";
 import { observer } from "mobx-react";
@@ -170,6 +171,22 @@ class SinglePage extends Component {
                     </p>
                   </hgroup>
                   <Liquidity />
+                </div>
+              )}
+            </section>
+          )}
+          {poolsStore["activeTabSymbol"] != null &&
+          poolsStore["poolHasAccounts"] > 0 && (
+            <section id="stable-monitoring">
+              {mainStore.proViewShow("stable-monitoring") && (
+                <div>
+                  <hgroup>
+                    <h2>Stable Monitoring</h2>
+                    <p className="description">
+                      Blabla
+                    </p>
+                  </hgroup>
+                  <StableMonitoring />
                 </div>
               )}
             </section>

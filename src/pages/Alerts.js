@@ -111,8 +111,6 @@ class Alerts extends Component {
     // whales alerts
     const whaleAlerts = alertStore["whalesAlerts"];
     alerts.push(whaleAlerts);
-
-    console.log('alerts', alerts)
     return (
       <div>
         <AtRisk />
