@@ -51,7 +51,7 @@ import poolsStore from "../stores/pools.store";
 
 class Liquidity extends Component {
   render() {
-    const loading = poolsStore["dex_liquidity_loading"];
+    const loading = poolsStore["liquidity_loading"];
     const collaterals = poolsStore["poolCollaterals"];
     let symbol = poolsStore["activeTabSymbol"];
 
