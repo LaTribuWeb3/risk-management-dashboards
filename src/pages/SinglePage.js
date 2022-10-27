@@ -177,13 +177,13 @@ class SinglePage extends Component {
           )}
           {poolsStore["activeTabSymbol"] != null &&
           poolsStore["poolHasAccounts"] > 0 && (
-            <section id="stable-monitoring">
-              {mainStore.proViewShow("stable-monitoring") && (
+            <section id="stablecoin-monitoring">
+              {mainStore.proViewShow("stablecoin-monitoring") && (
                 <div>
                   <hgroup>
-                    <h2>Stable Monitoring</h2>
+                    <h2>Stablecoin Monitoring</h2>
                     <p className="description">
-                      Blabla
+                      Monitoring stablecoins health: dex liquidity vs USDC for 4% slippage and backing ratio where applicable.
                     </p>
                   </hgroup>
                   <StableMonitoring />

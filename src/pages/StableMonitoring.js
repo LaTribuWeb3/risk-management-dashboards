@@ -9,27 +9,37 @@ const Columns = [
     name: "Asset",
     selector: (row) => row.asset,
     format: (row) => row.asset,
+    sortable: true,
   },
   {
     name: "Liquidity",
     selector: (row) => row.liquidity,
-    format: (row) => row.liquidity,
-    grow: 2,
+    format: (row) => "$" + Number(row.liquidity).toFixed(2),
+    sortable: true,
   },
   {
     name: "Backing Ratio",
     selector: (row) => row.ratio,
-    format: (row) => row.ratio,
-    width: "260px",
+    format: (row) => Number(row.ratio).toFixed(2) + " %",
+    sortable: true,
   },
 ];
+
 
 
 const ratioData = [{
     asset: "LUSD",
     liquidity: "12342133212.123412455324",
     ratio: "223"
-}];
+},{
+    asset: "TUSD",
+    liquidity: "12342133212.123412455324",
+    ratio: "USDC"
+},{
+    asset: "BLA",
+    liquidity: "42342133212.123412455324",
+    ratio: "223"
+},];
 
 class StableMonitoring extends Component {
   render() {
@@ -39,7 +49,7 @@ class StableMonitoring extends Component {
       <div>
         <Box loading={loading} time={json_time}>
           {!loading && (
-            <DataTable columns={Columns} data={ratioData} />
+            <DataTable defaultSortFieldId={2} defaultSortAsc={false} columns={Columns} data={ratioData} />
           )}
         </Box>
       </div>
