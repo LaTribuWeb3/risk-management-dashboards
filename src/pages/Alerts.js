@@ -112,12 +112,13 @@ class Alerts extends Component {
     const whaleAlerts = alertStore["whalesAlerts"];
     alerts.push(whaleAlerts);
 
+    console.log('alerts', alerts)
     return (
       <div>
         <AtRisk />
         {window.APP_CONFIG.feature_flags.alerts && (
           <BoxGrid>
-            <Box loading={poolsStore["totalLiquidations_loading"]}>
+            <Box loading={poolsStore["totalLiquidations_loading"] || alertStore["walesAlerts_loading"] }>
               <div>
                 {alerts.map((alert, i) => (
                   <Alert key={i} alert={alert} />
