@@ -115,7 +115,12 @@ class Alerts extends Component {
         <AtRisk />
         {window.APP_CONFIG.feature_flags.alerts && (
           <BoxGrid>
-            <Box loading={poolsStore["totalLiquidations_loading"] || alertStore["walesAlerts_loading"] }>
+            <Box
+              loading={
+                poolsStore["totalLiquidations_loading"] ||
+                alertStore["walesAlerts_loading"]
+              }
+            >
               <div>
                 {alerts.map((alert, i) => (
                   <Alert key={i} alert={alert} />

@@ -50,13 +50,17 @@ import poolsStore from "../stores/pools.store";
 // ];
 
 class Liquidity extends Component {
+  
   render() {
     const loading = poolsStore["liquidity_loading"];
     const collaterals = poolsStore["poolCollaterals"];
+    const rawData = Object.assign([], poolsStore["liquidity_data"] || {});
     let symbol = poolsStore["activeTabSymbol"];
+    const jsonTime = rawData[0]["slippage"]["json_time"];
+    
 
-    let liquidity_data = poolsStore["liquidity_data"];
-    const jsonTime = liquidity_data[0]["slippage"]["json_time"];
+    let liquidity_data = rawData;
+
     for (let i = 0; i < liquidity_data.length; i++) {
       if (liquidity_data[i]["debtToken"] === symbol) {
         liquidity_data = liquidity_data[i]["slippage"];
