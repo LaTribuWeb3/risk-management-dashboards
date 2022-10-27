@@ -29,8 +29,8 @@ const AlertText = (props) => {
   return <div style={style}>{props.children}</div>;
 };
 const Alert = (props) => {
-  const { alert } = props
-  const hasAlerts = alert.data.length || alert.negative
+  const { alert } = props;
+  const hasAlerts = alert.data.length || alert.negative;
   return (
     <>
       <BoxRow>
@@ -109,8 +109,8 @@ class Alerts extends Component {
     alerts.push(collateralAlerts);
 
     // whales alerts
-        const whaleAlerts = alertStore["whalesAlerts"];
-        alerts.push(whaleAlerts);
+    const whaleAlerts = alertStore["whalesAlerts"];
+    alerts.push(whaleAlerts);
 
     return (
       <div>
