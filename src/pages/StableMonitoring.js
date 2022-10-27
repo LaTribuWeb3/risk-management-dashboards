@@ -32,7 +32,7 @@ class StableMonitoring extends Component {
     const { loading } = poolsStore["liquidity_loading"];
     const { json_time } = mainStore["risk_params_data"] || {};
 
-    const stables = ["LUSD", "sUSD", "USDT", "FRAX", "DAI"];
+    const stables = ["LUSD", "sUSD", "USDT", "FRAX", "DAI", "USDC"];
     const rawData = Object.assign([], poolsStore["liquidity_data"] || {});
     const tab = poolsStore["activeTabSymbol"];
 
