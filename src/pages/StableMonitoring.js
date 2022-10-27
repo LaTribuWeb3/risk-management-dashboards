@@ -52,7 +52,10 @@ class StableMonitoring extends Component {
             ratioData.push({
               asset: entry,
               liquidity: liquidityData[entry][tab]["volume"],
-              ratio: liquidityData[entry][tab]["ratio"] ? Number((liquidityData[entry][tab]["ratio"])*100).toFixed(2) + " %" : "N/A",
+              ratio: liquidityData[entry][tab]["ratio"]
+                ? Number(liquidityData[entry][tab]["ratio"] * 100).toFixed(2) +
+                  " %"
+                : "N/A",
             });
           }
         }
