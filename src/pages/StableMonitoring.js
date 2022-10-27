@@ -3,6 +3,8 @@ import { Component } from "react";
 import DataTable from "react-data-table-component";
 import mainStore from "../stores/main.store";
 import { observer } from "mobx-react";
+import poolsStore from "../stores/pools.store";
+import { whaleFriendlyFormater } from "../components/WhaleFriendly";
 
 const Columns = [
   {
@@ -14,7 +16,7 @@ const Columns = [
   {
     name: "Liquidity",
     selector: (row) => row.liquidity,
-    format: (row) => "$" + Number(row.liquidity).toFixed(2),
+    format: (row) => whaleFriendlyFormater(Number(row.liquidity).toFixed(2)),
     sortable: true,
   },
   {
@@ -27,29 +29,43 @@ const Columns = [
 
 
 
-const ratioData = [{
-    asset: "LUSD",
-    liquidity: "12342133212.123412455324",
-    ratio: "223"
-},{
-    asset: "TUSD",
-    liquidity: "12342133212.123412455324",
-    ratio: "USDC"
-},{
-    asset: "BLA",
-    liquidity: "42342133212.123412455324",
-    ratio: "223"
-},];
 
 class StableMonitoring extends Component {
+    
   render() {
-    const { loading } = false;
+    const { loading } = poolsStore["liquidity_loading"];;
     const { json_time } = mainStore["risk_params_data"] || {};
+
+const stables = ["LUSD", "sUSD", "USDT", "FRAX", "DAI"];
+const tab = poolsStore["activeTabSymbol"];
+
+const ratioData = [];
+
+if(!loading){
+let liquidityData = poolsStore["liquidity_data"];
+for (let i = 0; i < liquidityData.length; i++) {
+    if (liquidityData[i]["debtToken"] === tab) {
+        liquidityData = liquidityData[i]["slippage"];
+        break
+    }
+  }
+for(let i = 0; i < stables.length; i++){
+    for(const entry in liquidityData){
+        if(entry == stables[i]){
+            ratioData.push({
+                asset: entry,
+                liquidity: liquidityData[entry][tab]["volume"],
+                ratio: "na",
+            })
+        }
+    }
+}
+}
     return (
       <div>
         <Box loading={loading} time={json_time}>
           {!loading && (
-            <DataTable defaultSortFieldId={2} defaultSortAsc={false} columns={Columns} data={ratioData} />
+            <DataTable defaultSortFieldId={2} columns={Columns} data={ratioData} />
           )}
         </Box>
       </div>
