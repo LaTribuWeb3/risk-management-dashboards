@@ -79,10 +79,9 @@ class RiskParametersSimulation extends Component {
       }
     }
 
-    const { json_time } = rawData["0"]["json_time"];
     return (
       <div>
-        <Box loading={loading} time={json_time}>
+        <Box loading={loading} time={rawData["0"]["json_time"]}>
           <hgroup>
             <h6>According to Worst Day Scenario</h6>
             <p className="description">
