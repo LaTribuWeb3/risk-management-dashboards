@@ -6,6 +6,7 @@ import { Component } from "react";
 import DataTable from "react-data-table-component";
 import LiquidationsGraph from "../components/LiquidationsGraph";
 import Token from "../components/Token";
+import alertStore from "../stores/alert.store";
 import { observer } from "mobx-react";
 import poolsStore from "../stores/pools.store";
 import { whaleFriendlyFormater } from "../components/WhaleFriendly";
@@ -196,6 +197,9 @@ class Accounts extends Component {
       }
     }
 
+
+
+
     // median function for next block
     function getMedian(arr) {
       const mid = Math.floor(arr.length / 2),
@@ -257,6 +261,29 @@ class Accounts extends Component {
         }
       }
     }
+
+    // update whales alert
+        const alerts = [];
+        for(let i = 0; i < tableData.length; i++){
+
+          for(let j = 0; j < tableData[i].whales["big_collateral"].length; j++){
+            if(Number(tableData[i].whales["big_collateral"][j].size) > Number(tableData[i].total_collateral / 10)){
+              alerts.push({
+                asset: tableData[i].key,
+                type: "Collateral",
+                size: tableData[i].whales["big_collateral"][j].size,
+              account: tableData[i].whales["big_collateral"][j].id              })
+            }
+          }
+        }
+        const type = alerts.length ? "review" : "healthy";
+        alertStore["whalesAlerts"] = {
+          title: "whales",
+          data: alerts,
+          type,
+          link: "#asset-distribution",
+        };
+        alertStore["walesAlerts_loading"] = false;
 
     // sort by size and auto expand first item
     if (tableData.length) {

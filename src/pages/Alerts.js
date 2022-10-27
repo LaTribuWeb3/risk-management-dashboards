@@ -1,10 +1,12 @@
 import AtRisk from "../components/AtRisk";
 import Box from "../components/Box";
+import BoxGrid from "../components/BoxGrid";
 import BoxRow from "../components/BoxRow";
 import { Component } from "react";
 import DataTable from "react-data-table-component";
 import alertStore from "../stores/alert.store";
 import { observer } from "mobx-react";
+import poolsStore from "../stores/pools.store";
 
 const AlertText = (props) => {
   const { type, hasAlerts } = props;
@@ -26,8 +28,9 @@ const AlertText = (props) => {
   }
   return <div style={style}>{props.children}</div>;
 };
-
 const Alert = (props) => {
+  const { alert } = props
+  const hasAlerts = alert.data.length || alert.negative
   return (
     <>
       <BoxRow>
@@ -105,13 +108,14 @@ class Alerts extends Component {
     const collateralAlerts = alertStore["collateralAlerts"];
     alerts.push(collateralAlerts);
 
-    //whales alerts
-    const whaleAlerts = alertStore["whaleAlerts"];
-    alerts.push(whaleAlerts);
+    // whales alerts
+        const whaleAlerts = alertStore["whalesAlerts"];
+        alerts.push(whaleAlerts);
+
     return (
       <div>
         <AtRisk />
-        {/* {window.APP_CONFIG.feature_flags.alerts && (
+        {window.APP_CONFIG.feature_flags.alerts && (
           <BoxGrid>
             <Box loading={poolsStore["totalLiquidations_loading"]}>
               <div>
@@ -121,7 +125,7 @@ class Alerts extends Component {
               </div>
             </Box>
           </BoxGrid>
-        )} */}
+        )}
       </div>
     );
   }
