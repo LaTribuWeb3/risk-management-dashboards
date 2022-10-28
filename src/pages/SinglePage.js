@@ -18,6 +18,8 @@ class SinglePage extends Component {
   render() {
     const { proViewShow } = mainStore;
     return (
+      <div>
+      
       <ScrollSpy
         offsetBottom={0}
         scrollThrottle={100}
@@ -175,7 +177,7 @@ class SinglePage extends Component {
               )}
             </section>
           )}
-        {poolsStore["activeTabSymbol"] != null &&
+        {poolsStore["activeTabSymbol"] != null && (poolsStore["activeTabSymbol"] == "DAI" || poolsStore["activeTabSymbol"] == "USDC") &&
           poolsStore["poolHasAccounts"] > 0 && (
             <section id="stablecoin-monitoring">
               {mainStore.proViewShow("stablecoin-monitoring") && (
@@ -183,7 +185,7 @@ class SinglePage extends Component {
                   <hgroup>
                     <h2>Stablecoin Monitoring</h2>
                     <p className="description">
-                      Monitoring stablecoins health: dex liquidity vs USDC for
+                      Monitoring stablecoins health: dex liquidity vs {poolsStore["activeTabSymbol"]} for
                       4% slippage and backing ratio where applicable.
                     </p>
                   </hgroup>
@@ -193,6 +195,7 @@ class SinglePage extends Component {
             </section>
           )}
       </ScrollSpy>
+      </div>
     );
   }
   // {

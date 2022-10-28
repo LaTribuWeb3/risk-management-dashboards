@@ -1,5 +1,6 @@
 import mainStore from "../stores/main.store";
 import { observer } from "mobx-react";
+import poolsStore from "../stores/pools.store";
 
 const pages = [
   "select-pool",
@@ -11,17 +12,26 @@ const pages = [
   "open-liquidations",
   "oracle-deviation",
   "liquidity",
-  "stablecoin-monitoring",
   // 'backstop',
   // 'assumptions',
   //'qualitative-anlysis',
 ];
+
+
 
 const humanPagesMap = {
   liquidity: "DEX Liquidity",
 };
 
 const Sidenav = (props) => {
+  if(poolsStore["activeTabSymbol"] == "DAI" ||poolsStore["activeTabSymbol"] == "USDC"){
+    if(!pages.includes("stablecoin-monitoring"))
+    pages.push("stablecoin-monitoring")
+  }
+  if(poolsStore["activeTabSymbol"] !== "DAI" && poolsStore["activeTabSymbol"] !== "USDC"){
+    if(pages.includes("stablecoin-monitoring"))
+    pages.pop()
+  }
   return (
     <div className="side-bar box-space">
       {/* <Header/> */}
