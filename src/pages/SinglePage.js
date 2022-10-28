@@ -8,6 +8,7 @@ import Overview from "./Overview";
 import RiskParameters from "./RiskParameters";
 import ScrollSpy from "react-ui-scrollspy";
 import Simulation from "./Simulation";
+import StableMonitoring from "./StableMonitoring";
 import Tabnav from "../layout/Tabnav";
 import mainStore from "../stores/main.store";
 import { observer } from "mobx-react";
@@ -17,6 +18,8 @@ class SinglePage extends Component {
   render() {
     const { proViewShow } = mainStore;
     return (
+      <div>
+      
       <ScrollSpy
         offsetBottom={0}
         scrollThrottle={100}
@@ -174,7 +177,25 @@ class SinglePage extends Component {
               )}
             </section>
           )}
+        {poolsStore["activeTabSymbol"] != null && (poolsStore["activeTabSymbol"] == "DAI" || poolsStore["activeTabSymbol"] == "USDC") &&
+          poolsStore["poolHasAccounts"] > 0 && (
+            <section id="stablecoin-monitoring">
+              {mainStore.proViewShow("stablecoin-monitoring") && (
+                <div>
+                  <hgroup>
+                    <h2>Stablecoin Monitoring</h2>
+                    <p className="description">
+                      Monitoring stablecoins health: dex liquidity vs {poolsStore["activeTabSymbol"]} for
+                      4% slippage and backing ratio where applicable.
+                    </p>
+                  </hgroup>
+                  <StableMonitoring />
+                </div>
+              )}
+            </section>
+          )}
       </ScrollSpy>
+      </div>
     );
   }
   // {

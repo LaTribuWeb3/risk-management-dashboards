@@ -28,7 +28,7 @@ const AtRisk = (props) => {
   return (
     <>
       <BoxGrid>
-        <Box time={alertStore.varLarJsonTime}>
+        <Box time={rawData["0"]["json_time"]}>
           <BoxRow>
             <h5 style={{ margin: 0 }}>Value at Risk on Worst Day Simulation</h5>
             <h5 style={{ margin: 0 }}>${alertStore.valueAtRisk}</h5>
@@ -42,7 +42,7 @@ const AtRisk = (props) => {
             </p>
           </hgroup>
         </Box>
-        <Box time={alertStore.varLarJsonTime}>
+        <Box time={rawData["0"]["json_time"]}>
           <BoxRow>
             <h5 style={{ margin: 0 }}>Liquidations on Worst Day Simulation</h5>
             <h5 style={{ margin: 0 }}>${alertStore.liquidationsAtRisk}</h5>

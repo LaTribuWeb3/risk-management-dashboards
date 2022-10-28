@@ -48,7 +48,6 @@ class PoolsStore {
     this["poolHasAccounts"] = 0;
     this["updated"] = 0;
     apiEndpoints.forEach(this.fetchData);
-    this["dex_liquidity_loading"] = false;
   };
 
   fetchData = (endpoint) => {

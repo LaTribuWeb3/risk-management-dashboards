@@ -4,8 +4,8 @@ import { Component } from "react";
 import DataTable from "react-data-table-component";
 import SimulationDisplay from "../components/simulationDisplay";
 import Token from "../components/Token";
-import mainStore from "../stores/main.store";
 import { observer } from "mobx-react";
+import poolsStore from "../stores/pools.store";
 import riskStore from "../stores/risk.store";
 
 const columns = [
@@ -34,11 +34,11 @@ const columns = [
 ];
 class Simulation extends Component {
   render() {
+    const rawData = Object.assign({}, poolsStore["risk_data"] || {});
     const { loading } = riskStore["currentRiskLoading"];
-    const { json_time } = mainStore["risk_params_data"] || {};
     return (
       <div>
-        <Box loading={loading} time={json_time}>
+        <Box loading={loading} time={rawData["0"]["json_time"]}>
           {/* <h6>Risk Parameters Recommendations</h6> */}
           {!loading && (
             <DataTable columns={columns} data={riskStore.currentRiskData} />
