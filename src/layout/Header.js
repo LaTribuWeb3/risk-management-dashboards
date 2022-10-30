@@ -30,12 +30,14 @@ class Header extends Component {
           }}
         >
           <img
+            alt=""
             style={{ height: "calc((var(--header-height) / 2) - 35px)" }}
             src={`/images/${color}-wordmark.png`}
           />
           {/* <img style={{ width: '0.7vw', margin: '0 2vw'}} src={`/logos/${color}-x.svg`}/> */}
           {logo && (
             <img
+              alt=""
               style={{ height: "calc((var(--header-height) / 2) - 45px)" }}
               src={`/logos/${logo}`}
             />
