@@ -56,7 +56,7 @@ class RiskParametersSimulation extends Component {
     for (const entry in rawData) {
       if (rawData[entry]["underlying"] === tab) {
         for (const point in rawData[entry]["current"]) {
-          if (rawData[entry]["current"][point] != null) {
+          if (rawData[entry]["current"][point] !== null) {
             data.push({
               key: point,
               total_liquidation:

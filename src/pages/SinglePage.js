@@ -32,7 +32,7 @@ class SinglePage extends Component {
             <span className="noaccounts">No pool selected</span>
           </div>
         )}
-        {poolsStore["activeTabSymbol"] != null &&
+        {poolsStore["activeTabSymbol"] !== null &&
           poolsStore["poolHasAccounts"] === 0 && (
             <div className="noaccountsdiv">
               <span className="noaccounts">
@@ -41,7 +41,7 @@ class SinglePage extends Component {
             </div>
           )}
 
-        {poolsStore["activeTabSymbol"] != null &&
+        {poolsStore["activeTabSymbol"] !== null &&
           poolsStore["poolHasAccounts"] > 0 && (
             <section id="system-status">
               {mainStore.proViewShow("system-status") && (
@@ -53,7 +53,7 @@ class SinglePage extends Component {
             </section>
           )}
 
-        {poolsStore["activeTabSymbol"] != null &&
+        {poolsStore["activeTabSymbol"] !== null &&
           poolsStore["poolHasAccounts"] > 0 && (
             <section id="overview">
               {mainStore.proViewShow("overview") && (
@@ -67,7 +67,7 @@ class SinglePage extends Component {
               )}
             </section>
           )}
-        {poolsStore["activeTabSymbol"] != null &&
+        {poolsStore["activeTabSymbol"] !== null &&
           poolsStore["poolHasAccounts"] > 0 && (
             <section id="collateral-factors">
               {mainStore.proViewShow("collateral-factors") && (
@@ -79,7 +79,7 @@ class SinglePage extends Component {
             </section>
           )}
 
-        {poolsStore["activeTabSymbol"] != null &&
+        {poolsStore["activeTabSymbol"] !== null &&
           poolsStore["poolHasAccounts"] > 0 && (
             <section id="sandbox">
               {mainStore.proViewShow("sandbox") && (
@@ -97,7 +97,7 @@ class SinglePage extends Component {
             </section>
           )}
 
-        {poolsStore["activeTabSymbol"] != null &&
+        {poolsStore["activeTabSymbol"] !== null &&
           poolsStore["poolHasAccounts"] > 0 && (
             <section id="asset-distribution">
               {mainStore.proViewShow("asset-distribution") && (
@@ -119,7 +119,7 @@ class SinglePage extends Component {
             </section>
           )}
 
-        {poolsStore["activeTabSymbol"] != null &&
+        {poolsStore["activeTabSymbol"] !== null &&
           poolsStore["poolHasAccounts"] > 0 && (
             <section id="open-liquidations">
               {mainStore.proViewShow("open-liquidations") && (
@@ -134,7 +134,7 @@ class SinglePage extends Component {
             </section>
           )}
 
-        {poolsStore["activeTabSymbol"] != null &&
+        {poolsStore["activeTabSymbol"] !== null &&
           poolsStore["poolHasAccounts"] > 0 && (
             <section id="oracle-deviation">
               {mainStore.proViewShow("oracle-deviation") && (
@@ -156,7 +156,7 @@ class SinglePage extends Component {
             </section>
           )}
 
-        {poolsStore["activeTabSymbol"] != null &&
+        {poolsStore["activeTabSymbol"] !== null &&
           poolsStore["poolHasAccounts"] > 0 && (
             <section id="liquidity">
               {mainStore.proViewShow("liquidity") && (
@@ -176,7 +176,7 @@ class SinglePage extends Component {
               )}
             </section>
           )}
-        {poolsStore["activeTabSymbol"] != null && (poolsStore["activeTabSymbol"] === "DAI" || poolsStore["activeTabSymbol"] === "USDC") &&
+        {poolsStore["activeTabSymbol"] !== null && (poolsStore["activeTabSymbol"] === "DAI" || poolsStore["activeTabSymbol"] === "USDC") &&
           poolsStore["poolHasAccounts"] > 0 && (
             <section id="stablecoin-monitoring">
               {mainStore.proViewShow("stablecoin-monitoring") && (

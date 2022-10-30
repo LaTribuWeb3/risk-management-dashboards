@@ -27,9 +27,6 @@ export const whaleFriendlyFormater = (num) => {
 };
 
 class WhaleFriendly extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   render() {
     let wfn = whaleFriendlyFormater(this.props.num);

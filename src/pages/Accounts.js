@@ -108,7 +108,7 @@ class Accounts extends Component {
           );
 
           // if token amount is non-null,
-          if (tokenAmount != 0) {
+          if (tokenAmount !== 0) {
             // create token entry or
             if (tokenBalances[tokenSymbol] == undefined) {
               tokenBalances[tokenSymbol] = tokenAmount;

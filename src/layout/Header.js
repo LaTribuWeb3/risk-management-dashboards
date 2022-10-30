@@ -3,9 +3,6 @@ import mainStore from "../stores/main.store";
 import { observer } from "mobx-react";
 
 class Header extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   render() {
     const color = mainStore.blackMode ? "white" : "black";

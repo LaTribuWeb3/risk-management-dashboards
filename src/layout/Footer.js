@@ -3,9 +3,6 @@ import { observer } from "mobx-react";
 import mainStore from "../stores/main.store";
 
 class Footer extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   render() {
     const color = mainStore.blackMode ? "#edf0f3" : "black";

@@ -57,7 +57,7 @@ class RiskParametersUtilization extends Component {
     let poolTokens = selectedPool["allowedTokens"].filter(
       (entry) =>
         collaterals.includes(tokenName(entry.tokenAddress)) &&
-        entry.tokenAddress != underlying
+        entry.tokenAddress !== underlying
     );
     poolTokens = poolTokens.map((e) => ({
       asset: tokenName(e.tokenAddress),
