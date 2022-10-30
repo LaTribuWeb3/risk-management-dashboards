@@ -53,7 +53,6 @@ class PoolsStore {
   fetchData = (endpoint) => {
     this[endpoint + "_loading"] = true;
     this[endpoint + "_data"] = null;
-    const apiIsV2 = this.apiUrl.indexOf("github") > -1;
     this[endpoint + "_request"] = this.apiVersionPromise
       .then((version) => {
         let url;

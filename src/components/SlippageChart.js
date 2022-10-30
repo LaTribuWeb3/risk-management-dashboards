@@ -14,16 +14,8 @@ import {
 
 import { COLORS } from "../constants";
 import { Component } from "react";
-import mainStore from "../stores/main.store";
 import { observer } from "mobx-react";
 import poolsStore from "../stores/pools.store";
-
-const truncate = {
-  maxWidth: "200px",
-  whiteSpace: "nowrap",
-  overflow: "hidden",
-  textOverflow: "ellipsis",
-};
 
 const expendedBoxStyle = {
   margin: "30px",
@@ -34,7 +26,7 @@ const expendedBoxStyle = {
 
 const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
-    const { name, value, liquidation } = Object.assign({}, payload[0].payload);
+    const { value, liquidation } = Object.assign({}, payload[0].payload);
     return (
       <div className="tooltip-container">
         <div>Liquidity Depth: {whaleFriendlyFormater(value)}</div>
@@ -69,8 +61,6 @@ class SlippageChart extends Component {
     if (dataMax < 1) {
       dataMax = 1000;
     }
-
-    const color = mainStore.blackMode ? "white" : "black";
 
     const poolsData = Object.assign([], poolsStore["pools_data"] || []);
     const tab = poolsStore["tab"];

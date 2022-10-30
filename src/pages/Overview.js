@@ -9,19 +9,6 @@ import mainStore from "../stores/main.store";
 import { observer } from "mobx-react";
 import poolsStore from "../stores/pools.store";
 
-const txtMap = {
-  total_debt: "Total Debt",
-  top_1_debt: "Debt of Top 1 User",
-  top_10_debt: "Debt of Top 10 Users",
-  median_debt: "Median Debt per User",
-  total_collateral: "Total Collateral",
-  top_1_collateral: "Collateral of Top 1 User",
-  top_10_collateral: "Collateral of Top 10 Users",
-  median_collateral: "Median Collateral per User",
-};
-
-const humanTxt = (txt) => txtMap[txt];
-
 class Overview extends Component {
   render() {
     // median function

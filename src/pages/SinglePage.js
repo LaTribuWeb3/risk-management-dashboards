@@ -16,7 +16,6 @@ import poolsStore from "../stores/pools.store";
 
 class SinglePage extends Component {
   render() {
-    const { proViewShow } = mainStore;
     return (
       <div>
       
