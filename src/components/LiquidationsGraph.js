@@ -76,7 +76,7 @@ class LiquidationsGraph extends Component {
     const dataSet = Object.values(graphData).sort((a, b) => a.x - b.x);
     const dataSetItemProps = Object.keys(dataSet[0]).filter((p) => p != "x");
     let currentPrice = Math.max(...dataSet.map((_) => _.x));
-    if (this.props.data.key == poolsStore["activeTabSymbol"]) {
+    if (this.props.data.key === poolsStore["activeTabSymbol"]) {
       currentPrice = Math.min(...dataSet.map((_) => _.x));
     }
     const biggestValue = dataSet.map((o) => o.x).sort((a, b) => b - a)[0];

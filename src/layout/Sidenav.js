@@ -24,7 +24,7 @@ const humanPagesMap = {
 };
 
 const Sidenav = (props) => {
-  if(poolsStore["activeTabSymbol"] == "DAI" ||poolsStore["activeTabSymbol"] == "USDC"){
+  if(poolsStore["activeTabSymbol"] === "DAI" ||poolsStore["activeTabSymbol"] === "USDC"){
     if(!pages.includes("stablecoin-monitoring"))
     pages.push("stablecoin-monitoring")
   }

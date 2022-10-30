@@ -83,7 +83,7 @@ class Liquidity extends Component {
     const riskData = Object.assign({}, poolsStore["risk_data"] || {});
     for (let i = 0; i < liquidityArray.length; i++) {
       for (const entry in riskData) {
-        if (riskData[entry]["underlying"] == symbol) {
+        if (riskData[entry]["underlying"] === symbol) {
           if (riskData[entry]["current"][liquidityArray[i].name] != undefined) {
             liquidityArray[i]["liquidation"] =
               riskData[entry]["current"][liquidityArray[i].name][
