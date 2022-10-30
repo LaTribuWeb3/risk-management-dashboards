@@ -23,7 +23,8 @@ class Accounts extends Component {
     };
 
     const toggleTopTen = (row, name) => {
-      if (row[name] == undefined) {
+      debugger
+      if (row[name] === undefined) {
         row[name] = true;
       } else {
         row[name] = !row[name];
@@ -110,7 +111,7 @@ class Accounts extends Component {
           // if token amount is non-null,
           if (tokenAmount !== 0) {
             // create token entry or
-            if (tokenBalances[tokenSymbol] == undefined) {
+            if (tokenBalances[tokenSymbol] === undefined) {
               tokenBalances[tokenSymbol] = tokenAmount;
             }
             ///increment total token collateral value
@@ -170,7 +171,7 @@ class Accounts extends Component {
           whaleCreditAccounts[i]["tokenBalances"][j]["amount"]
         );
         if (tokenAmount >= 0) {
-          if (userArrays[tokenSymbol] == null) {
+          if (!userArrays[tokenSymbol]) {
             userArrays[tokenSymbol] = [];
             userArrays[tokenSymbol].push({
               id: whaleCreditAccounts[i]["address"],
