@@ -33,7 +33,8 @@
     "build-aurigami": "REACT_APP_CONFIG=aurigami && npm run build",
     "build-nervos": "REACT_APP_CONFIG=nervos && npm run build",
     "build-vesta": "REACT_APP_CONFIG=vesta && npm run build",
-    "build-gearbox": "REACT_APP_CONFIG=gearbox && npm run build",
+    "build-gearbox": "REACT_APP_CONFIG=gearbox && react-app-rewired build && ./generate-static.sh",
+    "deploy-gearbox": "node tomlGen.js --name gearbox-${GITHUB_REF##*/} && wrangler publish",
     "test": "react-app-rewired test",
     "eject": "react-app-rewired eject",
     "deploy": "npm run build-gearbox && scp -r ./build/* $DEPLOY_SERVER:/app/gearbox/dashboard"
