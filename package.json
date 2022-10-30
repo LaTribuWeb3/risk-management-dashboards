@@ -26,7 +26,8 @@
     "styled-components": "^5.3.5",
     "toml": "^3.0.0",
     "web-vitals": "^2.1.4",
-    "web3-utils": "^1.7.3"
+    "web3-utils": "^1.7.3",
+    "wrangler": "^2.1.13"
   },
   "scripts": {
     "start": "react-app-rewired start",
