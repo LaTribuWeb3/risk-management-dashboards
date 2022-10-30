@@ -108,7 +108,7 @@ class SlippageChart extends Component {
           }}
         >
           <hgroup>
-            <h1></h1>
+            <div></div>
             <p>
               Max Liquidation in a single transaction for up to {percent}%
               slippage versus the liquidation for the worst simulated day.
