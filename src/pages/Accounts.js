@@ -230,7 +230,19 @@ class Accounts extends Component {
         }
       }
     }
-    console.log('collateralData', collateralData)
+    /// get underlying price in USD
+    const tokenData = Object.assign([], poolsStore["tokens_data"] || []);
+    const underlying = poolsStore["activeTabSymbol"]
+    let underlyingPrice = 0
+    for (const token in tokenData) {
+      if (tokenData[token].symbol.toLowerCase() === underlying.toLowerCase()) {
+        underlyingPrice = tokenData[token]["priceUSD18Decimals"] / 1e18
+      }
+    }
+
+
+
+
     // include graph data in tableData
     let apiGraphData = Object.assign(poolsStore["liquidations_data"]);
     apiGraphData = apiGraphData.filter(
@@ -243,9 +255,16 @@ class Accounts extends Component {
       graphData[data] = {};
       let graphArray = {};
       for (const point in apiGraphData[data]) {
-        graphArray[apiGraphData[data][point]["priceUsd"]] =
+        if(data.toLowerCase() === poolsStore["activeTabSymbol"].toLowerCase()){
+          
+        graphArray[Number(apiGraphData[data][point]["priceUsd"])/underlyingPrice] =
           apiGraphData[data][point]["normalizedTotalLiquidationUsd"];
       }
+      else{         
+        graphArray[Number(apiGraphData[data][point]["priceUsd"])/underlyingPrice] =
+          apiGraphData[data][point]["normalizedTotalLiquidationUsd"] / underlyingPrice;}
+      
+    }
       graphData[data] = graphArray;
       graphDataArray.push(graphData);
     }
