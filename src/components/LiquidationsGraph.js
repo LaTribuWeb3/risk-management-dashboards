@@ -53,8 +53,6 @@ class LiquidationsGraph extends Component {
       const token = Object.keys(this.props.data.graph_data)["0"]
       const underlying = poolsStore["activeTabSymbol"]
       let symbol = null
-      console.log('token.toLowerCase()',token.toLowerCase())
-      console.log('underlying.toLowerCase()',underlying.toLowerCase())
       if(token.toLowerCase() === underlying.toLowerCase()){
         symbol = "$"
       }
