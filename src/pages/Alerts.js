@@ -9,7 +9,7 @@ import { observer } from "mobx-react";
 import poolsStore from "../stores/pools.store";
 
 const AlertText = (props) => {
-  const { type, hasAlerts } = props;
+  const { type } = props;
   const style = {
     display: "inline-block",
     minWidth: "26px",

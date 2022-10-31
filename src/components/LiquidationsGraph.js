@@ -1,20 +1,21 @@
-import { Component } from "react";
-import { observer } from "mobx-react";
 import {
-  AreaChart,
   Area,
-  XAxis,
-  YAxis,
-  Tooltip,
+  AreaChart,
   ReferenceLine,
   ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
 } from "recharts";
-import { COLORS } from "../constants";
 import {
   WhaleFriendlyAxisTick,
   whaleFriendlyFormater,
 } from "../components/WhaleFriendly";
+
 import BoxRow from "../components/BoxRow";
+import { COLORS } from "../constants";
+import { Component } from "react";
+import { observer } from "mobx-react";
 import poolsStore from "../stores/pools.store";
 
 const CustomTooltip = ({ active, payload, label }) => {
@@ -60,75 +61,79 @@ const CustomTooltip = ({ active, payload, label }) => {
 
 class LiquidationsGraph extends Component {
   render() {
-    const graphData = {};
-    const graphKeys = {};
-    Object.entries(this.props.data.graph_data).forEach(([k, v]) => {
-      Object.entries(v).forEach(([x, y]) => {
-        y = parseFloat(y).toFixed(2);
-        x = parseFloat(x).toFixed(2);
-        graphData[x] = graphData[x] || {};
-        graphData[x][k] = y;
-        graphData[x].x = parseFloat(x);
-        graphKeys[k] = k;
+    if (this.props.data.graph_data) {
+      const graphData = {};
+      const graphKeys = {};
+      Object.entries(this.props.data.graph_data).forEach(([k, v]) => {
+        Object.entries(v).forEach(([x, y]) => {
+          y = parseFloat(y).toFixed(2);
+          x = parseFloat(x).toFixed(2);
+          graphData[x] = graphData[x] || {};
+          graphData[x][k] = y;
+          graphData[x].x = parseFloat(x);
+          graphKeys[k] = k;
+        });
       });
-    });
-    const dataKeys = Object.keys(graphKeys);
-    const dataSet = Object.values(graphData).sort((a, b) => a.x - b.x);
-    const dataSetItemProps = Object.keys(dataSet[0]).filter((p) => p != "x");
-    let currentPrice = Math.max(...dataSet.map((_) => _.x));
-    if (this.props.data.key == poolsStore["activeTabSymbol"]) {
-      currentPrice = Math.min(...dataSet.map((_) => _.x));
-    }
-    const biggestValue = dataSet.map((o) => o.x).sort((a, b) => b - a)[0];
-    if (biggestValue < currentPrice) {
-      const item = { x: currentPrice };
-      dataSetItemProps.forEach((p) => (item[p] = 0));
-      dataSet.push(item);
-    }
-    const DoubleCurrentPrice = currentPrice * 2;
-    if (biggestValue < DoubleCurrentPrice) {
-      const item = { x: DoubleCurrentPrice };
-      dataSetItemProps.forEach((p) => (item[p] = 0));
-      dataSet.push(item);
-    }
-    const dataMax = Math.max(biggestValue, DoubleCurrentPrice);
-    return (
-      <div style={{ width: "70vw", height: "30vh" }}>
-        <ResponsiveContainer>
-          <AreaChart data={dataSet}>
-            {/* <CartesianGrid strokeDasharray="3 3" /> */}
-            {currentPrice && (
-              <ReferenceLine
-                ifOverflow="extendDomain"
-                x={currentPrice}
-                label={`current`}
-                stroke="var(--primary"
-                strokeWidth="1"
+      const dataKeys = Object.keys(graphKeys);
+      const dataSet = Object.values(graphData).sort((a, b) => a.x - b.x);
+      const dataSetItemProps = Object.keys(dataSet[0]).filter((p) => p !== "x");
+      let currentPrice = Math.max(...dataSet.map((_) => _.x));
+      if (this.props.data.key === poolsStore["activeTabSymbol"]) {
+        currentPrice = Math.min(...dataSet.map((_) => _.x));
+      }
+      const biggestValue = dataSet.map((o) => o.x).sort((a, b) => b - a)[0];
+      if (biggestValue < currentPrice) {
+        const item = { x: currentPrice };
+        dataSetItemProps.forEach((p) => (item[p] = 0));
+        dataSet.push(item);
+      }
+      const DoubleCurrentPrice = currentPrice * 2;
+      if (biggestValue < DoubleCurrentPrice) {
+        const item = { x: DoubleCurrentPrice };
+        dataSetItemProps.forEach((p) => (item[p] = 0));
+        dataSet.push(item);
+      }
+      const dataMax = Math.max(biggestValue, DoubleCurrentPrice);
+      return (
+        <div style={{ width: "70vw", height: "30vh" }}>
+          <ResponsiveContainer>
+            <AreaChart data={dataSet}>
+              {/* <CartesianGrid strokeDasharray="3 3" /> */}
+              {currentPrice && (
+                <ReferenceLine
+                  ifOverflow="extendDomain"
+                  x={currentPrice}
+                  label={`current`}
+                  stroke="var(--primary"
+                  strokeWidth="1"
+                />
+              )}
+              {/* <ReferenceLine y={650000} label="Max" stroke="red" /> */}
+              <XAxis
+                tickCount={55}
+                domain={[0, dataMax]}
+                type="number"
+                dataKey="x"
               />
-            )}
-            {/* <ReferenceLine y={650000} label="Max" stroke="red" /> */}
-            <XAxis
-              tickCount={55}
-              domain={[0, dataMax]}
-              type="number"
-              dataKey="x"
-            />
-            <YAxis tick={<WhaleFriendlyAxisTick />} />
-            <Tooltip content={CustomTooltip} />
-            {dataKeys.map((k, i) => (
-              <Area
-                key={i}
-                type="monotone"
-                dataKey={k}
-                stackId="1"
-                stroke={COLORS[i]}
-                fill={COLORS[i]}
-              />
-            ))}
-          </AreaChart>
-        </ResponsiveContainer>
-      </div>
-    );
+              <YAxis tick={<WhaleFriendlyAxisTick />} />
+              <Tooltip content={CustomTooltip} />
+              {dataKeys.map((k, i) => (
+                <Area
+                  key={i}
+                  type="monotone"
+                  dataKey={k}
+                  stackId="1"
+                  stroke={COLORS[i]}
+                  fill={COLORS[i]}
+                />
+              ))}
+            </AreaChart>
+          </ResponsiveContainer>
+        </div>
+      );
+    } else {
+      return <div>No graph data - there is no token holder in the pool.</div>;
+    }
   }
 }
 

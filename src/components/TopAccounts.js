@@ -21,10 +21,8 @@ class Top10Accounts extends Component {
     const { props } = this;
     let { accounts, value } = props;
     accounts.sort((a, b) => b["size"] - a["size"]);
-    let hasWhales = false;
     for (const account of accounts) {
       if (!!account.whale_flag) {
-        hasWhales = true;
         break;
       }
     }

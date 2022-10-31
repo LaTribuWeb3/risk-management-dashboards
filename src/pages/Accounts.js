@@ -23,7 +23,8 @@ class Accounts extends Component {
     };
 
     const toggleTopTen = (row, name) => {
-      if (row[name] == undefined) {
+      debugger;
+      if (row[name] === undefined) {
         row[name] = true;
       } else {
         row[name] = !row[name];
@@ -108,9 +109,9 @@ class Accounts extends Component {
           );
 
           // if token amount is non-null,
-          if (tokenAmount != 0) {
+          if (tokenAmount !== 0) {
             // create token entry or
-            if (tokenBalances[tokenSymbol] == undefined) {
+            if (tokenBalances[tokenSymbol] === undefined) {
               tokenBalances[tokenSymbol] = tokenAmount;
             }
             ///increment total token collateral value
@@ -121,9 +122,9 @@ class Accounts extends Component {
             }
             // arrays of collateral token
             const tokenIndex = collateralData.findIndex(
-              (tk) => tk.key == tokenSymbol
+              (tk) => tk.key === tokenSymbol
             );
-            if (tokenIndex == -1) {
+            if (tokenIndex === -1) {
               collateralData.push({
                 key: tokenSymbol,
                 balances: [tokenAmount],
@@ -170,7 +171,7 @@ class Accounts extends Component {
           whaleCreditAccounts[i]["tokenBalances"][j]["amount"]
         );
         if (tokenAmount >= 0) {
-          if (userArrays[tokenSymbol] == null) {
+          if (!userArrays[tokenSymbol]) {
             userArrays[tokenSymbol] = [];
             userArrays[tokenSymbol].push({
               id: whaleCreditAccounts[i]["address"],
@@ -209,7 +210,7 @@ class Accounts extends Component {
     //update median, top 1 and top 10 collateral
     for (let i = 0; i < collateralData.length; i++) {
       const tokenIndex = tableData.findIndex(
-        (tk) => tk.key == collateralData[i]["key"]
+        (tk) => tk.key === collateralData[i]["key"]
       );
       let median = getMedian(collateralData[i]["balances"]);
       tableData[tokenIndex]["median_collateral"] = median.toString();
@@ -233,7 +234,7 @@ class Accounts extends Component {
     // include graph data in tableData
     let apiGraphData = Object.assign(poolsStore["liquidations_data"]);
     apiGraphData = apiGraphData.filter(
-      (entry) => entry.poolAddress == poolsStore["tab"]
+      (entry) => entry.poolAddress === poolsStore["tab"]
     );
     apiGraphData = apiGraphData[0].liquidations;
     let graphDataArray = [];

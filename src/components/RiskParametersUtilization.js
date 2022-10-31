@@ -40,7 +40,7 @@ class RiskParametersUtilization extends Component {
     const { loading } =
       poolsStore["pools_loading"] ||
       poolsStore["risk_loading"] ||
-      poolsStore["tab"] == undefined;
+      !poolsStore["tab"];
     const collaterals = poolsStore["poolCollaterals"];
     const collateralsValue = poolsStore["collateralValues"];
     const riskParameters = poolsStore["risk_data"];
@@ -49,7 +49,7 @@ class RiskParametersUtilization extends Component {
     const selectedPool = poolData.find((p) => p.address === poolsStore["tab"]);
     const underlying = selectedPool["underlying"];
     const riskParametersForPool = riskParameters.find(
-      (_) => _.underlying == tokenName(underlying)
+      (_) => _.underlying === tokenName(underlying)
     );
     const jsonTime = Math.floor(
       selectedPool["UpdateData"]["lastUpdate"] / 1000
@@ -57,7 +57,7 @@ class RiskParametersUtilization extends Component {
     let poolTokens = selectedPool["allowedTokens"].filter(
       (entry) =>
         collaterals.includes(tokenName(entry.tokenAddress)) &&
-        entry.tokenAddress != underlying
+        entry.tokenAddress !== underlying
     );
     poolTokens = poolTokens.map((e) => ({
       asset: tokenName(e.tokenAddress),

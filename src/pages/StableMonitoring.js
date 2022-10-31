@@ -48,7 +48,7 @@ class StableMonitoring extends Component {
       }
       for (let i = 0; i < stables.length; i++) {
         for (const entry in liquidityData) {
-          if (entry == stables[i]) {
+          if (entry === stables[i]) {
             ratioData.push({
               asset: entry,
               liquidity: liquidityData[entry][tab]["volume"],
