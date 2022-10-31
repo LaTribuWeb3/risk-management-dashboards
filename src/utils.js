@@ -29,7 +29,7 @@ export const tokenName = (address) => {
 };
 
 export const tokenPrice = (symbol, amount) => {
-  if (amount == 0) {
+  if (amount === 0) {
     return 0;
   }
   const tokenData = Object.assign([], poolsStore["tokens_data"] || []);
@@ -66,7 +66,7 @@ export const getRecommendedLT = (
   underlyingName,
   riskParameters
 ) => {
-  if (riskParameters == null) {
+  if (!riskParameters) {
     return "No Pool Data";
   }
   const shortStableLfs = [1, 1.5, 2];
@@ -85,7 +85,7 @@ export const getRecommendedLT = (
 
   /// select token data for tName
   let tokenRiskData = riskParameters[collateralName + "-" + underlyingName];
-  if (tokenRiskData == undefined) {
+  if (!tokenRiskData) {
     console.log(
       "cannot find token -- " + collateralName + " -- in risk parameters"
     );
@@ -96,8 +96,8 @@ export const getRecommendedLT = (
   tokenRiskData = Object.values(tokenRiskData)[0];
   const formattedData = [];
   tokenRiskData.forEach((t) => {
-    const fData = formattedData.find((f) => f.dc == t.dc);
-    if (fData == undefined) {
+    const fData = formattedData.find((f) => f.dc === t.dc);
+    if (!fData) {
       formattedData.push({
         dc: t.dc,
         values: [
@@ -154,7 +154,7 @@ export const initialSandboxValue = (
   value
 ) => {
   let tokenRiskData = riskParameters[token + "-" + underlying];
-  if (tokenRiskData == undefined) {
+  if (!tokenRiskData) {
     console.log("cannot find token -- " + token + " -- in risk parameters");
     return 0;
   }
@@ -163,8 +163,8 @@ export const initialSandboxValue = (
   tokenRiskData = Object.values(tokenRiskData)[0];
   const formattedData = [];
   tokenRiskData.forEach((t) => {
-    const fData = formattedData.find((f) => f.dc == t.dc);
-    if (fData == undefined) {
+    const fData = formattedData.find((f) => f.dc === t.dc);
+    if (!fData) {
       formattedData.push({
         dc: t.dc,
         values: [
@@ -208,7 +208,7 @@ export const initialSandboxValue = (
 
 export const sandboxSwitch = (row, field, up) => {
   let tokenRiskData = row.riskParameters[row.asset + "-" + row.underlying];
-  if (tokenRiskData == undefined) {
+  if (!tokenRiskData) {
     console.log("cannot find token -- " + row.asset + " -- in risk parameters");
     return "Not Found";
   }
@@ -217,8 +217,8 @@ export const sandboxSwitch = (row, field, up) => {
   tokenRiskData = Object.values(tokenRiskData)[0];
   const formattedData = [];
   tokenRiskData.forEach((t) => {
-    const fData = formattedData.find((f) => f.dc == t.dc);
-    if (fData == undefined) {
+    const fData = formattedData.find((f) => f.dc === t.dc);
+    if (!fData) {
       formattedData.push({
         dc: t.dc,
         values: [
@@ -256,8 +256,8 @@ export const sandboxSwitch = (row, field, up) => {
     }
   }
   const index = formattedData.map((e) => e.dc).indexOf(selectedFData.dc);
-  if (up == "1") {
-    if (formattedData[index + 1] == undefined) {
+  if (up === "1") {
+    if (!formattedData[index + 1]) {
       console.log("out of the simulation bounds");
     } else {
       row["sandboxValue"] = formattedData[index + 1].dc;
@@ -268,8 +268,8 @@ export const sandboxSwitch = (row, field, up) => {
         row.riskParameters
       );
     }
-  } else if (up == "0") {
-    if (formattedData[index - 1] == undefined) {
+  } else if (up === "0") {
+    if (!formattedData[index - 1]) {
       console.log("out of the simulation bounds");
     } else {
       row["sandboxValue"] = formattedData[index - 1].dc;

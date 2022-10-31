@@ -27,10 +27,6 @@ export const whaleFriendlyFormater = (num) => {
 };
 
 class WhaleFriendly extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     let wfn = whaleFriendlyFormater(this.props.num);
     return <Fragment>{wfn}</Fragment>;
@@ -39,7 +35,7 @@ class WhaleFriendly extends Component {
 
 export class WhaleFriendlyAxisTick extends PureComponent {
   render() {
-    const { x, y, stroke, payload } = this.props;
+    const { x, y, payload } = this.props;
 
     return (
       <g transform={`translate(${x},${y})`}>

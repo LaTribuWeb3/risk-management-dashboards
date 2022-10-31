@@ -9,19 +9,6 @@ import mainStore from "../stores/main.store";
 import { observer } from "mobx-react";
 import poolsStore from "../stores/pools.store";
 
-const txtMap = {
-  total_debt: "Total Debt",
-  top_1_debt: "Debt of Top 1 User",
-  top_10_debt: "Debt of Top 10 Users",
-  median_debt: "Median Debt per User",
-  total_collateral: "Total Collateral",
-  top_1_collateral: "Collateral of Top 1 User",
-  top_10_collateral: "Collateral of Top 10 Users",
-  median_collateral: "Median Collateral per User",
-};
-
-const humanTxt = (txt) => txtMap[txt];
-
 class Overview extends Component {
   render() {
     // median function
@@ -55,7 +42,7 @@ class Overview extends Component {
         const tokenAddress = creditAccountsForPool[i].tokenBalances[j].address;
         const amountWDecimals =
           creditAccountsForPool[i].tokenBalances[j].amount;
-        const token = tokenData.filter((tk) => tk.address == tokenAddress);
+        const token = tokenData.filter((tk) => tk.address === tokenAddress);
         const tokenDecimals = token[0]["decimals"];
         const tokenPrice = BigNumber(token[0]["priceUSD18Decimals"])
           .div(1e18)
@@ -134,7 +121,7 @@ class Overview extends Component {
       totalDebt
     );
     const poolUnderlying = tokenData.filter(
-      (tk) => tk.address == selectedPool["underlying"]
+      (tk) => tk.address === selectedPool["underlying"]
     );
     const underlyingPrice = BigNumber(
       poolUnderlying[0]["priceUSD18Decimals"]
@@ -207,7 +194,7 @@ class Overview extends Component {
         const tokenAddress = creditAccountsForPool[i].tokenBalances[j].address;
         const amount = creditAccountsForPool[i].tokenBalances[j].amount;
         const indexedToken = tokenData.filter(
-          (tk) => tk.address == tokenAddress
+          (tk) => tk.address === tokenAddress
         )[0];
 
         let valToAddBN = BigNumber(amount);
