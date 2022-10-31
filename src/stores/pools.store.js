@@ -33,7 +33,7 @@ class PoolsStore {
   };
 
   apiUrl =
-    "https://raw.githubusercontent.com/Risk-DAO/simulation-results/main/gearbox";
+    "https://raw.githubusercontent.com/Risk-DAO/simulation-results/main/gearbox/main";
   poolsData = {};
 
   init = () => {
