@@ -191,8 +191,8 @@ class Accounts extends Component {
     // update big_collateral array
     for (let i = 0; i < tableData.length; i++) {
       let array = userArrays[tableData[i]["key"]];
-      array.sort((a, b) => b - a);
-      array = array.slice(0, 11);
+      array.sort((a, b) => b.size - a.size);
+      array = array.slice(0, 10);
       for (let j = 0; j < array.length; j++) {
         tableData[i]["whales"]["big_collateral"].push(array[j]);
       }
