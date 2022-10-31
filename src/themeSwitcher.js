@@ -87,7 +87,8 @@ const themeSwitcher = {
     document.querySelector("html").setAttribute("data-theme", this.scheme);
     const buttons = document.querySelectorAll(this.buttonsTarget);
     buttons.forEach((button) => {
-      const text = this.scheme === "dark" ? this.change.dark : this.change.light;
+      const text =
+        this.scheme === "dark" ? this.change.dark : this.change.light;
       button.innerHTML = text;
       button.setAttribute("aria-label", text.replace(/<[^>]*>?/gm, ""));
     });

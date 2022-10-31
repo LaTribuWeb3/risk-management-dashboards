@@ -17,20 +17,23 @@ const pages = [
   //'qualitative-anlysis',
 ];
 
-
-
 const humanPagesMap = {
   liquidity: "DEX Liquidity",
 };
 
 const Sidenav = (props) => {
-  if(poolsStore["activeTabSymbol"] === "DAI" ||poolsStore["activeTabSymbol"] === "USDC"){
-    if(!pages.includes("stablecoin-monitoring"))
-    pages.push("stablecoin-monitoring")
+  if (
+    poolsStore["activeTabSymbol"] === "DAI" ||
+    poolsStore["activeTabSymbol"] === "USDC"
+  ) {
+    if (!pages.includes("stablecoin-monitoring"))
+      pages.push("stablecoin-monitoring");
   }
-  if(poolsStore["activeTabSymbol"] !== "DAI" && poolsStore["activeTabSymbol"] !== "USDC"){
-    if(pages.includes("stablecoin-monitoring"))
-    pages.pop()
+  if (
+    poolsStore["activeTabSymbol"] !== "DAI" &&
+    poolsStore["activeTabSymbol"] !== "USDC"
+  ) {
+    if (pages.includes("stablecoin-monitoring")) pages.pop();
   }
   return (
     <div className="side-bar box-space">

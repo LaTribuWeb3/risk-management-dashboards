@@ -23,7 +23,7 @@ class Accounts extends Component {
     };
 
     const toggleTopTen = (row, name) => {
-      debugger
+      debugger;
       if (row[name] === undefined) {
         row[name] = true;
       } else {

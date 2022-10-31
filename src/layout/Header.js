@@ -3,7 +3,6 @@ import mainStore from "../stores/main.store";
 import { observer } from "mobx-react";
 
 class Header extends Component {
-
   render() {
     const color = mainStore.blackMode ? "white" : "black";
     const logo = mainStore.blackMode

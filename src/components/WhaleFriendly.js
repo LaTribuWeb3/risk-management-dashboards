@@ -27,7 +27,6 @@ export const whaleFriendlyFormater = (num) => {
 };
 
 class WhaleFriendly extends Component {
-
   render() {
     let wfn = whaleFriendlyFormater(this.props.num);
     return <Fragment>{wfn}</Fragment>;

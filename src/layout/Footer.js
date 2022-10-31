@@ -3,7 +3,6 @@ import { observer } from "mobx-react";
 import mainStore from "../stores/main.store";
 
 class Footer extends Component {
-
   render() {
     const color = mainStore.blackMode ? "#edf0f3" : "black";
     return (
@@ -29,7 +28,11 @@ class Footer extends Component {
             }}
           >
             <div>
-              <a href="https://twitter.com/Risk_DAO" target="_blank" rel="noreferrer">
+              <a
+                href="https://twitter.com/Risk_DAO"
+                target="_blank"
+                rel="noreferrer"
+              >
                 <svg
                   fill={color}
                   xmlns="http://www.w3.org/2000/svg"
@@ -42,7 +45,11 @@ class Footer extends Component {
               </a>
             </div>
             <div>
-              <a href="https://discord.gg/NYyeDQDDvM" target="_blank" rel="noreferrer">
+              <a
+                href="https://discord.gg/NYyeDQDDvM"
+                target="_blank"
+                rel="noreferrer"
+              >
                 <svg
                   fill={color}
                   width="24"
@@ -56,7 +63,11 @@ class Footer extends Component {
               </a>
             </div>
             <div>
-              <a href="https://medium.com/risk-dao" target="_blank" rel="noreferrer">
+              <a
+                href="https://medium.com/risk-dao"
+                target="_blank"
+                rel="noreferrer"
+              >
                 <svg
                   fill={color}
                   width="24"
@@ -70,7 +81,11 @@ class Footer extends Component {
               </a>
             </div>
             <div>
-              <a href="https://github.com/Risk-DAO" target="_blank" rel="noreferrer">
+              <a
+                href="https://github.com/Risk-DAO"
+                target="_blank"
+                rel="noreferrer"
+              >
                 <svg
                   fill={color}
                   xmlns="http://www.w3.org/2000/svg"
