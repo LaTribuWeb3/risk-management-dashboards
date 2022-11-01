@@ -89,6 +89,17 @@ class LiquidationsGraph extends Component {
         dataSet.push(item);
       }
       const dataMax = Math.max(biggestValue, DoubleCurrentPrice);
+
+      const DataFormater = (number) => {
+        if(number < 1/1e6){
+          return (number*1e6).toString() + 'µ';
+        }else if(number < 1/1e3){
+          return (number*1e3).toString() + 'm';
+        }
+        else{
+          return number.toString();
+        }
+      }
       return (
         <div style={{ width: "70vw", height: "30vh" }}>
           <ResponsiveContainer>
@@ -105,6 +116,7 @@ class LiquidationsGraph extends Component {
               )}
               {/* <ReferenceLine y={650000} label="Max" stroke="red" /> */}
               <XAxis
+               tickFormatter={DataFormater}
                 tickCount={55}
                 domain={[0, dataMax]}
                 type="number"
