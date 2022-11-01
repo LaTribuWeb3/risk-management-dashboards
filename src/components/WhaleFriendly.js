@@ -37,7 +37,7 @@ export const liquidationWhaleFriendlyFormater = (num, symbol) => {
   }
   let wfn;
   if (num === 0) {
-    wfn = symbol+ " " + "0";
+    wfn = symbol + " 0";
   } else if (!num) {
     wfn = "N/A";
   } else if (num <= tenth) {
