@@ -256,19 +256,24 @@ class Accounts extends Component {
       graphData[data] = {};
       let graphArray = {};
       for (const point in apiGraphData[data]) {
-        if(data.toLowerCase() === poolsStore["activeTabSymbol"].toLowerCase()){
-          
-        graphArray[Number(apiGraphData[data][point]["priceUsd"])/underlyingPrice] =
-          apiGraphData[data][point]["normalizedTotalLiquidationUsd"];
+        /// IF COLLATERAL == UNDERLYING
+        if (data.toLowerCase() === poolsStore["activeTabSymbol"].toLowerCase()) {
+          let x = Number(apiGraphData[data][point]["priceUsd"])
+          const y = apiGraphData[data][point]["normalizedTotalLiquidationUsd"];
+
+          graphArray[x] = y;
+        }
+        /// IF COLLATERAL /= UNDERLYING
+        else {
+          let x = Number(apiGraphData[data][point]["priceUsd"]) / underlyingPrice
+          const y = apiGraphData[data][point]["normalizedTotalLiquidationUsd"] / underlyingPrice;
+          graphArray[x] = y;
+        }
+        graphData[data] = graphArray;
+        graphDataArray.push(graphData);
       }
-      else{         
-        graphArray[Number(apiGraphData[data][point]["priceUsd"])/underlyingPrice] =
-          apiGraphData[data][point]["normalizedTotalLiquidationUsd"] / underlyingPrice;}
-      
     }
-      graphData[data] = graphArray;
-      graphDataArray.push(graphData);
-    }
+
     //// TENTATIVE DE PENETRATION DE TABLE DATA
     for (const token in tableData) {
       for (let i = 0; i < graphDataArray.length; i++) {
@@ -310,7 +315,6 @@ class Accounts extends Component {
       tableData.sort((a, b) => b["total_collateral"] - a["total_collateral"]);
       tableData[0].defaultExpanded = true;
     }
-
     return (
       <div>
         <Box loading={loading} time={jsonTime}>

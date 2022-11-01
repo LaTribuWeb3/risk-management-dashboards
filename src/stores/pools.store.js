@@ -10,6 +10,7 @@ const apiEndpoints = [
   "liquidity",
   "risk",
 ];
+const isProduction= window.location.hostname.includes('-production')
 class PoolsStore {
   constructor() {
     this.init();
@@ -32,8 +33,9 @@ class PoolsStore {
       .then(({ data }) => data.trim().replace("\n", ""));
   };
 
+
   apiUrl =
-    "https://raw.githubusercontent.com/Risk-DAO/simulation-results/main/gearbox/main";
+    "https://raw.githubusercontent.com/Risk-DAO/simulation-results/main/gearbox/";
   poolsData = {};
 
   init = () => {
@@ -57,7 +59,7 @@ class PoolsStore {
     this[endpoint + "_request"] = this.apiVersionPromise
       .then((version) => {
         let url;
-        url = `${this.apiUrl}/${version}/${endpoint}.json`;
+        url = `${this.apiUrl}/${isProduction? "main" : "goerli"}/${version}/${endpoint}.json`;
         return axios.get(url);
       })
       .then(({ data }) => {

@@ -36,11 +36,20 @@ export const liquidationWhaleFriendlyFormater = (num, symbol) => {
     num = parseFloat(num);
   }
   let wfn;
+  if (symbol === undefined){
+    symbol = "$"
+  }
   if (num === 0) {
-    wfn = symbol + " 0";
+    wfn = symbol+ " " + "0";
   } else if (!num) {
     wfn = "N/A";
-  } else if (num <= tenth) {
+  } else if(num < 1/1e6){
+    wfn = symbol + " " + Number(num*1e6).toFixed(2) + "µ"
+  }
+  else if(num < 1/1e3){
+    wfn = symbol + " " + Number(num*1e3).toFixed(2) + "m"
+  }
+  else if (num <= tenth) {
     wfn = symbol + " " + Number(num.toFixed(2));
   } else if (num / 1000 <= tenth) {
     wfn = symbol+ " " + Number((num / 1000).toFixed(2)) + "K";

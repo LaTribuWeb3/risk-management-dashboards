@@ -18,11 +18,12 @@ import poolsStore from "../stores/pools.store";
 const CustomTooltip = ({ active, payload, symbol }) => {
   if (active && payload && payload.length) {
     const content = Object.assign({}, payload[0].payload);
+
     const colorMap = {};
     payload.forEach(({ dataKey, color }) => {
       colorMap[dataKey] = color;
     });
-    const price = content.x.toFixed(2);
+    const price = content.x;
     delete content.x;
     const total = Object.entries(content)
       .reduce((acc, [k, v]) => {
@@ -59,16 +60,16 @@ class LiquidationsGraph extends Component {
       else{
         symbol = underlying
       }
+
       Object.entries(this.props.data.graph_data).forEach(([k, v]) => {
         Object.entries(v).forEach(([x, y]) => {
-          y = parseFloat(y).toFixed(2);
-          x = parseFloat(x).toFixed(2);
           graphData[x] = graphData[x] || {};
           graphData[x][k] = y;
-          graphData[x].x = parseFloat(x);
+          graphData[x].x = x;
           graphKeys[k] = k;
         });
       });
+
       const dataKeys = Object.keys(graphKeys);
       const dataSet = Object.values(graphData).sort((a, b) => a.x - b.x);
       const dataSetItemProps = Object.keys(dataSet[0]).filter((p) => p !== "x");
@@ -88,7 +89,8 @@ class LiquidationsGraph extends Component {
         dataSetItemProps.forEach((p) => (item[p] = 0));
         dataSet.push(item);
       }
-      const dataMax = Math.max(biggestValue, DoubleCurrentPrice);
+      let dataMax = Math.max(biggestValue, DoubleCurrentPrice);
+
 
       const DataFormater = (number) => {
         if(number < 1/1e6){
@@ -100,6 +102,7 @@ class LiquidationsGraph extends Component {
           return number.toString();
         }
       }
+
       return (
         <div style={{ width: "70vw", height: "30vh" }}>
           <ResponsiveContainer>
@@ -116,7 +119,7 @@ class LiquidationsGraph extends Component {
               )}
               {/* <ReferenceLine y={650000} label="Max" stroke="red" /> */}
               <XAxis
-               tickFormatter={DataFormater}
+                tickFormatter={DataFormater}
                 tickCount={55}
                 domain={[0, dataMax]}
                 type="number"
