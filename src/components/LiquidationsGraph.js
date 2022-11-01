@@ -7,7 +7,10 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { WhaleFriendlyAxisTick, liquidationWhaleFriendlyFormater } from "../components/WhaleFriendly";
+import {
+  WhaleFriendlyAxisTick,
+  liquidationWhaleFriendlyFormater,
+} from "../components/WhaleFriendly";
 
 import BoxRow from "../components/BoxRow";
 import { COLORS } from "../constants";
@@ -51,14 +54,13 @@ class LiquidationsGraph extends Component {
     if (this.props.data.graph_data) {
       const graphData = {};
       const graphKeys = {};
-      const token = Object.keys(this.props.data.graph_data)["0"]
-      const underlying = poolsStore["activeTabSymbol"]
-      let symbol = null
-      if(token.toLowerCase() === underlying.toLowerCase()){
-        symbol = "$"
-      }
-      else{
-        symbol = underlying
+      const token = Object.keys(this.props.data.graph_data)["0"];
+      const underlying = poolsStore["activeTabSymbol"];
+      let symbol = null;
+      if (token.toLowerCase() === underlying.toLowerCase()) {
+        symbol = "$";
+      } else {
+        symbol = underlying;
       }
 
       Object.entries(this.props.data.graph_data).forEach(([k, v]) => {
@@ -91,22 +93,20 @@ class LiquidationsGraph extends Component {
       }
       let dataMax = Math.max(biggestValue, DoubleCurrentPrice);
 
-
       const DataFormater = (number) => {
-        if(number < 1/1e6){
-          return (number*1e6).toString() + 'µ';
-        }else if(number < 1/1e3){
-          return (number*1e3).toString() + 'm';
-        }
-        else{
+        if (number < 1 / 1e6) {
+          return (number * 1e6).toString() + "µ";
+        } else if (number < 1 / 1e3) {
+          return (number * 1e3).toString() + "m";
+        } else {
           return number.toString();
         }
-      }
+      };
 
       return (
         <div style={{ width: "70vw", height: "30vh" }}>
           <ResponsiveContainer>
-            <AreaChart margin={{left: 40}} data={dataSet}>
+            <AreaChart margin={{ left: 40 }} data={dataSet}>
               {/* <CartesianGrid strokeDasharray="3 3" /> */}
               {currentPrice && (
                 <ReferenceLine
