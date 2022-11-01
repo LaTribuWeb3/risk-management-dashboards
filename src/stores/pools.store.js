@@ -10,6 +10,7 @@ const apiEndpoints = [
   "liquidity",
   "risk",
 ];
+const isProduction= window.location.hostname.includes('-production')
 class PoolsStore {
   constructor() {
     this.init();
@@ -32,8 +33,9 @@ class PoolsStore {
       .then(({ data }) => data.trim().replace("\n", ""));
   };
 
+
   apiUrl =
-    "https://raw.githubusercontent.com/Risk-DAO/simulation-results/main/gearbox";
+    "https://raw.githubusercontent.com/Risk-DAO/simulation-results/main/gearbox/";
   poolsData = {};
 
   init = () => {
@@ -45,6 +47,7 @@ class PoolsStore {
     this["poolCollaterals"] = [];
     this["collateralValues"] = [];
     this["activeTabSymbol"] = null;
+    this["lastUpdate"] = null;
     this["poolHasAccounts"] = 0;
     this["updated"] = 0;
     apiEndpoints.forEach(this.fetchData);
@@ -56,7 +59,7 @@ class PoolsStore {
     this[endpoint + "_request"] = this.apiVersionPromise
       .then((version) => {
         let url;
-        url = `${this.apiUrl}/${version}/${endpoint}.json`;
+        url = `${this.apiUrl}/${isProduction? "main" : "goerli"}/${version}/${endpoint}.json`;
         return axios.get(url);
       })
       .then(({ data }) => {
@@ -82,6 +85,7 @@ class PoolsStore {
       this["poolHasAccounts"] = 1;
       mainStore["overview_loading"] = false;
     }
+    console.log(this["tab"])
   }
 }
 

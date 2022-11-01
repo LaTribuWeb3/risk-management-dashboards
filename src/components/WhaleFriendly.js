@@ -1,5 +1,7 @@
-import React, { Component, Fragment, PureComponent } from "react";
+import { Component, Fragment, PureComponent } from "react";
+
 import { observer } from "mobx-react";
+
 const tenth = 100;
 
 export const whaleFriendlyFormater = (num) => {
@@ -26,6 +28,40 @@ export const whaleFriendlyFormater = (num) => {
   return wfn;
 };
 
+export const liquidationWhaleFriendlyFormater = (num, symbol) => {
+  if (isNaN(num)) {
+    // not a numerical string
+    return num;
+  } else {
+    num = parseFloat(num);
+  }
+  let wfn;
+  if (symbol === undefined){
+    symbol = "$"
+  }
+  if (num === 0) {
+    wfn = symbol+ " " + "0";
+  } else if (!num) {
+    wfn = "N/A";
+  } else if(num < 1/1e6){
+    wfn = symbol + " " + Number(num*1e6).toFixed(2) + "µ"
+  }
+  else if(num < 1/1e3){
+    wfn = symbol + " " + Number(num*1e3).toFixed(2) + "m"
+  }
+  else if (num <= tenth) {
+    wfn = symbol + " " + Number(num.toFixed(2));
+  } else if (num / 1000 <= tenth) {
+    wfn = symbol+ " " + Number((num / 1000).toFixed(2)) + "K";
+  } else if (num / 1000000 <= tenth) {
+    wfn = symbol+ " " + Number((num / 1000000).toFixed(2)) + "M";
+  } else {
+    wfn = symbol+ " " + Number((num / 1000000000).toFixed(2)) + "B";
+  }
+  return wfn;
+};
+
+
 class WhaleFriendly extends Component {
   render() {
     let wfn = whaleFriendlyFormater(this.props.num);
@@ -36,11 +72,12 @@ class WhaleFriendly extends Component {
 export class WhaleFriendlyAxisTick extends PureComponent {
   render() {
     const { x, y, payload } = this.props;
+    const symbol = this.props.symbol;
 
     return (
       <g transform={`translate(${x},${y})`}>
         <text x={0} y={0} dy={16} textAnchor="end" fill="#666">
-          {whaleFriendlyFormater(payload.value)}
+          {liquidationWhaleFriendlyFormater(payload.value, symbol)}
         </text>
       </g>
     );

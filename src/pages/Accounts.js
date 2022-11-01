@@ -92,6 +92,7 @@ class Accounts extends Component {
       jsonTime = Math.floor(
         PoolCreditAccounts["0"]["UpdateData"]["lastUpdate"] / 1000
       );
+      poolsStore["lastUpdate"] = jsonTime;
       /// calculate USD value for each collateral token in the pool
       for (let i = 0; i < PoolCreditAccounts.length; i++) {
         for (
@@ -109,7 +110,7 @@ class Accounts extends Component {
           );
 
           // if token amount is non-null,
-          if (tokenAmount !== 0) {
+          if (tokenAmount > 0) {
             // create token entry or
             if (tokenBalances[tokenSymbol] === undefined) {
               tokenBalances[tokenSymbol] = tokenAmount;
@@ -230,6 +231,18 @@ class Accounts extends Component {
         }
       }
     }
+    /// get underlying price in USD
+    const tokenData = Object.assign([], poolsStore["tokens_data"] || []);
+    const underlying = poolsStore["activeTabSymbol"]
+    let underlyingPrice = 0
+    for (const token in tokenData) {
+      if (tokenData[token].symbol.toLowerCase() === underlying.toLowerCase()) {
+        underlyingPrice = tokenData[token]["priceUSD18Decimals"] / 1e18
+      }
+    }
+
+
+
 
     // include graph data in tableData
     let apiGraphData = Object.assign(poolsStore["liquidations_data"]);
@@ -243,11 +256,22 @@ class Accounts extends Component {
       graphData[data] = {};
       let graphArray = {};
       for (const point in apiGraphData[data]) {
-        graphArray[apiGraphData[data][point]["priceUsd"]] =
-          apiGraphData[data][point]["normalizedTotalLiquidationUsd"];
+        /// IF COLLATERAL == UNDERLYING
+        if (data.toLowerCase() === poolsStore["activeTabSymbol"].toLowerCase()) {
+          let x = Number(apiGraphData[data][point]["priceUsd"])
+          const y = apiGraphData[data][point]["normalizedTotalLiquidationUsd"];
+
+          graphArray[x] = y;
+        }
+        /// IF COLLATERAL /= UNDERLYING
+        else {
+          let x = Number(apiGraphData[data][point]["priceUsd"]) / underlyingPrice
+          const y = apiGraphData[data][point]["normalizedTotalLiquidationUsd"] / underlyingPrice;
+          graphArray[x] = y;
+        }
+        graphData[data] = graphArray;
+        graphDataArray.push(graphData);
       }
-      graphData[data] = graphArray;
-      graphDataArray.push(graphData);
     }
 
     //// TENTATIVE DE PENETRATION DE TABLE DATA
@@ -291,7 +315,6 @@ class Accounts extends Component {
       tableData.sort((a, b) => b["total_collateral"] - a["total_collateral"]);
       tableData[0].defaultExpanded = true;
     }
-
     return (
       <div>
         <Box loading={loading} time={jsonTime}>

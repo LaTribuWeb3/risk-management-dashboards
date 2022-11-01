@@ -55,7 +55,7 @@ class Liquidity extends Component {
     const collaterals = poolsStore["poolCollaterals"];
     const rawData = Object.assign([], poolsStore["liquidity_data"] || {});
     let symbol = poolsStore["activeTabSymbol"];
-    const jsonTime = rawData[0]["slippage"]["json_time"];
+    const jsonTime = poolsStore["lastUpdate"];
 
     let liquidity_data = rawData;
 

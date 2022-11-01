@@ -7,10 +7,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import {
-  WhaleFriendlyAxisTick,
-  whaleFriendlyFormater,
-} from "../components/WhaleFriendly";
+import { WhaleFriendlyAxisTick, liquidationWhaleFriendlyFormater } from "../components/WhaleFriendly";
 
 import BoxRow from "../components/BoxRow";
 import { COLORS } from "../constants";
@@ -18,14 +15,15 @@ import { Component } from "react";
 import { observer } from "mobx-react";
 import poolsStore from "../stores/pools.store";
 
-const CustomTooltip = ({ active, payload, label }) => {
+const CustomTooltip = ({ active, payload, symbol }) => {
   if (active && payload && payload.length) {
     const content = Object.assign({}, payload[0].payload);
+
     const colorMap = {};
     payload.forEach(({ dataKey, color }) => {
       colorMap[dataKey] = color;
     });
-    const price = content.x.toFixed(2);
+    const price = content.x;
     delete content.x;
     const total = Object.entries(content)
       .reduce((acc, [k, v]) => {
@@ -37,22 +35,11 @@ const CustomTooltip = ({ active, payload, label }) => {
       <div className="tooltip-container">
         <BoxRow slim={true}>
           <div>Price</div>
-          <div>{whaleFriendlyFormater(price)}</div>
+          <div>{liquidationWhaleFriendlyFormater(price, symbol)}</div>
         </BoxRow>
-        {Object.entries(content).map(([k, v], i) => {
-          k = k === "x" ? "Price" : k;
-          return (
-            <BoxRow slim={true} key={i}>
-              <div style={{ color: colorMap[k] }}>
-                {poolsStore["activeTabSymbol"]}
-              </div>
-              <div>{whaleFriendlyFormater(v)}</div>
-            </BoxRow>
-          );
-        })}
         <BoxRow slim={true}>
           <div>Total</div>
-          <div>{whaleFriendlyFormater(total)}</div>
+          <div>{liquidationWhaleFriendlyFormater(total, symbol)}</div>
         </BoxRow>
       </div>
     );
@@ -64,16 +51,25 @@ class LiquidationsGraph extends Component {
     if (this.props.data.graph_data) {
       const graphData = {};
       const graphKeys = {};
+      const token = Object.keys(this.props.data.graph_data)["0"]
+      const underlying = poolsStore["activeTabSymbol"]
+      let symbol = null
+      if(token.toLowerCase() === underlying.toLowerCase()){
+        symbol = "$"
+      }
+      else{
+        symbol = underlying
+      }
+
       Object.entries(this.props.data.graph_data).forEach(([k, v]) => {
         Object.entries(v).forEach(([x, y]) => {
-          y = parseFloat(y).toFixed(2);
-          x = parseFloat(x).toFixed(2);
           graphData[x] = graphData[x] || {};
           graphData[x][k] = y;
-          graphData[x].x = parseFloat(x);
+          graphData[x].x = x;
           graphKeys[k] = k;
         });
       });
+
       const dataKeys = Object.keys(graphKeys);
       const dataSet = Object.values(graphData).sort((a, b) => a.x - b.x);
       const dataSetItemProps = Object.keys(dataSet[0]).filter((p) => p !== "x");
@@ -93,11 +89,24 @@ class LiquidationsGraph extends Component {
         dataSetItemProps.forEach((p) => (item[p] = 0));
         dataSet.push(item);
       }
-      const dataMax = Math.max(biggestValue, DoubleCurrentPrice);
+      let dataMax = Math.max(biggestValue, DoubleCurrentPrice);
+
+
+      const DataFormater = (number) => {
+        if(number < 1/1e6){
+          return (number*1e6).toString() + 'µ';
+        }else if(number < 1/1e3){
+          return (number*1e3).toString() + 'm';
+        }
+        else{
+          return number.toString();
+        }
+      }
+
       return (
         <div style={{ width: "70vw", height: "30vh" }}>
           <ResponsiveContainer>
-            <AreaChart data={dataSet}>
+            <AreaChart margin={{left: 40}} data={dataSet}>
               {/* <CartesianGrid strokeDasharray="3 3" /> */}
               {currentPrice && (
                 <ReferenceLine
@@ -110,13 +119,14 @@ class LiquidationsGraph extends Component {
               )}
               {/* <ReferenceLine y={650000} label="Max" stroke="red" /> */}
               <XAxis
+                tickFormatter={DataFormater}
                 tickCount={55}
                 domain={[0, dataMax]}
                 type="number"
                 dataKey="x"
               />
-              <YAxis tick={<WhaleFriendlyAxisTick />} />
-              <Tooltip content={CustomTooltip} />
+              <YAxis tick={<WhaleFriendlyAxisTick symbol={symbol} />} />
+              <Tooltip symbol={symbol} content={CustomTooltip} />
               {dataKeys.map((k, i) => (
                 <Area
                   key={i}
