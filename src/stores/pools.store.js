@@ -45,6 +45,7 @@ class PoolsStore {
     this["poolCollaterals"] = [];
     this["collateralValues"] = [];
     this["activeTabSymbol"] = null;
+    this["lastUpdate"] = null;
     this["poolHasAccounts"] = 0;
     this["updated"] = 0;
     apiEndpoints.forEach(this.fetchData);
@@ -82,6 +83,7 @@ class PoolsStore {
       this["poolHasAccounts"] = 1;
       mainStore["overview_loading"] = false;
     }
+    console.log(this["tab"])
   }
 }
 

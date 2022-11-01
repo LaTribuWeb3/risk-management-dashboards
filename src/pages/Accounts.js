@@ -92,6 +92,7 @@ class Accounts extends Component {
       jsonTime = Math.floor(
         PoolCreditAccounts["0"]["UpdateData"]["lastUpdate"] / 1000
       );
+      poolsStore["lastUpdate"] = jsonTime;
       /// calculate USD value for each collateral token in the pool
       for (let i = 0; i < PoolCreditAccounts.length; i++) {
         for (
@@ -268,7 +269,6 @@ class Accounts extends Component {
       graphData[data] = graphArray;
       graphDataArray.push(graphData);
     }
-
     //// TENTATIVE DE PENETRATION DE TABLE DATA
     for (const token in tableData) {
       for (let i = 0; i < graphDataArray.length; i++) {
