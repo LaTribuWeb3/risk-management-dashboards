@@ -1,7 +1,6 @@
 import Box from "../components/Box";
 import { Component } from "react";
 import DataTable from "react-data-table-component";
-import mainStore from "../stores/main.store";
 import { observer } from "mobx-react";
 import poolsStore from "../stores/pools.store";
 import { whaleFriendlyFormater } from "../components/WhaleFriendly";
