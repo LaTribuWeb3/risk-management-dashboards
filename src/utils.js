@@ -144,7 +144,10 @@ export const getRecommendedLT = (
     .filter((_) => Lfs.includes(_.lf))
     .map((_) => _.li);
   meanLI = meanLI.reduce((a, b) => a + b, 0) / meanLI.length;
-  return (1 - meanMD - meanLI).toFixed(2);
+
+  /// Protocol penalty
+  const penalty = 0.015;
+  return (1 - meanMD - meanLI - penalty).toFixed(3);
 };
 
 export const initialSandboxValue = (

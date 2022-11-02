@@ -10,7 +10,7 @@ const apiEndpoints = [
   "liquidity",
   "risk",
 ];
-const isProduction = window.location.hostname.includes("-production");
+const isStaging = window.location.hostname.includes("-staging");
 class PoolsStore {
   constructor() {
     this.init();
@@ -59,7 +59,7 @@ class PoolsStore {
       .then((version) => {
         let url;
         url = `${this.apiUrl}/${
-          isProduction ? "main" : "goerli"
+          isStaging ? "goerli" : "main"
         }/${version}/${endpoint}.json`;
         return axios.get(url);
       })
