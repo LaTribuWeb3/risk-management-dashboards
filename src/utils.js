@@ -146,7 +146,7 @@ export const getRecommendedLT = (
   meanLI = meanLI.reduce((a, b) => a + b, 0) / meanLI.length;
 
   /// Protocol penalty
-  const penalty = 0.015
+  const penalty = 0.015;
   return (1 - meanMD - meanLI - penalty).toFixed(3);
 };
 

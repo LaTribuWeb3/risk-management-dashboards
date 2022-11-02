@@ -13,13 +13,7 @@ import { whaleFriendlyFormater } from "./WhaleFriendly";
 
 const currentLT = (currentLT, recommendedLT) => {
   const alert = currentLT > recommendedLT;
-  return (
-    <Ramzor
-      red={alert}
-    >
-      {currentLT}
-    </Ramzor>
-  );
+  return <Ramzor red={alert}>{currentLT}</Ramzor>;
 };
 const currentColumns = [
   {

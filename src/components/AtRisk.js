@@ -20,7 +20,7 @@ const AtRisk = (props) => {
           valueAtRisk += rawData[entry]["current"][point]["pnl"];
         }
       }
-    } 
+    }
   }
   alertStore.valueAtRisk = valueAtRisk.toFixed(2);
   alertStore.liquidationsAtRisk = liquidationsAtRisk.toFixed(2);
@@ -31,7 +31,9 @@ const AtRisk = (props) => {
         <Box time={rawData["0"]["json_time"]}>
           <BoxRow>
             <h5 style={{ margin: 0 }}>Value at Risk on Worst Day Simulation</h5>
-            <h5 style={{ margin: 0 }}>${Intl.NumberFormat('en-US').format(alertStore.valueAtRisk)}</h5>
+            <h5 style={{ margin: 0 }}>
+              ${Intl.NumberFormat("en-US").format(alertStore.valueAtRisk)}
+            </h5>
           </BoxRow>
           <hgroup style={{ margin: 0 }}>
             <p style={{ margin: 0 }}>
@@ -45,7 +47,10 @@ const AtRisk = (props) => {
         <Box time={rawData["0"]["json_time"]}>
           <BoxRow>
             <h5 style={{ margin: 0 }}>Liquidations on Worst Day Simulation</h5>
-            <h5 style={{ margin: 0 }}>${Intl.NumberFormat('en-US').format(alertStore.liquidationsAtRisk)}</h5>
+            <h5 style={{ margin: 0 }}>
+              $
+              {Intl.NumberFormat("en-US").format(alertStore.liquidationsAtRisk)}
+            </h5>
           </BoxRow>
           <hgroup style={{ margin: 0 }}>
             <p style={{ margin: 0 }}>
