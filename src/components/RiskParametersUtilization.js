@@ -91,7 +91,7 @@ class RiskParametersUtilization extends Component {
     // get threshold alerts
     const collateralAlerts = [];
     for (let i = 0; i < poolTokens.length; i++) {
-      if (poolTokens[i].currentLT < poolTokens[i].recommendedLT) {
+      if (poolTokens[i].currentLT > poolTokens[i].recommendedLT) {
         const currentLT = poolTokens[i].currentLT;
         collateralAlerts.push({
           asset: poolTokens[i].asset,
@@ -101,7 +101,7 @@ class RiskParametersUtilization extends Component {
         });
       }
     }
-    const type = collateralAlerts.length ? "review" : "success";
+    const type = collateralAlerts.length ? "review" : "healthy";
     alertStore["collateralAlerts"] = {
       title: "Liquidation Thresholds",
       data: collateralAlerts,
