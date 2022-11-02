@@ -51,8 +51,8 @@ class RiskParametersSimulation extends Component {
     const loading = poolsStore["risk_loading"];
     const rawData = Object.assign({}, poolsStore["risk_data"] || {});
     const tab = poolsStore["activeTabSymbol"];
-      /// Protocol penalty
-  const penalty = 0.015
+    /// Protocol penalty
+    const penalty = 0.015;
     let data = [];
 
     for (const entry in rawData) {
@@ -66,7 +66,7 @@ class RiskParametersSimulation extends Component {
               pnl: rawData[entry]["current"][point]["pnl"],
               max_drop: rawData[entry]["current"][point]["max_drop"],
               max_collateral:
-                (rawData[entry]["current"][point]["max_collateral"]) - penalty,
+                rawData[entry]["current"][point]["max_collateral"] - penalty,
             });
           } else {
             data.push({
