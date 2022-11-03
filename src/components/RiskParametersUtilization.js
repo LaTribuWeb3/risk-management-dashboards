@@ -1,4 +1,4 @@
-import { getRecommendedLT, initialSandboxValue, tokenName } from "../utils";
+import { getRecommendedLT, initialSandboxValue, tableStyle, tokenName } from "../utils";
 
 import Box from "./Box";
 import { Component } from "react";
@@ -77,7 +77,7 @@ class RiskParametersUtilization extends Component {
       ),
       currentLT: e.liquidationThreshold / 10000,
       simulationLT: getRecommendedLT(
-        collateralsValue[tokenName(e.tokenAddress)] / 1e6,
+        collateralsValue[tokenName(e.tokenAddress)],
         tokenName(e.tokenAddress),
         tokenName(underlying),
         riskParametersForPool?.risk
@@ -89,7 +89,8 @@ class RiskParametersUtilization extends Component {
         riskParametersForPool?.risk
       ),
     }));
-
+    // sort by supply
+    poolTokens.sort((a, b) => b.supply - a.supply);
     riskStore["currentRiskData"] = poolTokens;
     riskStore["currentRiskLoading"] = false;
 
@@ -133,6 +134,8 @@ class RiskParametersUtilization extends Component {
               data={poolTokens}
               defaultSortFieldId={2}
               defaultSortAsc={false}
+              customStyles={tableStyle}
+              dense
             />
           )}
         </Box>
