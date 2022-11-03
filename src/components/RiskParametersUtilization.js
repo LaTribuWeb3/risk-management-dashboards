@@ -89,7 +89,8 @@ class RiskParametersUtilization extends Component {
         riskParametersForPool?.risk
       ),
     }));
-
+    // sort by supply
+    poolTokens.sort((a, b) => b.supply - a.supply);
     riskStore["currentRiskData"] = poolTokens;
     riskStore["currentRiskLoading"] = false;
 
