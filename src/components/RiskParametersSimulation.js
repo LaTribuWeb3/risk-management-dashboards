@@ -4,6 +4,7 @@ import DataTable from "react-data-table-component";
 import Token from "./Token";
 import { observer } from "mobx-react";
 import poolsStore from "../stores/pools.store";
+import { tableStyle } from "../utils";
 import { whaleFriendlyFormater } from "./WhaleFriendly";
 
 const columns = [
@@ -102,6 +103,8 @@ class RiskParametersSimulation extends Component {
               data={data}
               defaultSortFieldId={2}
               defaultSortAsc={false}
+              customStyles={tableStyle}
+              dense
             />
           )}
         </Box>

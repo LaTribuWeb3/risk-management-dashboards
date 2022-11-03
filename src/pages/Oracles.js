@@ -6,6 +6,7 @@ import Token from "../components/Token";
 import alertStore from "../stores/alert.store";
 import { observer } from "mobx-react";
 import poolsStore from "../stores/pools.store";
+import { tableStyle } from "../utils";
 
 const percentFrom = (base, num) => {
   if (base <= 0 || num <= 0) {
@@ -119,7 +120,8 @@ class Oracles extends Component {
     return (
       <div>
         <Box loading={loading} time={jsonTime}>
-          {!loading && <DataTable columns={columns} data={oracleArray} />}
+          {!loading && <DataTable customStyles={tableStyle}
+              dense columns={columns} data={oracleArray} />}
         </Box>
       </div>
     );

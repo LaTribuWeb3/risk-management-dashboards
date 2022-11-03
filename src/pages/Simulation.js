@@ -7,6 +7,7 @@ import Token from "../components/Token";
 import { observer } from "mobx-react";
 import poolsStore from "../stores/pools.store";
 import riskStore from "../stores/risk.store";
+import { tableStyle } from "../utils";
 
 const columns = [
   {
@@ -41,7 +42,7 @@ class Simulation extends Component {
         <Box loading={loading} time={rawData["0"]["json_time"]}>
           {/* <h6>Risk Parameters Recommendations</h6> */}
           {!loading && (
-            <DataTable columns={columns} data={riskStore.currentRiskData} />
+            <DataTable dense customStyles={tableStyle} columns={columns} data={riskStore.currentRiskData} />
           )}
         </Box>
       </div>
