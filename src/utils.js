@@ -8,7 +8,13 @@ function roundTo(num, dec) {
 }
 
 export const removeTokenPrefix = (token) => token.replace(TOKEN_PREFIX, "");
-
+export const tableStyle = {
+  rows: {
+      style: {
+          maxHeight: '50px', // override the row height
+      },
+  },
+};
 export const precentFormatter = (num) => {
   if (isNaN(num)) {
     // not a numerical string

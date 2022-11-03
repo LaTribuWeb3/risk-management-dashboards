@@ -1,4 +1,4 @@
-import { getRecommendedLT, initialSandboxValue, tokenName } from "../utils";
+import { getRecommendedLT, initialSandboxValue, tableStyle, tokenName } from "../utils";
 
 import Box from "./Box";
 import { Component } from "react";
@@ -133,6 +133,8 @@ class RiskParametersUtilization extends Component {
               data={poolTokens}
               defaultSortFieldId={2}
               defaultSortAsc={false}
+              customStyles={tableStyle}
+              dense
             />
           )}
         </Box>
