@@ -78,6 +78,7 @@ export const getRecommendedLT = (
   const shortStableLfs = [1, 1.5, 2];
   const longStableLfs = [0.25, 0.5, 1];
   const otherLfs = [0.5, 1, 1.5];
+  collateralValue = collateralValue / 1e6;
 
   let Lfs = null;
 
@@ -150,7 +151,6 @@ export const getRecommendedLT = (
     .filter((_) => Lfs.includes(_.lf))
     .map((_) => _.li);
   meanLI = meanLI.reduce((a, b) => a + b, 0) / meanLI.length;
-
   /// Protocol penalty
   const penalty = 0.015;
   return (1 - meanMD - meanLI - penalty).toFixed(3);
@@ -271,7 +271,7 @@ export const sandboxSwitch = (row, field, up) => {
     } else {
       row["sandboxValue"] = formattedData[index + 1].dc;
       row["simulationLT"] = getRecommendedLT(
-        formattedData[index + 1].dc,
+        formattedData[index + 1].dc *1e6,
         row.asset,
         row.underlying,
         row.riskParameters
@@ -283,7 +283,7 @@ export const sandboxSwitch = (row, field, up) => {
     } else {
       row["sandboxValue"] = formattedData[index - 1].dc;
       row["simulationLT"] = getRecommendedLT(
-        formattedData[index - 1].dc,
+        formattedData[index - 1].dc*1e6,
         row.asset,
         row.underlying,
         row.riskParameters
