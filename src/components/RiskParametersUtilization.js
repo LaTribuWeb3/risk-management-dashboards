@@ -1,8 +1,9 @@
-import { getRecommendedLT, initialSandboxValue, tokenName } from "../utils";
+import { getRecommendedLT, initialSandboxValue, tableStyle, tokenName } from "../utils";
 
 import Box from "./Box";
 import { Component } from "react";
 import DataTable from "react-data-table-component";
+import Ramzor from "./Ramzor";
 import Token from "./Token";
 import alertStore from "../stores/alert.store";
 import { observer } from "mobx-react";
@@ -10,6 +11,10 @@ import poolsStore from "../stores/pools.store";
 import riskStore from "../stores/risk.store";
 import { whaleFriendlyFormater } from "./WhaleFriendly";
 
+const currentLT = (currentLT, recommendedLT) => {
+  const alert = currentLT > recommendedLT;
+  return <Ramzor red={alert}>{currentLT}</Ramzor>;
+};
 const currentColumns = [
   {
     name: "Asset",
@@ -25,7 +30,7 @@ const currentColumns = [
   },
   {
     name: "Current Liquidation Threshold",
-    selector: (row) => row.currentLT,
+    selector: (row) => currentLT(row.currentLT, row.recommendedLT),
     sortable: true,
   },
   {
@@ -91,7 +96,7 @@ class RiskParametersUtilization extends Component {
     // get threshold alerts
     const collateralAlerts = [];
     for (let i = 0; i < poolTokens.length; i++) {
-      if (poolTokens[i].currentLT < poolTokens[i].recommendedLT) {
+      if (poolTokens[i].currentLT > poolTokens[i].recommendedLT) {
         const currentLT = poolTokens[i].currentLT;
         collateralAlerts.push({
           asset: poolTokens[i].asset,
@@ -101,7 +106,7 @@ class RiskParametersUtilization extends Component {
         });
       }
     }
-    const type = collateralAlerts.length ? "review" : "success";
+    const type = collateralAlerts.length ? "review" : "healthy";
     alertStore["collateralAlerts"] = {
       title: "Liquidation Thresholds",
       data: collateralAlerts,
@@ -128,6 +133,8 @@ class RiskParametersUtilization extends Component {
               data={poolTokens}
               defaultSortFieldId={2}
               defaultSortAsc={false}
+              customStyles={tableStyle}
+              dense
             />
           )}
         </Box>

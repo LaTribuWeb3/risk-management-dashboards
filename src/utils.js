@@ -8,7 +8,13 @@ function roundTo(num, dec) {
 }
 
 export const removeTokenPrefix = (token) => token.replace(TOKEN_PREFIX, "");
-
+export const tableStyle = {
+  rows: {
+      style: {
+          maxHeight: '50px', // override the row height
+      },
+  },
+};
 export const precentFormatter = (num) => {
   if (isNaN(num)) {
     // not a numerical string
@@ -144,7 +150,10 @@ export const getRecommendedLT = (
     .filter((_) => Lfs.includes(_.lf))
     .map((_) => _.li);
   meanLI = meanLI.reduce((a, b) => a + b, 0) / meanLI.length;
-  return (1 - meanMD - meanLI).toFixed(2);
+
+  /// Protocol penalty
+  const penalty = 0.015;
+  return (1 - meanMD - meanLI - penalty).toFixed(3);
 };
 
 export const initialSandboxValue = (

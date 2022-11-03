@@ -4,6 +4,7 @@ import BoxRow from "../components/BoxRow";
 import alertStore from "../stores/alert.store";
 import { observer } from "mobx-react";
 import poolsStore from "../stores/pools.store";
+import { whaleFriendlyFormater } from "./WhaleFriendly";
 
 const AtRisk = (props) => {
   const rawData = Object.assign({}, poolsStore["risk_data"] || {});
@@ -31,7 +32,9 @@ const AtRisk = (props) => {
         <Box time={rawData["0"]["json_time"]}>
           <BoxRow>
             <h5 style={{ margin: 0 }}>Value at Risk on Worst Day Simulation</h5>
-            <h5 style={{ margin: 0 }}>${alertStore.valueAtRisk}</h5>
+            <h5 style={{ margin: 0 }}>
+              {whaleFriendlyFormater(alertStore.valueAtRisk)}
+            </h5>
           </BoxRow>
           <hgroup style={{ margin: 0 }}>
             <p style={{ margin: 0 }}>
@@ -45,7 +48,9 @@ const AtRisk = (props) => {
         <Box time={rawData["0"]["json_time"]}>
           <BoxRow>
             <h5 style={{ margin: 0 }}>Liquidations on Worst Day Simulation</h5>
-            <h5 style={{ margin: 0 }}>${alertStore.liquidationsAtRisk}</h5>
+            <h5 style={{ margin: 0 }}>
+              {whaleFriendlyFormater(alertStore.liquidationsAtRisk)}
+            </h5>
           </BoxRow>
           <hgroup style={{ margin: 0 }}>
             <p style={{ margin: 0 }}>

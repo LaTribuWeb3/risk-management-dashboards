@@ -233,16 +233,13 @@ class Accounts extends Component {
     }
     /// get underlying price in USD
     const tokenData = Object.assign([], poolsStore["tokens_data"] || []);
-    const underlying = poolsStore["activeTabSymbol"]
-    let underlyingPrice = 0
+    const underlying = poolsStore["activeTabSymbol"];
+    let underlyingPrice = 0;
     for (const token in tokenData) {
       if (tokenData[token].symbol.toLowerCase() === underlying.toLowerCase()) {
-        underlyingPrice = tokenData[token]["priceUSD18Decimals"] / 1e18
+        underlyingPrice = tokenData[token]["priceUSD18Decimals"] / 1e18;
       }
     }
-
-
-
 
     // include graph data in tableData
     let apiGraphData = Object.assign(poolsStore["liquidations_data"]);
@@ -257,16 +254,21 @@ class Accounts extends Component {
       let graphArray = {};
       for (const point in apiGraphData[data]) {
         /// IF COLLATERAL == UNDERLYING
-        if (data.toLowerCase() === poolsStore["activeTabSymbol"].toLowerCase()) {
-          let x = Number(apiGraphData[data][point]["priceUsd"])
+        if (
+          data.toLowerCase() === poolsStore["activeTabSymbol"].toLowerCase()
+        ) {
+          let x = Number(apiGraphData[data][point]["priceUsd"]);
           const y = apiGraphData[data][point]["normalizedTotalLiquidationUsd"];
 
           graphArray[x] = y;
         }
         /// IF COLLATERAL /= UNDERLYING
         else {
-          let x = Number(apiGraphData[data][point]["priceUsd"]) / underlyingPrice
-          const y = apiGraphData[data][point]["normalizedTotalLiquidationUsd"] / underlyingPrice;
+          let x =
+            Number(apiGraphData[data][point]["priceUsd"]) / underlyingPrice;
+          const y =
+            apiGraphData[data][point]["normalizedTotalLiquidationUsd"] /
+            underlyingPrice;
           graphArray[x] = y;
         }
         graphData[data] = graphArray;
