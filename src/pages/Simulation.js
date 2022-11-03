@@ -20,6 +20,7 @@ const columns = [
     selector: (row) => row.mint_cap,
     format: (row) => <CapInput row={row} field={"sandboxValue"} />,
     grow: 2,
+    sortable: true,
   },
   {
     name: "Current Liquidation Threshold",
@@ -42,7 +43,8 @@ class Simulation extends Component {
         <Box loading={loading} time={rawData["0"]["json_time"]}>
           {/* <h6>Risk Parameters Recommendations</h6> */}
           {!loading && (
-            <DataTable dense customStyles={tableStyle} columns={columns} data={riskStore.currentRiskData} />
+            <DataTable dense customStyles={tableStyle} defaultSortFieldId={2}
+            defaultSortAsc={false} columns={columns} data={riskStore.currentRiskData} />
           )}
         </Box>
       </div>
