@@ -49,10 +49,6 @@ const columns = [
   },
 ];
 
-// const ExpandedComponent = ({ data }) => (
-//   <pre>{JSON.stringify(data, null, 2)}</pre>
-// );
-
 function roundTo(num, dec) {
   const pow = Math.pow(10, dec);
   return Math.round((num + Number.EPSILON) * pow) / pow;
