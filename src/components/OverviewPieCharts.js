@@ -8,7 +8,7 @@ class OverviewPieCharts extends Component {
   render() {
     const overviewData = this.props.data;
     const json_time = this.props.time;
-    const loading = false
+    const loading = false;
 
     return (
       <BoxGrid>

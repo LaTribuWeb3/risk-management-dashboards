@@ -9,7 +9,7 @@ const apiEndpoints = [
   "liquidations",
   "liquidity",
   "risk",
-  "summary"
+  "summary",
 ];
 // const isStaging = window.location.hostname.includes("-staging");
 const isStaging = true;
@@ -60,10 +60,9 @@ class PoolsStore {
     this[endpoint + "_request"] = this.apiVersionPromise
       .then((version) => {
         let url;
-        if(isStaging){
+        if (isStaging) {
           url = `${this.apiUrl}staging/${endpoint}.json`;
-        }
-        else{
+        } else {
           url = `${this.apiUrl}main/${version}/${endpoint}.json`;
         }
         return axios.get(url);

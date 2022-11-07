@@ -10,9 +10,9 @@ function roundTo(num, dec) {
 export const removeTokenPrefix = (token) => token.replace(TOKEN_PREFIX, "");
 export const tableStyle = {
   rows: {
-      style: {
-          maxHeight: '50px', // override the row height
-      },
+    style: {
+      maxHeight: "50px", // override the row height
+    },
   },
 };
 export const precentFormatter = (num) => {
@@ -271,7 +271,7 @@ export const sandboxSwitch = (row, field, up) => {
     } else {
       row["sandboxValue"] = formattedData[index + 1].dc;
       row["simulationLT"] = getRecommendedLT(
-        formattedData[index + 1].dc *1e6,
+        formattedData[index + 1].dc * 1e6,
         row.asset,
         row.underlying,
         row.riskParameters
@@ -283,7 +283,7 @@ export const sandboxSwitch = (row, field, up) => {
     } else {
       row["sandboxValue"] = formattedData[index - 1].dc;
       row["simulationLT"] = getRecommendedLT(
-        formattedData[index - 1].dc*1e6,
+        formattedData[index - 1].dc * 1e6,
         row.asset,
         row.underlying,
         row.riskParameters

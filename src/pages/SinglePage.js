@@ -27,14 +27,14 @@ class SinglePage extends Component {
           <section id="select-pool">
             <Tabnav />
           </section>
-          {poolsStore["activeTabSymbol"] === "summary"  && <Summary/> }
+          {poolsStore["activeTabSymbol"] === "summary" && <Summary />}
           {poolsStore["activeTabSymbol"] === null && (
             <div className="noaccountsdiv">
               <span className="noaccounts">No pool selected</span>
             </div>
           )}
           {poolsStore["activeTabSymbol"] !== null &&
-          poolsStore["activeTabSymbol"] !== "summary" &&
+            poolsStore["activeTabSymbol"] !== "summary" &&
             poolsStore["poolHasAccounts"] === 0 && (
               <div className="noaccountsdiv">
                 <span className="noaccounts">

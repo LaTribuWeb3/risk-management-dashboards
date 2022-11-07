@@ -9,19 +9,15 @@ import poolsStore from "../stores/pools.store";
 
 class Summary extends Component {
   render() {
-
-    let overviewData = {}
+    let overviewData = {};
     const tab = poolsStore["tab"];
     const data = Object.assign([], poolsStore["summary_data"] || []);
 
-    const loading = poolsStore["summary_loading"]
- 
-    const jsonTime = Math.floor(
-      data["updateData"]["lastUpdate"] / 1000
-    );
+    const loading = poolsStore["summary_loading"];
 
+    const jsonTime = Math.floor(data["updateData"]["lastUpdate"] / 1000);
 
-    overviewData = {...data["gearboxOverview"]}
+    overviewData = { ...data["gearboxOverview"] };
     /// remove < 1$ tokens
     for (const data in overviewData["collateralGraphData"]) {
       if (Number(overviewData["collateralGraphData"][data]) < 1) {

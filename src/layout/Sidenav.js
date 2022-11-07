@@ -22,15 +22,9 @@ const humanPagesMap = {
 };
 
 const Sidenav = (props) => {
-  if (
-    poolsStore["activeTabSymbol"] === "summary"
-  ){
-    pages = [
-      "select-pool",
-      "overview"
-    ]
-  }
-  else{
+  if (poolsStore["activeTabSymbol"] === "summary") {
+    pages = ["select-pool", "overview"];
+  } else {
     pages = [
       "select-pool",
       "system-status",
@@ -40,7 +34,8 @@ const Sidenav = (props) => {
       "asset-distribution",
       "open-liquidations",
       "oracle-deviation",
-      "liquidity"];
+      "liquidity",
+    ];
   }
   if (
     poolsStore["activeTabSymbol"] === "DAI" ||
