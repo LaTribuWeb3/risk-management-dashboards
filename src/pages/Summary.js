@@ -12,7 +12,7 @@ class Summary extends Component {
 
     let overviewData = {}
     const tab = poolsStore["tab"];
-    const data = Object.assign({}, poolsStore["summary_data"] || {});
+    const data = Object.assign([], poolsStore["summary_data"] || []);
 
     const loading = poolsStore["summary_loading"]
  
@@ -22,15 +22,12 @@ class Summary extends Component {
 
 
     overviewData = {...data["gearboxOverview"]}
-    console.log('data???', overviewData)
-    console.log('datatype???', typeof(overviewData))
     /// remove < 1$ tokens
     for (const data in overviewData["collateralGraphData"]) {
       if (Number(overviewData["collateralGraphData"][data]) < 1) {
         delete overviewData["collateralGraphData"][data];
       }
     }
-
     return (
       <div>
         <OverviewPieCharts data={overviewData} time={jsonTime} />
