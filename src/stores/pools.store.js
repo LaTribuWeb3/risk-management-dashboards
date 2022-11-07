@@ -55,7 +55,6 @@ class PoolsStore {
   };
 
   fetchData = (endpoint) => {
-    console.log('call data', endpoint, isStaging)
     this[endpoint + "_loading"] = true;
     this[endpoint + "_data"] = null;
     this[endpoint + "_request"] = this.apiVersionPromise
@@ -92,7 +91,6 @@ class PoolsStore {
       this["poolHasAccounts"] = 1;
       mainStore["overview_loading"] = false;
     }
-    console.log(this["tab"]);
   }
 }
 

@@ -4,7 +4,7 @@ import { observer } from "mobx-react";
 const BoxFooter = (props) => {
   if(props.time){
     const update = moment(parseInt(1000 *props.time));
-    console.log('update', update)
+
     const now = moment()
     const duration = moment.duration(now.diff(update));
 //Get Days and subtract from duration
@@ -21,10 +21,7 @@ duration.subtract(minutes, 'minutes');
 
 //Get seconds
 const seconds = duration.seconds();
-console.log('days', days)
-console.log('hours', hours)
-console.log('minutes', minutes)
-console.log('seconds', seconds)
+
 
   const text = props.text || "";
   return (
