@@ -116,8 +116,14 @@ class Oracles extends Component {
     return (
       <div>
         <Box loading={loading} time={jsonTime}>
-          {!loading && <DataTable customStyles={tableStyle}
-              dense columns={columns} data={oracleArray} />}
+          {!loading && (
+            <DataTable
+              customStyles={tableStyle}
+              dense
+              columns={columns}
+              data={oracleArray}
+            />
+          )}
         </Box>
       </div>
     );
