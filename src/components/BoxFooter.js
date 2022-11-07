@@ -22,7 +22,6 @@ const BoxFooter = (props) => {
     //Get seconds
     const seconds = duration.seconds();
 
-    const text = props.text || "";
     return (
       <div
         style={{
