@@ -2,11 +2,9 @@ import moment from "moment";
 import { observer } from "mobx-react";
 
 const BoxFooter = (props) => {
-  const time = props.time
-    ? "last updated " + moment(parseInt(1000 * props.time)).fromNow()
-    : "";
-
-    const update = moment(props.time);
+  if(props.time){
+    const update = moment(parseInt(1000 *props.time));
+    console.log('update', update)
     const now = moment()
     const duration = moment.duration(now.diff(update));
 //Get Days and subtract from duration
@@ -43,6 +41,6 @@ console.log('seconds', seconds)
       <small>last updated {days ? days + " days, ": ""} {hours ? hours + " hours, " : ""}{minutes ? minutes + " minutes, " : ""} {seconds ? seconds + " seconds ago" : ""}</small>
     </div>
   );
-};
+}};
 
 export default observer(BoxFooter);

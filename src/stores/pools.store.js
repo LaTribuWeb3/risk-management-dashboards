@@ -47,7 +47,7 @@ class PoolsStore {
     this["totalLiquidations_Loading"] = true;
     this["poolCollaterals"] = [];
     this["collateralValues"] = [];
-    this["activeTabSymbol"] = "summary";
+    this["activeTabSymbol"] = null;
     this["lastUpdate"] = null;
     this["poolHasAccounts"] = 0;
     this["updated"] = 0;
