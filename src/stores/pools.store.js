@@ -11,8 +11,7 @@ const apiEndpoints = [
   "risk",
   "summary",
 ];
-// const isStaging = window.location.hostname.includes("-staging");
-const isStaging = true;
+const isStaging = window.location.hostname.includes("-staging");
 class PoolsStore {
   constructor() {
     this.init();
