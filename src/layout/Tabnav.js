@@ -13,6 +13,7 @@ class Tabnav extends Component {
       poolsStore["liquidity_loading"] ||
       poolsStore["risk_loading"];
 
+    
     const poolsData = Object.assign([], poolsStore["pools_data"] || []);
     const tokenData = Object.assign([], poolsStore["tokens_data"] || []);
 
@@ -34,15 +35,26 @@ class Tabnav extends Component {
             <tr>
               {loading ? (
                 <td>loading...</td>
-              ) : (
-                poolsData.map((pool, i) => {
+              ) : 
+                [<td className='tabnav-td'><button
+                onClick={() => setActiveTab("", "summary")}
+                className={
+                  "tnbtn " +
+                  (poolsStore["activeTabSymbol"] === "summary" ? "active" : "")
+                }
+                key={"summary"}
+                id={"summaryButton"}
+              >
+                Summary
+              </button></td>,
+                (poolsData.map((pool, i) => {
                   const symbol = tokenData.find(
                     (t) => t.address === pool.underlying
                   )?.symbol;
 
-                  if (i === 0 && poolsStore["tab"] === null) {
-                    poolsStore.setActiveTab(pool.address, symbol);
-                  }
+                  // if (i === 0 && poolsStore["tab"] === null) {
+                  //   poolsStore.setActiveTab(pool.address, symbol);
+                  // }
                   return (
                     <td key={i} className="tabnav-td">
                       <button
@@ -60,7 +72,7 @@ class Tabnav extends Component {
                     </td>
                   );
                 })
-              )}
+              )]}
             </tr>
           </tbody>
         </table>

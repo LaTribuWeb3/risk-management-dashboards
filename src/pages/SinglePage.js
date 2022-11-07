@@ -9,6 +9,7 @@ import RiskParameters from "./RiskParameters";
 import ScrollSpy from "react-ui-scrollspy";
 import Simulation from "./Simulation";
 import StableMonitoring from "./StableMonitoring";
+import Summary from "./Summary";
 import Tabnav from "../layout/Tabnav";
 import mainStore from "../stores/main.store";
 import { observer } from "mobx-react";
@@ -26,12 +27,14 @@ class SinglePage extends Component {
           <section id="select-pool">
             <Tabnav />
           </section>
+          {poolsStore["activeTabSymbol"] === "summary" && <Summary/> }
           {poolsStore["activeTabSymbol"] === null && (
             <div className="noaccountsdiv">
               <span className="noaccounts">No pool selected</span>
             </div>
           )}
           {poolsStore["activeTabSymbol"] !== null &&
+          poolsStore["activeTabSymbol"] !== "summary" &&
             poolsStore["poolHasAccounts"] === 0 && (
               <div className="noaccountsdiv">
                 <span className="noaccounts">

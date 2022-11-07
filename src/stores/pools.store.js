@@ -9,8 +9,10 @@ const apiEndpoints = [
   "liquidations",
   "liquidity",
   "risk",
+  "summary"
 ];
-const isStaging = window.location.hostname.includes("-staging");
+// const isStaging = window.location.hostname.includes("-staging");
+const isStaging = true;
 class PoolsStore {
   constructor() {
     this.init();
@@ -45,7 +47,7 @@ class PoolsStore {
     this["totalLiquidations_Loading"] = true;
     this["poolCollaterals"] = [];
     this["collateralValues"] = [];
-    this["activeTabSymbol"] = null;
+    this["activeTabSymbol"] = "summary";
     this["lastUpdate"] = null;
     this["poolHasAccounts"] = 0;
     this["updated"] = 0;
@@ -53,14 +55,18 @@ class PoolsStore {
   };
 
   fetchData = (endpoint) => {
+    console.log('call data', endpoint, isStaging)
     this[endpoint + "_loading"] = true;
     this[endpoint + "_data"] = null;
     this[endpoint + "_request"] = this.apiVersionPromise
       .then((version) => {
         let url;
-        url = `${this.apiUrl}/${
-          isStaging ? "goerli" : "main"
-        }/${version}/${endpoint}.json`;
+        if(isStaging){
+          url = `${this.apiUrl}staging/${endpoint}.json`;
+        }
+        else{
+          url = `${this.apiUrl}main/${version}/${endpoint}.json`;
+        }
         return axios.get(url);
       })
       .then(({ data }) => {
