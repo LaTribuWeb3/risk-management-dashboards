@@ -2,7 +2,7 @@ import mainStore from "../stores/main.store";
 import { observer } from "mobx-react";
 import poolsStore from "../stores/pools.store";
 
-const pages = [
+let pages = [
   "select-pool",
   "system-status",
   "overview",
@@ -22,6 +22,21 @@ const humanPagesMap = {
 };
 
 const Sidenav = (props) => {
+  if (poolsStore["activeTabSymbol"] === "summary") {
+    pages = ["select-pool", "overview"];
+  } else {
+    pages = [
+      "select-pool",
+      "system-status",
+      "overview",
+      "collateral-factors",
+      "sandbox",
+      "asset-distribution",
+      "open-liquidations",
+      "oracle-deviation",
+      "liquidity",
+    ];
+  }
   if (
     poolsStore["activeTabSymbol"] === "DAI" ||
     poolsStore["activeTabSymbol"] === "USDC"

@@ -12,9 +12,28 @@ class Tabnav extends Component {
       poolsStore["liquidations_loading"] ||
       poolsStore["liquidity_loading"] ||
       poolsStore["risk_loading"];
-
     const poolsData = Object.assign([], poolsStore["pools_data"] || []);
     const tokenData = Object.assign([], poolsStore["tokens_data"] || []);
+    let summaryDisabled = true;
+
+    if (
+      !loading &&
+      poolsStore["summary_loading"] === false &&
+      poolsStore["activeTabSymbol"] === null
+    ) {
+      poolsStore.setActiveTab("", "summary");
+      summaryDisabled = false;
+    } else if (
+      !loading &&
+      poolsStore["summary_loading"] === true &&
+      poolsStore["activeTabSymbol"] === null
+    ) {
+      const symbol = tokenData.find(
+        (t) => t.address === poolsData[0].underlying
+      )?.symbol;
+      poolsStore.setActiveTab(poolsData[0].address, symbol);
+      summaryDisabled = true;
+    }
 
     function setActiveTab(tab, symbol) {
       poolsStore.setActiveTab(tab, symbol);
@@ -35,31 +54,46 @@ class Tabnav extends Component {
               {loading ? (
                 <td>loading...</td>
               ) : (
-                poolsData.map((pool, i) => {
-                  const symbol = tokenData.find(
-                    (t) => t.address === pool.underlying
-                  )?.symbol;
+                [
+                  <td className="tabnav-td">
+                    <button
+                      onClick={() => setActiveTab("", "summary")}
+                      className={
+                        "tnbtn " +
+                        (poolsStore["activeTabSymbol"] === "summary"
+                          ? "active"
+                          : "")
+                      }
+                      key={"summary"}
+                      id={"summaryButton"}
+                      disabled={summaryDisabled}
+                    >
+                      Summary
+                    </button>
+                  </td>,
+                  poolsData.map((pool, i) => {
+                    const symbol = tokenData.find(
+                      (t) => t.address === pool.underlying
+                    )?.symbol;
 
-                  if (i === 0 && poolsStore["tab"] === null) {
-                    poolsStore.setActiveTab(pool.address, symbol);
-                  }
-                  return (
-                    <td key={i} className="tabnav-td">
-                      <button
-                        onClick={() => setActiveTab(pool.address, symbol)}
-                        className={
-                          "tnbtn " +
-                          (poolsStore["tab"] === pool.address ? "active" : "")
-                        }
-                        key={i}
-                        value={pool.address}
-                        id={symbol}
-                      >
-                        {symbol}
-                      </button>
-                    </td>
-                  );
-                })
+                    return (
+                      <td key={i} className="tabnav-td">
+                        <button
+                          onClick={() => setActiveTab(pool.address, symbol)}
+                          className={
+                            "tnbtn " +
+                            (poolsStore["tab"] === pool.address ? "active" : "")
+                          }
+                          key={i}
+                          value={pool.address}
+                          id={symbol}
+                        >
+                          {symbol}
+                        </button>
+                      </td>
+                    );
+                  }),
+                ]
               )}
             </tr>
           </tbody>
