@@ -4,7 +4,7 @@ import { observer } from "mobx-react";
 const BoxFooter = (props) => {
   if (props.time) {
     const update = moment(parseInt(1000 * props.time));
-
+    const updateDate = new Date(parseInt(1000 * props.time)).toLocaleString()  
     const now = moment();
     const duration = moment.duration(now.diff(update));
     //Get Days and subtract from duration
@@ -37,8 +37,8 @@ const BoxFooter = (props) => {
           paddingTop: "calc(var(--spacing) * 2)",
         }}
       >
-        <small>
-          last updated {dayStr} {hourStr} {minuteStr} {secondStr} ago.
+        <small title={updateDate} >
+          last updated {dayStr} {hourStr} {minuteStr} {secondStr} ago.      
         </small>
       </div>
     );
