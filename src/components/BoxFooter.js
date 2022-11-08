@@ -7,6 +7,7 @@ const BoxFooter = (props) => {
     const updateDate = new Date(parseInt(1000 * props.time)).toLocaleString()  
     const now = moment();
     const duration = moment.duration(now.diff(update));
+    console.log('original timestamp', props.time)
     console.log('update', update)
     console.log('now', now)
     console.log('duration', duration)
