@@ -7,6 +7,9 @@ const BoxFooter = (props) => {
     const updateDate = new Date(parseInt(1000 * props.time)).toLocaleString()  
     const now = moment();
     const duration = moment.duration(now.diff(update));
+    console.log('update', update)
+    console.log('now', now)
+    console.log('duration', duration)
     //Get Days and subtract from duration
     const days = duration.days();
     duration.subtract(days, "days");
