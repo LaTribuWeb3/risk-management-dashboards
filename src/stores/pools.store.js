@@ -9,6 +9,7 @@ const apiEndpoints = [
   "liquidations",
   "liquidity",
   "risk",
+  "summary",
 ];
 const isStaging = window.location.hostname.includes("-staging");
 class PoolsStore {
@@ -47,6 +48,7 @@ class PoolsStore {
     this["collateralValues"] = [];
     this["activeTabSymbol"] = null;
     this["lastUpdate"] = null;
+    this["summaryDisabled"] = null;
     this["poolHasAccounts"] = 0;
     this["updated"] = 0;
     apiEndpoints.forEach(this.fetchData);
@@ -58,9 +60,11 @@ class PoolsStore {
     this[endpoint + "_request"] = this.apiVersionPromise
       .then((version) => {
         let url;
-        url = `${this.apiUrl}/${
-          isStaging ? "goerli" : "main"
-        }/${version}/${endpoint}.json`;
+        if (isStaging) {
+          url = `${this.apiUrl}staging/${endpoint}.json`;
+        } else {
+          url = `${this.apiUrl}main/${version}/${endpoint}.json`;
+        }
         return axios.get(url);
       })
       .then(({ data }) => {
@@ -86,7 +90,6 @@ class PoolsStore {
       this["poolHasAccounts"] = 1;
       mainStore["overview_loading"] = false;
     }
-    console.log(this["tab"]);
   }
 }
 

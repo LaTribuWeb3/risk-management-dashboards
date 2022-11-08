@@ -2,14 +2,13 @@ import Box from "../components/Box";
 import BoxGrid from "../components/BoxGrid";
 import { Component } from "react";
 import PieChart from "../components/PieChart";
-import mainStore from "../stores/main.store";
 import { observer } from "mobx-react";
 
 class OverviewPieCharts extends Component {
   render() {
     const overviewData = this.props.data;
     const json_time = this.props.time;
-    const loading = mainStore["overview_loading"]; // TODO
+    const loading = false;
 
     return (
       <BoxGrid>
