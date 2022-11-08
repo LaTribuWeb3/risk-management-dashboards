@@ -104,10 +104,11 @@ class Example extends PureComponent {
     const cleanData = [];
     Object.entries(data).forEach(([key, val]) => {
       cleanData.push({
-        name: key + ` (${whaleFriendlyFormater(val)})`,
+        name: key,
         value: val,
       });
     });
+
     cleanData.sort((a, b) => b.value - a.value);
     return (
       <ResponsiveContainer>
@@ -116,8 +117,8 @@ class Example extends PureComponent {
             activeIndex={this.state.activeIndex}
             activeShape={renderActiveShape}
             data={cleanData}
-            innerRadius={120}
-            outerRadius={140}
+            innerRadius={90}
+            outerRadius={110}
             fill="#8884d8"
             dataKey="value"
             onMouseEnter={this.onPieEnter}
@@ -126,7 +127,14 @@ class Example extends PureComponent {
               <Cell key={`cell-${index}`} fill={COLORS[index]} />
             ))}
           </Pie>
-          <Legend iconType={"circle"} />
+          <Legend
+            payload={cleanData.map((item, index) => ({
+              name: item.name,
+              value: item.name + ` (${whaleFriendlyFormater(item.value)})`,
+              color: COLORS[index % COLORS.length],
+            }))}
+            iconType={"circle"}
+          />
         </PieChart>
       </ResponsiveContainer>
     );

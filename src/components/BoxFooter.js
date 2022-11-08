@@ -3,29 +3,32 @@ import { observer } from "mobx-react";
 
 const BoxFooter = (props) => {
   if (props.time) {
-    const updateDate = new Date(parseInt(1000 * props.time)).toLocaleString()  
+    const updateDate = new Date(parseInt(1000 * props.time)).toLocaleString();
     const update = moment(1000 * props.time);
     const now = moment();
     const duration = moment.duration(now.diff(update));
     //Get Days and subtract from duration
     const days = duration.days();
     duration.subtract(days, "days");
-    const dayStr = days ? (days + " day" + (days > 1 ? "s," : ",") ) : ""
+    const dayStr = days ? days + " day" + (days > 1 ? "s," : ",") : "";
 
     //Get hours and subtract from duration
     const hours = duration.hours();
     duration.subtract(hours, "hours");
-    const hourStr = hours ? (hours + " hour" + (hours > 1 ? "s," : ",") ) : ""
-
+    const hourStr = hours ? hours + " hour" + (hours > 1 ? "s," : ",") : "";
 
     //Get Minutes and subtract from duration
     const minutes = duration.minutes();
     duration.subtract(minutes, "minutes");
-    const minuteStr = minutes ? (minutes + " minute" + (minutes > 1 ? "s," : ",") ) : ""
+    const minuteStr = minutes
+      ? minutes + " minute" + (minutes > 1 ? "s," : ",")
+      : "";
 
     //Get seconds
     const seconds = duration.seconds();
-    const secondStr = seconds ? (seconds + " second" + (seconds > 1 ? "s" : "")) : ""
+    const secondStr = seconds
+      ? seconds + " second" + (seconds > 1 ? "s" : "")
+      : "";
 
     return (
       <div
@@ -38,8 +41,8 @@ const BoxFooter = (props) => {
           paddingTop: "calc(var(--spacing) * 2)",
         }}
       >
-        <small title={updateDate} >
-          last updated {dayStr} {hourStr} {minuteStr} {secondStr} ago.      
+        <small title={updateDate}>
+          last updated {dayStr} {hourStr} {minuteStr} {secondStr} ago.
         </small>
       </div>
     );
