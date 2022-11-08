@@ -23,9 +23,14 @@ class App extends React.Component {
     return (
       <Router>
         <div className="App">
-        {mainStore["mobile"] ? '' : <Header />}
-          <div ref={this.scrollContainer} className={mainStore["mobile"] ? "main-content-mobile" : "main-content"}>
-            {mainStore["mobile"] ? '' : <Sidenav />}
+          {mainStore["mobile"] ? "" : <Header />}
+          <div
+            ref={this.scrollContainer}
+            className={
+              mainStore["mobile"] ? "main-content-mobile" : "main-content"
+            }
+          >
+            {mainStore["mobile"] ? "" : <Sidenav />}
             <h1>Risk Management Dashboard</h1>
             <main>
               <Routes>

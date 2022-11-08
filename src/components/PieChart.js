@@ -127,12 +127,14 @@ class Example extends PureComponent {
               <Cell key={`cell-${index}`} fill={COLORS[index]} />
             ))}
           </Pie>
-          <Legend payload={cleanData.map(
-      (item, index) => ({
-        name: item.name,
-        value: item.name    + ` (${whaleFriendlyFormater(item.value)})`,color: COLORS[index % COLORS.length],
-      })
-    )} iconType={"circle"} />
+          <Legend
+            payload={cleanData.map((item, index) => ({
+              name: item.name,
+              value: item.name + ` (${whaleFriendlyFormater(item.value)})`,
+              color: COLORS[index % COLORS.length],
+            }))}
+            iconType={"circle"}
+          />
         </PieChart>
       </ResponsiveContainer>
     );

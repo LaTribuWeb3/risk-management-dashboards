@@ -31,11 +31,11 @@ class MainStore {
       .addEventListener("change", (e) => {
         this.blackMode = !!e.matches;
       });
-      if(window.innerWidth < 811){
-        this["mobile"] = true;
-      }
+    if (window.innerWidth < 811) {
+      this["mobile"] = true;
+    }
 
-      console.log('mobile?', this["mobile"])
+    console.log("mobile?", this["mobile"]);
     makeAutoObservable(this);
   }
 
