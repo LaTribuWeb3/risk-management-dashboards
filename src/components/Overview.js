@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import { observer } from "mobx-react";
 import Box from "../components/Box";
 import BoxGrid from "../components/BoxGrid";
-import mainStore from "../stores/main.store";
+import { Component } from "react";
 import WhaleFriendly from "../components/WhaleFriendly";
+import mainStore from "../stores/main.store";
+import { observer } from "mobx-react";
 
 const boxRow = {
   display: "flex",

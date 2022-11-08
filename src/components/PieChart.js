@@ -1,14 +1,15 @@
-import { observer } from "mobx-react";
-import React, { PureComponent } from "react";
 import {
-  PieChart,
-  Pie,
-  Sector,
-  ResponsiveContainer,
   Cell,
   Legend,
+  Pie,
+  PieChart,
+  ResponsiveContainer,
+  Sector,
 } from "recharts";
+
 import { COLORS } from "../constants";
+import { PureComponent } from "react";
+import { observer } from "mobx-react";
 import { whaleFriendlyFormater } from "../components/WhaleFriendly";
 
 const renderActiveShape = (props) => {
@@ -103,16 +104,11 @@ class Example extends PureComponent {
     const cleanData = [];
     Object.entries(data).forEach(([key, val]) => {
       cleanData.push({
-        name: key,
+        name: key + ` (${whaleFriendlyFormater(val)})`,
         value: val,
       });
     });
-    // const cleanData = data.map(([k,v]) => {
-    //   return {
-    //     name: k,
-    //     value: parseInt(v)
-    //   }
-    // })
+    cleanData.sort((a, b) => b.value - a.value);
     return (
       <ResponsiveContainer>
         <PieChart>
@@ -120,8 +116,8 @@ class Example extends PureComponent {
             activeIndex={this.state.activeIndex}
             activeShape={renderActiveShape}
             data={cleanData}
-            innerRadius={80}
-            outerRadius={100}
+            innerRadius={120}
+            outerRadius={140}
             fill="#8884d8"
             dataKey="value"
             onMouseEnter={this.onPieEnter}

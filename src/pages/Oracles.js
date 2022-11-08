@@ -49,10 +49,6 @@ const columns = [
   },
 ];
 
-// const ExpandedComponent = ({ data }) => (
-//   <pre>{JSON.stringify(data, null, 2)}</pre>
-// );
-
 function roundTo(num, dec) {
   const pow = Math.pow(10, dec);
   return Math.round((num + Number.EPSILON) * pow) / pow;
@@ -120,8 +116,14 @@ class Oracles extends Component {
     return (
       <div>
         <Box loading={loading} time={jsonTime}>
-          {!loading && <DataTable customStyles={tableStyle}
-              dense columns={columns} data={oracleArray} />}
+          {!loading && (
+            <DataTable
+              customStyles={tableStyle}
+              dense
+              columns={columns}
+              data={oracleArray}
+            />
+          )}
         </Box>
       </div>
     );

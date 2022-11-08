@@ -1,4 +1,9 @@
-import { getRecommendedLT, initialSandboxValue, tableStyle, tokenName } from "../utils";
+import {
+  getRecommendedLT,
+  initialSandboxValue,
+  tableStyle,
+  tokenName,
+} from "../utils";
 
 import Box from "./Box";
 import { Component } from "react";
