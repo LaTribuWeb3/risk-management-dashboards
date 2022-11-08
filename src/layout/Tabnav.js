@@ -14,7 +14,6 @@ class Tabnav extends Component {
       poolsStore["risk_loading"];
     const poolsData = Object.assign([], poolsStore["pools_data"] || []);
     const tokenData = Object.assign([], poolsStore["tokens_data"] || []);
-    let summaryDisabled = true;
 
     if (
       !loading &&
@@ -22,7 +21,7 @@ class Tabnav extends Component {
       poolsStore["activeTabSymbol"] === null
     ) {
       poolsStore.setActiveTab("", "summary");
-      summaryDisabled = false;
+      poolsStore["summaryDisabled"] = false;
     } else if (
       !loading &&
       poolsStore["summary_loading"] === true &&
@@ -32,13 +31,18 @@ class Tabnav extends Component {
         (t) => t.address === poolsData[0].underlying
       )?.symbol;
       poolsStore.setActiveTab(poolsData[0].address, symbol);
-      summaryDisabled = true;
+      poolsStore["summaryDisabled"] = true;
+    } else if (
+      !loading &&
+      poolsStore["summary_loading"] === false &&
+      poolsStore["activeTabSymbol"] !== null
+    ) {
+      poolsStore["summaryDisabled"] = false;
     }
 
     function setActiveTab(tab, symbol) {
       poolsStore.setActiveTab(tab, symbol);
     }
-
     return (
       <div className="navwrapper">
         <hgroup>
@@ -66,7 +70,7 @@ class Tabnav extends Component {
                       }
                       key={"summary"}
                       id={"summaryButton"}
-                      disabled={summaryDisabled}
+                      disabled={poolsStore["summaryDisabled"]}
                     >
                       Summary
                     </button>

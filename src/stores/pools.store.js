@@ -48,6 +48,7 @@ class PoolsStore {
     this["collateralValues"] = [];
     this["activeTabSymbol"] = null;
     this["lastUpdate"] = null;
+    this["summaryDisabled"] = null;
     this["poolHasAccounts"] = 0;
     this["updated"] = 0;
     apiEndpoints.forEach(this.fetchData);
