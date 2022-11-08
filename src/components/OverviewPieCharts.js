@@ -12,7 +12,7 @@ class OverviewPieCharts extends Component {
 
     return (
       <BoxGrid>
-        <Box loading={loading} height={620} time={json_time}>
+        <Box loading={loading} height={650} time={json_time}>
           <h6 style={{ margin: 0 }}>Collateral</h6>
           {!loading && <PieChart data={overviewData.collateralGraphData} />}
         </Box>

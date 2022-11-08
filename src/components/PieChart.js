@@ -116,8 +116,8 @@ class Example extends PureComponent {
             activeIndex={this.state.activeIndex}
             activeShape={renderActiveShape}
             data={cleanData}
-            innerRadius={110}
-            outerRadius={130}
+            innerRadius={120}
+            outerRadius={140}
             fill="#8884d8"
             dataKey="value"
             onMouseEnter={this.onPieEnter}
