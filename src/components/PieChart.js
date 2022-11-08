@@ -104,7 +104,7 @@ class Example extends PureComponent {
     const cleanData = [];
     Object.entries(data).forEach(([key, val]) => {
       cleanData.push({
-        name: key,
+        name: key + ` (${whaleFriendlyFormater(val)})`,
         value: val,
       });
     });
