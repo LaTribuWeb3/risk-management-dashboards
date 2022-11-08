@@ -104,7 +104,7 @@ class Example extends PureComponent {
     const cleanData = [];
     Object.entries(data).forEach(([key, val]) => {
       cleanData.push({
-        name: key,
+        name: key + ` (${whaleFriendlyFormater(val)})`,
         value: val,
       });
     });
@@ -116,8 +116,8 @@ class Example extends PureComponent {
             activeIndex={this.state.activeIndex}
             activeShape={renderActiveShape}
             data={cleanData}
-            innerRadius={80}
-            outerRadius={100}
+            innerRadius={120}
+            outerRadius={140}
             fill="#8884d8"
             dataKey="value"
             onMouseEnter={this.onPieEnter}
