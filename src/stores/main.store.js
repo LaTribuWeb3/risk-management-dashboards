@@ -1,5 +1,5 @@
-import { makeAutoObservable } from "mobx";
 import axios from "axios";
+import { makeAutoObservable } from "mobx";
 
 const platformId = window.APP_CONFIG.PLATFORM_ID;
 
@@ -31,6 +31,11 @@ class MainStore {
       .addEventListener("change", (e) => {
         this.blackMode = !!e.matches;
       });
+      if(window.innerWidth < 811){
+        this["mobile"] = true;
+      }
+
+      console.log('mobile?', this["mobile"])
     makeAutoObservable(this);
   }
 

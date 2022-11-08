@@ -1,14 +1,17 @@
 import "@picocss/pico";
-import { observer } from "mobx-react";
-import Footer from "./layout/Footer";
-import Sidenav from "./layout/Sidenav";
-import Header from "./layout/Header";
-import SinglePage from "./pages/SinglePage";
 import "./themeSwitcher";
 import "./App.css";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import React from "react";
+
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+
 import AlertsJson from "./API/AlertsJson";
+import Footer from "./layout/Footer";
+import Header from "./layout/Header";
+import React from "react";
+import Sidenav from "./layout/Sidenav";
+import SinglePage from "./pages/SinglePage";
+import mainStore from "./stores/main.store";
+import { observer } from "mobx-react";
 
 class App extends React.Component {
   constructor(props) {
@@ -20,9 +23,9 @@ class App extends React.Component {
     return (
       <Router>
         <div className="App">
-          <Header />
-          <div ref={this.scrollContainer} className="main-content">
-            <Sidenav />
+        {mainStore["mobile"] ? '' : <Header />}
+          <div ref={this.scrollContainer} className={mainStore["mobile"] ? "main-content-mobile" : "main-content"}>
+            {mainStore["mobile"] ? '' : <Sidenav />}
             <h1>Risk Management Dashboard</h1>
             <main>
               <Routes>
