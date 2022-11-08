@@ -261,10 +261,6 @@ class Overview extends Component {
         delete overviewData["collateralGraphData"][data];
       }
     }
-    console.log('time --------------------')
-    console.log('time --------------------')
-    console.log('time --------------------')
-    console.log('time --------------------')
     return (
       <div>
         <OverviewPieCharts data={overviewData} time={jsonTime} />
