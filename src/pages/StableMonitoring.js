@@ -31,7 +31,7 @@ class StableMonitoring extends Component {
     const { loading } = poolsStore["liquidity_loading"];
     const jsonTime = poolsStore["lastUpdate"];
 
-    const stables = ["LUSD", "sUSD", "USDT", "FRAX", "DAI", "USDC"];
+    const stables = ["LUSD", "sUSD", "USDT", "FRAX", "DAI", "USDC", "GUSD"];
     const rawData = Object.assign([], poolsStore["liquidity_data"] || {});
     const tab = poolsStore["activeTabSymbol"];
 
@@ -45,18 +45,24 @@ class StableMonitoring extends Component {
           break;
         }
       }
-      for (let i = 0; i < stables.length; i++) {
-        for (const entry in liquidityData) {
-          if (entry === stables[i]) {
-            ratioData.push({
-              asset: entry,
-              liquidity: liquidityData[entry][tab]["volume"],
-              ratio: liquidityData[entry][tab]["ratio"]
-                ? Number(liquidityData[entry][tab]["ratio"] * 100).toFixed(2) +
-                  " %"
-                : "N/A",
-            });
-          }
+
+      for (const entry in liquidityData) {
+        if (stables.includes(entry)) {
+          ratioData.push({
+            asset: entry,
+            liquidity: liquidityData[entry][tab]["volume"],
+            ratio: liquidityData[entry][tab]["ratio"]
+              ? Number(liquidityData[entry][tab]["ratio"] * 100).toFixed(2) +
+                " %"
+              : "N/A",
+          });
+        }
+
+        // if we already have the valid count of ratio data
+        // exit the for loop because it means we already have all the liquidity 
+        // data we were looking for
+        if(ratioData.length === stables.length) {
+          break;
         }
       }
     }
