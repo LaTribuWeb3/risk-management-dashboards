@@ -109,7 +109,7 @@ class Example extends PureComponent {
       });
     });
 
-    cleanData.sort((a, b) => a.name - b.name);
+    cleanData.sort((a, b) => b.value - a.value);
     return (
       <ResponsiveContainer>
         <PieChart>
