@@ -7,9 +7,9 @@ import {
   Sector,
 } from "recharts";
 
-import { COLORS } from "../constants";
 import { PureComponent } from "react";
 import { observer } from "mobx-react";
+import { tokenColors } from "../constants";
 import { whaleFriendlyFormater } from "../components/WhaleFriendly";
 
 const renderActiveShape = (props) => {
@@ -99,6 +99,11 @@ class Example extends PureComponent {
     });
   };
 
+  getcolor(name){
+    return tokenColors.name;
+
+  }
+
   render() {
     const { data } = this.props;
     const cleanData = [];
@@ -124,14 +129,14 @@ class Example extends PureComponent {
             onMouseEnter={this.onPieEnter}
           >
             {cleanData.map((entry, index) => (
-              <Cell key={`cell-${index}`} fill={COLORS[index]} />
+              <Cell key={`cell-${index}`} fill={this.getcolor(entry.name)} />
             ))}
           </Pie>
           <Legend
             payload={cleanData.map((item, index) => ({
               name: item.name,
               value: item.name + ` (${whaleFriendlyFormater(item.value)})`,
-              color: COLORS[index % COLORS.length],
+              color: this.getcolor(item.name),
             }))}
             iconType={"circle"}
           />
