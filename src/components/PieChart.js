@@ -100,7 +100,7 @@ class Example extends PureComponent {
   };
 
   getcolor(name){
-    return tokenColors.name;
+    return tokenColors[name];
 
   }
 
