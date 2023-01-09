@@ -130,7 +130,7 @@ class RiskParametersUtilization extends Component {
           <hgroup>
             <h6>According to Current Usage</h6>
             <p>
-              Recommended LTs according to current collateral and borrow usage.
+              Recommended LTs according to current positional value and borrow usage.
             </p>
           </hgroup>
           {!loading && (
