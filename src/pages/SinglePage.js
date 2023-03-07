@@ -179,8 +179,7 @@ class SinglePage extends Component {
               </section>
             )}
           {poolsStore["activeTabSymbol"] !== null &&
-            (poolsStore["activeTabSymbol"] === "DAI" ||
-              poolsStore["activeTabSymbol"] === "USDC") &&
+            (["DAI", "USDC", "FRAX"].includes(poolsStore["activeTabSymbol"])) &&
             poolsStore["poolHasAccounts"] > 0 && (
               <section id="stablecoin-monitoring">
                 {mainStore.proViewShow("stablecoin-monitoring") && (

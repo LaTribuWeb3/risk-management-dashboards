@@ -37,17 +37,12 @@ const Sidenav = (props) => {
       "liquidity",
     ];
   }
-  if (
-    poolsStore["activeTabSymbol"] === "DAI" ||
-    poolsStore["activeTabSymbol"] === "USDC"
-  ) {
+
+  if (["DAI", "USDC", "FRAX"].includes(poolsStore["activeTabSymbol"])) {
     if (!pages.includes("stablecoin-monitoring"))
       pages.push("stablecoin-monitoring");
   }
-  if (
-    poolsStore["activeTabSymbol"] !== "DAI" &&
-    poolsStore["activeTabSymbol"] !== "USDC"
-  ) {
+  if (!["DAI", "USDC", "FRAX"].includes(poolsStore["activeTabSymbol"])) {
     if (pages.includes("stablecoin-monitoring")) pages.pop();
   }
   return (
