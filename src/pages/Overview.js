@@ -268,7 +268,7 @@ class Overview extends Component {
           <Box loading={loading} time={jsonTime}>
             <div>
               <BoxRow key="total_collateral">
-                <div>Total Collateral</div>
+                <div>Total Positional Value</div>
                 <div>
                   <WhaleFriendly
                     num={overviewData.collateral?.totalCollateral}
@@ -276,7 +276,7 @@ class Overview extends Component {
                 </div>
               </BoxRow>
               <BoxRow key="median_collateral">
-                <div>Median Collateral per User</div>
+                <div>Median Positional Value per User</div>
                 <div>
                   <WhaleFriendly
                     num={overviewData.collateral?.medianCollateral}
@@ -284,7 +284,7 @@ class Overview extends Component {
                 </div>
               </BoxRow>
               <BoxRow key="top1collateral">
-                <div>Collateral of Top 1 User</div>
+                <div>Positional Value of Top 1 User</div>
                 <div>
                   <WhaleFriendly
                     num={overviewData.collateral?.top1Collateral}
@@ -292,7 +292,7 @@ class Overview extends Component {
                 </div>
               </BoxRow>
               <BoxRow key="top10collateral">
-                <div>Collateral of Top 10 Users</div>
+                <div>Positional Value of Top 10 Users</div>
                 <div>
                   <WhaleFriendly
                     num={overviewData.collateral?.top10Collateral}

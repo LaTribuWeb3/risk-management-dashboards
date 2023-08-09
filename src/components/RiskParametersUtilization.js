@@ -72,7 +72,9 @@ class RiskParametersUtilization extends Component {
     poolTokens = poolTokens.map((e) => ({
       asset: tokenName(e.tokenAddress),
       underlying: tokenName(underlying),
-      riskParameters: riskParametersForPool?.risk,
+      riskParameters: {
+        [`${tokenName(e.tokenAddress)}-${tokenName(underlying)}`]: riskParametersForPool?.risk[`${tokenName(e.tokenAddress)}-${tokenName(underlying)}`]
+      }      ,
       supply: collateralsValue[tokenName(e.tokenAddress)],
       sandboxValue: initialSandboxValue(
         tokenName(e.tokenAddress),
@@ -130,7 +132,7 @@ class RiskParametersUtilization extends Component {
           <hgroup>
             <h6>According to Current Usage</h6>
             <p>
-              Recommended LTs according to current collateral and borrow usage.
+              Recommended LTs according to current positional value and borrow usage.
             </p>
           </hgroup>
           {!loading && (

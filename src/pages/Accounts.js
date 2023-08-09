@@ -39,21 +39,21 @@ class Accounts extends Component {
         minWidth: "110px",
       },
       {
-        name: "Total Collateral",
+        name: "Total Positional Value",
         selector: (row) => Number(row["total_collateral"]),
         format: (row) => whaleFriendlyFormater(row["total_collateral"]),
         sortable: true,
         minWidth: "140px",
       },
       {
-        name: "Median Collateral",
+        name: "Median Positional Value",
         selector: (row) => Number(row["median_collateral"]),
         format: (row) => whaleFriendlyFormater(row["median_collateral"]),
         sortable: true,
         minWidth: "140px",
       },
       {
-        name: "Top 10 Accounts Collateral",
+        name: "Top 10 Accounts Positional Value",
         selector: (row) => Number(row["top_10_collateral"]),
         format: (row) => (
           <TopTenAccounts
@@ -68,7 +68,7 @@ class Accounts extends Component {
         minWidth: usersMinWidth,
       },
       {
-        name: "Top 1 Account Collateral",
+        name: "Top 1 Account Positional Value",
         selector: (row) => Number(row["top_1_collateral"]),
         format: (row) => whaleFriendlyFormater(row["top_1_collateral"]),
         sortable: true,

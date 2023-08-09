@@ -3,15 +3,15 @@ import { makeAutoObservable, runInAction } from "mobx";
 import Solver from "../risk/solver";
 import mainStore from "../stores/main.store";
 
-const tweakCurrentCap = (cap) => {
-  if (cap === "0" || cap === 0) {
-    return Infinity;
-  }
-  if (cap === "1" || cap === 1) {
-    return "0";
-  }
-  return cap;
-};
+// const tweakCurrentCap = (cap) => {
+//   if (cap === "0" || cap === 0) {
+//     return Infinity;
+//   }
+//   if (cap === "1" || cap === 1) {
+//     return "0";
+//   }
+//   return cap;
+// };
 
 class RiskStore {
   currentRiskLoading = true;
@@ -39,34 +39,34 @@ class RiskStore {
   init = async () => {
     if (true) {
       const data = await mainStore["risk_params_request"];
-      this.utilization = await mainStore["accounts_request"].then((u) => {
-        return Object.entries(u)
-          .map(([k, v]) => {
-            if (k === "json_time") {
-              return null;
-            }
-            return {
-              asset: k,
-              mint_cap: this.looping
-                ? v.total_collateral
-                : v.nl_total_collateral,
-              borrow_cap: this.looping ? v.total_debt : v.nl_total_debt,
-            };
-          })
-          .filter((o) => o);
-      });
-      this.currentData = await mainStore[
-        "lending_platform_current_request"
-      ].then((d) => {
-        const clean = {};
-        for (let asset in d.borrow_caps) {
-          clean[asset] = { asset };
-          clean[asset].borrow_cap = tweakCurrentCap(d.borrow_caps[asset]);
-          clean[asset].mint_cap = tweakCurrentCap(d.collateral_caps[asset]);
-          clean[asset].current_collateral_factor = d.collateral_factors[asset];
-        }
-        return Object.values(clean);
-      });
+      // this.utilization = await mainStore["accounts_request"].then((u) => {
+      //   return Object.entries(u)
+      //     .map(([k, v]) => {
+      //       if (k === "json_time") {
+      //         return null;
+      //       }
+      //       return {
+      //         asset: k,
+      //         mint_cap: this.looping
+      //           ? v.total_collateral
+      //           : v.nl_total_collateral,
+      //         borrow_cap: this.looping ? v.total_debt : v.nl_total_debt,
+      //       };
+      //     })
+      //     .filter((o) => o);
+      // });
+      // this.currentData = await mainStore[
+      //   "lending_platform_current_request"
+      // ].then((d) => {
+      //   const clean = {};
+      //   for (let asset in d.borrow_caps) {
+      //     clean[asset] = { asset };
+      //     clean[asset].borrow_cap = tweakCurrentCap(d.borrow_caps[asset]);
+      //     clean[asset].mint_cap = tweakCurrentCap(d.collateral_caps[asset]);
+      //     clean[asset].current_collateral_factor = d.collateral_factors[asset];
+      //   }
+      //   return Object.values(clean);
+      // });
       this.rawData = Object.assign({}, data || {});
       const { json_time } = this.rawData;
       if (json_time) {
