@@ -3,15 +3,15 @@ import { makeAutoObservable, runInAction } from "mobx";
 import Solver from "../risk/solver";
 import mainStore from "../stores/main.store";
 
-const tweakCurrentCap = (cap) => {
-  if (cap === "0" || cap === 0) {
-    return Infinity;
-  }
-  if (cap === "1" || cap === 1) {
-    return "0";
-  }
-  return cap;
-};
+// const tweakCurrentCap = (cap) => {
+//   if (cap === "0" || cap === 0) {
+//     return Infinity;
+//   }
+//   if (cap === "1" || cap === 1) {
+//     return "0";
+//   }
+//   return cap;
+// };
 
 class RiskStore {
   currentRiskLoading = true;
