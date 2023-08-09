@@ -73,9 +73,9 @@ class Oracles extends Component {
     });
 
     // filter out collaterals not present in pool
-    oracleArray = oracleArray.filter((entry) =>
-      collaterals.includes(entry.key)
-    );
+    // oracleArray = oracleArray.filter((entry) =>
+    //   collaterals.includes(entry.key)
+    // );
 
     /// compute oracle alerts
     const priceOracleDiffThreshold = 5;
