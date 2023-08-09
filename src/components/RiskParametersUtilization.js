@@ -72,7 +72,9 @@ class RiskParametersUtilization extends Component {
     poolTokens = poolTokens.map((e) => ({
       asset: tokenName(e.tokenAddress),
       underlying: tokenName(underlying),
-      riskParameters: riskParametersForPool?.risk,
+      riskParameters: {
+        [`${tokenName(e.tokenAddress)}-${tokenName(underlying)}`]: riskParametersForPool?.risk[`${tokenName(e.tokenAddress)}-${tokenName(underlying)}`]
+      }      ,
       supply: collateralsValue[tokenName(e.tokenAddress)],
       sandboxValue: initialSandboxValue(
         tokenName(e.tokenAddress),
